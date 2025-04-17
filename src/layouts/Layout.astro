@@ -11,7 +11,7 @@ interface LayoutProps {
   description: string;
 }
 
-const { lang = 'en', title = 'Welcome', description = 'Welcome to our site' } = Astro.props as LayoutProps;
+const { lang = 'en', title = 'Welcome', description = 'Welcome to our site' } = Astro.props as unknown as LayoutProps;
 ---
 
 <!DOCTYPE html>

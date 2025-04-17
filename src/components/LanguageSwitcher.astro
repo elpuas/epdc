@@ -6,13 +6,16 @@ interface Props {
   currentLang: Language;
 }
 
-const { currentLang } = Astro.props;
+const { currentLang = 'en' as Language } = Astro.props;
 
 const LANGUAGES = {
   en: { code: 'en', flag: '🇺🇸', name: 'English' },
   es: { code: 'es', flag: '🇨🇷', name: 'Español' },
   it: { code: 'it', flag: '🇮🇹', name: 'Italiano' }
 };
+
+// Ensure we have a valid language reference even if currentLang is somehow undefined
+const lang = LANGUAGES[currentLang ?? 'en'];
 ---
 
 <div class={styles.switcher}>
@@ -22,7 +25,7 @@ const LANGUAGES = {
     aria-haspopup="true"
     aria-expanded="false"
   >
-    {LANGUAGES[currentLang].flag}
+    {lang.flag}
   </button>
 
   <div
