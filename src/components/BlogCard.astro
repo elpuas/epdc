@@ -1,0 +1,44 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  lang: string; // Expect 'en', 'es', 'it', etc.
+}
+
+const { post, lang } = Astro.props;
+const { title, description, image } = post.data;
+const postUrl = `/${lang}/blog/${post.slug}`;
+---
+<article class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+  <a href={postUrl} aria-label={`Read more about ${title}`}>
+    {image && (
+      <img 
+        src={image} 
+        alt="" // Alt text is empty as the image is decorative within a link context
+        class="w-full h-48 object-cover"
+        width="400" 
+        height="200" 
+        loading="lazy"
+        decoding="async"
+      />
+    )}
+  </a>
+  <div class="p-4">
+    <h2 class="text-xl font-semibold mb-2">
+      <a href={postUrl} class="hover:text-primary transition-colors duration-300">
+        {title}
+      </a>
+    </h2>
+    {description && (
+      <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">{description}</p>
+    )}
+    <a 
+      href={postUrl} 
+      class="text-primary hover:underline text-sm font-medium"
+      aria-label={`Read more about ${title}`}
+    >
+      Read more &rarr;
+    </a>
+  </div>
+</article> 

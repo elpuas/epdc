@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro'; // Corrected import to Layout.astro
+import BlogCard from '../../../components/BlogCard.astro'; // Assuming BlogCard exists
+
+// 1. Fetch ALL blog posts
+const allPosts = await getCollection('blog');
+
+// 2. Filter posts for the current language (English)
+const englishPosts = allPosts.filter(post => post.data.lang === 'en');
+
+// Sort posts by date if needed (optional, newest first)
+englishPosts.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+
+const pageTitle = "Blog"; // Or fetch from a CMS/config
+const pageDescription = "Latest news and articles."; // Or fetch from a CMS/config
+---
+<Layout title={pageTitle} description={pageDescription}>
+  <section class="py-12 md:py-20">
+    <div class="container px-4 mx-auto">
+      <h1 class="text-3xl md:text-4xl font-bold mb-8 text-center">{pageTitle}</h1>
+      
+      {englishPosts.length === 0 ? (
+        <p class="text-center text-gray-500">No blog posts found for this language yet.</p>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {englishPosts.map((post) => (
+            <BlogCard post={post} lang="en" /> // Pass lang prop if BlogCard needs it for URL
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>
