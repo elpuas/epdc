@@ -73,4 +73,12 @@
 
   /* Scrollbar Width */
   --scrollbar-width: calc(100vw - 100%);
+
+  /* Font Families */
+  --font-family-base: 'Inter', system-ui, sans-serif;
+  --font-family-heading: var(--font-family-base);
+
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
 }

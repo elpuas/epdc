@@ -1,14 +1,16 @@
-export type Language = 'en' | 'es';
+export type Language = 'en' | 'es' | 'it';
 
-export const SUPPORTED_LANGUAGES = ['en', 'es'] as const;
+export const SUPPORTED_LANGUAGES = ['en', 'es', 'it'] as const;
 export const DEFAULT_LANGUAGE: Language = 'en';
 
 type Translations = {
   [key in Language]: {
     nav: {
-      home: string;
       about: string;
+      services: string;
+      crafted: string;
       blog: string;
+      contact: string;
     };
     common: {
       readMore: string;
@@ -20,14 +22,16 @@ type Translations = {
     language: {
       en: string;
       es: string;
+      it: string;
       switch: string;
     };
   };
 };
 
 const translations: Translations = {
-  en: (await import('./en.json')).default,
-  es: (await import('./es.json')).default,
+  en: (await import('./translations/en.json')).default,
+  es: (await import('./translations/es.json')).default,
+  it: (await import('./translations/it.json')).default,
 };
 
 export type TranslationKey = keyof typeof translations.en;

@@ -4,13 +4,13 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from './src/i18n/utils';
 
-// https://astro.build/config
+/** @type {import('astro').AstroUserConfig} */
 export default defineConfig({
 	site: 'https://example.com',
 	integrations: [mdx(), sitemap()],
 	i18n: {
 		defaultLocale: DEFAULT_LANGUAGE,
-		locales: SUPPORTED_LANGUAGES,
+		locales: [...SUPPORTED_LANGUAGES],
 		routing: {
 			prefixDefaultLocale: false,
 		},
