@@ -1,0 +1,83 @@
+---
+import { SUPPORTED_LANGUAGES, DEFAULT_LANGUAGE, type Language } from '../i18n/utils';
+
+interface Props {
+  currentLang: Language;
+}
+
+const { currentLang } = Astro.props;
+
+---
+
+<div class="relative">
+  <button
+    id="language-switcher"
+    class="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <span class="text-sm font-medium">{currentLang.toUpperCase()}</span>
+    <svg
+      class="w-4 h-4"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M19 9l-7 7-7-7"
+      />
+    </svg>
+  </button>
+
+  <div
+    id="language-dropdown"
+    class="absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 hidden"
+    role="menu"
+    aria-orientation="vertical"
+    aria-labelledby="language-switcher"
+  >
+    <div class="py-1" role="none">
+      {SUPPORTED_LANGUAGES.map((lang) => (
+        <a
+          href={`/${lang}`}
+          class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+          role="menuitem"
+          data-lang={lang}
+        >
+          {lang.toUpperCase()}
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  const switcher = document.getElementById('language-switcher');
+  const dropdown = document.getElementById('language-dropdown');
+  const links = dropdown?.querySelectorAll('a');
+
+  switcher?.addEventListener('click', () => {
+    dropdown?.classList.toggle('hidden');
+  });
+
+  links?.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const lang = link.getAttribute('data-lang');
+      if (lang) {
+        localStorage.setItem('preferredLanguage', lang);
+        window.location.href = `/${lang}`;
+      }
+    });
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!switcher?.contains(e.target as Node) && !dropdown?.contains(e.target as Node)) {
+      dropdown?.classList.add('hidden');
+    }
+  });
+</script> 

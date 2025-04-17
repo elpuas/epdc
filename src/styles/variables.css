@@ -1,0 +1,76 @@
+:root {
+  /* Font Sizes */
+  --fontsize-h1: clamp(74px, calc(4.625rem + ((1vw - 7.68px) * 4.661)), 96px);
+  --fontsize-h2: clamp(42px, calc(2.625rem + ((1vw - 7.68px) * 6.7797)), 74px);
+  --fontsize-h3: clamp(36px, calc(2.25rem + ((1vw - 7.68px) * 1.2712)), 42px);
+  --fontsize-h4: clamp(24px, calc(1.5rem + ((1vw - 7.68px) * 2.5424)), 36px);
+  --fontsize-h5: 24px;
+  --fontsize-base: 18px;
+
+  /* Line Heights */
+  --lineheight-base: 1.5;
+  --lineheight-heading: 1.2;
+
+  /* Colors */
+  --color-primary: #000000;
+  --color-secondary: #D8FF00;
+  --color-tertiary: #00C7BE;
+  --color-quaternary: #5E6F00;
+  --color-white: #FFF;
+  --color-black: #333;
+
+  /* Base Spacing Scale */
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: clamp(80px, 10vw, 100px);
+  --space-4xl: clamp(100px, 12vw, 120px);
+
+  /* Margins */
+  --margin-xs: var(--space-xs);
+  --margin-sm: var(--space-sm);
+  --margin-md: var(--space-md);
+  --margin-lg: var(--space-lg);
+  --margin-xl: var(--space-xl);
+  --margin-3xl: var(--space-3xl);
+  --margin-4xl: var(--space-4xl);
+
+  /* Paddings */
+  --padding-xs: var(--space-xs);
+  --padding-sm: var(--space-sm);
+  --padding-md: var(--space-md);
+  --padding-lg: var(--space-lg);
+  --padding-xl: var(--space-xl);
+  --padding-3xl: var(--space-3xl);
+  --padding-4xl: var(--space-4xl);
+
+  /* Container Width and Padding */
+  --content-width: 1240px;
+  --container-padding-inline: var(--space-md);
+  --container-padding-inline-lg: var(--space-xl);
+
+  /* Grid System */
+  --grid-cols-mobile: 6;
+  --grid-cols-tablet: 8;
+  --grid-cols-desktop: 12;
+  --grid-gap: 1rem;
+  --grid-gap-lg: 1.5rem;
+  --grid-gap-xl: 2rem;
+
+  /* Container Queries */
+  --container-tablet: 768px;
+  --container-desktop: 1024px;
+
+
+  /* Shadow */
+  --box-shadow: 0 2px 6px rgba(51, 51, 51, 0.25),
+                0 8px 24px rgba(51, 51, 51, 0.33),
+                0 16px 32px rgba(51, 51, 51, 0.33);
+
+  /* Scrollbar Width */
+  --scrollbar-width: calc(100vw - 100%);
+}

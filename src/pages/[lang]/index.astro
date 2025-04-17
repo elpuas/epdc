@@ -1,0 +1,29 @@
+---
+import type { Language } from '../../i18n/utils';
+import { SUPPORTED_LANGUAGES, t } from '../../i18n/utils';
+import Layout from '../../layouts/Layout.astro';
+
+export function getStaticPaths() {
+  return SUPPORTED_LANGUAGES.map((lang) => ({
+    params: { lang },
+    props: { lang }
+  }));
+}
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+---
+
+<Layout lang={lang}>
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-4">
+      {t('common.welcome', lang)}
+    </h1>
+    <p>
+      {t('common.welcomeMessage', lang)}
+    </p>
+  </main>
+</Layout> 

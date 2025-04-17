@@ -1,0 +1,45 @@
+---
+import type { Props } from 'astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/Layout.module.css';
+
+interface LayoutProps {
+  lang: string;
+  title: string;
+  description: string;
+}
+
+const { lang = 'en', title = 'Welcome', description = 'Welcome to our site' } = Astro.props as LayoutProps;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <Header lang={lang} />
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <div class="content">
+          <slot />
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="container">
+        <Footer lang={lang} />
+      </div>
+    </footer>
+  </body>
+</html> 

@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "blog": "Blog"
+  },
+  "common": {
+    "readMore": "Leer Más",
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "welcome": "Bienvenido",
+    "welcomeMessage": "Esta es la página de inicio en español"
+  },
+  "language": {
+    "en": "Inglés",
+    "es": "Español",
+    "switch": "Cambiar Idioma"
+  }
+} 

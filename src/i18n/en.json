@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "blog": "Blog"
+  },
+  "common": {
+    "readMore": "Read More",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "welcome": "Welcome",
+    "welcomeMessage": "This is the home page in English"
+  },
+  "language": {
+    "en": "English",
+    "es": "Spanish",
+    "switch": "Switch Language"
+  }
+} 

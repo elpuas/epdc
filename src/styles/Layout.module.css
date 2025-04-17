@@ -1,0 +1,89 @@
+@import './variables.css';
+
+/* Base body grid layout with modern nesting */
+body {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--grid-gap);
+  min-height: 100dvh;
+  container-type: inline-size;
+  margin: 0;
+  padding: 0;
+
+  /* Container queries for responsive columns */
+  @media screen and (width >= 768px) {
+    grid-template-columns: repeat(8, 1fr);
+  }
+
+  @media screen and (width >= 1024px) {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  /* Header and footer - full width */
+  header, footer {
+    grid-column: 1 / -1;
+    width: 100%;
+    background-color: var(--surface-color);
+  }
+
+  header {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  footer {
+    border-top: 1px solid var(--border-color);
+  }
+
+  /* Main content area */
+  main {
+    grid-column: 1 / -1;
+    width: 100%;
+    padding: var(--grid-gap);
+    display: grid;
+    grid-template-columns: inherit;
+    gap: inherit;
+
+    /* Container queries for main content */
+    @container (width >= 768px) {
+      padding: var(--grid-gap-lg);
+    }
+
+    @container (width >= 1024px) {
+      padding: var(--grid-gap-xl);
+    }
+  }
+
+  /* Container for content */
+  .container {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: var(--container-desktop);
+    margin: 0 auto;
+    padding: 0 var(--grid-gap);
+  }
+
+  /* Content sections */
+  .content {
+    grid-column: span 6;
+
+    @container (width >= 768px) {
+      grid-column: span 6;
+    }
+
+    @container (width >= 1024px) {
+      grid-column: span 9;
+    }
+  }
+
+  .sidebar {
+    grid-column: span 6;
+
+    @container (width >= 768px) {
+      grid-column: span 2;
+    }
+
+    @container (width >= 1024px) {
+      grid-column: span 3;
+    }
+  }
+}
