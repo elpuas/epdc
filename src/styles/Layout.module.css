@@ -44,14 +44,27 @@ main {
 @container (width >= 768px) {
   main {
     padding: var(--padding-lg);
+
+    > .wrapper,
+    article {
+      max-width: var(--content-width);
+      width: 100%;
+      padding: var(--padding-md);
+    }
   }
 }
 
-/* Container */
-.container {
+article {
   grid-column: 1 / -1;
   width: 100%;
-  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--padding-md);
+}
+
+/* Container */
+.wrapper {
+  grid-column: 1 / -1;
+  width: 100%;
   margin: 0 auto;
   padding: 0 var(--padding-md);
 }
