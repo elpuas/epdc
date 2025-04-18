@@ -1,0 +1,108 @@
+---
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+
+// Define the rotating verbs for each language
+const verbs = {
+    en: ['code', 'craft', 'build', 'design', 'optimize'],
+    es: ['programamos', 'creamos', 'construimos', 'diseñamos', 'optimizamos'],
+    it: ['programmiamo', 'creiamo', 'costruiamo', 'progettiamo', 'ottimizziamo']
+};
+
+// Get the appropriate verbs for the current language
+const currentVerbs = verbs[lang as keyof typeof verbs] || verbs.en;
+---
+
+<section class="hero">
+    <div class="hero-content">
+        {lang === 'en' && (
+            <h1>We <span id="verb-rotator" aria-live="polite">{currentVerbs[0]}</span> digital crafts <strong>for</strong> humans.</h1>
+        )}
+        {lang === 'es' && (
+            <h1>Nosotros <span id="verb-rotator" aria-live="polite">{currentVerbs[0]}</span> artesanías digitales <strong>para</strong> humanos.</h1>
+        )}
+        {lang === 'it' && (
+            <h1>Noi <span id="verb-rotator" aria-live="polite">{currentVerbs[0]}</span> artigianato digitale <strong>per</strong> umani.</h1>
+        )}
+    </div>
+</section>
+
+<style>
+    .hero {
+        text-align: left;
+    }
+
+    
+    h1 {
+        margin-bottom: 1rem;
+        letter-spacing: -0.05em;
+    }
+    
+    #verb-rotator {
+        display: inline-block;
+        min-width: 80px;
+        font-weight: inherit;
+        font-size: var(--fontsize-h1);
+        color: var(--color-tertiary);
+        position: relative;
+        transition: opacity 0.3s ease-in-out;
+    }
+</style>
+
+<script>
+  // Wait for DOM to be fully loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get references to DOM elements
+    const verbRotator = document.getElementById('verb-rotator');
+    if (!verbRotator) return;
+    
+    // Get the language from the URL pathname
+    const pathLang = window.location.pathname.split('/')[1] || 'en';
+    
+    // Define the verbs for each language
+    const verbs = {
+      en: ['code', 'craft', 'build', 'design', 'optimize'],
+      es: ['programamos', 'creamos', 'construimos', 'diseñamos', 'optimizamos'],
+      it: ['programmiamo', 'creiamo', 'costruiamo', 'progettiamo', 'ottimizziamo']
+    };
+    
+    // Type assertion for language key
+    type LanguageKey = keyof typeof verbs;
+    
+    // Get the appropriate verbs for the current language
+    const langKey = (pathLang in verbs) ? pathLang as LanguageKey : 'en';
+    const currentVerbs = verbs[langKey];
+    
+    let currentIndex = 0;
+    
+    // Function to update the rotating verb with null checks
+    function updateVerb() {
+      if (!verbRotator) return;
+      
+      // Fade out
+      verbRotator.style.opacity = '0';
+      
+      setTimeout(() => {
+        if (!verbRotator) return;
+        
+        // Update text
+        currentIndex = (currentIndex + 1) % currentVerbs.length;
+        verbRotator.textContent = currentVerbs[currentIndex];
+        
+        // Fade in
+        verbRotator.style.opacity = '1';
+      }, 500); // Half of the total transition time
+    }
+    
+    // Set initial opacity (with null check)
+    if (verbRotator) {
+      verbRotator.style.opacity = '1';
+    }
+    
+    // Start rotation timer (3 seconds per word)
+    setInterval(updateVerb, 3000);
+  });
+</script> 

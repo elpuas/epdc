@@ -1,12 +1,178 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-
+import Hero from '../../components/Hero.astro';
+import Button from '../../components/Button.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import { Icon } from 'astro-icon/components';
 const title = 'Welcome';
 const description = 'Welcome to ElPuas Digital Crafts';
 const lang = 'en';
 ---
 
 <Layout {title} {description} {lang}>
-  <p>This is the English version of our homepage. Full content coming soon.</p>
-  <h1>We code digital crafts <strong>for</strong> humans.</h1>
+  <section class="intro">
+    <p>Crafting digital experiences</p>
+    <Hero {lang} />
+    <Button href="/en/about" label="About Us" />
+  </section> 
+  <section class="services">
+    <div class="with-pattern dots-pattern">
+      <h3>At <span class="brand accent">ElPuas Digital Crafts</span>, we don’t just build websites — we craft high-performance digital platforms, powered by AI and backed by expert maintenance to grow with your business.</h3>
+    </div>
+  </section>
+  <section class="expertise-section">
+    <h2>Our Expertise</h2>
+    <p class="subtitle">We deliver more than code — we bring smart, reliable digital craftsmanship.</p>
+  
+    <ul class="services-grid">
+      <li>
+        <ServiceCard 
+        icon="ph:flask" 
+        title="Custom Web Development" 
+        description="Tailor-made websites built for speed, performance, and scalability." 
+        href="/en/custom-web-development" />
+      </li>
+      <li>
+        <ServiceCard 
+        icon="ph:shopping-cart" 
+        title="E-Commerce Solutions" 
+        description="WooCommerce or headless — we make selling seamless." 
+        href="/en/e-commerce-solutions" />
+      </li>
+      <li>
+        <ServiceCard 
+        icon="ph:lifebuoy" 
+        title="Maintenance & Support" 
+        description="Updates, optimizations, and peace of mind — handled for you." 
+        href="/en/maintenance-support" />
+      </li>
+      <li>
+        <ServiceCard 
+        icon="ph:mask-happy" 
+        title="White-Label Services" 
+        description="We build quietly behind the scenes so your agency shines." 
+        href="/en/white-label-services" />
+      </li>
+    </ul>
+  </section>
+  <section class="case-section">
+    <div class="case-content">
+      <h3>Digital Craftsmanship in Action</h3>
+      <p class="accent">FishCostaRica.com didn’t just get a website — they got a partner.</p>
+      <p>We built a custom site designed to convert, and continue to optimize it through our monthly maintenance plan. The result? Higher search visibility, better performance, and a steady increase in bookings — all without lifting a finger.</p>
+      <blockquote>
+        “Since launching the new site, we’ve seen a noticeable boost in bookings and better visibility on search. ElPuas understood our goals and delivered results.”
+        <footer>— Team at FishCostaRica.com</footer>
+      </blockquote>
+
+      <Button href="#" label="Case Study" />
+    </div>
+  </section>
 </Layout> 
+
+<style>
+  .intro {
+    max-width: 978px;
+    width: 100%;
+    p {
+      font-size: var(--fontsize-h4);
+      font-weight: 700;
+      margin-bottom: 0;
+      letter-spacing: 0.05em;
+      text-transform: capitalize;
+    }
+  }
+
+  .services {
+    .with-pattern {
+      position: relative;
+      
+      &.dots-pattern {
+        &::after {
+          right: -20px;
+          bottom: -38px;
+        }
+
+        h3 {
+          padding: var(--space-2xl) 0;
+          font-weight: 500;
+
+          .brand {
+            color: var(--color-tertiary);
+          }
+
+          .accent {
+            font-size: inherit;
+          }
+        }
+      }
+    }
+  }
+
+  .expertise-section {
+
+      h2,
+      p {
+        text-align: center;
+      }
+
+      p {
+        color: var(--color-tertiary);
+      }
+    .services-grid {
+      margin-top: var(--space-4xl);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-2xl);
+      li {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-md);
+
+        &:nth-child(2) {
+          grid-column-start: 2;
+          grid-row-start: 2;
+
+          .service-card:hover {
+              transform: skew(-4deg, -8deg);
+          }
+        }
+
+        &:nth-child(3) {
+          grid-column-start: 1;
+          grid-row-start: 3;
+        }
+
+        &:nth-child(4) {
+          grid-column-start: 2;
+          grid-row-start: 4;
+
+          .service-card:hover {
+            transform: skew(-4deg, -8deg);
+          }
+        }
+
+        p {
+          color: var(--color-tertiary);
+          text-align: left;
+        }
+      }
+    }
+  }
+
+  .case-section {
+    background-image: url('/laptop-placeholder.jpg');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    .case-content {
+      max-width: 70%;
+      width: 100%;
+    }
+
+    .accent {
+      color: var(--color-tertiary);
+    }
+    
+  }
+</style>
