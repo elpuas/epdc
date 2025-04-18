@@ -1,0 +1,90 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+    icon: string;
+    title: string;
+    description: string;
+    href?: string;
+}
+
+const { icon, title, description, href = '#' } = Astro.props;
+---
+
+<a class="service-card" href={href}>
+    <Icon name={icon} width="48" height="48" />
+    <div class="card-content">
+        <h4>{title}</h4>
+        <p>{description}</p>
+    </div>
+</a>
+
+<style>
+.service-card {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    color: var(--color-secondary);
+    padding: var(--padding-lg);
+    border-radius: 0.5rem;
+    text-align: left;
+    text-decoration: none;  
+    overflow: hidden;
+    z-index: 0;
+    isolation: isolate;
+    transform: skew(0deg, 0deg);
+    transition: transform 0.3s ease;
+
+    h4,
+    p {
+        text-align: left;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        border-radius: 0.5rem;
+        padding: 2px;
+        background: linear-gradient(
+            130deg,
+            #000 30%,
+            var(--color-secondary) 50%,
+            transparent 100%
+        );
+        background-size: 200% 100%;
+        background-position: -150% 0;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+        mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+        mask-composite: exclude;
+        -webkit-mask-composite: destination-out;
+        z-index: 1;
+    }
+}
+
+.service-card:hover::before {
+    opacity: 1;
+    animation: shimmer-border 8s linear infinite;
+}
+
+.service-card:hover {
+    transform: skew(4deg, 8deg);
+}
+
+@keyframes shimmer-border {
+    0% {
+    background-position: -150% 0;
+    }
+    50% {
+        background-position: 150% 0;
+    }
+    100% {
+    background-position: -150% 0;
+    }
+}
+</style>

@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "about": "Sobre Nosotros",
+    "services": "Servicios",
+    "crafted": "Hecho con Amor",
+    "blog": "Blog",
+    "contact": "Contacto"
+  },
+  "common": {
+    "readMore": "Leer Más",
+    "loading": "Cargando...",
+    "error": "Error",
+    "welcome": "Bienvenido",
+    "welcomeMessage": "Bienvenido a ElPuas Digital Crafts"
+  },
+  "language": {
+    "en": "Inglés",
+    "es": "Español",
+    "it": "Italiano",
+    "switch": "Cambiar Idioma"
+  }
+} 

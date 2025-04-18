@@ -1,16 +1,21 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import icons from 'astro-icon';
 import sitemap from '@astrojs/sitemap';
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from './src/i18n/utils';
 
-// https://astro.build/config
+/** @type {import('astro').AstroUserConfig} */
 export default defineConfig({
 	site: 'https://example.com',
-	integrations: [mdx(), sitemap()],
+	integrations: [mdx(), sitemap(), icons({
+		include: {
+			ph: ['flask', 'shopping-cart', 'lifebuoy', 'mask-happy'],
+		},
+	})],
 	i18n: {
 		defaultLocale: DEFAULT_LANGUAGE,
-		locales: SUPPORTED_LANGUAGES,
+		locales: [...SUPPORTED_LANGUAGES],
 		routing: {
 			prefixDefaultLocale: false,
 		},

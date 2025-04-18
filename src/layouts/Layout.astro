@@ -2,7 +2,8 @@
 import type { Props } from 'astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import '../styles/Layout.module.css';
+import '../styles/global.css';
+import styles from '../styles/Layout.module.css';
 
 interface LayoutProps {
   lang: string;
@@ -10,7 +11,7 @@ interface LayoutProps {
   description: string;
 }
 
-const { lang = 'en', title = 'Welcome', description = 'Welcome to our site' } = Astro.props as LayoutProps;
+const { lang = 'en', title = 'Welcome', description = 'Welcome to our site' } = Astro.props as unknown as LayoutProps;
 ---
 
 <!DOCTYPE html>
@@ -25,19 +26,19 @@ const { lang = 'en', title = 'Welcome', description = 'Welcome to our site' } = 
   </head>
   <body>
     <header>
-      <div class="container">
+      <div class:list={styles.wrapper}>
         <Header lang={lang} />
       </div>
     </header>
     <main>
-      <div class="container">
-        <div class="content">
+      <div class:list={styles.wrapper}>
+        <div class:list={styles.content}>
           <slot />
         </div>
       </div>
     </main>
     <footer>
-      <div class="container">
+      <div class:list={styles.wrapper}>
         <Footer lang={lang} />
       </div>
     </footer>

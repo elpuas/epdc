@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro'; 
+import BlogCard from '../../../components/BlogCard.astro';
+
+const allPosts = await getCollection('blog');
+
+// Filter posts for Italian
+const italianPosts = allPosts.filter(post => post.data.lang === 'it');
+
+// Sort posts by date
+italianPosts.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+
+const pageTitle = "Blog"; // TODO: Translate title
+const pageDescription = "Ultime notizie e articoli."; // TODO: Translate description
+---
+<Layout title={pageTitle} description={pageDescription} lang="it"> { /* Added lang prop */}
+  <section class="py-12 md:py-20">
+    <div class="container px-4 mx-auto">
+      <h1 class="text-3xl md:text-4xl font-bold mb-8 text-center">{pageTitle}</h1>
+      
+      {italianPosts.length === 0 ? (
+        <p class="text-center text-gray-500">Nessun post del blog trovato per questa lingua.</p> // TODO: Translate fallback
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {italianPosts.map((post) => (
+            <BlogCard post={post} lang="it" /> // Pass 'it' lang prop
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>

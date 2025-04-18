@@ -1,0 +1,27 @@
+.button {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-lg);
+    font-size: var(--fontsize-base);
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primary {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border: none;
+}
+
+.outline {
+    background-color: transparent;
+    color: var(--color-secondary);
+    border: 2px solid var(--color-secondary);
+}
+
+.button:hover {
+    transform: scale(1.05);
+    box-shadow: var(--box-shadow);
+} 

@@ -1,0 +1,53 @@
+@import './variables.css';
+
+.switcher {
+  position: relative;
+}
+
+.toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + var(--space-xs));
+  right: 0;
+  background: var(--color-white);
+  border-radius: 6px;
+  padding: var(--space-xs);
+  box-shadow: var(--box-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  z-index: 999;
+}
+
+.menu[hidden] {
+  display: none;
+}
+
+.menu img {
+  width: 28px;
+  height: auto;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: transform 0.2s ease;
+}
+
+.menu img:hover {
+  transform: scale(1.1);
+} 

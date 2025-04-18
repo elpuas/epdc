@@ -1,56 +1,51 @@
 ---
+import styles from '../styles/LanguageSwitcher.module.css';
 import { SUPPORTED_LANGUAGES, DEFAULT_LANGUAGE, type Language } from '../i18n/utils';
 
 interface Props {
   currentLang: Language;
 }
 
-const { currentLang } = Astro.props;
+const { currentLang = 'en' as Language } = Astro.props;
 
+const LANGUAGES = {
+  en: { code: 'en', flag: '🇺🇸', name: 'English' },
+  es: { code: 'es', flag: '🇨🇷', name: 'Español' },
+  it: { code: 'it', flag: '🇮🇹', name: 'Italiano' }
+};
+
+// Ensure we have a valid language reference even if currentLang is somehow undefined
+const lang = LANGUAGES[currentLang ?? 'en'];
 ---
 
-<div class="relative">
+<div class={styles.switcher}>
   <button
+    class={styles.toggle}
     id="language-switcher"
-    class="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
     aria-haspopup="true"
     aria-expanded="false"
   >
-    <span class="text-sm font-medium">{currentLang.toUpperCase()}</span>
-    <svg
-      class="w-4 h-4"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M19 9l-7 7-7-7"
-      />
-    </svg>
+    {lang.flag}
   </button>
 
   <div
     id="language-dropdown"
-    class="absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 hidden"
+    class={styles.menu}
     role="menu"
     aria-orientation="vertical"
     aria-labelledby="language-switcher"
+    hidden
   >
-    <div class="py-1" role="none">
-      {SUPPORTED_LANGUAGES.map((lang) => (
-        <a
-          href={`/${lang}`}
-          class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-          role="menuitem"
-          data-lang={lang}
-        >
-          {lang.toUpperCase()}
-        </a>
-      ))}
-    </div>
+    {Object.entries(LANGUAGES).map(([code, { flag }]) => (
+      <a
+        href={`/${code}`}
+        role="menuitem"
+        data-lang={code}
+        class={styles.menuItem}
+      >
+        {flag}
+      </a>
+    ))}
   </div>
 </div>
 
@@ -59,10 +54,14 @@ const { currentLang } = Astro.props;
   const dropdown = document.getElementById('language-dropdown');
   const links = dropdown?.querySelectorAll('a');
 
+  // Toggle dropdown
   switcher?.addEventListener('click', () => {
-    dropdown?.classList.toggle('hidden');
+    const isExpanded = switcher.getAttribute('aria-expanded') === 'true';
+    switcher.setAttribute('aria-expanded', (!isExpanded).toString());
+    dropdown?.toggleAttribute('hidden');
   });
 
+  // Handle language selection
   links?.forEach((link) => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
@@ -77,7 +76,17 @@ const { currentLang } = Astro.props;
   // Close dropdown when clicking outside
   document.addEventListener('click', (e) => {
     if (!switcher?.contains(e.target as Node) && !dropdown?.contains(e.target as Node)) {
-      dropdown?.classList.add('hidden');
+      switcher?.setAttribute('aria-expanded', 'false');
+      dropdown?.setAttribute('hidden', '');
     }
   });
+
+  // Check for preferred language on load
+  const preferredLang = localStorage.getItem('preferredLanguage');
+  const currentPath = window.location.pathname;
+  const currentLang = currentPath.split('/')[1];
+
+  if (preferredLang && preferredLang !== currentLang) {
+    window.location.href = `/${preferredLang}${currentPath.slice(3)}`;
+  }
 </script> 

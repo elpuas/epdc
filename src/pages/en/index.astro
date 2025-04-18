@@ -1,0 +1,73 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import Button from '../../components/Button.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import { Icon } from 'astro-icon/components';
+import styles from '../../styles/Index.module.css';
+
+const title = 'Welcome';
+const description = 'Welcome to ElPuas Digital Crafts';
+const lang = 'en';
+---
+
+<Layout {title} {description} {lang}>
+  <section class={styles.intro}>
+    <p>Crafting digital experiences</p>
+    <Hero {lang} />
+    <Button href="/en/about" label="About Us" />
+  </section> 
+  <section class={styles.services}>
+    <div class={`${styles.withPattern} ${styles.dotsPattern}`}>
+      <h3>At <span class={`${styles.brand} ${styles.accent}`}>ElPuas Digital Crafts</span>, we don't just build websites — we craft high-performance digital platforms, powered by AI and backed by expert maintenance to grow with your business.</h3>
+    </div>
+  </section>
+  <section class={styles.expertiseSection}>
+    <h2>Our Expertise</h2>
+    <p class="subtitle">We deliver more than code — we bring smart, reliable digital craftsmanship.</p>
+  
+    <ul class={styles.servicesGrid}>
+      <li>
+        <ServiceCard 
+        icon="ph:flask" 
+        title="Custom Web Development" 
+        description="Tailor-made websites built for speed, performance, and scalability." 
+        href="/en/custom-web-development" />
+      </li>
+      <li>
+        <ServiceCard 
+        icon="ph:shopping-cart" 
+        title="E-Commerce Solutions" 
+        description="WooCommerce or headless — we make selling seamless." 
+        href="/en/e-commerce-solutions" />
+      </li>
+      <li>
+        <ServiceCard 
+        icon="ph:lifebuoy" 
+        title="Maintenance & Support" 
+        description="Updates, optimizations, and peace of mind — handled for you." 
+        href="/en/maintenance-support" />
+      </li>
+      <li>
+        <ServiceCard 
+        icon="ph:mask-happy" 
+        title="White-Label Services" 
+        description="We build quietly behind the scenes so your agency shines." 
+        href="/en/white-label-services" />
+      </li>
+    </ul>
+  </section>
+  <section class={styles.caseSection}>
+    <div class={styles.caseContent}>
+      <h3>Digital Craftsmanship in Action</h3>
+      <p class={styles.accent}>FishCostaRica.com didn't just get a website — they got a partner.</p>
+      <p>We built a custom site designed to convert, and continue to optimize it through our monthly maintenance plan. The result? Higher search visibility, better performance, and a steady increase in bookings — all without lifting a finger.</p>
+      <blockquote>
+        "Since launching the new site, we've seen a noticeable boost in bookings and better visibility on search. ElPuas understood our goals and delivered results."
+        <footer>— Team at FishCostaRica.com</footer>
+      </blockquote>
+
+      <Button href="#" label="Case Study" />
+    </div>
+  </section>
+</Layout>
