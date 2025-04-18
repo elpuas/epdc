@@ -1,6 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
+import Button from '../../components/Button.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import { Icon } from 'astro-icon/components';
+import styles from '../../styles/Index.module.css';
 
 const title = 'Bienvenidos';
 const description = 'Página principal de ElPuas Digital Crafts';
@@ -8,6 +12,62 @@ const lang = 'es';
 ---
 
 <Layout {title} {description} {lang}>
-  <p>Creando experiencias digitales</p>
-  <Hero {lang} />
+  <section class={styles.intro}>
+    <p>Creando experiencias digitales</p>
+    <Hero {lang} />
+    <Button href="/es/about" label="Conócenos" />
+  </section> 
+  <section class={styles.services}>
+    <div class={`${styles.withPattern} ${styles.dotsPattern}`}>
+      <h3>En <span class={`${styles.brand} ${styles.accent}`}>ElPuas Digital Crafts</span>, no solo construimos sitios web — creamos plataformas digitales de alto rendimiento, impulsadas por IA y respaldadas por mantenimiento experto para crecer con tu negocio.</h3>
+    </div>
+  </section>
+  <section class={styles.expertiseSection}>
+    <h2>Nuestra Experiencia</h2>
+    <p class="subtitle">Entregamos más que código — aportamos artesanía digital inteligente y confiable.</p>
+  
+    <ul class={styles.servicesGrid}>
+      <li>
+        <ServiceCard 
+        icon="ph:flask" 
+        title="Desarrollo Web Personalizado" 
+        description="Sitios web a medida construidos para velocidad, rendimiento y escalabilidad." 
+        href="/es/desarrollo-web-personalizado" />
+      </li>
+      <li>
+        <ServiceCard 
+        icon="ph:shopping-cart" 
+        title="Soluciones de Comercio Electrónico" 
+        description="WooCommerce o headless — hacemos que vender sea fluido." 
+        href="/es/soluciones-comercio-electronico" />
+      </li>
+      <li>
+        <ServiceCard 
+        icon="ph:lifebuoy" 
+        title="Mantenimiento y Soporte" 
+        description="Actualizaciones, optimizaciones y tranquilidad — gestionados para ti." 
+        href="/es/mantenimiento-soporte" />
+      </li>
+      <li>
+        <ServiceCard 
+        icon="ph:mask-happy" 
+        title="Servicios White-Label" 
+        description="Construimos discretamente en segundo plano para que tu agencia brille." 
+        href="/es/servicios-white-label" />
+      </li>
+    </ul>
+  </section>
+  <section class={styles.caseSection}>
+    <div class={styles.caseContent}>
+      <h3>Artesanía Digital en Acción</h3>
+      <p class={styles.accent}>FishCostaRica.com no solo obtuvo un sitio web — consiguió un socio.</p>
+      <p>Construimos un sitio personalizado diseñado para convertir, y continuamos optimizándolo a través de nuestro plan de mantenimiento mensual. ¿El resultado? Mayor visibilidad en búsquedas, mejor rendimiento y un aumento constante en las reservas — todo sin mover un dedo.</p>
+      <blockquote>
+        "Desde el lanzamiento del nuevo sitio, hemos notado un impulso notable en las reservas y mejor visibilidad en búsquedas. ElPuas entendió nuestros objetivos y entregó resultados."
+        <footer>— Equipo de FishCostaRica.com</footer>
+      </blockquote>
+
+      <Button href="#" label="Caso de Estudio" />
+    </div>
+  </section>
 </Layout> 
