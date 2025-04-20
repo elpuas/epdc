@@ -5,6 +5,8 @@ import Button from '../../components/Button.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import { Icon } from 'astro-icon/components';
 import styles from '../../styles/Index.module.css';
+import TrustedBy from '../../components/TrustedBy.astro';
+import Firefly from '../../components/Firefly.astro';
 
 const title = 'Welcome';
 const description = 'Welcome to ElPuas Digital Crafts';
@@ -13,9 +15,9 @@ const lang = 'en';
 
 <Layout {title} {description} {lang}>
   <section class={styles.intro}>
-    <p>Crafting digital experiences</p>
+    <p>Small studio, big results.</p>
     <Hero {lang} />
-    <Button href="/en/about" label="About Us" />
+    <Button href="/en/contact" label="Let's Talk" />
   </section> 
   <section class={styles.services}>
     <div class={`${styles.withPattern} ${styles.dotsPattern}`}>
@@ -57,17 +59,49 @@ const lang = 'en';
       </li>
     </ul>
   </section>
+  <section class={styles.trustedBy}>
+    <TrustedBy title="Trusted by forward-thinking brands" />
+  </section>
   <section class={styles.caseSection}>
     <div class={styles.caseContent}>
       <h3>Digital Craftsmanship in Action</h3>
-      <p class={styles.accent}>FishCostaRica.com didn't just get a website — they got a partner.</p>
+      <p class={`${styles.accent} ${styles.caseAccent}`}>FishCostaRica.com didn't just get a website — they got a partner.</p>
       <p>We built a custom site designed to convert, and continue to optimize it through our monthly maintenance plan. The result? Higher search visibility, better performance, and a steady increase in bookings — all without lifting a finger.</p>
-      <blockquote>
+      <blockquote class={styles.caseQuote}>
         "Since launching the new site, we've seen a noticeable boost in bookings and better visibility on search. ElPuas understood our goals and delivered results."
         <footer>— Team at FishCostaRica.com</footer>
       </blockquote>
 
       <Button href="#" label="Case Study" />
     </div>
+  </section>
+  <section class={styles.supportTeaser}>
+    <h2>Ongoing Support That Grows With You</h2>
+    <p class={styles.accent}>
+      From performance tweaks to full-scale updates, our monthly care plans keep your site fast, secure, and evolving.
+    </p>
+  
+    <ul class={styles.features}>
+      <li>
+        <Icon name="ph:shield-check" width="48" height="48" />
+        <h4>Regular updates & backups</h4>
+      </li>
+      <li>
+        <Icon name="ph:code" width="48" height="48" />
+        <h4>Expert dev hours included</h4>
+      </li>
+      <li>
+        <Icon name="ph:gauge" width="48" height="48" />
+        <h4>Proactive performance checks</h4>
+      </li>
+      <li>
+        <Icon name="ph:lightning" width="48" height="48" />
+        <h4>Priority response options</h4>
+      </li>
+    </ul>
+    <Button href="/services#plans" label="Explore Our Plans" />
+  </section>
+  <section class={styles.firefly}>
+    <Firefly />
   </section>
 </Layout>

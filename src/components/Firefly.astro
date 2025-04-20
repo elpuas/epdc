@@ -1,0 +1,74 @@
+<div class="firefly">
+    <img src="/luciernaga-verde.png" alt="Firefly logo" />
+    <div class="tail-glow"></div>
+</div>
+
+<style>
+    .firefly {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 48px;
+        height: 48px;
+        pointer-events: none;
+        animation: floatAround 15s infinite ease-in-out, fadeInOut 6s infinite ease-in-out;
+        z-index: 100;
+    }
+
+    .firefly img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .tail-glow {
+        position: absolute;
+        bottom: 8%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40%;
+        height: 40%;
+        border-radius: 50%;
+        background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);
+        animation: pulse-glow 2s infinite ease-in-out;
+        pointer-events: none;
+    }
+
+    @keyframes pulse-glow {
+        0%, 100% {
+        opacity: 0.2;
+        transform: translateX(-50%) scale(0.9);
+        }
+        50% {
+        opacity: 0.8;
+        transform: translateX(-50%) scale(1.1);
+        }
+    }
+
+    @keyframes floatAround {
+        0% {
+        transform: translate(0, 0);
+        }
+        25% {
+        transform: translate(40vw, -10vh);
+        }
+        50% {
+        transform: translate(75vw, 5vh);
+        }
+        75% {
+        transform: translate(90vw, -15vh);
+        }
+        100% {
+        transform: translate(0, 0);
+        }
+    }
+
+    @keyframes fadeInOut {
+        0%, 100% {
+        opacity: 0;
+        }
+        50% {
+        opacity: 1;
+        }
+    }
+</style>

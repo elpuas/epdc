@@ -5,6 +5,8 @@ import Button from '../../components/Button.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import { Icon } from 'astro-icon/components';
 import styles from '../../styles/Index.module.css';
+import TrustedBy from '../../components/TrustedBy.astro';
+import Firefly from '../../components/Firefly.astro';
 
 const title = 'Benvenuto';
 const description = 'Homepage di ElPuas Digital Crafts';
@@ -13,9 +15,9 @@ const lang = 'it';
 
 <Layout {title} {description} {lang}>
   <section class={styles.intro}>
-    <p>Creando esperienze digitali</p>
+    <p>Studio piccolo, grandi risultati.</p>
     <Hero {lang} />
-    <Button href="/it/about" label="Chi Siamo" />
+    <Button href="/it/contatto" label="Parliamone" />
   </section> 
   <section class={styles.services}>
     <div class={`${styles.withPattern} ${styles.dotsPattern}`}>
@@ -57,17 +59,49 @@ const lang = 'it';
       </li>
     </ul>
   </section>
+  <section class={styles.trustedBy}>
+    <TrustedBy title="Scelti da brand innovativi" />
+  </section>
   <section class={styles.caseSection}>
     <div class={styles.caseContent}>
       <h3>Artigianato Digitale in Azione</h3>
-      <p class={styles.accent}>FishCostaRica.com non ha ottenuto solo un sito web — ha trovato un partner.</p>
+      <p class={`${styles.accent} ${styles.caseAccent}`}>FishCostaRica.com non ha ottenuto solo un sito web — ha trovato un partner.</p>
       <p>Abbiamo costruito un sito personalizzato progettato per convertire, e continuiamo a ottimizzarlo attraverso il nostro piano di manutenzione mensile. Il risultato? Maggiore visibilità nelle ricerche, migliori prestazioni e un costante aumento delle prenotazioni — il tutto senza muovere un dito.</p>
-      <blockquote>
+      <blockquote class={styles.caseQuote}>
         "Dal lancio del nuovo sito, abbiamo visto un notevole incremento nelle prenotazioni e una migliore visibilità nelle ricerche. ElPuas ha compreso i nostri obiettivi e ha fornito risultati."
         <footer>— Team di FishCostaRica.com</footer>
       </blockquote>
 
       <Button href="#" label="Caso Studio" />
     </div>
+  </section>
+  <section class={styles.supportTeaser}>
+    <h2>Supporto Continuo Che Cresce Con Te</h2>
+    <p class={styles.accent}>
+      Dagli aggiustamenti delle prestazioni agli aggiornamenti completi, i nostri piani di assistenza mensile mantengono il tuo sito veloce, sicuro e in evoluzione.
+    </p>
+  
+    <ul class={styles.features}>
+      <li>
+        <Icon name="ph:shield-check" width="48" height="48" />
+        <h4>Aggiornamenti e backup regolari</h4>
+      </li>
+      <li>
+        <Icon name="ph:code" width="48" height="48" />
+        <h4>Ore di sviluppo esperto incluse</h4>
+      </li>
+      <li>
+        <Icon name="ph:gauge" width="48" height="48" />
+        <h4>Controlli proattivi delle prestazioni</h4>
+      </li>
+      <li>
+        <Icon name="ph:lightning" width="48" height="48" />
+        <h4>Opzioni di risposta prioritaria</h4>
+      </li>
+    </ul>
+    <Button href="/it/servizi#piani" label="Esplora I Nostri Piani" />
+  </section>
+  <section class={styles.firefly}>
+    <Firefly />
   </section>
 </Layout> 

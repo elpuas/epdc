@@ -7,14 +7,78 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const currentYear = new Date().getFullYear();
 ---
 
-<footer class={styles.footer}>
-	<div class="container">
-		<div class="py-8 text-center">
-			<p>
-				&copy; {new Date().getFullYear()} {t('footer.copyright', lang)}
-			</p>
-		</div>
+<footer class="site-footer">
+	<div class="footer-content">
+	  <div class="footer-brand">
+		<img src="/luciernaga-verde.png" alt="ElPuas Logo" class="footer-logo" />
+		<p>Digital craftsmanship with a human touch.</p>
+	  </div>
+  
+	  <nav class="footer-nav">
+		<a href="/about">About</a>
+		<a href="/services">Services</a>
+		<a href="/crafted-with-love">Portfolio</a>
+		<a href="/blog">Blog</a>
+		<a href="/contact">Contact</a>
+	  </nav>
+  
+	  <div class="footer-meta">
+		<p>© {currentYear} ElPuas Digital Crafts. All rights reserved.</p>
+	  </div>
 	</div>
-</footer>
+  </footer>
+  
+<style>
+	.site-footer {
+		padding: var(--space-2xl) var(--space-md);
+		background-color: var(--color-primary);
+		color: var(--color-secondary);
+		text-align: center;
+		font-size: var(--fontsize-base);
+	}
+
+	.footer-content {
+		max-width: var(--content-width);
+		margin: 0 auto;
+		display: grid;
+		gap: var(--space-lg);
+	}
+
+	.footer-logo {
+		width: 48px;
+		margin: 0 auto var(--space-sm);
+		filter: brightness(1.2);
+	}
+
+	.footer-brand p {
+		margin: 0;
+		color: var(--color-secondary);
+		font-size: var(--fontsize-base);
+	}
+
+	.footer-nav {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: var(--space-md);
+	}
+
+	.footer-nav a {
+		color: var(--color-secondary);
+		text-decoration: none;
+		font-weight: 500;
+		transition: color 0.3s ease;
+	}
+
+	.footer-nav a:hover {
+		color: var(--color-tertiary);
+	}
+
+	.footer-meta {
+		font-size: 0.875rem;
+		color: var(--color-quaternary);
+	}
+</style>

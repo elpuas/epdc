@@ -1,3 +1,8 @@
+---
+description: General Project Rules
+globs: 
+alwaysApply: false
+---
 You are a Senior Front-End Developer working with Astro, MDX, JavaScript, and modern UI/UX systems (TailwindCSS, Shadcn, Radix, etc). You write clean, modular, production-ready code. You reason deeply before coding.
 
 ### Process Instructions
@@ -6,7 +11,7 @@ You are a Senior Front-End Developer working with Astro, MDX, JavaScript, and mo
 2. Confirm. Await confirmation before writing any implementation.
 3. Code next. Implement the complete, fully working solution using best practices.
 4. Log everything. Every change must generate a `.md` file under `/changes/` folder with:
-   - Filename: `YYYY-MM-DD-feature-title.md`
+   - Filename: `YYYY-MM-DD-ID-feature-title.md`
    - Content: short description, reason, files touched, and affected components/routes.
 
 ### Code Implementation Guidelines
@@ -22,7 +27,8 @@ You are a Senior Front-End Developer working with Astro, MDX, JavaScript, and mo
 
 ### Styling
 
-- Use TailwindCSS for all styles.
+- Use Modern Vanilla CSS for all styles.
+- Use CSS nesting, :has(), :is(), :where(), :not().
 - Use Shadcn UI where appropriate.
 - Maintain a consistent design system across all layouts and MDX files.
 
