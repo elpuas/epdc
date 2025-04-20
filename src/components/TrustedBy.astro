@@ -1,0 +1,66 @@
+---
+const { title = 'Trusted by forward-thinking brands' } = Astro.props;
+
+const logos = [
+    {
+        src: '/images/avalanche.png',
+        alt: 'Avalanche Advertising Logo'
+    },
+    {
+        src: '/images/pb.png',
+        alt: 'Premium Brokers Logo'
+    },
+    {
+        src: '/images/fishcostarica.png',
+        alt: 'FishCostaRica Logo'
+    },
+    {
+        src: '/images/monkey.png',
+        alt: 'Monkey Scrubs Logo'
+    }
+];
+---
+
+<section class="trusted-by">
+    <h2 class="trusted-title">{title}</h2>
+    <div class="logo-row">
+        {logos.map(({ src, alt }) => (
+            <img src={src} alt={alt} loading="lazy" />
+        ))}
+    </div>
+</section>
+
+<style>
+    .trusted-by {
+        padding-block: var(--space-xl);
+        text-align: center;
+    }
+
+    .trusted-title {
+        font-size: var(--fontsize-h3);
+        color: var(--color-secondary);
+        margin-bottom: var(--space-lg);
+    }
+
+    .logo-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--space-xl);
+    }
+
+    .logo-row {
+        img {
+            max-width: 320px;
+            object-fit: contain;
+            filter: grayscale(100%) brightness(1.5);
+            transition: filter 0.3s ease;
+
+            &:hover {
+                filter: none;
+            }
+        }
+    }
+
+</style>
