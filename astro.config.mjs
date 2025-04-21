@@ -11,12 +11,20 @@ export default defineConfig({
 	integrations: [mdx(), sitemap(), icons({
 		include: {
 			ph: [
+				// Regular icons
 				'flask', 'shopping-cart', 'lifebuoy', 'mask-happy', 
 				'shield-check', 'code', 'gauge', 'lightning',
-				'cpu-bold', 'chart-line-up-bold', 'brain-bold', 'handshake-bold',
-				'browser', 'trending-up', 'rocket-launch-bold',
-				'handshake', 'rocket-launch', 'brain', 'magnifying-glass',
-				'pen-nib', 'truck', 'chart-line-up'
+				'browser', 'trending-up', 'handshake', 'rocket-launch', 
+				'brain', 'magnifying-glass', 'pen-nib', 'truck', 
+				'chart-line-up', 'cpu',
+				
+				// Bold variants
+				'cpu-bold', 'chart-line-up-bold', 'brain-bold', 
+				'handshake-bold', 'rocket-launch-bold', 'flask-bold',
+				'shopping-cart-bold', 'lifebuoy-bold', 'mask-happy-bold',
+				'shield-check-bold', 'code-bold', 'gauge-bold', 
+				'lightning-bold', 'browser-bold', 'trending-up-bold',
+				'magnifying-glass-bold', 'pen-nib-bold', 'truck-bold'
 			],
 		},
 	})],

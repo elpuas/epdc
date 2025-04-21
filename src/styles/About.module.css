@@ -1,10 +1,122 @@
+/* Step icon animations */
 .step-icon {
 	opacity: 0;
 	transform: scale(0.4);
-	transition: all 0.4s ease-out;
+	transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	will-change: transform, opacity;
+	transform-origin: center;
 }
 
+/* Keep the old class for backwards compatibility */
 .step-icon.visible {
 	opacity: 1;
 	transform: scale(1);
+}
+
+/* New animation with higher specificity and more dramatic effect */
+.process :global(.step-icon.animate) {
+	animation-name: iconHop;
+	animation-duration: 0.6s;
+	animation-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+	animation-fill-mode: both;
+	animation-delay: 0.1s;
+	opacity: 1;
+	transform: scale(1);
+}
+
+@keyframes iconHop {
+	0% {
+		opacity: 0;
+		transform: scale(0.4) translateY(20px);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.2) translateY(-10px);
+	}
+	70% {
+		transform: scale(0.95) translateY(5px);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1) translateY(0);
+	}
+}
+
+/* Process section styles */
+.process {
+	margin: 4rem 0;
+	position: relative;
+}
+
+.process h2 {
+	margin-bottom: 2.5rem;
+	text-align: center;
+}
+
+/* Additional styles for responsive behavior */
+@media (max-width: 768px) {
+	.process h2 {
+		text-align: left;
+	}
+}
+
+/* Hero, About, Values, Team, Philosophy, Testimonial, CTA sections */
+.hero, .about, .values, .team, .philosophy, .testimonial, .cta {
+	margin-bottom: 3rem;
+}
+
+.about {
+    p {
+        font-size: 1.25rem;
+        line-height: 1.6;
+    }
+}
+
+.accent {
+	color: var(--color-tertiary);
+    font-size: inherit;
+}
+
+.lead {
+	font-size: 1.25rem;
+	line-height: 1.6;
+}
+
+/* Values section */
+.values ul {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: 1.5rem;
+	padding: 0;
+	list-style: none;
+}
+
+.values li {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Team section */
+.team ul {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 2rem;
+	padding: 0;
+	list-style: none;
+}
+
+/* Testimonial section */
+.testimonial {
+	padding: 2rem;
+	border-radius: 0.75rem;
+}
+
+/* CTA section */
+.cta {
+	text-align: center;
+	margin: 4rem 0;
 }
