@@ -16,7 +16,7 @@ export default defineConfig({
 				'shield-check', 'code', 'gauge', 'lightning',
 				'browser', 'trending-up', 'handshake', 'rocket-launch', 
 				'brain', 'magnifying-glass', 'pen-nib', 'truck', 
-				'chart-line-up', 'cpu',
+				'chart-line-up', 'cpu', 'arrow-right',
 				
 				// Bold variants
 				'cpu-bold', 'chart-line-up-bold', 'brain-bold', 

@@ -26,7 +26,21 @@ const blogCollection = defineCollection({
   }),
 });
 
+// Define the portfolio collection schema
+const portfolioCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.string().transform((str) => new Date(str)),
+    image: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    lang: z.enum(['en', 'es', 'it']),
+    slug: z.string().optional(), // Make slug optional as it can be inferred from filename
+  }),
+});
+
 // Export collections
 export const collections = {
   'blog': blogCollection,
+  'portfolio': portfolioCollection,
 }; 

@@ -1,0 +1,26 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import ProjectLayout from '../../../layouts/ProjectLayout.astro';
+
+export async function getStaticPaths() {
+	// Filter portfolio items for Italian language
+	const projects = await getCollection('portfolio', ({ data }) => {
+		return data.lang === 'it';
+	});
+	
+	// Map projects to paths using project.slug
+	return projects.map((project) => ({
+		params: { slug: project.slug },
+		props: project,
+	}));
+}
+
+type Props = CollectionEntry<'portfolio'>;
+
+const project = Astro.props;
+const { Content } = await project.render();
+---
+
+<ProjectLayout {...project.data}>
+	<Content />
+</ProjectLayout> 

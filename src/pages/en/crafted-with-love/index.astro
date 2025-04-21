@@ -1,0 +1,114 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import ProjectCard from '../../../components/ProjectCard.astro';
+
+// Fetch all portfolio items
+const allProjects = await getCollection('portfolio');
+console.log("DEBUG - EN Portfolio index - All projects:", allProjects.length);
+console.log("DEBUG - EN Portfolio index - All project slugs:", allProjects.map(p => p.slug).join(", "));
+console.log("DEBUG - EN Portfolio index - All project langs:", allProjects.map(p => p.data.lang).join(", "));
+
+// Filter projects for English language
+const englishProjects = allProjects.filter(project => project.data.lang === 'en');
+console.log("DEBUG - EN Portfolio index - Filtered English projects:", englishProjects.length);
+console.log("DEBUG - EN Portfolio index - English project slugs:", englishProjects.map(p => p.slug).join(", "));
+
+// Sort projects by date if needed (newest first)
+englishProjects.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+
+const pageTitle = "Crafted with Love";
+const pageDescription = "Explore our portfolio of custom digital projects.";
+const lang = "en";
+---
+
+<Layout title={pageTitle} description={pageDescription} lang={lang}>
+  <section class="portfolio-header">
+    <div class="container">
+      <h1>{pageTitle}</h1>
+      <p class="lead">Our showcase of bespoke digital craftsmanship</p>
+    </div>
+  </section>
+
+  <section class="portfolio-grid">
+    <div class="container">
+      {englishProjects.length === 0 ? (
+        <div class="no-projects">
+          <p>No projects available yet. Check back soon!</p>
+        </div>
+      ) : (
+        <div class="projects-grid">
+          {englishProjects.map((project) => (
+            <ProjectCard project={project} lang={lang} />
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .portfolio-header {
+    padding: 4rem 0 2rem;
+    text-align: center;
+  }
+  
+  .portfolio-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .lead {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary, #718096);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .portfolio-grid {
+    padding: 2rem 0 5rem;
+  }
+  
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+  
+  .no-projects {
+    text-align: center;
+    padding: 3rem 0;
+    font-size: 1.25rem;
+    color: var(--color-text-secondary, #718096);
+  }
+  
+  @media (max-width: 768px) {
+    .projects-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+    
+    .portfolio-header h1 {
+      font-size: 2.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .portfolio-header h1 {
+      font-size: 2rem;
+    }
+    
+    .lead {
+      font-size: 1.1rem;
+    }
+  }
+</style> 
