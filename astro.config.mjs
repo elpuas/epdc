@@ -10,7 +10,12 @@ export default defineConfig({
 	site: 'https://example.com',
 	integrations: [mdx(), sitemap(), icons({
 		include: {
-			ph: ['flask', 'shopping-cart', 'lifebuoy', 'mask-happy', 'shield-check', 'code', 'gauge', 'lightning'],
+			ph: [
+				'flask', 'shopping-cart', 'lifebuoy', 'mask-happy', 
+				'shield-check', 'code', 'gauge', 'lightning',
+				'cpu-bold', 'chart-line-up-bold', 'brain-bold', 'handshake-bold',
+				'browser', 'trending-up', 'rocket-launch-bold'
+			],
 		},
 	})],
 	i18n: {

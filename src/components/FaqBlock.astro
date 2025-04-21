@@ -1,0 +1,58 @@
+---
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
+const faqs: FAQ[] = [
+    {
+        question: 'How long does a typical project take?',
+        answer: 'Most websites are completed in 4–6 weeks depending on scope and client responsiveness.'
+    },
+    {
+        question: 'Do you offer ongoing support?',
+        answer: 'Yes! Our maintenance plans include updates, support hours, and performance monitoring.'
+    },
+    {
+        question: 'What platforms do you work with?',
+        answer: 'We specialize in WordPress, WooCommerce, Astro, and Laravel.'
+    },
+    {
+        question: 'Can I request changes during development?',
+        answer: 'Absolutely. We work collaboratively and welcome feedback throughout the process.'
+    }
+];
+---
+
+<section class="faq-block">
+    <h2>Frequently Asked Questions</h2>
+    <dl>
+    {faqs.map(({ question, answer }) => (
+        <div class="faq-item">
+        <dt>{question}</dt>
+        <dd>{answer}</dd>
+        </div>
+    ))}
+    </dl>
+</section>
+
+<style scoped>
+.faq-block {
+    margin-block: var(--space-4xl);
+    padding-block: var(--space-xl);
+}
+
+.faq-item {
+    margin-bottom: var(--space-lg);
+}
+
+.faq-item dt {
+    font-weight: bold;
+    margin-bottom: var(--space-xs);
+}
+
+.faq-item dd {
+    margin: 0;
+    font-size: var(--fontsize-base);
+}
+</style>

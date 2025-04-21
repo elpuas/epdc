@@ -1,0 +1,30 @@
+.hero {
+    p {
+        margin-bottom: calc(var(--space-md) * 4);
+    }
+}
+
+.accent {
+    color: var(--color-tertiary);
+}
+
+.servicesIntro {
+    text-align: center;
+}
+
+.servicesIntroGrid {
+    text-align: left;
+}
+
+.pricingGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-md);
+}
+
+.testimonial {}
+
+.whyChoose {}
+
+.ctaBlock {}
+
