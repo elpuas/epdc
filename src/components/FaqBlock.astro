@@ -15,7 +15,7 @@ const faqs: FAQ[] = [
     },
     {
         question: 'What platforms do you work with?',
-        answer: 'We specialize in WordPress, WooCommerce, Astro, and Laravel.'
+        answer: 'We specialize in WordPress, WooCommerce, React, Astro, and Laravel.'
     },
     {
         question: 'Can I request changes during development?',
@@ -25,12 +25,12 @@ const faqs: FAQ[] = [
 ---
 
 <section class="faq-block">
-    <h2>Frequently Asked Questions</h2>
+    <h3>Frequently Asked Questions</h3>
     <dl>
     {faqs.map(({ question, answer }) => (
         <div class="faq-item">
-        <dt>{question}</dt>
-        <dd>{answer}</dd>
+        <dt class="faq-item-question">{question}</dt>
+        <dd class="faq-item-answer">{answer}</dd>
         </div>
     ))}
     </dl>
@@ -38,7 +38,6 @@ const faqs: FAQ[] = [
 
 <style scoped>
 .faq-block {
-    margin-block: var(--space-4xl);
     padding-block: var(--space-xl);
 }
 
@@ -55,4 +54,15 @@ const faqs: FAQ[] = [
     margin: 0;
     font-size: var(--fontsize-base);
 }
+
+.faq-item-question {
+    font-weight: bold;
+    margin-bottom: var(--space-xs);
+}
+
+.faq-item-answer {
+    margin: 0;
+    color: var(--color-tertiary);
+}
+
 </style>

@@ -1,0 +1,28 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Step {
+  icon: string
+  title: string
+  description: string
+}
+
+interface Props {
+  steps: Step[]
+}
+
+const { steps } = Astro.props;
+---
+
+
+<ol class="step-list">
+    {steps.map((step) => (
+        <li class="step">
+        <Icon name={step.icon} class="step-icon" size="36" />
+        <div>
+            <h3>{step.title}</h3>
+            <p>{step.description}</p>
+        </div>
+        </li>
+    ))}
+</ol>

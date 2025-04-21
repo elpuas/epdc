@@ -14,7 +14,9 @@ export default defineConfig({
 				'flask', 'shopping-cart', 'lifebuoy', 'mask-happy', 
 				'shield-check', 'code', 'gauge', 'lightning',
 				'cpu-bold', 'chart-line-up-bold', 'brain-bold', 'handshake-bold',
-				'browser', 'trending-up', 'rocket-launch-bold'
+				'browser', 'trending-up', 'rocket-launch-bold',
+				'handshake', 'rocket-launch', 'brain', 'magnifying-glass',
+				'pen-nib', 'truck', 'chart-line-up'
 			],
 		},
 	})],

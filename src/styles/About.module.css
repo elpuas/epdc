@@ -1,0 +1,10 @@
+.step-icon {
+	opacity: 0;
+	transform: scale(0.4);
+	transition: all 0.4s ease-out;
+}
+
+.step-icon.visible {
+	opacity: 1;
+	transform: scale(1);
+}

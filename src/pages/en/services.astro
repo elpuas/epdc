@@ -5,7 +5,6 @@ import ServiceDetails from '../../components/ServiceDetails.astro';
 import FaqBlock from '../../components/FaqBlock.astro';
 import TrustedBy from '../../components/TrustedBy.astro';
 import PricingCard from '../../components/PricingCard.astro';
-import { Icon } from 'astro-icon/components';
 import styles from '../../styles/Services.module.css';
 const title = 'Our Services';
 const description = 'Explore our digital craftsmanship services';
@@ -14,14 +13,14 @@ const lang = 'en';
 
 <Layout {title} {description} {lang}>
   <section class={styles.hero}>
-    <h1>Smart, Scalable Digital Services</h1>
+    <h1>Smart, <span class={styles.accent}>Scalable</span> Digital Services</h1>
     <h5>From handcrafted websites to ongoing support — we help your business thrive online.</h5>
     <Button href="/contact" label="Let's Talk" />
   </section>
 
   <section class={styles.servicesIntro}>
     <h2>What We Offer</h2>
-    <p class={styles.accent}>From initial launch to long-term growth, we provide complete digital craftsmanship tailored to your business needs.</p>
+    <p class={`${styles.accent} ${styles.subtitle}`}>From initial launch to long-term growth, we provide complete digital craftsmanship tailored to your business needs.</p>
     <div class={styles.servicesIntroGrid}>
         <ServiceDetails 
           icon="ph:flask" 
@@ -128,28 +127,14 @@ const lang = 'en';
   </section>
 
   <section class={styles.testimonial}>
+    <h3>Partnering Behind the Scenes</h3>
+    <p class={styles.accent}>
+      We support agencies and studios through reliable, white-label execution.
+    </p>
     <blockquote>
-      "Working with ElPuas has been seamless — they deliver on time, understand complex specs, and make us look good to our clients."
-      <footer>— Avalanche Studio (White-label partner)</footer>
+      “Working with ElPuas has been a game-changer. They consistently deliver high-quality work on time, handle complex technical specs with ease, and elevate the quality of our agency’s output. Our clients are happy — and that makes us look great.”
+      <footer>— Avalanche Advertising (White-label Partner)</footer>
     </blockquote>
-  </section>
-
-  <section class={styles.whyChoose}>
-    <h2>Why Choose ElPuas?</h2>
-    <ul>
-      <li>
-        <Icon name="ph:cpu-bold" width="24" height="24" /> Powered by AI and efficient workflows
-      </li>
-      <li>
-        <Icon name="ph:chart-line-up-bold" width="24" height="24" /> Results-focused and transparent process
-      </li>
-      <li>
-        <Icon name="ph:brain-bold" width="24" height="24" /> Expertise in WordPress, Astro, Laravel, and WooCommerce
-      </li>
-      <li>
-        <Icon name="ph:handshake-bold" width="24" height="24" /> Real people. Real support. Real commitment.
-      </li>
-    </ul>
   </section>
 
   <TrustedBy title="Trusted by forward-thinking brands" />
