@@ -10,7 +10,7 @@
 }
 
 .primary {
-    background-color: var(--color-secondary);
+    background-color: var(--color-tertiary);
     color: var(--color-primary);
     border: none;
 }
@@ -24,4 +24,6 @@
 .button:hover {
     transform: scale(1.05);
     box-shadow: var(--box-shadow);
+    background-color: var(--color-quaternary);
+    color: var(--color-tertiary);
 } 
