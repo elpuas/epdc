@@ -47,10 +47,19 @@
 	font-display: swap;
 }
 
+@font-face {
+	font-family: 'Montserrat VF';
+	src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
 /* Base Typography */
 body {
-	font-family: 'Inter', sans-serif;
+	font-family: 'Montserrat VF', sans-serif;
 	font-size: var(--fontsize-base);
+	font-weight: 300;
 	line-height: var(--lineheight-base);
 	color: var(--color-secondary);
 	background-color: var(--color-primary);

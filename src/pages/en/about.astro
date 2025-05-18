@@ -1,13 +1,185 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-
-const title = 'About Us';
-const description = 'Learn more about ElPuas Digital Crafts';
+import Button from '../../components/Button.astro';
+import { Icon } from 'astro-icon/components';
+import ProcessStep from '../../components/ProcessStep.astro';
+import styles from '../../styles/About.module.css';
+const title = 'About';
+const description = 'Meet the people and philosophy behind ElPuas Digital Crafts.';
 const lang = 'en';
+const process = [
+  {
+    icon: 'ph:magnifying-glass',
+    title: 'Discovery & Understanding',
+    description: 'We start by gathering as much information as possible about your business, challenges, and goals. Understanding your needs is the foundation of a successful project.'
+  },
+  {
+    icon: 'ph:brain',
+    title: 'Strategic Planning with AI Insights',
+    description: 'Using the information gathered, we analyze and identify the best approach. With AI, we uncover innovative solutions, optimize workflows, and ensure no detail is overlooked.'
+  },
+  {
+    icon: 'ph:pen-nib',
+    title: 'Design Strategy',
+    description: 'We craft a design strategy tailored to your vision and target audience. This ensures a user-friendly, visually engaging experience that aligns with your goals.'
+  },
+  {
+    icon: 'ph:code',
+    title: 'Technology Selection & Development',
+    description: "Whether it's WordPress for flexibility or React for dynamic applications, we choose the best framework for your needs. AI aids in optimizing development and solving challenges faster."
+  },
+  {
+    icon: 'ph:truck',
+    title: 'Delivery',
+    description: 'Once everything is perfected, we deliver your project on time, ensuring it meets your expectations and performs flawlessly.'
+  },
+  {
+    icon: 'ph:chart-line-up',
+    title: 'Ongoing Support & AI-Driven Optimization',
+    description: "Our commitment doesn't end at delivery. With ongoing support, we use AI to monitor and continuously improve your website, adapting to new challenges and opportunities."
+  }
+];
 ---
 
 <Layout {title} {description} {lang}>
-  <img src="https://gravatar.com/avatar/876a39bf8a0f2c6aa6c1ac161c856285" alt="Gravatar" />
-  <h1>About ElPuas Digital Crafts</h1>
-  <p>Discover our story and mission. Full content coming soon.</p>
-</Layout> 
+  <section class={styles.hero}>
+    <h1><span class={styles.accent}>Welcome to </span>ElPuas Digital Crafts</h1>
+    <h5 class={styles.lead}>
+      We empower agencies and businesses with pixel-perfect, high-performance websites — built with care, backed by expert support.
+    </h5>
+  </section> 
+
+  <section class={styles.about}>
+    <p>We're ElPuas Digital Crafts — a small, family-led studio founded by <strong>Alfredo Navas</strong> and <strong>Catalina Valverde</strong>, with their son <strong>Gianfranco Navas</strong> now part of the team.</p>
+    <p>We're not a giant agency with layers of meetings and overhead — we're the kind of team that gets things done, with precision and heart.</p>
+    <p>We believe great websites aren't just beautiful — they're fast, scalable, affordable, and built to evolve. That's why we combine creativity, modern tech, and AI-assisted workflows to deliver high-quality websites without the high-maintenance price tag.</p>
+    <p>From custom WordPress builds to smart eCommerce platforms, we create digital experiences that help small businesses grow and agencies look good to their clients. And because we're also developers who've seen it all, we think about the long run — speed, SEO, updates, backups, support. The boring stuff that becomes critical when your site goes live.</p>
+    <p>Whether you're a solo founder, a growing brand, or an agency needing a white-label partner, we've got your back.</p>
+    <p>We build digital crafts for humans — with love, code, and coffee.</p>
+    <p>With offices in <strong>Costa Rica</strong>, <strong>Miami</strong>, and <strong>Rome</strong>, we serve clients worldwide — delivering not only bespoke solutions but also <strong>white-label services</strong> to agencies seeking top-tier web development for their clientele.</p>
+  </section>
+
+  <section class={styles.values}>
+    <h3>What We Stand For</h3>
+    <ul class="values">
+      <li><Icon name="ph:handshake" width="64" height="64" /> Partnership First</li>
+      <li><Icon name="ph:rocket-launch" width="64" height="64" /> Results-Driven Execution</li>
+      <li><Icon name="ph:brain" width="64" height="64" /> Tech Excellence, Human Touch</li>
+      <li><Icon name="ph:shield-check" width="64" height="64" /> Transparency & Security</li>
+    </ul>
+  </section>
+
+  <section class={styles.team}>
+    <h2>Meet Our Team</h2>
+    <ul class="team">
+      <li>
+        <blockquote>
+          "Alfredo brings over 15 years of expertise, having developed websites for Fortune 500 companies."
+          <footer><strong>Alfredo Navas</strong> — Lead Developer</footer>
+        </blockquote>
+      </li>
+      <li>
+        <blockquote>
+          "Catalina, a seasoned journalist with a production background, ensures our projects resonate with compelling narratives."
+          <footer><strong>Catalina Valverde</strong> — Head of Content</footer>
+        </blockquote>
+      </li>
+      <li>
+        <blockquote>
+          "Gianfranco, our frontend expert, adds depth to our team's capabilities, ensuring cutting-edge designs and functionality."
+          <footer><strong>Gianfranco Navas</strong> — Frontend Developer</footer>
+        </blockquote>
+      </li>
+    </ul>
+  </section>
+
+  <section class={styles.philosophy}>
+    <h2>Our Philosophy</h2>
+    <p>
+      At <strong>ElPuas Digital Crafts</strong>, our ethos is simple:
+    "WE CODE DIGITAL CRAFTS FOR HUMANS."
+    </p>
+    <p>
+      Each project is imbued with care, creativity, and craftsmanship, delivering not just websites, but unforgettable digital experiences.
+    </p>
+  </section>
+
+  <section class={styles.process}>
+    <h2>How We Bring Your Vision to Life</h2>
+    <ProcessStep steps={process} />
+  </section>
+
+  <section class={styles.testimonial}>
+    <h2>E‑Commerce Built to Scale</h2>
+    <blockquote>
+      "ElPuas Digital Crafts helped us launch our store that actually works — fast, stable, and fully managed. With their support, we've been able to focus on sales while they take care of the rest."
+      <footer><strong>Monkey Scrubs</strong> — WooCommerce + Support Plan Client</footer>
+    </blockquote>
+  </section>
+
+  <section class={styles.cta}>
+    <Button href="/contact" label="Let's Talk" />
+  </section>
+</Layout>
+<script type="module" is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('Process step animation script loaded');
+    
+    // Force a small initial delay to ensure everything is loaded
+    setTimeout(() => {
+      const icons = document.querySelectorAll('.step-icon');
+      console.log('Found step icons:', icons.length);
+      
+      // Manually apply animation to any icons already in viewport on page load
+      let iconsArray = Array.from(icons);
+      
+      // Create an observer for icons not yet in view
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              console.log('Icon in view:', entry.target);
+              
+              // Remove any existing animation classes and force reflow
+              entry.target.classList.remove('animate');
+              void entry.target.offsetWidth; // Force reflow
+              
+              // Apply the animation class
+              entry.target.classList.add('animate');
+              
+              // Stop observing this icon
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { 
+          threshold: 0.3,
+          rootMargin: '-10px' 
+        }
+      );
+      
+      // Apply staggered animation for icons
+      iconsArray.forEach((icon, index) => {
+        // Check if icon is already in viewport to animate immediately
+        const rect = icon.getBoundingClientRect();
+        const isInViewport = (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+        
+        if (isInViewport) {
+          // Stagger the animation for icons already in viewport
+          setTimeout(() => {
+            console.log('Animating icon in viewport:', index);
+            icon.classList.add('animate');
+          }, index * 150);
+        } else {
+          // Observe icons not yet in viewport
+          observer.observe(icon);
+        }
+      });
+    }, 800); // Longer delay to ensure all resources are loaded
+  });
+</script>

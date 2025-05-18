@@ -1,12 +1,145 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-
+import Button from '../../components/Button.astro';
+import ServiceDetails from '../../components/ServiceDetails.astro';
+import TrustedBy from '../../components/TrustedBy.astro';
+import PricingCard from '../../components/PricingCard.astro';
+import styles from '../../styles/Services.module.css';
 const title = 'Our Services';
 const description = 'Explore our digital craftsmanship services';
 const lang = 'en';
 ---
 
 <Layout {title} {description} {lang}>
-  <h1>Our Digital Craftsmanship Services</h1>
-  <p>Explore our range of services. Full content coming soon.</p>
+  <section class={styles.hero}>
+    <h1>Smart, <span class={styles.accent}>Scalable</span> Digital Services</h1>
+    <h5>From handcrafted websites to ongoing support — we help your business thrive online.</h5>
+    <Button href="/contact" label="Let's Talk" />
+  </section>
+
+  <section class={styles.servicesIntro}>
+    <h2>What We Offer</h2>
+    <p class={`${styles.accent} ${styles.subtitle}`}>From initial launch to long-term growth, we provide complete digital craftsmanship tailored to your business needs.</p>
+    <div class={styles.servicesIntroGrid}>
+        <ServiceDetails 
+          icon="ph:flask" 
+          title="Custom Web Development" 
+          description="Tailor-made websites and platforms built for performance, flexibility and scale. No templates, just crafted code." 
+          features={["Responsive, mobile-first design", "Fast load times & SEO optimization", "Custom CMS integrations", "API and third-party service connectivity"]}
+          image="/service-one.png"
+          alt="Screenshot of FishCostaRica.com custom website project"
+          reverse={true}
+        />
+
+        <ServiceDetails 
+          icon="ph:shopping-cart" 
+          title="E-Commerce Solutions" 
+          description="We design and develop storefronts that convert. WooCommerce or headless — we help you sell more with less friction." 
+          features={["Conversion-focused product pages", "Streamlined checkout experiences", "Inventory & logistics integration", "Custom reports & automation"]}
+          image="/mobile.png"
+          alt="Screenshot of FishCostaRica.com custom website project"
+          reverse={false}
+        />
+
+        <ServiceDetails 
+          icon="ph:lifebuoy" 
+          title="Maintenance & Support" 
+          description="Peace of mind through expert support, performance monitoring, and scheduled updates. Flexible monthly plans for growing businesses." 
+          features={["Scheduled plugin and theme updates", "Performance & uptime monitoring", "Expert dev time included", "Priority bug fixes"]}
+          image="/service-one.png"
+          alt="Screenshot of FishCostaRica.com custom website project"
+          reverse={true}
+        />
+
+        <ServiceDetails 
+          icon="ph:mask-happy" 
+          title="White-Label Services" 
+          description="We work quietly behind the scenes, so your agency can scale without overhead. Trusted development partners for design agencies and consultants." 
+          features={["Invisible client-ready code", "Fast delivery & scoped estimates", "Reliable dev support", "Confidential partnerships"]}
+          image="/mobile.png"
+          alt="Screenshot of FishCostaRica.com custom website project"
+          reverse={false}
+        />
+    </div>
+  </section>
+
+  <section class={styles.pricing}>
+    <h2>Plans That Grow With You</h2>
+    <p class="subtitle">Choose the plan that fits your pace — each one backed by expert support and powerful dev time.</p>
+    <div class={styles.pricingGrid}>
+      <PricingCard
+        title="Starter"
+        price="$150/mo"
+        icon="ph:browser"
+        features={[
+          'Regular WordPress updates for security and stability',
+          'Scheduled backups to prevent data loss',
+          'Hardened security against viruses and attacks',
+          'Performance optimization for faster load times',
+          'Technical support for web-related issues',
+          'Dedicated Slack channel for emergencies',
+          'Web design + support',
+          'Basic maintenance',
+          'Email & uptime monitoring'
+        ]}
+      />
+
+      <PricingCard
+        title="Growth"
+        price="$180/mo"
+        icon="ph:chart-line-up-bold"
+        highlight
+        features={[
+          'Regular WordPress updates for security and stability',
+          'Scheduled backups to prevent data loss',
+          'Hardened security against viruses and attacks',
+          'Performance optimization for faster load times',
+          'Technical support for web-related issues',
+          'Dedicated Slack channel for emergencies',
+          'Web design + support',
+          'Priority maintenance',
+          'Uptime monitoring',
+          'Hosting included',
+          '4 dev hours / month'
+        ]}
+      />
+
+      <PricingCard
+        title="Pro"
+        price="$250/mo"
+        icon="ph:rocket-launch-bold"
+        features={[
+          'Regular WordPress updates for security and stability',
+          'Scheduled backups to prevent data loss',
+          'Hardened security against viruses and attacks',
+          'Performance optimization for faster load times',
+          'Technical support for web-related issues',
+          'Dedicated Slack channel for emergencies',
+          'Web design + support',
+          'Priority maintenance',
+          'Uptime monitoring',
+          '8 dev hours / month',
+          'Priority support'
+        ]}
+      />
+    </div>
+  </section>
+
+  <section class={styles.testimonial}>
+    <h3>Partnering Behind the Scenes</h3>
+    <p class={styles.accent}>
+      We support agencies and studios through reliable, white-label execution.
+    </p>
+    <blockquote>
+      “Working with ElPuas has been a game-changer. They consistently deliver high-quality work on time, handle complex technical specs with ease, and elevate the quality of our agency’s output. Our clients are happy — and that makes us look great.”
+      <footer>— Avalanche Advertising (White-label Partner)</footer>
+    </blockquote>
+  </section>
+
+  <TrustedBy title="Trusted by forward-thinking brands" />
+
+  <section class={styles.ctaBlock}>
+    <h2>Ready to launch or scale your next digital project?</h2>
+    <Button href="/contact" label="Get Started Today" />
+  </section>
 </Layout> 

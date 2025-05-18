@@ -1,0 +1,64 @@
+.hero {
+    h1 span {
+        font-size: var(--fontsize-h1);
+    }
+
+    h5 {
+        margin-bottom: calc(var(--space-md) * 4);
+    }
+}
+
+.accent {
+    color: var(--color-tertiary);
+}
+
+.subtitle {
+    font-size: var(--fontsize-h5);
+    margin-bottom: calc(var(--space-md) * 4);
+}
+
+.servicesIntro {
+    text-align: center;
+}
+
+.servicesIntroGrid {
+    text-align: left;
+}
+
+.pricing {
+    h2 {
+        text-align: center;
+    }
+
+    p {
+        text-align: center;
+        font-size: var(--fontsize-h5);
+        color: var(--color-tertiary);
+        max-width: 80%;
+        margin: 0 auto calc(var(--space-md) * 4);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.pricingGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-md);
+}
+
+.testimonial {}
+
+.whyChoose {}
+
+.ctaBlock {
+    text-align: center;
+
+    h2 {
+        text-align: center;
+        margin-bottom: calc(var(--space-md) * 4);
+    }
+}
+

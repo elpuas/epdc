@@ -1,0 +1,34 @@
+---
+import Button from './Button.astro';
+import styles from '../styles/Index.module.css';
+
+interface Props {
+  title: string;
+  accentText: string;
+  paragraph: string;
+  quote: string;
+  author: string;
+  buttonLabel: string;
+  buttonHref: string;
+  imgSrc: string;
+  imgAlt: string;
+}
+
+const { title, accentText, paragraph, quote, author, buttonLabel, buttonHref, imgSrc, imgAlt } = Astro.props;
+---
+
+<section class={styles.caseSection}>
+  <div class={styles.caseContent}>
+    <h3>{title}</h3>
+    <p class={`${styles.accent} ${styles.caseAccent}`}>{accentText}</p>
+    <p>{paragraph}</p>
+    <blockquote class={styles.caseQuote}>
+      "{quote}"
+      <footer>— {author}</footer>
+    </blockquote>
+    <Button href={buttonHref} label={buttonLabel} />
+  </div>
+  <div class={styles.caseImage}>
+    <img src={imgSrc} alt={imgAlt} />
+  </div>
+</section> 

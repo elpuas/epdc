@@ -5,7 +5,7 @@
   --fontsize-h3: clamp(36px, calc(2.25rem + ((1vw - 7.68px) * 1.2712)), 42px);
   --fontsize-h4: clamp(24px, calc(1.5rem + ((1vw - 7.68px) * 2.5424)), 36px);
   --fontsize-h5: 24px;
-  --fontsize-base: 18px;
+  --fontsize-base: clamp(16px, calc(1rem + ((1vw - 7.68px) * 0.6356)), 24px);
 
   /* Line Heights */
   --lineheight-base: 1.5;
@@ -14,7 +14,7 @@
   /* Colors */
   --color-primary: #000000;
   --color-secondary: #D8FF00;
-  --color-tertiary: #00C7BE;
+  --color-tertiary: #00FFF3;
   --color-quaternary: #5E6F00;
   --color-white: #FFF;
   --color-black: #333;

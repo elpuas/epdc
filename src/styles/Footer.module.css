@@ -1,0 +1,145 @@
+
+  /* Modern CSS Variables for consistent theming */
+
+
+  /* Base Footer Styling */
+.footer {
+    .footerContainer {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .footerContent {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .footerSection {
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    .footerSection:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+    
+    .accentLine {
+        height: 2px;
+        width: 40px;
+        background-color: var(--color-secondary);
+        transform: scaleX(0);
+        transform-origin: left;
+        animation: expandLine 0.6s ease-out 0.3s forwards;
+    }
+}
+  /* Location Details Styling */
+.locationDetails, 
+.officeDetails, 
+.headquartersDetails {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--footer-spacing));
+}
+
+.locationTitle, 
+.officeTitle, 
+.headquartersTitle {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    color: var(--color-secondary);
+}
+
+.locationEmail, 
+.officeEmail, 
+.headquartersEmail,
+.locationPhone, 
+.officePhone, 
+.headquartersPhone {
+    font-size: 0.9rem;
+    margin: 0;
+    color: var(--color-secondary);
+    transition: color var(--transition-speed, 0.3s);
+}
+
+.locationEmail:hover, 
+.officeEmail:hover, 
+.headquartersEmail:hover,
+.locationPhone:hover, 
+.officePhone:hover, 
+.headquartersPhone:hover {
+    color: var(--color-tertiary);
+    cursor: pointer;
+}
+
+  /* Social Links Styling */
+.socialLinks {
+    display: flex;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out 0.6s forwards;
+}
+
+.socialLink {
+    transition: color var(--transition-speed, 0.3s), transform var(--transition-speed, 0.3s);
+}
+
+.socialLink:hover {
+    color: var(--color-tertiary);
+    transform: translateY(-3px);
+}
+
+  /* Copyright Styling */
+.copyright {
+    font-size: 0.8rem;
+    color: var(--color-secondary);
+    text-align: left;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out 0.8s forwards;
+}
+
+.copyright p {
+    margin: 0;
+}
+
+  /* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    @keyframes expandLine {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-section {
+        align-items: flex-start;
+    }
+
+    .social-links {
+        justify-content: flex-start;
+    }
+
+    .copyright {
+        text-align: left;
+    }
+}

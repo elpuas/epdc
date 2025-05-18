@@ -6,7 +6,7 @@ import ServiceCard from '../../components/ServiceCard.astro';
 import { Icon } from 'astro-icon/components';
 import styles from '../../styles/Index.module.css';
 import TrustedBy from '../../components/TrustedBy.astro';
-import Firefly from '../../components/Firefly.astro';
+import CaseStudySection from '../../components/CaseStudySection.astro';
 
 const title = 'Welcome';
 const description = 'Welcome to ElPuas Digital Crafts';
@@ -59,21 +59,19 @@ const lang = 'en';
       </li>
     </ul>
   </section>
+  <CaseStudySection
+    title="From Website to Growth Engine"
+    accentText="FishCostaRica.com didn't just get a website — they got a partner."
+    paragraph="We built a custom site designed to convert, and continue to optimize it through our monthly maintenance plan. The result? Higher search visibility, better performance, and a steady increase in bookings — all without lifting a finger."
+    quote="Since launching the new site, we've seen a noticeable boost in bookings and better visibility on search. ElPuas understood our goals and delivered results."
+    author="Richard Krug, FishCostaRica.com"
+    buttonLabel="Case Study"
+    buttonHref="#" 
+    imgSrc="/phone-showcase.jpg"
+    imgAlt="FishCostaRica.com"
+  />
   <section class={styles.trustedBy}>
     <TrustedBy title="Trusted by forward-thinking brands" />
-  </section>
-  <section class={styles.caseSection}>
-    <div class={styles.caseContent}>
-      <h3>Digital Craftsmanship in Action</h3>
-      <p class={`${styles.accent} ${styles.caseAccent}`}>FishCostaRica.com didn't just get a website — they got a partner.</p>
-      <p>We built a custom site designed to convert, and continue to optimize it through our monthly maintenance plan. The result? Higher search visibility, better performance, and a steady increase in bookings — all without lifting a finger.</p>
-      <blockquote class={styles.caseQuote}>
-        "Since launching the new site, we've seen a noticeable boost in bookings and better visibility on search. ElPuas understood our goals and delivered results."
-        <footer>— Team at FishCostaRica.com</footer>
-      </blockquote>
-
-      <Button href="#" label="Case Study" />
-    </div>
   </section>
   <section class={styles.supportTeaser}>
     <h2>Ongoing Support That Grows With You</h2>
@@ -100,8 +98,5 @@ const lang = 'en';
       </li>
     </ul>
     <Button href="/services#plans" label="Explore Our Plans" />
-  </section>
-  <section class={styles.firefly}>
-    <Firefly />
   </section>
 </Layout>

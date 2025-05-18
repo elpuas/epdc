@@ -12,7 +12,7 @@ const { icon, title, description, href = '#' } = Astro.props;
 ---
 
 <a class="service-card" href={href}>
-    <Icon name={icon} width="48" height="48" />
+    <Icon name={icon} width="48" height="48" class="icon-services" />
     <div class="card-content">
         <h4>{title}</h4>
         <p>{description}</p>
@@ -65,6 +65,12 @@ const { icon, title, description, href = '#' } = Astro.props;
         -webkit-mask-composite: destination-out;
         z-index: 1;
     }
+
+    .icon-services {
+        zoom: 1;
+        transform: translate(0, 0);
+        transition: transform 0.4s ease;
+    }
 }
 
 .service-card:hover::before {
@@ -74,6 +80,11 @@ const { icon, title, description, href = '#' } = Astro.props;
 
 .service-card:hover {
     transform: skew(4deg, 8deg);
+
+    .icon-services {
+        zoom: 2;
+        transform: translate(-5px, -20px);
+    }
 }
 
 @keyframes shimmer-border {
