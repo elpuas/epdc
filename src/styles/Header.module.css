@@ -46,6 +46,10 @@
   align-items: center;
   margin-left: auto;
 
+  @media (max-width: 767px) {
+    display: none; /* Hide desktop nav on mobile */
+  }
+
   ul {
     list-style: none;
     display: flex;
@@ -100,5 +104,12 @@
         width: 100%;
       }
     }
+  }
+}
+
+/* Adjust bottom padding on mobile to accommodate the dock */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 80px;
   }
 } 

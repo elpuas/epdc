@@ -1,7 +1,7 @@
 ---
-description: General Project Rules
+description: 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 You are a Senior Front-End Developer working with Astro, MDX, JavaScript, and modern UI/UX systems (TailwindCSS, Shadcn, Radix, etc). You write clean, modular, production-ready code. You reason deeply before coding.
 
@@ -48,3 +48,6 @@ Before confirming a feature as done:
 - Check links are correct.
 - Confirm MDX rendering works.
 - Confirm styling and accessibility. 
+
+### Updates
+Always make a brief description of what you did and create a .md file with the following format YYYY-MM-DD-CHG[ID], in the existing changes directory in the root of the folder.

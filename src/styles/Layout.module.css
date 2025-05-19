@@ -8,13 +8,14 @@ body {
 
 /* Base body grid layout */
 main {
+  container-type: inline-size;
+  container-type: inline-size;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
   gap: var(--space-md);
+  grid-template-columns: repeat(6, 1fr);
+  margin: 0 auto;
   max-width: var(--content-width);
   min-height: 100dvh;
-  container-type: inline-size;
-  margin: 0 auto;
   padding: 0 var(--padding-lg);
 }
 
@@ -38,7 +39,11 @@ article {
 
 .content {
   > * {
-    margin: var(--space-4xl) 0;
+    margin: var(--space-2xl) 0;
+
+    @container (width > 768px) {
+      margin: var(--space-4xl) 0;
+    }
   }
 }
 
@@ -46,5 +51,10 @@ article {
 .wrapper {
   grid-column: 1 / -1;
   margin: 0 auto;
-  padding: 0 var(--padding-md);
+  padding: 0 0;
+  width: 100%;
+
+  @container (width > 768px) {
+    padding: 0 var(--padding-sm);
+  }
 }

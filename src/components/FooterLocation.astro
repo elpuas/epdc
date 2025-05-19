@@ -1,0 +1,22 @@
+---
+import styles from '../styles/Footer.module.css';
+
+interface Props {
+	title: string;
+	email: string;
+	phone: string;
+	className?: string;
+}
+
+const { title, email, phone, className = '' } = Astro.props;
+
+---
+
+<div class={`${styles.footerSection} ${className}`}>
+	<div class={styles.accentLine}></div>
+	<div class={styles.locationDetails}>
+		<p class={styles.locationTitle}>{title}</p>
+		<p class={styles.locationEmail}><a href={`mailto:${email}`}>Email Us</a></p>
+		<p class={styles.locationPhone}><a href={`tel:${phone}`}>{phone}</a></p>
+	</div>
+</div> 

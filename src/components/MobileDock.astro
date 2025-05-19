@@ -1,0 +1,66 @@
+---
+import { t } from '../i18n/utils';
+import type { Language } from '../i18n/utils';
+import { Icon } from 'astro-icon/components';
+import styles from '../styles/MobileDock.module.css';
+
+interface Props {
+  lang: Language;
+  currentPath: string;
+}
+
+const { lang, currentPath } = Astro.props;
+
+const navItems = [
+  { 
+    href: `/${lang}/about`, 
+    label: t('nav.about', lang), 
+    icon: 'ph:user' 
+  },
+  { 
+    href: `/${lang}/services`, 
+    label: t('nav.services', lang), 
+    icon: 'ph:briefcase' 
+  },
+  { 
+    href: `/${lang}/crafted-with-love/`, 
+    label: t('nav.crafted', lang), 
+    icon: 'ph:heart' 
+  },
+  { 
+    href: `/${lang}/blog`, 
+    label: t('nav.blog', lang), 
+    icon: 'ph:article' 
+  },
+  { 
+    href: `/${lang}/contact`, 
+    label: t('nav.contact', lang), 
+    icon: 'ph:envelope' 
+  }
+];
+---
+
+<div class={styles.mobileDock}>
+  <nav class={styles.nav}>
+    <ul class={styles.navList}>
+      {
+        navItems.map(({ href, label, icon }) => {
+          const isActive = currentPath === href || 
+            (href !== `/${lang}` && currentPath.startsWith(href));
+          
+          return (
+            <li class={styles.navItem}>
+              <a 
+                href={href} 
+                aria-label={label}
+                class={`${styles.navLink} ${isActive ? styles.active : ''}`}
+              >
+                <Icon name={icon} size={24} />
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </nav>
+</div>

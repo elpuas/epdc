@@ -1,6 +1,7 @@
 ---
 import styles from '../styles/Footer.module.css';
 import { t } from '../i18n/utils';
+import FooterLocation from './FooterLocation.astro';
 
 interface Props {
 	lang: string;
@@ -12,48 +13,38 @@ const { lang } = Astro.props;
 <footer class={styles.footer}>
 	<div class={styles.footerContainer}>
 		<div class={styles.footerContent}>
-			<div class={`${styles.footerSection} ${styles.cartago}`}>
-			<div class={styles.accentLine}></div>
-			<div class={styles.locationDetails}>
-				<p class={styles.locationTitle}>Cartago, Costa Rica</p>
-				<p class={styles.locationEmail}><a href="mailto:management@elpuasdev.com">Email Us</a></p>
-				<p class={styles.locationPhone}><a href="tel:+50660601034">+506 6060 1034</a></p>
-			</div>
-			</div>
-			
-			<div class={`${styles.footerSection} ${styles.miami}`}>
-			<div class={styles.accentLine}></div>
-			<div class={styles.officeDetails}>
-				<p class={styles.officeTitle}>Miami, USA</p>	
-				<p class={styles.officeEmail}><a href="mailto:management@elpuasdev.com">Email Us</a></p>
-				<p class={styles.officePhone}><a href="tel:+17863147968">+1 (786) 314 7968</a></p>
-			</div>
+			<div>
+				<FooterLocation
+					title="Cartago, Costa Rica"
+					email="management@elpuasdev.com"
+					phone="+506 6060 1034"
+					className={styles.cartago}
+				/>
 			</div>
 			
-			<div class={`${styles.footerSection} ${styles.rome}`}>
-			<div class={styles.accentLine}></div>
-			<div class={styles.headquartersDetails}>
-				<p class={styles.headquartersTitle}>Rome, Italy</p>
-				<p class={styles.headquartersEmail}><a href="mailto:management@elpuasdev.com">Email Us</a></p>
-				<p class={styles.headquartersPhone}><a href="tel:+393391234567">+39 339 1234567</a></p>
+			<div>
+				<FooterLocation
+					title="Miami, USA"
+					email="management@elpuasdev.com"
+					phone="+1 (786) 314 7968"
+					className={styles.miami}
+				/>
 			</div>
+			
+			<div>
+				<FooterLocation
+					title="Rome, Italy"
+					email="management@elpuasdev.com"
+					phone="+39 339 1234567"
+					className={styles.rome}
+				/>
 			</div>
-		</div>
-		
-		<div class={styles.socialLinks}>
-			<a href="#" class={styles.socialLink} aria-label="LinkedIn">
-			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-			</a>
-			<a href="#" class={styles.socialLink} aria-label="Twitter">
-			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
-			</a>
-			<a href="#" class={styles.socialLink} aria-label="Instagram">
-			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-			</a>
 		</div>
 	
 		<div class={styles.copyright}>
-			<p>&copy; {new Date().getFullYear()} ElPuas Digital Crafts. All rights reserved.</p>
+			<p>&copy; {new Date().getFullYear()} ElPuas Digital Crafts. All rights reserved. <a href="#" class={styles.socialLink} aria-label="LinkedIn">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+				</a></p>
 		</div>
 	</div>
 </footer>
