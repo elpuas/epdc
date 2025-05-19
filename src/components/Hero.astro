@@ -16,16 +16,16 @@ const verbs = {
 const currentVerbs = verbs[lang as keyof typeof verbs] || verbs.en;
 ---
 
-<section class="hero">
+<section class="hero" aria-labelledby="hero-heading">
     <div class="hero-content">
         {lang === 'en' && (
-            <h1>We <span id="verb-rotator" aria-live="polite">{currentVerbs[0]}</span> digital crafts <strong>for</strong> humans.</h1>
+            <h1 id="hero-heading">We <span id="verb-rotator" aria-live="polite" aria-label={`Current action: ${currentVerbs[0]}`}>{currentVerbs[0]}</span> digital crafts <strong>for</strong> humans.</h1>
         )}
         {lang === 'es' && (
-            <h1>Nosotros <span id="verb-rotator" aria-live="polite">{currentVerbs[0]}</span> artesanías digitales <strong>para</strong> humanos.</h1>
+            <h1 id="hero-heading">Nosotros <span id="verb-rotator" aria-live="polite" aria-label={`Acción actual: ${currentVerbs[0]}`}>{currentVerbs[0]}</span> artesanías digitales <strong>para</strong> humanos.</h1>
         )}
         {lang === 'it' && (
-            <h1>Noi <span id="verb-rotator" aria-live="polite">{currentVerbs[0]}</span> artigianato digitale <strong>per</strong> umani.</h1>
+            <h1 id="hero-heading">Noi <span id="verb-rotator" aria-live="polite" aria-label={`Azione attuale: ${currentVerbs[0]}`}>{currentVerbs[0]}</span> artigianato digitale <strong>per</strong> umani.</h1>
         )}
     </div>
 </section>
@@ -69,12 +69,20 @@ const currentVerbs = verbs[lang as keyof typeof verbs] || verbs.en;
       it: ['programmiamo', 'creiamo', 'costruiamo', 'progettiamo', 'ottimizziamo']
     };
     
+    // Define labels for each language
+    const ariaLabels = {
+      en: 'Current action:',
+      es: 'Acción actual:',
+      it: 'Azione attuale:'
+    };
+    
     // Type assertion for language key
     type LanguageKey = keyof typeof verbs;
     
     // Get the appropriate verbs for the current language
     const langKey = (pathLang in verbs) ? pathLang as LanguageKey : 'en';
     const currentVerbs = verbs[langKey];
+    const labelPrefix = ariaLabels[langKey] || ariaLabels.en;
     
     let currentIndex = 0;
     
@@ -88,9 +96,11 @@ const currentVerbs = verbs[lang as keyof typeof verbs] || verbs.en;
       setTimeout(() => {
         if (!verbRotator) return;
         
-        // Update text
+        // Update text and aria-label
         currentIndex = (currentIndex + 1) % currentVerbs.length;
-        verbRotator.textContent = currentVerbs[currentIndex];
+        const currentVerb = currentVerbs[currentIndex];
+        verbRotator.textContent = currentVerb;
+        verbRotator.setAttribute('aria-label', `${labelPrefix} ${currentVerb}`);
         
         // Fade in
         verbRotator.style.opacity = '1';

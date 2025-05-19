@@ -8,95 +8,112 @@ import styles from '../../styles/Index.module.css';
 import TrustedBy from '../../components/TrustedBy.astro';
 import CaseStudySection from '../../components/CaseStudySection.astro';
 
+// Import case study image
+import caseStudyImage from '../../../public/phone-showcase.jpg';
+
 const title = 'Welcome';
 const description = 'Welcome to ElPuas Digital Crafts';
 const lang = 'en';
 ---
 
 <Layout {title} {description} {lang}>
-  <section class={styles.intro}>
-    <p>Small studio, big results.</p>
-    <Hero {lang} />
-    <Button href="/en/contact" label="Let's Talk" />
-  </section> 
-  <section class={styles.services}>
-    <div class={`${styles.withPattern} ${styles.dotsPattern}`}>
-      <h3>At <span class={`${styles.brand} ${styles.accent}`}>ElPuas Digital Crafts</span>, we don't just build websites — we craft high-performance digital platforms, powered by AI and backed by expert maintenance to grow with your business.</h3>
-    </div>
-  </section>
-  <section class={styles.expertiseSection}>
-    <h2>Our Expertise</h2>
-    <p class="subtitle">We deliver more than code — we bring smart, reliable digital craftsmanship.</p>
-  
-    <ul class={styles.servicesGrid}>
-      <li>
-        <ServiceCard 
-        icon="ph:flask" 
-        title="Custom Web Development" 
-        description="Tailor-made websites built for speed, performance, and scalability." 
-        href="/en/custom-web-development" />
-      </li>
-      <li>
-        <ServiceCard 
-        icon="ph:shopping-cart" 
-        title="E-Commerce Solutions" 
-        description="WooCommerce or headless — we make selling seamless." 
-        href="/en/e-commerce-solutions" />
-      </li>
-      <li>
-        <ServiceCard 
-        icon="ph:lifebuoy" 
-        title="Maintenance & Support" 
-        description="Updates, optimizations, and peace of mind — handled for you." 
-        href="/en/maintenance-support" />
-      </li>
-      <li>
-        <ServiceCard 
-        icon="ph:mask-happy" 
-        title="White-Label Services" 
-        description="We build quietly behind the scenes so your agency shines." 
-        href="/en/white-label-services" />
-      </li>
-    </ul>
-  </section>
-  <CaseStudySection
-    title="From Website to Growth Engine"
-    accentText="FishCostaRica.com didn't just get a website — they got a partner."
-    paragraph="We built a custom site designed to convert, and continue to optimize it through our monthly maintenance plan. The result? Higher search visibility, better performance, and a steady increase in bookings — all without lifting a finger."
-    quote="Since launching the new site, we've seen a noticeable boost in bookings and better visibility on search. ElPuas understood our goals and delivered results."
-    author="Richard Krug, FishCostaRica.com"
-    buttonLabel="Case Study"
-    buttonHref="#" 
-    imgSrc="/phone-showcase.jpg"
-    imgAlt="FishCostaRica.com"
-  />
-  <section class={styles.trustedBy}>
-    <TrustedBy title="Trusted by forward-thinking brands" />
-  </section>
-  <section class={styles.supportTeaser}>
-    <h3>Ongoing Support That Grows With You</h3>
-    <p class={styles.accent}>
-      From performance tweaks to full-scale updates, our monthly care plans keep your site fast, secure, and evolving.
-    </p>
-  
-    <ul class={styles.features}>
-      <li>
-        <Icon name="ph:shield-check" width="48" height="48" />
-        <h4>Regular updates & backups</h4>
-      </li>
-      <li>
-        <Icon name="ph:code" width="48" height="48" />
-        <h4>Expert dev hours included</h4>
-      </li>
-      <li>
-        <Icon name="ph:gauge" width="48" height="48" />
-        <h4>Proactive performance checks</h4>
-      </li>
-      <li>
-        <Icon name="ph:lightning" width="48" height="48" />
-        <h4>Priority response options</h4>
-      </li>
-    </ul>
-    <Button href="/services#plans" label="Explore Our Plans" />
-  </section>
+    <section class={styles.intro}>
+      <p>Small studio, big results.</p>
+      <Hero {lang} />
+      <Button href="/en/contact" label="Let's Talk" />
+    </section> 
+    <section class={styles.services}>
+      <div class={`${styles.withPattern} ${styles.dotsPattern}`}>
+        <h2>At <span class={`${styles.brand} ${styles.accent}`}>ElPuas Digital Crafts</span>, we don't just build websites — we craft high-performance digital platforms, powered by AI and backed by expert maintenance to grow with your business.</h2>
+      </div>
+    </section>
+    <section class={styles.expertiseSection}>
+      <h2>Our Expertise</h2>
+      <p class="subtitle">We deliver more than code — we bring smart, reliable digital craftsmanship.</p>
+    
+      <ul class={styles.servicesGrid}>
+        <li>
+          <ServiceCard 
+          icon="ph:flask" 
+          title="Custom Web Development" 
+          description="Tailor-made websites built for speed, performance, and scalability." 
+          href="/en/custom-web-development" />
+        </li>
+        <li>
+          <ServiceCard 
+          icon="ph:shopping-cart" 
+          title="E-Commerce Solutions" 
+          description="WooCommerce or headless — we make selling seamless." 
+          href="/en/e-commerce-solutions" />
+        </li>
+        <li>
+          <ServiceCard 
+          icon="ph:lifebuoy" 
+          title="Maintenance & Support" 
+          description="Updates, optimizations, and peace of mind — handled for you." 
+          href="/en/maintenance-support" />
+        </li>
+        <li>
+          <ServiceCard 
+          icon="ph:mask-happy" 
+          title="White-Label Services" 
+          description="We build quietly behind the scenes so your agency shines." 
+          href="/en/white-label-services" />
+        </li>
+      </ul>
+    </section>
+    <CaseStudySection
+      title="From Website to Growth Engine"
+      accentText="FishCostaRica.com didn't just get a website — they got a partner."
+      paragraph="We built a custom site designed to convert, and continue to optimize it through our monthly maintenance plan. The result? Higher search visibility, better performance, and a steady increase in bookings — all without lifting a finger."
+      quote="Since launching the new site, we've seen a noticeable boost in bookings and better visibility on search. ElPuas understood our goals and delivered results."
+      author="Richard Krug, FishCostaRica.com"
+      buttonLabel="Case Study"
+      buttonHref="#" 
+      imgSrc={caseStudyImage}
+      imgAlt="FishCostaRica.com"
+    />
+    <section class={styles.trustedBy}>
+      <TrustedBy title="Trusted by forward-thinking brands" />
+    </section>
+    <section class={styles.supportTeaser}>
+      <h3>Ongoing Support That Grows With You</h3>
+      <p class={styles.accent}>
+        From performance tweaks to full-scale updates, our monthly care plans keep your site fast, secure, and evolving.
+      </p>
+    
+      <ul class={styles.features}>
+        <li>
+          <Icon name="ph:shield-check" width="48" height="48" aria-hidden="true" />
+          <h4>Regular updates & backups</h4>
+        </li>
+        <li>
+          <Icon name="ph:code" width="48" height="48" aria-hidden="true" />
+          <h4>Expert dev hours included</h4>
+        </li>
+        <li>
+          <Icon name="ph:gauge" width="48" height="48" aria-hidden="true" />
+          <h4>Proactive performance checks</h4>
+        </li>
+        <li>
+          <Icon name="ph:lightning" width="48" height="48" aria-hidden="true" />
+          <h4>Priority response options</h4>
+        </li>
+      </ul>
+      <Button href="/services#plans" label="Explore Our Plans" />
+    </section>
 </Layout>
+
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

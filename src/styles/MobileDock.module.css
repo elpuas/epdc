@@ -37,18 +37,18 @@
   justify-content: center;
   min-height: 44px;
   min-width: 44px;
-  color: #ffffff;
+  color: var(--color-secondary);
   padding: 8px;
   border-radius: 8px;
   transition: color 0.2s ease;
 }
 
 .navLink:hover {
-  color: #D8FF00;
+  color: var(--color-tertiary);
 }
 
 .active {
-  color: #D8FF00;
+  color: var(--color-quaternary);
 }
 
 @media (min-width: 768px) {

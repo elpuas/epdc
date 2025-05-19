@@ -1,25 +1,34 @@
 ---
+import { Image } from 'astro:assets';
+
+// Import images
+import avalancheLogo from '../../public/images/avalanche.png';
+import pbLogo from '../../public/images/pb.png';
+import monkeyLogo from '../../public/images/monkey.png';
+import fishcostaricaLogo from '../../public/images/fishcostarica.png';
+import voyagerLogo from '../../public/images/Logo-rojo-voyager.png';
+
 const { title = 'Trusted by forward-thinking brands' } = Astro.props;
 
 const logos = [
     {
-        src: '/images/avalanche.png',
+        src: avalancheLogo,
         alt: 'Avalanche Advertising Logo'
     },
     {
-        src: '/images/pb.png',
+        src: pbLogo,
         alt: 'Premium Brokers Logo'
     },
     {
-        src: '/images/fishcostarica.png',
-        alt: 'FishCostaRica Logo'
-    },
-    {
-        src: '/images/monkey.png',
+        src: monkeyLogo,
         alt: 'Monkey Scrubs Logo'
     },
     {
-        src: '/images/Logo-rojo-voyager.png',
+        src: fishcostaricaLogo,
+        alt: 'FishCostaRica Logo'
+    },
+    {
+        src: voyagerLogo,
         alt: 'Voyager Logo'
     },
     
@@ -27,10 +36,12 @@ const logos = [
 ---
 
 <section class="trusted-by">
-    <h2 class="trusted-title">{title}</h2>
-    <div class="logo-row">
-        {logos.map(({ src, alt }) => (
-            <img src={src} alt={alt} loading="lazy" />
+    <h3 class="trusted-title">{title}</h3>
+    <div class="logo-row" role="list">
+        {logos.map(({ src, alt }, index) => (
+            <div role="listitem" data-index={index}>
+                <Image src={src} alt={alt} width={320} height={160} class="logo-image" />
+            </div>
         ))}
     </div>
 </section>
@@ -56,7 +67,7 @@ const logos = [
     }
 
     .logo-row {
-        img {
+        .logo-image {
             max-width: 320px;
             object-fit: contain;
             filter: grayscale(100%) brightness(1.5);
@@ -64,6 +75,10 @@ const logos = [
 
             &:hover {
                 filter: none;
+            }
+
+            @container (width > 768px) {
+                max-width: 200px;
             }
         }
     }

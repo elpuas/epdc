@@ -11,6 +11,12 @@
   }
 }
 
+.withPattern {
+  h2 {
+    font-size: var(--fontsize-h3);
+  }
+}
+
 /* Services */
 .services {
   .withPattern {
