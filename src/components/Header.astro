@@ -2,6 +2,7 @@
 import styles from '../styles/Header.module.css';
 import { t } from '../i18n/utils';
 import LanguageSwitcher from './LanguageSwitcher.astro';
+import MobileDock from './MobileDock.astro';
 import type { Language } from '../i18n/utils';
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const currentPath = Astro.url.pathname;
 ---
 
 <header class={styles.siteHeader}>
@@ -28,3 +30,5 @@ const { lang } = Astro.props;
 		<LanguageSwitcher currentLang={lang} />
 	</div>
 </header>
+
+<MobileDock lang={lang} currentPath={currentPath} />

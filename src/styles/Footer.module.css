@@ -12,6 +12,19 @@
     .footerContent {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        margin-bottom: var(--space-2xl);
+
+        > div {
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            margin-bottom: var(--space-2xl);
+
+            @container (width > 768px) {
+                justify-content: center;
+                width: auto;
+            }
+        }
     }
 
     .footerSection {
@@ -20,6 +33,13 @@
         opacity: 0;
         transform: translateY(20px);
         animation: fadeIn 0.6s ease-out forwards;
+        width: auto;
+        padding-left: var(--padding-lg);
+
+        @container (width > 768px) {
+            padding-left: 0;
+            width: 100%;
+        }
     }
 
     .footerSection:nth-child(2) {
@@ -29,6 +49,7 @@
     .accentLine {
         height: 2px;
         width: 40px;
+        margin-bottom: var(--margin-lg);
         background-color: var(--color-secondary);
         transform: scaleX(0);
         transform-origin: left;
@@ -36,22 +57,18 @@
     }
 }
   /* Location Details Styling */
-.locationDetails, 
-.officeDetails, 
-.headquartersDetails {
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--footer-spacing));
+.locationDetails {
+    .locationTitle, 
+    .officeTitle, 
+    .headquartersTitle {
+        font-size: var(--font-size-base);
+        font-weight: 500;
+        margin: 0;
+        color: var(--color-secondary);
+        transition: color var(--transition-speed, 0.3s);
+    }
 }
 
-.locationTitle, 
-.officeTitle, 
-.headquartersTitle {
-    font-size: 1rem;
-    font-weight: 500;
-    margin: 0;
-    color: var(--color-secondary);
-}
 
 .locationEmail, 
 .officeEmail, 
@@ -63,45 +80,41 @@
     margin: 0;
     color: var(--color-secondary);
     transition: color var(--transition-speed, 0.3s);
+
+    &:hover {
+        color: var(--color-tertiary);
+        cursor: pointer;
+    }
 }
 
-.locationEmail:hover, 
-.officeEmail:hover, 
-.headquartersEmail:hover,
-.locationPhone:hover, 
-.officePhone:hover, 
-.headquartersPhone:hover {
-    color: var(--color-tertiary);
-    cursor: pointer;
-}
 
   /* Social Links Styling */
-.socialLinks {
-    display: flex;
-    opacity: 0;
-    animation: fadeIn 0.6s ease-out 0.6s forwards;
-}
 
-.socialLink {
-    transition: color var(--transition-speed, 0.3s), transform var(--transition-speed, 0.3s);
-}
-
-.socialLink:hover {
-    color: var(--color-tertiary);
-    transform: translateY(-3px);
-}
 
   /* Copyright Styling */
 .copyright {
     font-size: 0.8rem;
     color: var(--color-secondary);
-    text-align: left;
+    text-align: center;
     opacity: 0;
     animation: fadeIn 0.6s ease-out 0.8s forwards;
-}
 
-.copyright p {
-    margin: 0;
+    p {
+        margin: 0;
+    }
+
+    .socialLink {
+        transition: color var(--transition-speed, 0.3s), transform var(--transition-speed, 0.3s);
+
+        &:hover {
+            color: var(--color-tertiary);
+            transform: translateY(-3px);
+        }
+
+        svg {
+            margin-bottom: -2px;
+        }
+    }
 }
 
   /* Animations */
@@ -140,6 +153,7 @@
     }
 
     .copyright {
-        text-align: left;
+        max-width: 80%;
+        margin: 0 auto;
     }
 }
