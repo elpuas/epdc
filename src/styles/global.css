@@ -63,6 +63,7 @@ body {
 	line-height: var(--lineheight-base);
 	color: var(--color-secondary);
 	background-color: var(--color-primary);
+	overflow-x: hidden;
 }
 
 /* Headings */
@@ -72,6 +73,7 @@ h1, h2, h3, h4, h5, h6 {
 	line-height: var(--lineheight-heading);
 	color: var(--color-secondary);
 	margin: 0 0 var(--margin-md) 0;
+	letter-spacing: -0.05em;
 }
 
 h1 { font-size: var(--fontsize-h1); }

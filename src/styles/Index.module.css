@@ -84,68 +84,6 @@
   }
 }
 
-/* Case Section */
-.caseSection {
-  position: relative;
-  overflow: visible;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  @container (width > 768px) {
-    flex-direction: row;
-  }
-
-  .caseImage {
-    max-width: 100%;
-    width: 100%;
-    object-fit: contain;
-    order: 1;
-    margin-bottom: -364px;
-
-    @container (width > 768px) {
-      max-width: 50%;
-      order: 2;
-      margin-bottom: 0;
-    }
-
-    img {
-      background-position: -100px;
-
-      @container (width > 768px) {
-        background-position: 0;
-      }
-    }
-  }
-  
-  .caseContent {
-    max-width: 100%;
-    width: 100%;
-    order: 2;
-
-    @container (width > 768px) {
-      max-width: 50%;
-      order: 1;
-    }
-  }
-  
-  .accent,
-  blockquote footer {
-    color: var(--color-tertiary);
-  }
-
-  blockquote {
-    margin-bottom: var(--space-2xl);
-    margin-left: 0;
-    padding-left: var(--space-md);
-    border-left: 10px solid var(--color-secondary);
-  
-    footer {
-      margin-top: var(--space-md);
-    }
-  }
-}
-
 /* Support Teaser */
 .supportTeaser {
   padding-block: var(--space-2xl);

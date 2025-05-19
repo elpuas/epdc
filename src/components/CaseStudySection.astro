@@ -1,6 +1,5 @@
 ---
 import Button from './Button.astro';
-import styles from '../styles/Index.module.css';
 import { Image } from 'astro:assets';
 
 // We need to handle the image import differently since it's passed as a prop
@@ -8,8 +7,8 @@ import { Image } from 'astro:assets';
 
 interface Props {
   title: string;
-  accentText: string;
-  paragraph: string;
+  accentText?: string;
+  paragraph?: string;
   quote: string;
   author: string;
   buttonLabel: string;
@@ -18,28 +17,95 @@ interface Props {
   imgAlt: string;
 }
 
-const { title, accentText, paragraph, quote, author, buttonLabel, buttonHref, imgSrc, imgAlt } = Astro.props;
+const { title, accentText = "", paragraph = "", quote, author, buttonLabel, buttonHref, imgSrc, imgAlt } = Astro.props;
 
 // Determine if imgSrc is a string or an ImageMetadata object
 const isStringPath = typeof imgSrc === 'string';
 ---
 
-<section class={styles.caseSection} aria-labelledby="case-study-title">
-  <div class={styles.caseContent}>
-    <h2 id="case-study-title">{title}</h2>
-    <p class={`${styles.accent} ${styles.caseAccent}`}>{accentText}</p>
-    <p>{paragraph}</p>
-    <blockquote class={styles.caseQuote} cite={buttonHref}>
+<section class="case-section">
+  <div class="case-content">
+    <h2 id="case-study-title" aria-labelledby="case-study-title">{title}</h2>
+    {accentText && <p class="accent case-accent">{accentText}</p>}
+    {paragraph && <p>{paragraph}</p>}
+    <blockquote class="case-quote" cite={buttonHref}>
       "{quote}"
       <footer>— <cite>{author}</cite></footer>
     </blockquote>
     <Button href={buttonHref} label={buttonLabel} />
   </div>
-  <div class={styles.caseImage}>
+  <div class="case-image">
     {isStringPath ? (
       <img src={imgSrc as string} alt={imgAlt} loading="lazy" decoding="async" />
     ) : (
-      <Image src={imgSrc as ImageMetadata} alt={imgAlt} width={620} height={777} class={styles.caseImg} />
+      <Image src={imgSrc as ImageMetadata} alt={imgAlt} width={620} height={777} class="case-img" />
     )}
   </div>
-</section> 
+</section>
+
+<style>
+  .case-section {
+    position: relative;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @container (width > 768px) {
+      flex-direction: row;
+    }
+
+  .case-image {
+    max-width: 100%;
+    width: 100%;
+    object-fit: contain;
+    order: 1;
+    margin-bottom: -364px;
+
+    @container (width > 768px) {
+      max-width: 50%;
+      order: 2;
+      margin-bottom: 0;
+    }
+
+    img {
+      background-position: -100px;
+
+      @container (width > 768px) {
+        background-position: 0;
+      }
+    }
+  }
+  
+  .case-content {
+    max-width: 100%;
+    width: 100%;
+    order: 2;
+
+    @container (width > 768px) {
+      max-width: 50%;
+      order: 1;
+    }
+
+    h2 {
+      font-size: var(--fontsize-h3);
+    }
+  }
+  
+  .accent,
+  blockquote footer {
+    color: var(--color-tertiary);
+  }
+
+  blockquote {
+    margin-bottom: var(--space-2xl);
+    margin-left: 0;
+    padding-left: var(--space-md);
+    border-left: 10px solid var(--color-secondary);
+  
+    footer {
+      margin-top: var(--space-md);
+    }
+  }
+}
+</style>

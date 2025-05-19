@@ -16,6 +16,7 @@ main {
   max-width: var(--content-width);
   min-height: 100dvh;
   padding: 0 var(--padding-lg);
+  overflow-x: hidden;
 }
 
 /* Responsive columns */
