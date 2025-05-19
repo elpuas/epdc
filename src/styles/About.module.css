@@ -95,6 +95,12 @@
 /* Values section */
 .values {
 	margin-top: var(--space-md);
+
+	> h2 {
+		font-size: var(--fontsize-base);
+		font-weight: 400;
+	}
+
 	ul {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -146,6 +152,10 @@
 			&:hover {
 				background-color: var(--color-tertiary);
 				transform: scale(1.05);
+
+				img {
+					transform: scale(1.5) translate(-10px, -10px);
+				}
 			}
 
 			p {
@@ -155,6 +165,7 @@
 
 			img {
 				border-radius: 50%;
+				transition: transform 0.3s ease-in-out;
 			}
 		}
 
@@ -219,9 +230,10 @@
 }
 
 .philosophy {
-	h3 {
+	h2 {
 		text-align: center;
 		font-weight: 400;
+		font-size: var(--fontsize-h3);
 	}
 
 	p {

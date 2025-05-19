@@ -14,6 +14,7 @@
 .withPattern {
   h2 {
     font-size: var(--fontsize-h3);
+    font-weight: 400;
   }
 }
 
@@ -104,6 +105,10 @@
     &:is(.accent) {
       color: var(--color-tertiary);
     }
+  }
+
+  ul {
+    margin-bottom: var(--space-3xl);
   }
 }
 

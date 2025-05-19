@@ -48,87 +48,87 @@ const process = [
 ---
 
 <Layout {title} {description} {lang}>
-  <section class={styles.hero}>
-    <h1><span class={styles.accent}>Welcome to </span>ElPuas Digital Crafts</h1>
+  <section class={styles.hero} aria-labelledby="page-title">
+    <h1 id="page-title"><span class={styles.accent}>Welcome to </span>ElPuas Digital Crafts</h1>
     <p class={styles.lead}>
       We empower agencies and businesses with pixel-perfect, high-performance websites — built with care, backed by expert support.
     </p>
   </section> 
 
-  <section class={styles.about}>
-    <p>We’re <span class={styles.accent}>ElPuas Digital Crafts</span> — a family-run web studio building high-performance websites with love, code, and coffee.</p>
+  <section class={styles.about} aria-label="About Us">
+    <p>We're <span class={styles.accent}>ElPuas Digital Crafts</span> — a family-run web studio building high-performance websites with love, code, and coffee.</p>
 
-    <p>We believe great websites go beyond design. They should be lightning-fast, easy to manage, and ready to grow with your business. That’s why we use modern frameworks like <span class={styles.accent}>Astro</span>, smart <span class={styles.accent}>WordPress</span> solutions, and <span class={styles.accent}>AI-assisted</span> workflows to deliver handcrafted sites without the high-maintenance price tag.</p>
+    <p>We believe great websites go beyond design. They should be lightning-fast, easy to manage, and ready to grow with your business. That's why we use modern frameworks like <span class={styles.accent}>Astro</span>, smart <span class={styles.accent}>WordPress</span> solutions, and <span class={styles.accent}>AI-assisted</span> workflows to deliver handcrafted sites without the high-maintenance price tag.</p>
 
-    <p>From custom <span class={styles.accent}>WordPress</span> builds to optimized <span class={styles.accent}>eCommerce</span> platforms, we create digital experiences that help small businesses grow and agencies scale. Whether you’re launching your first site or need a reliable white-label partner, we’ve got your back — with clear communication, thoughtful execution, and long-term support that actually shows up.</p>
+    <p>From custom <span class={styles.accent}>WordPress</span> builds to optimized <span class={styles.accent}>eCommerce</span> platforms, we create digital experiences that help small businesses grow and agencies scale. Whether you're launching your first site or need a reliable white-label partner, we've got your back — with clear communication, thoughtful execution, and long-term support that actually shows up.</p>
 
   </section>
 
-  <section class={styles.values}>
-    <p>What We Stand For</p>
-    <ul class="values">
-      <li><Icon name="ph:handshake" width="64" height="64" /> Partnership First</li>
-      <li><Icon name="ph:rocket-launch" width="64" height="64" /> Results-Driven Execution</li>
-      <li><Icon name="ph:brain" width="64" height="64" /> Tech Excellence, Human Touch</li>
-      <li><Icon name="ph:shield-check" width="64" height="64" /> Transparency & Security</li>
+  <section class={styles.values} aria-labelledby="values-title">
+    <h2 id="values-title">What We Stand For</h2>
+    <ul class="values" role="list">
+      <li><Icon name="ph:handshake" width="64" height="64" aria-hidden="true" /> Partnership First</li>
+      <li><Icon name="ph:rocket-launch" width="64" height="64" aria-hidden="true" /> Results-Driven Execution</li>
+      <li><Icon name="ph:brain" width="64" height="64" aria-hidden="true" /> Tech Excellence, Human Touch</li>
+      <li><Icon name="ph:shield-check" width="64" height="64" aria-hidden="true" /> Transparency & Security</li>
     </ul>
   </section>
 
-  <section class={styles.team}>
-    <h2>The Team</h2>
+  <section class={styles.team} aria-labelledby="team-title">
+    <h2 id="team-title">The Team</h2>
     <p class={styles.accent}>Meet the people behind ElPuas Digital Crafts.</p>
-    <ul class={styles.teamList}>
+    <ul class={styles.teamList} role="list">
       <li class={styles.teamMember}>
-        <Image src={alfredoImage} alt="Alfredo Navas" width={120} height={120} />
+        <Image src={alfredoImage} alt="Alfredo Navas - CTO and Lead Developer" width={120} height={120} loading="lazy" decoding="async" />
         <blockquote>
           <div class={styles.teamQuote}>
             <p>Alfredo brings over 15 years of expertise, having developed websites for Fortune 500 companies. He leads projects, ensures every site runs smoothly, and works closely with clients to translate ideas into performant digital experiences. As a speaker and open web advocate, he shares insights on WordPress, Astro, and emerging technologies.</p>
           </div>
-          <footer><strong>Alfredo Navas</strong> — CTO</footer>
+          <footer><cite><strong>Alfredo Navas</strong> — CTO</cite></footer>
           <div class={styles.teamSocial}>
-            <a href="https://www.linkedin.com/in/elpuasdev/" target="_blank" rel="noopener noreferrer">
-              <Icon name="ph:linkedin-logo" width="24" height="24" />
+            <a href="https://www.linkedin.com/in/elpuasdev/" target="_blank" rel="noopener noreferrer" aria-label="Alfredo's LinkedIn profile">
+              <Icon name="ph:linkedin-logo" width="24" height="24" aria-hidden="true" />
             </a>
-            <a href="https://github.com/elpuasdev" target="_blank" rel="noopener noreferrer">
-              <Icon name="ph:github-logo" width="24" height="24" />
+            <a href="https://github.com/elpuasdev" target="_blank" rel="noopener noreferrer" aria-label="Alfredo's GitHub profile">
+              <Icon name="ph:github-logo" width="24" height="24" aria-hidden="true" />
             </a>
-            <a href="https://www.elpuas.com" target="_blank" rel="noopener noreferrer">
-              <Icon name="ph:skull" width="24" height="24" />
+            <a href="https://www.elpuas.com" target="_blank" rel="noopener noreferrer" aria-label="Alfredo's personal website">
+              <Icon name="ph:skull" width="24" height="24" aria-hidden="true" />
             </a>
           </div>
         </blockquote>
       </li>
       <li class={styles.teamMember}>
         <blockquote>
-          "Catalina, a seasoned journalist with a production background, ensures our projects resonate with compelling narratives."
-          <footer><strong>Catalina Valverde</strong> — Head of Content</footer>
+          <p>"Catalina, a seasoned journalist with a production background, ensures our projects resonate with compelling narratives."</p>
+          <footer><cite><strong>Catalina Valverde</strong> — Head of Content</cite></footer>
         </blockquote>
       </li>
       <li class={styles.teamMember}>
         <blockquote>
-          "Gianfranco, our frontend expert, adds depth to our team's capabilities, ensuring cutting-edge designs and functionality."
-          <footer><strong>Gianfranco Navas</strong> — Frontend Developer</footer>
+          <p>"Gianfranco, our frontend expert, adds depth to our team's capabilities, ensuring cutting-edge designs and functionality."</p>
+          <footer><cite><strong>Gianfranco Navas</strong> — Frontend Developer</cite></footer>
         </blockquote>
       </li>
       <li class={styles.teamMember}>
-        <Image src={aiImage} alt="AI Assistant" width={120} height={120} />
+        <Image src={aiImage} alt="AI Assistant - Our digital team member" width={120} height={120} loading="lazy" decoding="async" />
         <blockquote>
           <div class={styles.teamQuote}>
-            Our AI assistant, a collaboration between ChatGPT and Cursor, helps us move faster without cutting corners. From code scaffolding to research and content drafts, it amplifies our team’s speed, precision, and creativity.
+            <p>Our AI assistant, a collaboration between ChatGPT and Cursor, helps us move faster without cutting corners. From code scaffolding to research and content drafts, it amplifies our team's speed, precision, and creativity.</p>
           </div>
-          <footer><strong>AI Assistant </strong> — Analysis, Development & Content Support</footer>
+          <footer><cite><strong>AI Assistant </strong> — Analysis, Development & Content Support</cite></footer>
         </blockquote>
       </li>
     </ul>
   </section>
 
-  <section class={styles.philosophy}>
-    <h3>
+  <section class={styles.philosophy} aria-label="Our Philosophy">
+    <h2>
       At ElPuas Digital Crafts, our ethos is simple:<span class={styles.accent}>"We code Digital Crafts for Humans"</span> Each project is imbued with care, creativity, and craftsmanship, delivering not just websites, but unforgettable digital experiences.
-    </h3>
+    </h2>
   </section>
 
-  <section class={styles.testimonial}>
+  <section class={styles.testimonial} aria-labelledby="case-study-title">
     <CaseStudySection
       title="E‑Commerce Built to Scale"
       quote="We built a tailored ecommerce store for medical and student apparel, and continue to optimize it through our monthly maintenance plan. We use AI tools to write better product descriptions and choose the right keywords, helping the site stay ahead of competitors in search results. The result? Higher visibility, smoother shopping experiences, and steady sales growth — all without the hassle of managing the tech."
@@ -136,17 +136,17 @@ const process = [
       buttonLabel="Case Study"
       buttonHref="#" 
       imgSrc={caseStudyImage}
-      imgAlt="FishCostaRica.com"
+      imgAlt="MonkeyScrubs eCommerce store displayed on mobile device"
     />
   </section>
 
-  <section class={styles.process}>
-    <h2>How We Bring Your Vision to Life</h2>
-    <p class={styles.accent}>From idea to delivery, here’s how we turn strategy into action.</p>
+  <section class={styles.process} aria-labelledby="process-title">
+    <h2 id="process-title">How We Bring Your Vision to Life</h2>
+    <p class={styles.accent}>From idea to delivery, here's how we turn strategy into action.</p>
     <ProcessStep steps={process} />
   </section>
 
-  <section class={styles.cta}>
+  <section class={styles.cta} aria-label="Contact Call to Action">
     <Button href="/contact" label="Let's Talk" />
   </section>
 </Layout>

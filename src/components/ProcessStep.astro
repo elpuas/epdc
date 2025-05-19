@@ -17,8 +17,8 @@ const { steps } = Astro.props;
 <ol class="step-list">
     {steps.map((step, index) => (
         <li class="step">
-            <div class="step-icon-wrapper">
-                <Icon name={step.icon} class="step-icon" size="86" />
+            <div class="step-icon-wrapper" aria-hidden="true">
+                <Icon name={step.icon} class="step-icon" size="86" aria-hidden="true" />
             </div>
             <div class="step-content">
                 <p><strong class="accent">{index + 1}. {step.title}</strong></p>
