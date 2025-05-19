@@ -1,6 +1,7 @@
 ---
 import styles from '../styles/LanguageSwitcher.module.css';
 import { SUPPORTED_LANGUAGES, DEFAULT_LANGUAGE, type Language } from '../i18n/utils';
+import { Icon } from 'astro-icon/components';
 
 interface Props {
   currentLang: Language;
@@ -9,9 +10,9 @@ interface Props {
 const { currentLang = 'en' as Language } = Astro.props;
 
 const LANGUAGES = {
-  en: { code: 'en', flag: '🇺🇸', name: 'English' },
-  es: { code: 'es', flag: '🇨🇷', name: 'Español' },
-  it: { code: 'it', flag: '🇮🇹', name: 'Italiano' }
+  en: { code: 'en', icon: 'circle-flags:us', name: 'English' },
+  es: { code: 'es', icon: 'circle-flags:es', name: 'Español' },
+  it: { code: 'it', icon: 'circle-flags:it', name: 'Italiano' }
 };
 
 // Ensure we have a valid language reference even if currentLang is somehow undefined
@@ -24,8 +25,9 @@ const lang = LANGUAGES[currentLang ?? 'en'];
     id="language-switcher"
     aria-haspopup="true"
     aria-expanded="false"
+    aria-label={`Change language from ${lang.name}`}
   >
-    {lang.flag}
+    <Icon name={lang.icon} width="24" height="24" />
   </button>
 
   <div
@@ -36,14 +38,15 @@ const lang = LANGUAGES[currentLang ?? 'en'];
     aria-labelledby="language-switcher"
     hidden
   >
-    {Object.entries(LANGUAGES).map(([code, { flag }]) => (
+    {Object.entries(LANGUAGES).map(([code, { icon, name }]) => (
       <a
         href={`/${code}`}
         role="menuitem"
         data-lang={code}
         class={styles.menuItem}
+        aria-label={`Switch to ${name}`}
       >
-        {flag}
+        <Icon name={icon} width="24" height="24" />
       </a>
     ))}
   </div>
