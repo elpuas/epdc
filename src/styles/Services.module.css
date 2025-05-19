@@ -3,7 +3,8 @@
         font-size: var(--fontsize-h1);
     }
 
-    h5 {
+    > p {
+        font-size: var(--fontsize-h5);
         margin-bottom: calc(var(--space-md) * 4);
     }
 }

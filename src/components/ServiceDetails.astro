@@ -6,20 +6,15 @@ interface Props {
     title: string;
     description: string;
     features: string[];
-    image?: string;
-    alt?: string;
     reverse?: boolean;
 }
 
-const { icon, title, description, features, image, alt = '', reverse = false } = Astro.props;
+const { icon, title, description, features, reverse = false } = Astro.props;
 ---
 
 <section class={`service-details ${reverse ? 'reverse' : ''}`}>
     <div class="text-block">
         <div class="service-header">
-        <div class="icon">
-            <Icon name={icon} width="48" height="48" />
-        </div>
         <h3>{title}</h3>
         </div>
         <p class="service-description">{description}</p>
@@ -30,11 +25,9 @@ const { icon, title, description, features, image, alt = '', reverse = false } =
         ))}
         </ul>
     </div>
-    {image && (
-        <div class="image-block">
-        <img src={image} alt={alt} loading="lazy" />
-        </div>
-    )}
+    <div class="icon">
+        <Icon name={icon} width="300" height="300" />
+    </div>
 </section>
 
 <style scoped>
@@ -50,11 +43,6 @@ const { icon, title, description, features, image, alt = '', reverse = false } =
 
 .service-details.reverse {
     flex-direction: row-reverse;
-}
-
-.text-block {
-    flex: 1 1 480px;
-    max-width: 600px;
 }
 
 .image-block {

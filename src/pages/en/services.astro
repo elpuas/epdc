@@ -4,16 +4,18 @@ import Button from '../../components/Button.astro';
 import ServiceDetails from '../../components/ServiceDetails.astro';
 import TrustedBy from '../../components/TrustedBy.astro';
 import PricingCard from '../../components/PricingCard.astro';
+import CaseStudySection from '../../components/CaseStudySection.astro';
 import styles from '../../styles/Services.module.css';
 const title = 'Our Services';
 const description = 'Explore our digital craftsmanship services';
+import caseStudyImage from '../../../public/phone-showcase.jpg';
 const lang = 'en';
 ---
 
 <Layout {title} {description} {lang}>
   <section class={styles.hero}>
     <h1>Smart, <span class={styles.accent}>Scalable</span> Digital Services</h1>
-    <h5>From handcrafted websites to ongoing support — we help your business thrive online.</h5>
+    <p class={styles.accent}>From handcrafted websites to ongoing support — we help your business thrive online.</p>
     <Button href="/contact" label="Let's Talk" />
   </section>
 
@@ -23,11 +25,9 @@ const lang = 'en';
     <div class={styles.servicesIntroGrid}>
         <ServiceDetails 
           icon="ph:flask" 
-          title="Custom Web Development" 
-          description="Tailor-made websites and platforms built for performance, flexibility and scale. No templates, just crafted code." 
+          title="Web Development" 
+          description="We craft websites that fit your goals — and your budget. Whether you need a fully custom build or a smartly adapted template, we create high-performance websites tailored to your business. From fast-launch starter sites to complex platforms, every project is optimized for speed, scalability, and ease of management." 
           features={["Responsive, mobile-first design", "Fast load times & SEO optimization", "Custom CMS integrations", "API and third-party service connectivity"]}
-          image="/service-one.png"
-          alt="Screenshot of FishCostaRica.com custom website project"
           reverse={true}
         />
 
@@ -36,8 +36,6 @@ const lang = 'en';
           title="E-Commerce Solutions" 
           description="We design and develop storefronts that convert. WooCommerce or headless — we help you sell more with less friction." 
           features={["Conversion-focused product pages", "Streamlined checkout experiences", "Inventory & logistics integration", "Custom reports & automation"]}
-          image="/mobile.png"
-          alt="Screenshot of FishCostaRica.com custom website project"
           reverse={false}
         />
 
@@ -46,8 +44,6 @@ const lang = 'en';
           title="Maintenance & Support" 
           description="Peace of mind through expert support, performance monitoring, and scheduled updates. Flexible monthly plans for growing businesses." 
           features={["Scheduled plugin and theme updates", "Performance & uptime monitoring", "Expert dev time included", "Priority bug fixes"]}
-          image="/service-one.png"
-          alt="Screenshot of FishCostaRica.com custom website project"
           reverse={true}
         />
 
@@ -56,8 +52,6 @@ const lang = 'en';
           title="White-Label Services" 
           description="We work quietly behind the scenes, so your agency can scale without overhead. Trusted development partners for design agencies and consultants." 
           features={["Invisible client-ready code", "Fast delivery & scoped estimates", "Reliable dev support", "Confidential partnerships"]}
-          image="/mobile.png"
-          alt="Screenshot of FishCostaRica.com custom website project"
           reverse={false}
         />
     </div>
@@ -126,20 +120,22 @@ const lang = 'en';
   </section>
 
   <section class={styles.testimonial}>
-    <h3>Partnering Behind the Scenes</h3>
-    <p class={styles.accent}>
-      We support agencies and studios through reliable, white-label execution.
-    </p>
-    <blockquote>
-      “Working with ElPuas has been a game-changer. They consistently deliver high-quality work on time, handle complex technical specs with ease, and elevate the quality of our agency’s output. Our clients are happy — and that makes us look great.”
-      <footer>— Avalanche Advertising (White-label Partner)</footer>
-    </blockquote>
+    <CaseStudySection
+      title="Partnering Behind the Scenes"
+      accentText=" We support agencies and studios through reliable, white-label execution."
+      quote="Working with ElPuas has been a game-changer. They consistently deliver high-quality work on time, handle complex technical specs with ease, and elevate the quality of our agency’s output. Our clients are happy — and that makes us look great."
+      author=" Avalanche Advertising (White-label Partner)"
+      buttonLabel="Case Study"
+      buttonHref="#" 
+      imgSrc={caseStudyImage}
+      imgAlt="FishCostaRica.com"
+    />
   </section>
 
   <TrustedBy title="Trusted by forward-thinking brands" />
 
   <section class={styles.ctaBlock}>
-    <h2>Ready to launch or scale your next digital project?</h2>
+    <h3>Ready to launch or scale your next digital project?</h3>
     <Button href="/contact" label="Get Started Today" />
   </section>
 </Layout> 

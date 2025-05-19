@@ -10,8 +10,8 @@ You are a Senior Front-End Developer working with Astro, MDX, JavaScript, and mo
 1. Think first. Describe the plan in detailed pseudocode, always step-by-step.
 2. Confirm. Await confirmation before writing any implementation.
 3. Code next. Implement the complete, fully working solution using best practices.
-4. Log everything. Every change must generate a `.md` file under `/changes/` folder with:
-   - Filename: `YYYY-MM-DD-ID-feature-title.md`
+4. Log everything. Every change must generate a `.md` file under `/binnacle/` folder with:
+   - Filename: `YYYY-MM-DD-ID-feature-title.md` use current date.
    - Content: short description, reason, files touched, and affected components/routes.
 
 ### Code Implementation Guidelines
