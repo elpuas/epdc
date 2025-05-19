@@ -6,7 +6,10 @@ import ServiceCard from '../../components/ServiceCard.astro';
 import { Icon } from 'astro-icon/components';
 import styles from '../../styles/Index.module.css';
 import TrustedBy from '../../components/TrustedBy.astro';
-import Firefly from '../../components/Firefly.astro';
+import CaseStudySection from '../../components/CaseStudySection.astro';
+
+// Import case study image
+import caseStudyImage from '../../../public/phone-showcase.jpg';
 
 const title = 'Benvenuto';
 const description = 'Homepage di ElPuas Digital Crafts';
@@ -21,7 +24,7 @@ const lang = 'it';
   </section> 
   <section class={styles.services}>
     <div class={`${styles.withPattern} ${styles.dotsPattern}`}>
-      <h3>A <span class={`${styles.brand} ${styles.accent}`}>ElPuas Digital Crafts</span>, non ci limitiamo a costruire siti web — creiamo piattaforme digitali ad alte prestazioni, potenziate dall'IA e supportate da manutenzione esperta per crescere con la tua attività.</h3>
+      <h2>A <span class={`${styles.brand} ${styles.accent}`}>ElPuas Digital Crafts</span>, non ci limitiamo a costruire siti web — creiamo piattaforme digitali ad alte prestazioni, potenziate dall'IA e supportate da manutenzione esperta per crescere con la tua attività.</h2>
     </div>
   </section>
   <section class={styles.expertiseSection}>
@@ -59,49 +62,58 @@ const lang = 'it';
       </li>
     </ul>
   </section>
+  <CaseStudySection
+    title="Da Sito Web a Motore di Crescita"
+    accentText="FishCostaRica.com non ha ottenuto solo un sito web — ha trovato un partner."
+    paragraph="Abbiamo costruito un sito personalizzato progettato per convertire, e continuiamo a ottimizzarlo attraverso il nostro piano di manutenzione mensile. Il risultato? Maggiore visibilità nelle ricerche, migliori prestazioni e un costante aumento delle prenotazioni — il tutto senza muovere un dito."
+    quote="Dal lancio del nuovo sito, abbiamo visto un notevole incremento nelle prenotazioni e una migliore visibilità nelle ricerche. ElPuas ha compreso i nostri obiettivi e ha fornito risultati."
+    author="Richard Krug, FishCostaRica.com"
+    buttonLabel="Caso Studio"
+    buttonHref="#" 
+    imgSrc={caseStudyImage}
+    imgAlt="FishCostaRica.com"
+  />
   <section class={styles.trustedBy}>
     <TrustedBy title="Scelti da brand innovativi" />
   </section>
-  <section class={styles.caseSection}>
-    <div class={styles.caseContent}>
-      <h3>Artigianato Digitale in Azione</h3>
-      <p class={`${styles.accent} ${styles.caseAccent}`}>FishCostaRica.com non ha ottenuto solo un sito web — ha trovato un partner.</p>
-      <p>Abbiamo costruito un sito personalizzato progettato per convertire, e continuiamo a ottimizzarlo attraverso il nostro piano di manutenzione mensile. Il risultato? Maggiore visibilità nelle ricerche, migliori prestazioni e un costante aumento delle prenotazioni — il tutto senza muovere un dito.</p>
-      <blockquote class={styles.caseQuote}>
-        "Dal lancio del nuovo sito, abbiamo visto un notevole incremento nelle prenotazioni e una migliore visibilità nelle ricerche. ElPuas ha compreso i nostri obiettivi e ha fornito risultati."
-        <footer>— Team di FishCostaRica.com</footer>
-      </blockquote>
-
-      <Button href="#" label="Caso Studio" />
-    </div>
-  </section>
   <section class={styles.supportTeaser}>
-    <h2>Supporto Continuo Che Cresce Con Te</h2>
+    <h3>Supporto Continuo Che Cresce Con Te</h3>
     <p class={styles.accent}>
       Dagli aggiustamenti delle prestazioni agli aggiornamenti completi, i nostri piani di assistenza mensile mantengono il tuo sito veloce, sicuro e in evoluzione.
     </p>
   
     <ul class={styles.features}>
       <li>
-        <Icon name="ph:shield-check" width="48" height="48" />
+        <Icon name="ph:shield-check" width="48" height="48" aria-hidden="true" />
         <h4>Aggiornamenti e backup regolari</h4>
       </li>
       <li>
-        <Icon name="ph:code" width="48" height="48" />
+        <Icon name="ph:code" width="48" height="48" aria-hidden="true" />
         <h4>Ore di sviluppo esperto incluse</h4>
       </li>
       <li>
-        <Icon name="ph:gauge" width="48" height="48" />
+        <Icon name="ph:gauge" width="48" height="48" aria-hidden="true" />
         <h4>Controlli proattivi delle prestazioni</h4>
       </li>
       <li>
-        <Icon name="ph:lightning" width="48" height="48" />
+        <Icon name="ph:lightning" width="48" height="48" aria-hidden="true" />
         <h4>Opzioni di risposta prioritaria</h4>
       </li>
     </ul>
     <Button href="/it/servizi#piani" label="Esplora I Nostri Piani" />
   </section>
-  <section class={styles.firefly}>
-    <Firefly />
-  </section>
-</Layout> 
+</Layout>
+
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style> 

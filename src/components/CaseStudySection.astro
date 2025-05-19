@@ -1,6 +1,10 @@
 ---
 import Button from './Button.astro';
 import styles from '../styles/Index.module.css';
+import { Image } from 'astro:assets';
+
+// We need to handle the image import differently since it's passed as a prop
+// The component will accept an ImageMetadata object instead of a string path
 
 interface Props {
   title: string;
@@ -10,25 +14,32 @@ interface Props {
   author: string;
   buttonLabel: string;
   buttonHref: string;
-  imgSrc: string;
+  imgSrc: string | ImageMetadata; // Accept both string and ImageMetadata
   imgAlt: string;
 }
 
 const { title, accentText, paragraph, quote, author, buttonLabel, buttonHref, imgSrc, imgAlt } = Astro.props;
+
+// Determine if imgSrc is a string or an ImageMetadata object
+const isStringPath = typeof imgSrc === 'string';
 ---
 
-<section class={styles.caseSection}>
+<section class={styles.caseSection} aria-labelledby="case-study-title">
   <div class={styles.caseContent}>
-    <h3>{title}</h3>
+    <h2 id="case-study-title">{title}</h2>
     <p class={`${styles.accent} ${styles.caseAccent}`}>{accentText}</p>
     <p>{paragraph}</p>
-    <blockquote class={styles.caseQuote}>
+    <blockquote class={styles.caseQuote} cite={buttonHref}>
       "{quote}"
-      <footer>— {author}</footer>
+      <footer>— <cite>{author}</cite></footer>
     </blockquote>
     <Button href={buttonHref} label={buttonLabel} />
   </div>
   <div class={styles.caseImage}>
-    <img src={imgSrc} alt={imgAlt} />
+    {isStringPath ? (
+      <img src={imgSrc as string} alt={imgAlt} loading="lazy" decoding="async" />
+    ) : (
+      <Image src={imgSrc as ImageMetadata} alt={imgAlt} width={620} height={777} class={styles.caseImg} />
+    )}
   </div>
 </section> 
