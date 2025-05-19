@@ -1,12 +1,214 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-
+import Button from '../../components/Button.astro';
+import { Icon } from 'astro-icon/components';
+import ProcessStep from '../../components/ProcessStep.astro';
+import CaseStudySection from '../../components/CaseStudySection.astro';
+import {Image} from 'astro:assets';
+import alfredoImage from '../../../public/team/alfredo-navas.jpeg';
+import aiImage from '../../../public/team/ai-assistant.png';
+import styles from '../../styles/About.module.css';
 const title = 'Sobre Nosotros';
-const description = 'Conoce más sobre ElPuas Digital Crafts';
+const description = 'Conoce a las personas y la filosofía detrás de ElPuas Digital Crafts.';
 const lang = 'es';
+// Import case study image
+import caseStudyImage from '../../../public/phone-showcase.jpg';
+const process = [
+  {
+    icon: 'ph:magnifying-glass',
+    title: 'Descubrimiento y Comprensión',
+    description: 'Comenzamos recopilando toda la información posible sobre tu negocio, desafíos y objetivos. Entender tus necesidades es la base de un proyecto exitoso.'
+  },
+  {
+    icon: 'ph:brain',
+    title: 'Planificación Estratégica con IA',
+    description: 'Utilizando la información recopilada, analizamos e identificamos el mejor enfoque. Con IA, descubrimos soluciones innovadoras, optimizamos flujos de trabajo y nos aseguramos de que no se pase por alto ningún detalle.'
+  },
+  {
+    icon: 'ph:pen-nib',
+    title: 'Estrategia de Diseño',
+    description: 'Creamos una estrategia de diseño adaptada a tu visión y público objetivo. Esto garantiza una experiencia fácil de usar y visualmente atractiva que se alinea con tus objetivos.'
+  },
+  {
+    icon: 'ph:code',
+    title: 'Selección de Tecnología y Desarrollo',
+    description: 'Ya sea WordPress por su flexibilidad o React para aplicaciones dinámicas, elegimos el mejor framework para tus necesidades. La IA ayuda a optimizar el desarrollo y resolver desafíos más rápido.'
+  },
+  {
+    icon: 'ph:truck',
+    title: 'Entrega',
+    description: 'Una vez que todo está perfeccionado, entregamos tu proyecto a tiempo, asegurándonos de que cumpla con tus expectativas y funcione perfectamente.'
+  },
+  {
+    icon: 'ph:chart-line-up',
+    title: 'Soporte Continuo y Optimización con IA',
+    description: 'Nuestro compromiso no termina con la entrega. Con soporte continuo, utilizamos IA para monitorear y mejorar continuamente tu sitio web, adaptándonos a nuevos desafíos y oportunidades.'
+  }
+];
 ---
 
 <Layout {title} {description} {lang}>
-  <h1>Sobre ElPuas Digital Crafts</h1>
-  <p>Descubre nuestra historia y misión. El contenido completo estará disponible pronto.</p>
-</Layout> 
+  <section class={styles.hero} aria-labelledby="page-title">
+    <h1 id="page-title"><span class={styles.accent}>Bienvenido a </span>ElPuas Digital Crafts</h1>
+    <p class={styles.lead}>
+      Empoderamos a agencias y empresas con sitios web de alto rendimiento y pixel-perfect — construidos con cuidado y respaldados por soporte experto.
+    </p>
+  </section> 
+
+  <section class={styles.about} aria-label="Sobre Nosotros">
+    <p>Somos <span class={styles.accent}>ElPuas Digital Crafts</span> — un estudio web familiar que construye sitios web de alto rendimiento con amor, código y café.</p>
+
+    <p>Creemos que los grandes sitios web van más allá del diseño. Deben ser ultrarrápidos, fáciles de gestionar y listos para crecer con tu negocio. Por eso utilizamos frameworks modernos como <span class={styles.accent}>Astro</span>, soluciones inteligentes de <span class={styles.accent}>WordPress</span> y flujos de trabajo <span class={styles.accent}>asistidos por IA</span> para entregar sitios artesanales sin el alto costo de mantenimiento.</p>
+
+    <p>Desde desarrollos personalizados de <span class={styles.accent}>WordPress</span> hasta plataformas optimizadas de <span class={styles.accent}>eCommerce</span>, creamos experiencias digitales que ayudan a crecer a pequeñas empresas y a escalar agencias. Ya sea que estés lanzando tu primer sitio o necesites un socio confiable de marca blanca, te respaldamos con comunicación clara, ejecución cuidadosa y soporte a largo plazo que realmente está presente.</p>
+
+  </section>
+
+  <section class={styles.values} aria-labelledby="values-title">
+    <h2 id="values-title">Nuestros Valores</h2>
+    <ul class="values" role="list">
+      <li><Icon name="ph:handshake" width="64" height="64" aria-hidden="true" /> Alianza Primero</li>
+      <li><Icon name="ph:rocket-launch" width="64" height="64" aria-hidden="true" /> Ejecución Orientada a Resultados</li>
+      <li><Icon name="ph:brain" width="64" height="64" aria-hidden="true" /> Excelencia Técnica, Toque Humano</li>
+      <li><Icon name="ph:shield-check" width="64" height="64" aria-hidden="true" /> Transparencia y Seguridad</li>
+    </ul>
+  </section>
+
+  <section class={styles.team} aria-labelledby="team-title">
+    <h2 id="team-title">El Equipo</h2>
+    <p class={styles.accent}>Conoce a las personas detrás de ElPuas Digital Crafts.</p>
+    <ul class={styles.teamList} role="list">
+      <li class={styles.teamMember}>
+        <Image src={alfredoImage} alt="Alfredo Navas - CTO y Desarrollador Principal" width={120} height={120} loading="lazy" decoding="async" />
+        <blockquote>
+          <div class={styles.teamQuote}>
+            <p>Alfredo aporta más de 15 años de experiencia, habiendo desarrollado sitios web para empresas Fortune 500. Lidera proyectos, asegura que cada sitio funcione sin problemas y trabaja estrechamente con los clientes para traducir ideas en experiencias digitales de alto rendimiento. Como orador y defensor de la web abierta, comparte conocimientos sobre WordPress, Astro y tecnologías emergentes.</p>
+          </div>
+          <footer><cite><strong>Alfredo Navas</strong> — CTO</cite></footer>
+          <div class={styles.teamSocial}>
+            <a href="https://www.linkedin.com/in/elpuasdev/" target="_blank" rel="noopener noreferrer" aria-label="Perfil de LinkedIn de Alfredo">
+              <Icon name="ph:linkedin-logo" width="24" height="24" aria-hidden="true" />
+            </a>
+            <a href="https://github.com/elpuasdev" target="_blank" rel="noopener noreferrer" aria-label="Perfil de GitHub de Alfredo">
+              <Icon name="ph:github-logo" width="24" height="24" aria-hidden="true" />
+            </a>
+            <a href="https://www.elpuas.com" target="_blank" rel="noopener noreferrer" aria-label="Sitio web personal de Alfredo">
+              <Icon name="ph:skull" width="24" height="24" aria-hidden="true" />
+            </a>
+          </div>
+        </blockquote>
+      </li>
+      <li class={styles.teamMember}>
+        <blockquote>
+          <p>"Catalina, una periodista experimentada con formación en producción, asegura que nuestros proyectos resuenen con narrativas convincentes."</p>
+          <footer><cite><strong>Catalina Valverde</strong> — Responsable de Contenido</cite></footer>
+        </blockquote>
+      </li>
+      <li class={styles.teamMember}>
+        <blockquote>
+          <p>"Gianfranco, nuestro experto en frontend, añade profundidad a las capacidades de nuestro equipo, asegurando diseños y funcionalidades de vanguardia."</p>
+          <footer><cite><strong>Gianfranco Navas</strong> — Desarrollador Frontend</cite></footer>
+        </blockquote>
+      </li>
+      <li class={styles.teamMember}>
+        <Image src={aiImage} alt="Asistente IA - Nuestro miembro digital del equipo" width={120} height={120} loading="lazy" decoding="async" />
+        <blockquote>
+          <div class={styles.teamQuote}>
+            <p>Nuestro asistente de IA, una colaboración entre ChatGPT y Cursor, nos ayuda a avanzar más rápido sin atajos. Desde la estructura del código hasta la investigación y borradores de contenido, amplifica la velocidad, precisión y creatividad de nuestro equipo.</p>
+          </div>
+          <footer><cite><strong>Asistente IA </strong> — Soporte en Análisis, Desarrollo y Contenido</cite></footer>
+        </blockquote>
+      </li>
+    </ul>
+  </section>
+
+  <section class={styles.philosophy} aria-label="Nuestra Filosofía">
+    <h2>
+      En ElPuas Digital Crafts, nuestra filosofía es simple:<span class={styles.accent}>"Creamos Artesanía Digital para Humanos"</span> Cada proyecto está impregnado de cuidado, creatividad y artesanía, entregando no solo sitios web, sino experiencias digitales inolvidables.
+    </h2>
+  </section>
+
+  <section class={styles.testimonial} aria-labelledby="case-study-title">
+    <CaseStudySection
+      title="E‑Commerce Construido para Escalar"
+      quote="Construimos una tienda de comercio electrónico a medida para indumentaria médica y estudiantil, y continuamos optimizándola a través de nuestro plan de mantenimiento mensual. Utilizamos herramientas de IA para escribir mejores descripciones de productos y elegir las palabras clave adecuadas, ayudando al sitio a mantenerse por delante de los competidores en los resultados de búsqueda. ¿El resultado? Mayor visibilidad, experiencias de compra más fluidas y un crecimiento constante de las ventas, todo sin la molestia de gestionar la tecnología."
+      author="MonkeyScrubs, Cliente de eCommerce + Plan de Soporte"
+      buttonLabel="Caso de Estudio"
+      buttonHref="#" 
+      imgSrc={caseStudyImage}
+      imgAlt="Tienda eCommerce MonkeyScrubs mostrada en dispositivo móvil"
+    />
+  </section>
+
+  <section class={styles.process} aria-labelledby="process-title">
+    <h2 id="process-title">Cómo Damos Vida a Tu Visión</h2>
+    <p class={styles.accent}>Desde la idea hasta la entrega, así es como convertimos la estrategia en acción.</p>
+    <ProcessStep steps={process} />
+  </section>
+
+  <section class={styles.cta} aria-label="Llamada a la Acción de Contacto">
+    <Button href="/contact" label="Hablemos" />
+  </section>
+</Layout>
+<script type="module" is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('Process step animation script loaded');
+    
+    // Force a small initial delay to ensure everything is loaded
+    setTimeout(() => {
+      const icons = document.querySelectorAll('.step-icon');
+      console.log('Found step icons:', icons.length);
+      
+      // Manually apply animation to any icons already in viewport on page load
+      let iconsArray = Array.from(icons);
+      
+      // Create an observer for icons not yet in view
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              console.log('Icon in view:', entry.target);
+              
+              // Remove any existing animation classes and force reflow
+              entry.target.classList.remove('animate');
+              void entry.target.offsetWidth; // Force reflow
+              
+              // Apply the animation class
+              entry.target.classList.add('animate');
+              
+              // Stop observing this icon
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { 
+          threshold: 0.3,
+          rootMargin: '-10px' 
+        }
+      );
+      
+      // Apply staggered animation for icons
+      iconsArray.forEach((icon, index) => {
+        // Check if icon is already in viewport to animate immediately
+        const rect = icon.getBoundingClientRect();
+        const isInViewport = (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+        
+        if (isInViewport) {
+          // Stagger the animation for icons already in viewport
+          setTimeout(() => {
+            console.log('Animating icon in viewport:', index);
+            icon.classList.add('animate');
+          }, index * 150);
+        } else {
+          // Observe icons not yet in viewport
+          observer.observe(icon);
+        }
+      });
+    }, 800); // Longer delay to ensure all resources are loaded
+  });
+</script> 
