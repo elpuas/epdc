@@ -12,18 +12,18 @@ interface Props {
 const { title, price, features, icon = 'ph:rocket-launch-bold', highlight = false } = Astro.props;
 ---
 
-<article class={`pricing-card ${highlight ? 'highlight' : ''}`}>
+<article class={`pricing-card ${highlight ? 'highlight' : ''}`} role="listitem" aria-labelledby={`pricing-title-${title.toLowerCase()}`}>
     <div class="card-header">
-        <Icon name={icon} width="64" height="64" class="card-icon" />
-        <h3>{title}</h3>
+        <Icon name={icon} width="64" height="64" class="card-icon" aria-hidden="true" />
+        <h3 id={`pricing-title-${title.toLowerCase()}`}>{title}</h3>
     </div>
 
-    <ul class="feature-list">
+    <ul class="feature-list" aria-label={`${title} plan features`}>
         {features.map((feature) => (
         <li>{feature}</li>
         ))}
     </ul>
-    <p class="price">{price}</p>
+    <p class="price" aria-label={`Price: ${price}`}>{price}</p>
 </article>
 
 <style scoped>
@@ -50,7 +50,11 @@ const { title, price, features, icon = 'ph:rocket-launch-bold', highlight = fals
 .highlight {
     color: var(--color-black);
     background-color: var(--color-secondary);
-    margin-top: -36px;
+    margin-top: var(--space-md);
+
+    @container (width > 768px) {
+        margin-top: -36px;
+    }
 }
 
 .card-header {

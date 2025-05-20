@@ -46,20 +46,20 @@
 
 .pricingGrid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: var(--space-md);
+
+    @container (width > 768px) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
-
-.testimonial {}
-
-.whyChoose {}
 
 .ctaBlock {
     text-align: center;
 
     h2 {
         text-align: center;
-        margin-bottom: calc(var(--space-md) * 4);
+        margin-bottom: calc(var(--space-3xl) * 2);
     }
 }
 

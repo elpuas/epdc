@@ -13,54 +13,68 @@ const lang = 'en';
 ---
 
 <Layout {title} {description} {lang}>
-  <section class={styles.hero}>
-    <h1>Smart, <span class={styles.accent}>Scalable</span> Digital Services</h1>
+  <section class={styles.hero} aria-labelledby="hero-title">
+    <h1 id="hero-title">Smart, <span class={styles.accent}>Scalable</span> Digital Services</h1>
     <p class={styles.accent}>From handcrafted websites to ongoing support — we help your business thrive online.</p>
-    <Button href="/contact" label="Let's Talk" />
+    <Button href="/contact" label="Let's Talk" aria-label="Contact us to discuss your project" />
   </section>
 
-  <section class={styles.servicesIntro}>
-    <h2>What We Offer</h2>
+  <section class={styles.servicesIntro} aria-labelledby="services-intro-title" role="region">
+    <h2 id="services-intro-title">What We Offer</h2>
     <p class={`${styles.accent} ${styles.subtitle}`}>From initial launch to long-term growth, we provide complete digital craftsmanship tailored to your business needs.</p>
     <div class={styles.servicesIntroGrid}>
         <ServiceDetails 
           icon="ph:flask" 
           title="Web Development" 
-          description="We craft websites that fit your goals — and your budget. Whether you need a fully custom build or a smartly adapted template, we create high-performance websites tailored to your business. From fast-launch starter sites to complex platforms, every project is optimized for speed, scalability, and ease of management." 
           features={["Responsive, mobile-first design", "Fast load times & SEO optimization", "Custom CMS integrations", "API and third-party service connectivity"]}
           reverse={true}
-        />
+        >
+          <div slot="description">
+            We <span class={styles.accent}>craft websites</span> that fit your goals — and your budget. Whether you need a fully custom build or a smartly adapted template, we create <span class={styles.accent}>high-performance websites</span> tailored to your business. From fast-launch starter sites to complex platforms, every project is optimized for speed, scalability, and ease of management." 
+          </div>
+        </ServiceDetails>
 
         <ServiceDetails 
           icon="ph:shopping-cart" 
           title="E-Commerce Solutions" 
-          description="We design and develop storefronts that convert. WooCommerce or headless — we help you sell more with less friction." 
           features={["Conversion-focused product pages", "Streamlined checkout experiences", "Inventory & logistics integration", "Custom reports & automation"]}
           reverse={false}
-        />
+        >
+          <div slot="description">
+            Whether you're launching your <span class={styles.accent}>first store</span> or scaling to thousands of orders, we build <span class={styles.accent}>WooCommerce solutions</span> that are fast, reliable, and conversion-optimized. From custom themes to advanced checkout flows and integrations, we help you sell more — with less friction and full support.
+          </div>
+        </ServiceDetails>
 
         <ServiceDetails 
           icon="ph:lifebuoy" 
-          title="Maintenance & Support" 
-          description="Peace of mind through expert support, performance monitoring, and scheduled updates. Flexible monthly plans for growing businesses." 
+          title="Maintenance & Support"  
           features={["Scheduled plugin and theme updates", "Performance & uptime monitoring", "Expert dev time included", "Priority bug fixes"]}
           reverse={true}
-        />
+        >
+          <div slot="description">
+            We handle the <span class={styles.accent}>updates, security, and performance</span> so you don't have to. Our maintenance and support plans include WordPress core and plugin updates, uptime monitoring, <span class={styles.accent}>regular backups</span>, security checks, and <span class={styles.accent}>performance tuning</span>. Need help fast? Reach us directly via Slack. Perfect for businesses that want peace of mind and proactive support — without hiring an in-house dev team. 
+          </div>
+        </ServiceDetails>
+
 
         <ServiceDetails 
           icon="ph:mask-happy" 
           title="White-Label Services" 
-          description="We work quietly behind the scenes, so your agency can scale without overhead. Trusted development partners for design agencies and consultants." 
           features={["Invisible client-ready code", "Fast delivery & scoped estimates", "Reliable dev support", "Confidential partnerships"]}
           reverse={false}
-        />
+        >
+          <div slot="description">
+            We work seamlessly behind the scenes so your <span class={styles.accent}>agency can scale</span> without the stress. From <span class={styles.accent}>pixel-perfect builds</span> to reliable ongoing support, we make you look good — your clients never need to know we were there. 
+          </div>
+        </ServiceDetails>
+
     </div>
   </section>
 
-  <section class={styles.pricing}>
-    <h2>Plans That Grow With You</h2>
-    <p class="subtitle">Choose the plan that fits your pace — each one backed by expert support and powerful dev time.</p>
-    <div class={styles.pricingGrid}>
+  <section class={styles.pricing} aria-labelledby="pricing-title" role="region">
+    <h2 id="pricing-title">Plans That Grow With You</h2>
+    <p class="subtitle" id="pricing-subtitle">Choose the plan that fits your pace — each one backed by expert support and powerful dev time.</p>
+    <div class={styles.pricingGrid} role="list" aria-describedby="pricing-subtitle">
       <PricingCard
         title="Starter"
         price="$150/mo"
@@ -119,11 +133,11 @@ const lang = 'en';
     </div>
   </section>
 
-  <section class={styles.testimonial}>
+  <section class={styles.testimonial} aria-labelledby="testimonial-title" role="region">
     <CaseStudySection
       title="Partnering Behind the Scenes"
       accentText=" We support agencies and studios through reliable, white-label execution."
-      quote="Working with ElPuas has been a game-changer. They consistently deliver high-quality work on time, handle complex technical specs with ease, and elevate the quality of our agency’s output. Our clients are happy — and that makes us look great."
+      quote="Working with ElPuas has been a game-changer. They consistently deliver high-quality work on time, handle complex technical specs with ease, and elevate the quality of our agency's output. Our clients are happy — and that makes us look great."
       author=" Avalanche Advertising (White-label Partner)"
       buttonLabel="Case Study"
       buttonHref="#" 
@@ -134,8 +148,8 @@ const lang = 'en';
 
   <TrustedBy title="Trusted by forward-thinking brands" />
 
-  <section class={styles.ctaBlock}>
-    <h3>Ready to launch or scale your next digital project?</h3>
-    <Button href="/contact" label="Get Started Today" />
+  <section class={styles.ctaBlock} aria-labelledby="cta-title" role="region">
+    <h2 id="cta-title">Ready to launch or scale your next digital project?</h2>
+    <Button href="/contact" label="Get Started Today" aria-label="Contact us to get started with your project" />
   </section>
 </Layout> 

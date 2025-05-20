@@ -25,20 +25,20 @@ const isStringPath = typeof imgSrc === 'string';
 
 <section class="case-section">
   <div class="case-content">
-    <h2 id="case-study-title" aria-labelledby="case-study-title">{title}</h2>
+    <h2 id="testimonial-title">{title}</h2>
     {accentText && <p class="accent case-accent">{accentText}</p>}
     {paragraph && <p>{paragraph}</p>}
     <blockquote class="case-quote" cite={buttonHref}>
       "{quote}"
       <footer>— <cite>{author}</cite></footer>
     </blockquote>
-    <Button href={buttonHref} label={buttonLabel} />
+    <Button href={buttonHref} label={buttonLabel} aria-label={`View ${title} case study`} />
   </div>
-  <div class="case-image">
+  <div class="case-image" aria-hidden="false">
     {isStringPath ? (
-      <img src={imgSrc as string} alt={imgAlt} loading="lazy" decoding="async" />
+      <img src={imgSrc as string} alt={imgAlt} loading="lazy" decoding="async" width="620" height="777" />
     ) : (
-      <Image src={imgSrc as ImageMetadata} alt={imgAlt} width={620} height={777} class="case-img" />
+      <Image src={imgSrc as ImageMetadata} alt={imgAlt} width={620} height={777} class="case-img" loading="lazy" decoding="async" />
     )}
   </div>
 </section>

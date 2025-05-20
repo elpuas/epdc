@@ -4,50 +4,57 @@ import { Icon } from 'astro-icon/components';
 interface Props {
     icon: string;
     title: string;
-    description: string;
     features: string[];
     reverse?: boolean;
 }
 
-const { icon, title, description, features, reverse = false } = Astro.props;
+const { icon, title, features, reverse = false } = Astro.props;
 ---
 
-<section class={`service-details ${reverse ? 'reverse' : ''}`}>
+<article class={`service-details ${reverse ? 'reverse' : ''}`} role="region" aria-labelledby={`service-title-${title.toLowerCase().replace(/\s+/g, '-')}`}>
     <div class="text-block">
         <div class="service-header">
-        <h3>{title}</h3>
+        <h3 id={`service-title-${title.toLowerCase().replace(/\s+/g, '-')}`}>{title}</h3>
         </div>
-        <p class="service-description">{description}</p>
+        <p class="service-description"><slot name="description" /></p>
 
-        <ul class="service-features">
+        <ul class="service-features" aria-label={`${title} features`}>
         {features.map((feature) => (
             <li>{feature}</li>
         ))}
         </ul>
     </div>
-    <div class="icon">
-        <Icon name={icon} width="300" height="300" />
+    <div class="icon" aria-hidden="true">
+        <Icon name={icon} width="240" height="240" class="icon-animate" aria-hidden="true" />
     </div>
-</section>
+</article>
 
 <style scoped>
 .service-details {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: var(--space-xl);
     padding-block: var(--space-xl);
     flex-wrap: wrap;
+
+    @container (width > 768px) {
+        justify-content: space-between;
+        flex-direction: row;
+    }
 }
 
 .service-details.reverse {
     flex-direction: row-reverse;
 }
 
-.image-block {
-    flex: 1 1 480px;
-    max-width: 480px;
+.text-block {
+    flex: 1;
+
+    h3 {
+        font-weight: 400;
+    }
 }
 
 .image-block img {
@@ -74,10 +81,38 @@ const { icon, title, description, features, reverse = false } = Astro.props;
 }
 
 .service-features {
-    list-style: none;
+    list-style: square;
     padding: 0;
     display: grid;
     gap: var(--space-sm);
     max-width: 48ch;
+    padding-left: var(--space-md);
+
+    ::marker {
+        color: var(--color-tertiary);
+    }
+}
+
+@keyframes pulse-float-rotate-color {
+    0% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        color: var(--color-secondary);
+    }
+    50% {
+        transform: translateY(-4px) scale(1.05) rotate(2deg);
+        color: var(--color-tertiary);
+    }
+    100% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        color: var(--color-secondary);
+    }
+}
+
+.icon-animate {
+    animation: pulse-float-rotate-color 5s ease-in-out infinite;
+    transform-origin: center;
+    display: inline-block;
+    will-change: transform, color;
+    transition: color 0.5s ease-in-out;
 }
 </style>
