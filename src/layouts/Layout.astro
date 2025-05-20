@@ -2,6 +2,8 @@
 import type { Props } from 'astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import BaseHead from '../components/BaseHead.astro';
+import type { Language } from '../i18n/utils';
 import '../styles/global.css';
 import styles from '../styles/Layout.module.css';
 
@@ -12,22 +14,19 @@ interface LayoutProps {
 }
 
 const { lang = 'en', title = 'Welcome', description = 'Welcome to our site' } = Astro.props as unknown as LayoutProps;
+// Ensure lang is a valid Language type
+const validLang = (lang === 'en' || lang === 'es' || lang === 'it') ? lang as Language : 'en' as Language;
 ---
 
 <!DOCTYPE html>
 <html lang={lang}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <BaseHead title={title} description={description} />
   </head>
   <body>
     <header>
       <div class:list={styles.wrapper}>
-        <Header lang={lang} />
+        <Header lang={validLang} />
       </div>
     </header>
     <main>
