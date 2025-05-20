@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 
 interface Props {
   project: CollectionEntry<'portfolio'>;
@@ -16,12 +17,12 @@ const projectUrl = `/${lang}/crafted-with-love/${project.slug}`;
   <a href={projectUrl} class="project-image-link" aria-label={`View details for ${title}`}>
     {image && (
       <div class="project-image-container">
-        <img 
+        <Image 
           src={image} 
           alt="" 
           class="project-image"
-          width="600" 
-          height="400" 
+          width={600} 
+          height={400} 
           loading="lazy"
           decoding="async"
         />
@@ -39,15 +40,7 @@ const projectUrl = `/${lang}/crafted-with-love/${project.slug}`;
     {description && (
       <p class="project-description">{description}</p>
     )}
-    
-    {tags && tags.length > 0 && (
-      <div class="project-tags">
-        {tags.map(tag => (
-          <span class="project-tag">{tag}</span>
-        ))}
-      </div>
-    )}
-    
+
     <a 
       href={projectUrl} 
       class="project-link"
@@ -55,8 +48,8 @@ const projectUrl = `/${lang}/crafted-with-love/${project.slug}`;
     >
       <span class="project-link-text">
         {lang === 'en' ? 'View Project' : 
-         lang === 'es' ? 'Ver Proyecto' : 
-         'Visualizza Progetto'}
+          lang === 'es' ? 'Ver Proyecto' : 
+          'Visualizza Progetto'}
       </span>
       <Icon name="ph:arrow-right" width="16" height="16" />
     </a>
@@ -67,10 +60,7 @@ const projectUrl = `/${lang}/crafted-with-love/${project.slug}`;
   .project-card {
     display: flex;
     flex-direction: column;
-    border-radius: 0.75rem;
     overflow: hidden;
-    background-color: var(--color-card-bg, #ffffff);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     height: 100%;
   }
@@ -82,14 +72,10 @@ const projectUrl = `/${lang}/crafted-with-love/${project.slug}`;
   
   .project-image-container {
     position: relative;
-    overflow: hidden;
-    padding-bottom: 66.67%; /* 3:2 aspect ratio */
   }
   
-  .project-image {
-    position: absolute;
-    top: 0;
-    left: 0;
+  .project-image,
+  .project-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -101,7 +87,6 @@ const projectUrl = `/${lang}/crafted-with-love/${project.slug}`;
   }
   
   .project-content {
-    padding: 1.5rem;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -115,17 +100,17 @@ const projectUrl = `/${lang}/crafted-with-love/${project.slug}`;
   }
   
   .project-title a {
-    color: var(--color-text, #2d3748);
+    color: var(--color-secondary);
     text-decoration: none;
     transition: color 0.2s ease;
   }
   
   .project-title a:hover {
-    color: var(--color-primary, #4361ee);
+    color: var(--color-tertiary);
   }
   
   .project-description {
-    color: var(--color-text-secondary, #718096);
+    color: var(--color-tertiary);
     font-size: 0.95rem;
     line-height: 1.5;
     margin-bottom: 1rem;
@@ -139,20 +124,11 @@ const projectUrl = `/${lang}/crafted-with-love/${project.slug}`;
     margin-top: auto;
   }
   
-  .project-tag {
-    background-color: var(--color-tag-bg, #edf2f7);
-    color: var(--color-tag-text, #4a5568);
-    font-size: 0.75rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 9999px;
-    font-weight: 500;
-  }
-  
   .project-link {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--color-primary, #4361ee);
+    color: var(--color-secondary);
     font-weight: 500;
     font-size: 0.95rem;
     text-decoration: none;

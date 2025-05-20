@@ -1,0 +1,11 @@
+.hero {
+    h1 {
+        font-size: var(--fontsize-h1);
+    }
+
+    .accent {
+        font-size: inherit;
+        color: var(--color-tertiary);
+    }
+}
+
