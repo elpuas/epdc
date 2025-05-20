@@ -64,6 +64,7 @@ body {
 	color: var(--color-secondary);
 	background-color: var(--color-primary);
 	overflow-x: hidden;
+	margin: 0;
 }
 
 /* Headings */
