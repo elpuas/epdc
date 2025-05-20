@@ -35,12 +35,12 @@ const logos = [
 ];
 ---
 
-<section class="trusted-by">
-    <h3 class="trusted-title">{title}</h3>
-    <div class="logo-row" role="list">
+<section class="trusted-by" aria-labelledby="trusted-by-title">
+    <h2 id="trusted-by-title" class="trusted-title">{title}</h2>
+    <div class="logo-row" role="list" aria-label="Partner logos">
         {logos.map(({ src, alt }, index) => (
             <div role="listitem" data-index={index}>
-                <Image src={src} alt={alt} width={320} height={160} class="logo-image" />
+                <Image src={src} alt={alt} width={320} height={160} class="logo-image" loading="lazy" decoding="async" />
             </div>
         ))}
     </div>

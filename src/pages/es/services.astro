@@ -2,73 +2,79 @@
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/Button.astro';
 import ServiceDetails from '../../components/ServiceDetails.astro';
-import FaqBlock from '../../components/FaqBlock.astro';
 import TrustedBy from '../../components/TrustedBy.astro';
 import PricingCard from '../../components/PricingCard.astro';
-import { Icon } from 'astro-icon/components';
+import CaseStudySection from '../../components/CaseStudySection.astro';
 import styles from '../../styles/Services.module.css';
 const title = 'Nuestros Servicios';
 const description = 'Explora nuestros servicios de artesanía digital';
+import caseStudyImage from '../../../public/phone-showcase.jpg';
 const lang = 'es';
 ---
 
 <Layout {title} {description} {lang}>
-  <section class={styles.hero}>
-    <h1>Servicios Digitales <span class={styles.accent}>Inteligentes</span> y Escalables</h1>
-    <h5>Desde sitios web artesanales hasta soporte continuo — ayudamos a tu negocio a prosperar en línea.</h5>
-    <Button href="/contact" label="Conversemos" />
+  <section class={styles.hero} aria-labelledby="hero-title">
+    <h1 id="hero-title">Servicios Digitales <span class={styles.accent}>Inteligentes</span> y Escalables</h1>
+    <p class={styles.accent}>Desde sitios web artesanales hasta soporte continuo — ayudamos a tu negocio a prosperar en línea.</p>
+    <Button href="/contact" label="Conversemos" aria-label="Contáctanos para discutir tu proyecto" />
   </section>
 
-  <section class={styles.servicesIntro}>
-    <h2>Lo Que Ofrecemos</h2>
+  <section class={styles.servicesIntro} aria-labelledby="services-intro-title" role="region">
+    <h2 id="services-intro-title">Lo Que Ofrecemos</h2>
     <p class={`${styles.accent} ${styles.subtitle}`}>Desde el lanzamiento inicial hasta el crecimiento a largo plazo, brindamos artesanía digital completa adaptada a las necesidades de tu negocio.</p>
     <div class={styles.servicesIntroGrid}>
         <ServiceDetails 
           icon="ph:flask" 
-          title="Desarrollo Web Personalizado" 
-          description="Sitios web y plataformas hechos a medida, construidos para rendimiento, flexibilidad y escala. Sin plantillas, solo código artesanal." 
+          title="Desarrollo Web" 
           features={["Diseño responsivo y mobile-first", "Tiempos de carga rápidos y optimización SEO", "Integraciones personalizadas con CMS", "Conectividad API y servicios de terceros"]}
-          image="/service-one.png"
-          alt="Captura de pantalla del proyecto de sitio web personalizado FishCostaRica.com"
           reverse={true}
-        />
+        >
+          <div slot="description">
+            <span class={styles.accent}>Creamos sitios web</span> que se ajustan a tus objetivos — y a tu presupuesto. Ya sea que necesites un desarrollo completamente personalizado o una plantilla adaptada inteligentemente, creamos <span class={styles.accent}>sitios web de alto rendimiento</span> a medida para tu negocio. Desde sitios de inicio rápido hasta plataformas complejas, cada proyecto está optimizado para velocidad, escalabilidad y facilidad de gestión.
+          </div>
+        </ServiceDetails>
 
         <ServiceDetails 
           icon="ph:shopping-cart" 
           title="Soluciones de Comercio Electrónico" 
-          description="Diseñamos y desarrollamos tiendas que convierten. WooCommerce o headless — te ayudamos a vender más con menos fricción." 
           features={["Páginas de productos enfocadas en conversión", "Experiencias de pago optimizadas", "Integración de inventario y logística", "Informes personalizados y automatización"]}
-          image="/mobile.png"
-          alt="Captura de pantalla del proyecto de sitio web personalizado FishCostaRica.com"
           reverse={false}
-        />
+        >
+          <div slot="description">
+            Ya sea que estés lanzando tu <span class={styles.accent}>primera tienda</span> o escalando a miles de pedidos, construimos <span class={styles.accent}>soluciones WooCommerce</span> que son rápidas, confiables y optimizadas para conversión. Desde temas personalizados hasta flujos de pago avanzados e integraciones, te ayudamos a vender más — con menos fricción y soporte completo.
+          </div>
+        </ServiceDetails>
 
         <ServiceDetails 
           icon="ph:lifebuoy" 
-          title="Mantenimiento y Soporte" 
-          description="Tranquilidad a través de soporte experto, monitoreo de rendimiento y actualizaciones programadas. Planes mensuales flexibles para negocios en crecimiento." 
+          title="Mantenimiento y Soporte"  
           features={["Actualizaciones programadas de plugins y temas", "Monitoreo de rendimiento y disponibilidad", "Tiempo de desarrollo experto incluido", "Correcciones prioritarias de errores"]}
-          image="/service-one.png"
-          alt="Captura de pantalla del proyecto de sitio web personalizado FishCostaRica.com"
           reverse={true}
-        />
+        >
+          <div slot="description">
+            Nos encargamos de las <span class={styles.accent}>actualizaciones, seguridad y rendimiento</span> para que tú no tengas que hacerlo. Nuestros planes de mantenimiento y soporte incluyen actualizaciones del núcleo de WordPress y plugins, monitoreo de tiempo de actividad, <span class={styles.accent}>copias de seguridad regulares</span>, controles de seguridad y <span class={styles.accent}>ajuste de rendimiento</span>. ¿Necesitas ayuda rápida? Contáctanos directamente a través de Slack. Perfecto para negocios que desean tranquilidad y soporte proactivo — sin contratar un equipo interno de desarrollo.
+          </div>
+        </ServiceDetails>
+
 
         <ServiceDetails 
           icon="ph:mask-happy" 
           title="Servicios White-Label" 
-          description="Trabajamos discretamente tras bambalinas, para que tu agencia pueda escalar sin sobrecarga. Socios de desarrollo confiables para agencias de diseño y consultores." 
-          features={["Código listo para cliente e invisible", "Entrega rápida y estimaciones definidas", "Soporte de desarrollo confiable", "Alianzas confidenciales"]}
-          image="/mobile.png"
-          alt="Captura de pantalla del proyecto de sitio web personalizado FishCostaRica.com"
+          features={["Código invisible listo para clientes", "Entrega rápida y estimaciones definidas", "Soporte de desarrollo confiable", "Asociaciones confidenciales"]}
           reverse={false}
-        />
+        >
+          <div slot="description">
+            Trabajamos perfectamente tras bambalinas para que tu <span class={styles.accent}>agencia pueda escalar</span> sin estrés. Desde <span class={styles.accent}>desarrollos pixel-perfect</span> hasta soporte continuo confiable, te hacemos quedar bien — tus clientes nunca necesitan saber que estuvimos allí.
+          </div>
+        </ServiceDetails>
+
     </div>
   </section>
 
-  <section class={styles.pricing}>
-    <h2>Planes Que Crecen Contigo</h2>
-    <p class="subtitle">Elige el plan que se adapte a tu ritmo — cada uno respaldado por soporte experto y potente tiempo de desarrollo.</p>
-    <div class={styles.pricingGrid}>
+  <section class={styles.pricing} aria-labelledby="pricing-title" role="region">
+    <h2 id="pricing-title">Planes Que Crecen Contigo</h2>
+    <p class="subtitle" id="pricing-subtitle">Elige el plan que se adapte a tu ritmo — cada uno respaldado por soporte experto y potente tiempo de desarrollo.</p>
+    <div class={styles.pricingGrid} role="list" aria-describedby="pricing-subtitle">
       <PricingCard
         title="Inicial"
         price="$150/mes"
@@ -127,23 +133,23 @@ const lang = 'es';
     </div>
   </section>
 
-  <section class={styles.testimonial}>
-    <h3>Colaboración Tras Bambalinas</h3>
-    <p class={styles.accent}>
-      Apoyamos a agencias y estudios a través de una ejecución confiable con marca blanca.
-    </p>
-    <blockquote>
-      "Trabajar con ElPuas ha sido un cambio de juego. Entregan constantemente trabajo de alta calidad a tiempo, manejan especificaciones técnicas complejas con facilidad y elevan la calidad del resultado de nuestra agencia. Nuestros clientes están contentos — y eso nos hace lucir genial."
-      <footer>— Avalanche Advertising (Socio White-label)</footer>
-    </blockquote>
+  <section class={styles.testimonial} aria-labelledby="testimonial-title" role="region">
+    <CaseStudySection
+      title="Colaboración Tras Bambalinas"
+      accentText="Apoyamos a agencias y estudios a través de una ejecución confiable con marca blanca."
+      quote="Trabajar con ElPuas ha sido un cambio de juego. Entregan constantemente trabajo de alta calidad a tiempo, manejan especificaciones técnicas complejas con facilidad y elevan la calidad del resultado de nuestra agencia. Nuestros clientes están contentos — y eso nos hace lucir genial."
+      author="Avalanche Advertising (Socio White-label)"
+      buttonLabel="Caso de Estudio"
+      buttonHref="#" 
+      imgSrc={caseStudyImage}
+      imgAlt="FishCostaRica.com"
+    />
   </section>
 
   <TrustedBy title="Confiado por marcas visionarias" />
 
-  <FaqBlock />
-
-  <section class={styles.ctaBlock}>
-    <h2>¿Listo para lanzar o escalar tu próximo proyecto digital?</h2>
-    <Button href="/contact" label="Comienza Hoy" />
+  <section class={styles.ctaBlock} aria-labelledby="cta-title" role="region">
+    <h2 id="cta-title">¿Listo para lanzar o escalar tu próximo proyecto digital?</h2>
+    <Button href="/contact" label="Comienza Hoy" aria-label="Contáctanos para comenzar con tu proyecto" />
   </section>
 </Layout> 
