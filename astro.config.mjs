@@ -7,7 +7,7 @@ import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from './src/i18n/utils';
 
 /** @type {import('astro').AstroUserConfig} */
 export default defineConfig({
-	site: 'https://example.com',
+	site: 'https://elpuasdigitalcrafts.com',
 	integrations: [
 		mdx(), 
 		sitemap(), 

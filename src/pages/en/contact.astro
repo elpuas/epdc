@@ -1,24 +1,21 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-
+import styles from '../../styles/Contact.module.css';
 const title = 'Contact Us';
 const description = 'Get in touch with ElPuas Digital Crafts';
 const lang = 'en';
 ---
 
 <Layout {title} {description} {lang}>
-  <h1>Contact Us</h1>
-  <p>Get in touch with our team.</p>
-
-  <section class="contact-intro">
-    <h1>Let’s Build Something Great Together</h1>
+  <section class={styles.contactIntro}>
+    <h1>Let’s Build Something <span class="accent">Great</span> Together</h1>
     <p>Fill out the form — we’ll get back to you within 24 hours, no robots involved.</p>
   </section>
   
-  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
+  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class={styles.contactForm}>
     <input type="hidden" name="form-name" value="contact" />
   
-    <p class="hidden">
+    <p class={styles.hidden}>
       <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
     </p>
   
@@ -61,3 +58,10 @@ const lang = 'en';
     </p>
   </form>
 </Layout> 
+
+<style>
+  .accent {
+    color: var(--color-tertiary);
+    font-size: inherit;
+  }
+</style>

@@ -1,5 +1,3 @@
-@import './variables.css';
-
 /* Header container */
 .siteHeader {
   grid-column: 1 / -1;
