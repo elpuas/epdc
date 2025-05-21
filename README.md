@@ -1,68 +1,111 @@
-# Astro Starter Kit: Blog
+# ElPuas Digital Crafts
 
-```sh
-npm create astro@latest -- --template blog
+A modern, multilingual website built with Astro, showcasing digital services and portfolio projects with a focus on accessibility, performance, and user experience.
+
+## Features
+
+- **Multilingual Support**: Complete internationalization for English, Spanish, and Italian through file-based routing (`/en`, `/es`, `/it`)
+- **Content-Driven Design**: MDX integration for portfolio projects and blog content
+- **Image Optimization**: Astro's built-in image optimization for maximum performance
+- **Netlify Integration**: Form handling on the contact pages with honeypot protection
+- **Interactive Components**: Custom flipping cards, animated icons, and mobile dock navigation
+- **Accessibility-First**: Semantic HTML, ARIA attributes, and keyboard navigation throughout
+- **Modular Architecture**: Reusable components for consistent design across pages
+- **Content Collections**: Type-safe Markdown and MDX content with schemas
+
+## Tech Stack
+
+- **[Astro](https://astro.build/)**: Core framework for static site generation
+- **Custom CSS**: Modern Vanilla CSS with CSS nesting and custom properties
+- **[Iconify](https://iconify.design/) + [Astro Icon](https://github.com/natemoo-re/astro-icon)**: Icon system
+- **[Netlify](https://www.netlify.com/)**: Deployment and form handling
+- **[MDX](https://mdxjs.com/)**: Enhanced markdown for content 
+- **[Astro Content Collections](https://docs.astro.build/en/guides/content-collections/)**: Structured content management
+
+## Project Structure
+
 ```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/blog)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/blog/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![blog](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
-
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
+├── public/             # Static assets (images, favicon, etc.)
 ├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+│   ├── components/     # Reusable UI components
+│   ├── content/        # Collections of structured content (portfolio, blog)
+│   ├── i18n/           # Internationalization utilities
+│   ├── layouts/        # Page layouts and templates
+│   ├── pages/          # Page routes and views
+│   │   ├── en/         # English pages
+│   │   ├── es/         # Spanish pages
+│   │   ├── it/         # Italian pages
+│   │   └── [lang]/     # Dynamic language routes
+│   └── styles/         # CSS modules and global styles
+├── binnacle/           # Change logs for project modifications
+├── astro.config.mjs    # Astro configuration
+└── package.json        # Project dependencies
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### Key Components
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- **Layout.astro**: Main page layout with header, footer, and SEO metadata
+- **ProjectLayout.astro**: Template for portfolio project detail pages
+- **ServiceCard.astro**: Reusable component for service offerings
+- **LanguageSwitcher.astro**: Language toggle component for multilingual navigation
+- **Footer.astro**: Site footer with company information and social links
+- **Header.astro**: Site header with navigation links
+- **MobileDock.astro**: Mobile-specific navigation component
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+## Getting Started
 
-Any static assets, like images, can be placed in the `public/` directory.
+### Prerequisites
 
-## 🧞 Commands
+- Node.js 16.x or higher
+- pnpm (recommended) or npm
 
-All commands are run from the root of the project, from a terminal:
+### Installation
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/epdc.git
+cd epdc
 
-## 👀 Want to learn more?
+# Install dependencies
+pnpm install
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+# Start development server
+pnpm dev
+```
 
-## Credit
+The site will be running at http://localhost:4321
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+### Building for Production
+
+```bash
+# Generate optimized build
+pnpm build
+
+# Preview production build locally
+pnpm preview
+```
+
+## Deployment
+
+This project is configured for deployment on Netlify. Simply connect your repository to Netlify, and it will automatically build and deploy when changes are pushed to the main branch.
+
+## Development Guidelines
+
+- **Language Consistency**: All three language versions should maintain identical structure and components
+- **Components First**: Create reusable components for any UI elements that appear more than once
+- **Accessibility**: Maintain accessibility standards in all new features
+- **Change Logging**: Document all modifications in the `binnacle/` directory with dated markdown files
+- **Image Optimization**: Always use Astro's Image component rather than HTML img tags
+
+## Adding New Content
+
+When adding new pages or sections:
+
+1. Start with the English (`en`) version
+2. Create matching pages in Spanish (`es`) and Italian (`it`) directories
+3. Ensure identical component structure and styling across all languages
+4. Only translate visible text content, not technical identifiers or code
+
+## License
+
+This project is proprietary and not licensed for public use without permission.
