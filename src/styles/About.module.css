@@ -101,14 +101,14 @@
 		font-weight: 400;
 	}
 
-	ul {
+	.valuesList {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 		gap: 1.5rem;
 		padding: 0;
 		list-style: none;
 
-		li {
+		.valueItem {
 			display: flex;
 			align-items: center;
 			gap: 2rem;
@@ -133,10 +133,14 @@
 
 	.teamList {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(1, 1fr);
 		gap: var(--space-3xl);
 		padding: 0;
 		list-style: none;
+
+		@media (min-width: 768px) {
+			grid-template-columns: repeat(2, 1fr);
+		}
 
 		.teamMember {
 			display: flex;
@@ -153,7 +157,7 @@
 				background-color: var(--color-tertiary);
 				transform: scale(1.05);
 
-				img {
+				.teamMemberImage {
 					transform: scale(1.5) translate(-10px, -10px);
 				}
 			}
@@ -163,14 +167,19 @@
 				color: var(--color-primary);
 			}
 
-			img {
+			.teamMemberImage {
 				border-radius: 50%;
 				transition: transform 0.3s ease-in-out;
 			}
 		}
 
-		blockquote {
+		.teamQuoteContainer {
 			margin: 0;
+
+			.teamQuote,
+			.teamQuoteText {
+				color: var(--color-primary);
+			}
 			
 			footer {
 				text-align: right;

@@ -15,12 +15,12 @@ const { title, price, features, icon = 'ph:rocket-launch-bold', highlight = fals
 <article class={`pricing-card ${highlight ? 'highlight' : ''}`} role="listitem" aria-labelledby={`pricing-title-${title.toLowerCase()}`}>
     <div class="card-header">
         <Icon name={icon} width="64" height="64" class="card-icon" aria-hidden="true" />
-        <h3 id={`pricing-title-${title.toLowerCase()}`}>{title}</h3>
+        <h3 class="card-title" id={`pricing-title-${title.toLowerCase()}`}>{title}</h3>
     </div>
 
     <ul class="feature-list" aria-label={`${title} plan features`}>
         {features.map((feature) => (
-        <li>{feature}</li>
+        <li class="feature-item">{feature}</li>
         ))}
     </ul>
     <p class="price" aria-label={`Price: ${price}`}>{price}</p>
@@ -66,7 +66,7 @@ const { title, price, features, icon = 'ph:rocket-launch-bold', highlight = fals
     justify-content: center;
     align-items: center;
 
-    h3 {
+    .card-title {
         color: var(--color-black);
         font-size: var(--fontsize-h3);
     }
@@ -95,7 +95,7 @@ const { title, price, features, icon = 'ph:rocket-launch-bold', highlight = fals
     display: grid;
     gap: var(--space-sm);
     
-    li {
+    .feature-item {
         color: var(--color-black);
         font-size: 14px;
     }

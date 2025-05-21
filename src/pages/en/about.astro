@@ -66,11 +66,11 @@ const process = [
 
   <section class={styles.values} aria-labelledby="values-title">
     <h2 id="values-title">What We Stand For</h2>
-    <ul class="values" role="list">
-      <li><Icon name="ph:handshake" width="64" height="64" aria-hidden="true" /> Partnership First</li>
-      <li><Icon name="ph:rocket-launch" width="64" height="64" aria-hidden="true" /> Results-Driven Execution</li>
-      <li><Icon name="ph:brain" width="64" height="64" aria-hidden="true" /> Tech Excellence, Human Touch</li>
-      <li><Icon name="ph:shield-check" width="64" height="64" aria-hidden="true" /> Transparency & Security</li>
+    <ul class={styles.valuesList} role="list">
+      <li class={styles.valueItem}><Icon name="ph:handshake" width="64" height="64" aria-hidden="true" /> <span>Partnership First</span></li>
+      <li class={styles.valueItem}><Icon name="ph:rocket-launch" width="64" height="64" aria-hidden="true" /> <span>Results-Driven Execution</span></li>
+      <li class={styles.valueItem}><Icon name="ph:brain" width="64" height="64" aria-hidden="true" /> <span>Tech Excellence, Human Touch</span></li>
+      <li class={styles.valueItem}><Icon name="ph:shield-check" width="64" height="64" aria-hidden="true" /> <span>Transparency & Security</span></li>
     </ul>
   </section>
 
@@ -79,10 +79,10 @@ const process = [
     <p class={styles.accent}>Meet the people behind ElPuas Digital Crafts.</p>
     <ul class={styles.teamList} role="list">
       <li class={styles.teamMember}>
-        <Image src={alfredoImage} alt="Alfredo Navas - CTO and Lead Developer" width={120} height={120} loading="lazy" decoding="async" />
-        <blockquote>
+        <Image src={alfredoImage} alt="Alfredo Navas - CTO and Lead Developer" width={120} height={120} loading="lazy" decoding="async" class={styles.teamMemberImage} />
+        <blockquote class={styles.teamQuoteContainer}>
           <div class={styles.teamQuote}>
-            <p>Alfredo brings over 15 years of expertise, having developed websites for Fortune 500 companies. He leads projects, ensures every site runs smoothly, and works closely with clients to translate ideas into performant digital experiences. As a speaker and open web advocate, he shares insights on WordPress, Astro, and emerging technologies.</p>
+            <p class={styles.teamQuoteText}>Alfredo brings over 15 years of expertise, having developed websites for Fortune 500 companies. He leads projects, ensures every site runs smoothly, and works closely with clients to translate ideas into performant digital experiences. As a speaker and open web advocate, he shares insights on WordPress, Astro, and emerging technologies.</p>
           </div>
           <footer><cite><strong>Alfredo Navas</strong> — CTO</cite></footer>
           <div class={styles.teamSocial}>
@@ -111,10 +111,10 @@ const process = [
         </blockquote>
       </li>
       <li class={styles.teamMember}>
-        <Image src={aiImage} alt="AI Assistant - Our digital team member" width={120} height={120} loading="lazy" decoding="async" />
-        <blockquote>
+        <Image src={aiImage} alt="AI Assistant - Our digital team member" width={120} height={120} loading="lazy" decoding="async" class={styles.teamMemberImage} />
+        <blockquote class={styles.teamQuoteContainer}>
           <div class={styles.teamQuote}>
-            <p>Our AI assistant, a collaboration between ChatGPT and Cursor, helps us move faster without cutting corners. From code scaffolding to research and content drafts, it amplifies our team's speed, precision, and creativity.</p>
+            <p class={styles.teamQuoteText}>Our AI assistant, a collaboration between ChatGPT and Cursor, helps us move faster without cutting corners. From code scaffolding to research and content drafts, it amplifies our team's speed, precision, and creativity.</p>
           </div>
           <footer><cite><strong>AI Assistant </strong> — Analysis, Development & Content Support</cite></footer>
         </blockquote>

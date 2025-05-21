@@ -46,7 +46,7 @@
 /* Expertise */
 .expertiseSection h2,
 .expertiseSection p {
-  text-align: center;
+  text-align: left;
 }
 
 .expertiseSection p {
@@ -60,6 +60,7 @@
   grid-template-columns: repeat(1, 1fr);
   gap: var(--space-2xl);
   padding-left: 0;
+  list-style: none;
 
   @container (width > 768px) {
     grid-template-columns: repeat(2, 1fr);
