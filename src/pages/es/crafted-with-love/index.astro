@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
 import ProjectCard from '../../../components/ProjectCard.astro';
+import styles from '../../../styles/Portfolio.module.css';
+import Button from '../../../components/Button.astro';
 
 // Fetch all portfolio items
 const allProjects = await getCollection('portfolio');
@@ -18,11 +20,11 @@ const lang = "es";
 ---
 
 <Layout title={pageTitle} description={pageDescription} lang={lang}>
-  <section class="portfolio-header">
-    <div class="container">
-      <h1>{pageTitle}</h1>
-      <p class="lead">Nuestra muestra de artesanía digital a medida</p>
-    </div>
+  <section class={styles.hero} aria-labelledby="hero-title">
+    <h1 id="hero-title">Creado con <span class={styles.accent}>Amor</span></h1>
+    <p>En ElPuas Digital Crafts, cada proyecto que emprendemos está <span class={styles.accent}>creado con amor, cuidado y gran atención al detalle</span>. Nos enorgullecemos de convertir ideas en experiencias digitales sorprendentes que no solo satisfacen las necesidades de nuestros clientes, sino que también superan sus expectativas. Al aprovechar <span class={styles.accent}>herramientas y técnicas potenciadas por IA</span>, mejoramos el proceso de desarrollo, garantizando una entrega más rápida, soluciones más inteligentes y resultados innovadores.</p>
+
+    <p>Aquí puedes explorar parte de nuestro <span class={styles.accent}>trabajo</span>, mostrando la amplia gama de soluciones web personalizadas que hemos creado para empresas de todo el mundo. Cada proyecto es un testimonio de nuestro compromiso con la <span class={styles.accent}>calidad, creatividad y artesanía</span>, amplificado por el poder de la IA.</p>
   </section>
 
   <section class="portfolio-grid">
@@ -40,6 +42,7 @@ const lang = "es";
       )}
     </div>
   </section>
+  <Button href="/contact" label="Hablemos" aria-label="Contáctanos para discutir tu proyecto" />
 </Layout>
 
 <style>
@@ -72,7 +75,7 @@ const lang = "es";
   
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
     gap: 2rem;
   }
   

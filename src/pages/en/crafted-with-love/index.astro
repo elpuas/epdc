@@ -2,17 +2,13 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
 import ProjectCard from '../../../components/ProjectCard.astro';
-
+import styles from '../../../styles/Portfolio.module.css';
+import Button from '../../../components/Button.astro';
 // Fetch all portfolio items
 const allProjects = await getCollection('portfolio');
-console.log("DEBUG - EN Portfolio index - All projects:", allProjects.length);
-console.log("DEBUG - EN Portfolio index - All project slugs:", allProjects.map(p => p.slug).join(", "));
-console.log("DEBUG - EN Portfolio index - All project langs:", allProjects.map(p => p.data.lang).join(", "));
 
 // Filter projects for English language
 const englishProjects = allProjects.filter(project => project.data.lang === 'en');
-console.log("DEBUG - EN Portfolio index - Filtered English projects:", englishProjects.length);
-console.log("DEBUG - EN Portfolio index - English project slugs:", englishProjects.map(p => p.slug).join(", "));
 
 // Sort projects by date if needed (newest first)
 englishProjects.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
@@ -23,11 +19,11 @@ const lang = "en";
 ---
 
 <Layout title={pageTitle} description={pageDescription} lang={lang}>
-  <section class="portfolio-header">
-    <div class="container">
-      <h1>{pageTitle}</h1>
-      <p class="lead">Our showcase of bespoke digital craftsmanship</p>
-    </div>
+  <section class={styles.hero} aria-labelledby="hero-title">
+    <h1 id="hero-title">Crafted with <span class={styles.accent}>Love</span></h1>
+    <p>At ElPuas Digital Crafts, every project we undertake is <span class={styles.accent}>crafted with love, care, and great attention to detail</span>. We take pride in turning ideas into amazing digital experiences that not only meet our clients’ needs but also exceed their expectations. By leveraging <span class={styles.accent}>AI-powered tools and techniques</span>, we enhance the development process, ensuring faster delivery, smarter solutions, and innovative results.</p>
+
+    <p>Here, you can explore some of our <span class={styles.accent}>work</span>, showcasing the wide range of custom web solutions we’ve created for businesses around the world. Each project is a testament to our commitment to <span class={styles.accent}>quality, creativity, and craftsmanship</span>, amplified by the power of AI</p>
   </section>
 
   <section class="portfolio-grid">
@@ -45,6 +41,7 @@ const lang = "en";
       )}
     </div>
   </section>
+  <Button href="/contact" label="Let's Talk" aria-label="Contact us to discuss your project" />
 </Layout>
 
 <style>
@@ -77,7 +74,7 @@ const lang = "en";
   
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
     gap: 2rem;
   }
   

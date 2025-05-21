@@ -1,12 +1,67 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-
+import styles from '../../styles/Contact.module.css';
 const title = 'Contáctanos';
 const description = 'Ponte en contacto con ElPuas Digital Crafts';
 const lang = 'es';
 ---
 
 <Layout {title} {description} {lang}>
-  <h1>Contáctanos</h1>
-  <p>Ponte en contacto con nuestro equipo. El contenido completo estará disponible pronto.</p>
+  <section class={styles.contactIntro}>
+    <h1>Construyamos Algo <span class="accent">Grandioso</span> Juntos</h1>
+    <p>Completa el formulario — te responderemos dentro de 24 horas, sin robots de por medio.</p>
+  </section>
+  
+  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class={styles.contactForm}>
+    <input type="hidden" name="form-name" value="contact" />
+  
+    <p class={styles.hidden}>
+      <label>No completes esto si eres humano: <input name="bot-field" /></label>
+    </p>
+  
+    <p>
+      <label>¿Cuál es tu nombre? *</label>
+      <input type="text" name="name" placeholder="Juan Pérez" required />
+    </p>
+  
+    <p>
+      <label>Tu mejor correo electrónico *</label>
+      <input type="email" name="email" placeholder="tu@ejemplo.com" required />
+    </p>
+  
+    <p>
+      <label>¿Qué necesitas? *</label>
+      <select name="service" required>
+        <option value="">Elige un servicio...</option>
+        <option value="Full Website">Necesito el paquete completo (Diseño + Desarrollo + Hosting)</option>
+        <option value="E-Commerce">Una tienda online que realmente venda</option>
+        <option value="Maintenance">Mantener mi sitio rápido y seguro</option>
+        <option value="White-Label">Desarrollo white-label para mi agencia</option>
+        <option value="Other">No estoy seguro aún, hablemos</option>
+      </select>
+    </p>
+  
+    <p>
+      <label>Cuéntanos tu historia *</label>
+      <textarea name="message" rows="5" placeholder="Nos encantaría saber sobre tu proyecto, objetivos o incluso desafíos..." required></textarea>
+    </p>
+  
+    <p>
+      <label>
+        <input type="checkbox" name="consent" required />
+        Estoy feliz de recibir comunicaciones de ElPuas Digital Crafts.
+      </label>
+    </p>
+  
+    <p>
+      <button type="submit">Hablemos</button>
+    </p>
+  </form>
 </Layout> 
+
+<style>
+  .accent {
+    color: var(--color-tertiary);
+    font-size: inherit;
+  }
+</style> 
