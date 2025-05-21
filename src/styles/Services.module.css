@@ -11,6 +11,7 @@
 
 .accent {
     color: var(--color-tertiary);
+    font-size: inherit;
 }
 
 .subtitle {
