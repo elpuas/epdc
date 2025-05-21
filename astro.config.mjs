@@ -26,10 +26,4 @@ export default defineConfig({
 			prefixDefaultLocale: false,
 		},
 	},
-	redirects: {
-		'/': {
-			status: 302,
-			destination: `/${DEFAULT_LANGUAGE}`,
-		},
-	},
 });
