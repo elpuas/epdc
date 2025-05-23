@@ -4,6 +4,7 @@ import Button from '../../components/Button.astro';
 import { Icon } from 'astro-icon/components';
 import ProcessStep from '../../components/ProcessStep.astro';
 import CaseStudySection from '../../components/CaseStudySection.astro';
+import TeamMember from '../../components/TeamMember.astro';
 import {Image} from 'astro:assets';
 import alfredoImage from '../../../public/team/alfredo-navas.jpeg';
 import aiImage from '../../../public/team/ai-assistant.png';
@@ -78,26 +79,30 @@ const process = [
     <h2 id="team-title">The Team</h2>
     <p class={styles.accent}>Meet the people behind ElPuas Digital Crafts.</p>
     <ul class={styles.teamList} role="list">
-      <li class={styles.teamMember}>
-        <Image src={alfredoImage} alt="Alfredo Navas - CTO and Lead Developer" width={120} height={120} loading="lazy" decoding="async" class={styles.teamMemberImage} />
-        <blockquote class={styles.teamQuoteContainer}>
-          <div class={styles.teamQuote}>
-            <p class={styles.teamQuoteText}>Alfredo brings over 15 years of expertise, having developed websites for Fortune 500 companies. He leads projects, ensures every site runs smoothly, and works closely with clients to translate ideas into performant digital experiences. As a speaker and open web advocate, he shares insights on WordPress, Astro, and emerging technologies.</p>
-          </div>
-          <footer><cite><strong>Alfredo Navas</strong> — CTO</cite></footer>
-          <div class={styles.teamSocial}>
-            <a href="https://www.linkedin.com/in/elpuasdev/" target="_blank" rel="noopener noreferrer" aria-label="Alfredo's LinkedIn profile">
-              <Icon name="ph:linkedin-logo" width="24" height="24" aria-hidden="true" />
-            </a>
-            <a href="https://github.com/elpuasdev" target="_blank" rel="noopener noreferrer" aria-label="Alfredo's GitHub profile">
-              <Icon name="ph:github-logo" width="24" height="24" aria-hidden="true" />
-            </a>
-            <a href="https://www.elpuas.com" target="_blank" rel="noopener noreferrer" aria-label="Alfredo's personal website">
-              <Icon name="ph:skull" width="24" height="24" aria-hidden="true" />
-            </a>
-          </div>
-        </blockquote>
-      </li>
+      <TeamMember
+        image={alfredoImage}
+        alt="Alfredo Navas - CTO and Lead Developer"
+        name="Alfredo Navas Fernandini"
+        role="CTO"
+        bio="Alfredo brings over 15 years of expertise, having developed websites for Fortune 500 companies. He leads projects, ensures every site runs smoothly, and works closely with clients to translate ideas into performant digital experiences. As a speaker and open web advocate, he shares insights on WordPress, Astro, and emerging technologies."
+        socials={[
+          { 
+            href: 'https://www.linkedin.com/in/elpuasdev/', 
+            icon: 'ph:linkedin-logo', 
+            label: 'Alfredo\'s LinkedIn profile' 
+          },
+          { 
+            href: 'https://github.com/elpuasdev', 
+            icon: 'ph:github-logo', 
+            label: 'Alfredo\'s GitHub profile' 
+          },
+          { 
+            href: 'https://www.elpuas.com', 
+            icon: 'ph:skull', 
+            label: 'Alfredo\'s personal website' 
+          }
+        ]}
+      />
       <li class={styles.teamMember}>
         <blockquote>
           <p>"Catalina, a seasoned journalist with a production background, ensures our projects resonate with compelling narratives."</p>

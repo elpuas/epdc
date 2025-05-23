@@ -66,11 +66,11 @@ const process = [
 
   <section class={styles.values} aria-labelledby="values-title">
     <h2 id="values-title">Nuestros Valores</h2>
-    <ul class="values" role="list">
-      <li><Icon name="ph:handshake" width="64" height="64" aria-hidden="true" /> Alianza Primero</li>
-      <li><Icon name="ph:rocket-launch" width="64" height="64" aria-hidden="true" /> Ejecución Orientada a Resultados</li>
-      <li><Icon name="ph:brain" width="64" height="64" aria-hidden="true" /> Excelencia Técnica, Toque Humano</li>
-      <li><Icon name="ph:shield-check" width="64" height="64" aria-hidden="true" /> Transparencia y Seguridad</li>
+    <ul class={styles.valuesList} role="list">
+      <li class={styles.valueItem}><Icon name="ph:handshake" width="64" height="64" aria-hidden="true" /> Alianza Primero</li>
+      <li class={styles.valueItem}><Icon name="ph:rocket-launch" width="64" height="64" aria-hidden="true" /> Ejecución Orientada a Resultados</li>
+      <li class={styles.valueItem}><Icon name="ph:brain" width="64" height="64" aria-hidden="true" /> Excelencia Técnica, Toque Humano</li>
+      <li class={styles.valueItem}><Icon name="ph:shield-check" width="64" height="64" aria-hidden="true" /> Transparencia y Seguridad</li>
     </ul>
   </section>
 
@@ -80,9 +80,9 @@ const process = [
     <ul class={styles.teamList} role="list">
       <li class={styles.teamMember}>
         <Image src={alfredoImage} alt="Alfredo Navas - CTO y Desarrollador Principal" width={120} height={120} loading="lazy" decoding="async" />
-        <blockquote>
+        <blockquote class={styles.teamQuoteContainer}>
           <div class={styles.teamQuote}>
-            <p>Alfredo aporta más de 15 años de experiencia, habiendo desarrollado sitios web para empresas Fortune 500. Lidera proyectos, asegura que cada sitio funcione sin problemas y trabaja estrechamente con los clientes para traducir ideas en experiencias digitales de alto rendimiento. Como orador y defensor de la web abierta, comparte conocimientos sobre WordPress, Astro y tecnologías emergentes.</p>
+            <p class={styles.teamQuoteText}>Alfredo aporta más de 15 años de experiencia, habiendo desarrollado sitios web para empresas Fortune 500. Lidera proyectos, asegura que cada sitio funcione sin problemas y trabaja estrechamente con los clientes para traducir ideas en experiencias digitales de alto rendimiento. Como orador y defensor de la web abierta, comparte conocimientos sobre WordPress, Astro y tecnologías emergentes.</p>
           </div>
           <footer><cite><strong>Alfredo Navas</strong> — CTO</cite></footer>
           <div class={styles.teamSocial}>

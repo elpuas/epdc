@@ -1,0 +1,97 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { Icon } from 'astro-icon/components';
+
+interface SocialLink {
+	href: string;
+	icon: string;
+	label: string;
+}
+
+interface Props {
+	image?: ImageMetadata;
+	alt?: string;
+	name?: string;
+	role?: string;
+	bio?: string;
+	socials?: SocialLink[];
+}
+
+const { image, alt = '', name, role, bio, socials } = Astro.props;
+---
+
+<li class="teamMember">
+	{image && (
+		<Image
+			src={image}
+			alt={alt}
+			width={120}
+			height={120}
+			loading="lazy"
+			decoding="async"
+			class="teamImage"
+		/>
+	)}
+	<blockquote class="teamQuote">
+		{bio && <p>{bio}</p>}
+		{(name || role) && (
+			<footer>
+				<cite>
+					{ name && <strong>{name}</strong> }
+					{ name && role && ' — ' }
+					{ role }
+				</cite>
+			</footer>
+		)}
+		{socials && socials.length > 0 && (
+			<div class="teamSocial">
+				{socials.map((s) => (
+					<a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+						<Icon name={s.icon} width="24" height="24" aria-hidden="true" />
+					</a>
+				))}
+			</div>
+		)}
+	</blockquote>
+</li>
+
+<style>
+.teamMember {
+	display: flex;
+	gap: 1rem;
+	align-items: flex-start;
+}
+
+.teamImage {
+	border-radius: 50%;
+	object-fit: cover;
+	width: 120px;
+	height: 120px;
+	flex-shrink: 0;
+}
+
+.teamQuote {
+	margin: 0;
+	padding: 0;
+	flex: 1;
+}
+
+.teamQuote p {
+	margin: 0 0 0.5em 0;
+}
+
+footer {
+	font-style: normal;
+}
+
+cite {
+	font-style: normal;
+}
+
+.teamSocial {
+	display: flex;
+	gap: 0.5rem;
+	margin-top: 0.5rem;
+}
+</style>
