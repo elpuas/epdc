@@ -21,7 +21,7 @@ interface Props {
 const { image, alt = '', name, role, bio, socials } = Astro.props;
 ---
 
-<li class="teamMember">
+<li class="team-member">
 	{image && (
 		<Image
 			src={image}
@@ -30,10 +30,10 @@ const { image, alt = '', name, role, bio, socials } = Astro.props;
 			height={120}
 			loading="lazy"
 			decoding="async"
-			class="teamImage"
+			class="team-image"
 		/>
 	)}
-	<blockquote class="teamQuote">
+	<blockquote class="team-quote">
 		{bio && <p>{bio}</p>}
 		{(name || role) && (
 			<footer>
@@ -45,7 +45,7 @@ const { image, alt = '', name, role, bio, socials } = Astro.props;
 			</footer>
 		)}
 		{socials && socials.length > 0 && (
-			<div class="teamSocial">
+			<div class="team-social">
 				{socials.map((s) => (
 					<a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
 						<Icon name={s.icon} width="24" height="24" aria-hidden="true" />
@@ -57,41 +57,65 @@ const { image, alt = '', name, role, bio, socials } = Astro.props;
 </li>
 
 <style>
-.teamMember {
+.team-member {
 	display: flex;
-	gap: 1rem;
-	align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    padding: var(--space-md) var(--space-xl);
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+        background-color: var(--color-tertiary);
+        transform: scale(1.05);
+
+        .team-image {
+            transform: scale(1.5) translate(-10px, -10px);
+        }
+    }
+
+    .team-image {
+        border-radius: 50%;
+        transition: transform 0.3s ease-in-out;
+    }
 }
 
-.teamImage {
-	border-radius: 50%;
-	object-fit: cover;
-	width: 120px;
-	height: 120px;
-	flex-shrink: 0;
+.team-quote {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 0;
+    gap: 1rem;
+    p {
+        margin: 0 0 0.5em 0;
+        color: var(--color-primary);
+    }
+
+    footer {
+        text-align: right;
+        margin-top: var(--space-xl);
+    }
 }
 
-.teamQuote {
-	margin: 0;
-	padding: 0;
-	flex: 1;
-}
 
-.teamQuote p {
-	margin: 0 0 0.5em 0;
-}
+.team-social {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-left: auto;
+    margin-top: var(--space-md);
 
-footer {
-	font-style: normal;
-}
+    a {
+        color: var(--color-primary);
+        transition: transform 0.3s ease-in-out;
 
-cite {
-	font-style: normal;
-}
-
-.teamSocial {
-	display: flex;
-	gap: 0.5rem;
-	margin-top: 0.5rem;
+        &:hover {
+            transform: scale(1.5);
+        }
+    }
 }
 </style>

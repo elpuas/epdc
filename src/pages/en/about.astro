@@ -80,6 +80,11 @@ const process = [
     <p class={styles.accent}>Meet the people behind ElPuas Digital Crafts.</p>
     <ul class={styles.teamList} role="list">
       <TeamMember
+        name="Catalina Valverde"
+        role="CEO & Head of Content"
+        bio="Catalina Valverde is our CEO, Head of Content, and co-founder of ElPuas Digital Crafts. With a degree in Media Production and years of experience as a journalist, she brings a strategic eye and storytelling finesse to every project. Catalina ensures that every site we build not only works — it speaks, connects, and inspires."
+      />
+      <TeamMember
         image={alfredoImage}
         alt="Alfredo Navas - CTO and Lead Developer"
         name="Alfredo Navas Fernandini"
@@ -103,27 +108,18 @@ const process = [
           }
         ]}
       />
-      <li class={styles.teamMember}>
-        <blockquote>
-          <p>"Catalina, a seasoned journalist with a production background, ensures our projects resonate with compelling narratives."</p>
-          <footer><cite><strong>Catalina Valverde</strong> — Head of Content</cite></footer>
-        </blockquote>
-      </li>
-      <li class={styles.teamMember}>
-        <blockquote>
-          <p>"Gianfranco, our frontend expert, adds depth to our team's capabilities, ensuring cutting-edge designs and functionality."</p>
-          <footer><cite><strong>Gianfranco Navas</strong> — Frontend Developer</cite></footer>
-        </blockquote>
-      </li>
-      <li class={styles.teamMember}>
-        <Image src={aiImage} alt="AI Assistant - Our digital team member" width={120} height={120} loading="lazy" decoding="async" class={styles.teamMemberImage} />
-        <blockquote class={styles.teamQuoteContainer}>
-          <div class={styles.teamQuote}>
-            <p class={styles.teamQuoteText}>Our AI assistant, a collaboration between ChatGPT and Cursor, helps us move faster without cutting corners. From code scaffolding to research and content drafts, it amplifies our team's speed, precision, and creativity.</p>
-          </div>
-          <footer><cite><strong>AI Assistant </strong> — Analysis, Development & Content Support</cite></footer>
-        </blockquote>
-      </li>
+      <TeamMember
+        name="Gianfranco Navas"
+        role="Lead Frontend Developer"
+        bio="Gianfranco, our frontend expert, adds depth to our team's capabilities, ensuring cutting-edge designs and functionality."
+      />
+      <TeamMember
+        name="AI Assistant"
+        role="Analysis, Development & Content Support"
+        bio="Our AI assistant, a collaboration between ChatGPT and Cursor, helps us move faster without cutting corners. From code scaffolding to research and content drafts, it amplifies our team's speed, precision, and creativity."
+        image={aiImage}
+        alt="AI Assistant - Our digital team member"
+      />
     </ul>
   </section>
 
