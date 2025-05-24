@@ -1,0 +1,121 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { Icon } from 'astro-icon/components';
+
+interface SocialLink {
+	href: string;
+	icon: string;
+	label: string;
+}
+
+interface Props {
+	image?: ImageMetadata;
+	alt?: string;
+	name?: string;
+	role?: string;
+	bio?: string;
+	socials?: SocialLink[];
+}
+
+const { image, alt = '', name, role, bio, socials } = Astro.props;
+---
+
+<li class="team-member">
+	{image && (
+		<Image
+			src={image}
+			alt={alt}
+			width={120}
+			height={120}
+			loading="lazy"
+			decoding="async"
+			class="team-image"
+		/>
+	)}
+	<blockquote class="team-quote">
+		{bio && <p>{bio}</p>}
+		{(name || role) && (
+			<footer>
+				<cite>
+					{ name && <strong>{name}</strong> }
+					{ name && role && ' — ' }
+					{ role }
+				</cite>
+			</footer>
+		)}
+		{socials && socials.length > 0 && (
+			<div class="team-social">
+				{socials.map((s) => (
+					<a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+						<Icon name={s.icon} width="24" height="24" aria-hidden="true" />
+					</a>
+				))}
+			</div>
+		)}
+	</blockquote>
+</li>
+
+<style>
+.team-member {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    padding: var(--space-md) var(--space-xl);
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+        background-color: var(--color-tertiary);
+        transform: scale(1.05);
+
+        .team-image {
+            transform: scale(1.5) translate(-10px, -10px);
+        }
+    }
+
+    .team-image {
+        border-radius: 50%;
+        transition: transform 0.3s ease-in-out;
+    }
+}
+
+.team-quote {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 0;
+    gap: 1rem;
+    p {
+        margin: 0 0 0.5em 0;
+        color: var(--color-primary);
+    }
+
+    footer {
+        text-align: right;
+        margin-top: var(--space-xl);
+    }
+}
+
+
+.team-social {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-left: auto;
+    margin-top: var(--space-md);
+
+    a {
+        color: var(--color-primary);
+        transition: transform 0.3s ease-in-out;
+
+        &:hover {
+            transform: scale(1.5);
+        }
+    }
+}
+</style>

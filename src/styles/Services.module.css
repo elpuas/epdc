@@ -43,6 +43,22 @@
             margin-bottom: 0;
         }
     }
+
+    .tacLink {
+        text-align: center;
+        margin-top: var(--space-2xl);
+        width: 100%;
+
+        a {
+            color: var(--color-tertiary);
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: var(--color-secondary);
+                text-decoration: underline;
+            }
+        }
+    }
 }
 
 .pricingGrid {
