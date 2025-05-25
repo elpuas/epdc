@@ -4,7 +4,7 @@ import Button from '../../components/Button.astro';
 import { Icon } from 'astro-icon/components';
 import ProcessStep from '../../components/ProcessStep.astro';
 import CaseStudySection from '../../components/CaseStudySection.astro';
-import {Image} from 'astro:assets';
+import TeamMember from '../../components/TeamMember.astro';
 import alfredoImage from '../../../public/team/alfredo-navas.jpeg';
 import aiImage from '../../../public/team/ai-assistant.png';
 import styles from '../../styles/About.module.css';
@@ -12,7 +12,7 @@ const title = 'Conocé ElPuas Digital Crafts | Un Estudio Web Familiar';
 const description = 'Descubrí quiénes somos, qué nos mueve y cómo creamos sitios web de alto rendimiento con un enfoque humano y personalizado. Un equipo pequeño con visión global.';
 const lang = 'es';
 // Import case study image
-import caseStudyImage from '../../../public/phone-showcase.jpg';
+import caseStudyImage from '../../../public/monkey-phone.jpg';
 const process = [
   {
     icon: 'ph:magnifying-glass',
@@ -66,11 +66,11 @@ const process = [
 
   <section class={styles.values} aria-labelledby="values-title">
     <h2 id="values-title">Nuestros Valores</h2>
-    <ul class="values" role="list">
-      <li><Icon name="ph:handshake" width="64" height="64" aria-hidden="true" /> Alianza Primero</li>
-      <li><Icon name="ph:rocket-launch" width="64" height="64" aria-hidden="true" /> Ejecución Orientada a Resultados</li>
-      <li><Icon name="ph:brain" width="64" height="64" aria-hidden="true" /> Excelencia Técnica, Toque Humano</li>
-      <li><Icon name="ph:shield-check" width="64" height="64" aria-hidden="true" /> Transparencia y Seguridad</li>
+    <ul class={styles.valuesList} role="list">
+      <li class={styles.valueItem}><Icon name="ph:handshake" width="64" height="64" aria-hidden="true" /> <span>Alianza Primero</span></li>
+      <li class={styles.valueItem}><Icon name="ph:rocket-launch" width="64" height="64" aria-hidden="true" /> <span>Ejecución Orientada a Resultados</span></li>
+      <li class={styles.valueItem}><Icon name="ph:brain" width="64" height="64" aria-hidden="true" /> <span>Excelencia Técnica, Toque Humano</span></li>
+      <li class={styles.valueItem}><Icon name="ph:shield-check" width="64" height="64" aria-hidden="true" /> <span>Transparencia y Seguridad</span></li>
     </ul>
   </section>
 
@@ -78,47 +78,47 @@ const process = [
     <h2 id="team-title">El Equipo</h2>
     <p class={styles.accent}>Conoce a las personas detrás de ElPuas Digital Crafts.</p>
     <ul class={styles.teamList} role="list">
-      <li class={styles.teamMember}>
-        <Image src={alfredoImage} alt="Alfredo Navas - CTO y Desarrollador Principal" width={120} height={120} loading="lazy" decoding="async" />
-        <blockquote>
-          <div class={styles.teamQuote}>
-            <p>Alfredo aporta más de 15 años de experiencia, habiendo desarrollado sitios web para empresas Fortune 500. Lidera proyectos, asegura que cada sitio funcione sin problemas y trabaja estrechamente con los clientes para traducir ideas en experiencias digitales de alto rendimiento. Como orador y defensor de la web abierta, comparte conocimientos sobre WordPress, Astro y tecnologías emergentes.</p>
-          </div>
-          <footer><cite><strong>Alfredo Navas</strong> — CTO</cite></footer>
-          <div class={styles.teamSocial}>
-            <a href="https://www.linkedin.com/in/elpuasdev/" target="_blank" rel="noopener noreferrer" aria-label="Perfil de LinkedIn de Alfredo">
-              <Icon name="ph:linkedin-logo" width="24" height="24" aria-hidden="true" />
-            </a>
-            <a href="https://github.com/elpuasdev" target="_blank" rel="noopener noreferrer" aria-label="Perfil de GitHub de Alfredo">
-              <Icon name="ph:github-logo" width="24" height="24" aria-hidden="true" />
-            </a>
-            <a href="https://www.elpuas.com" target="_blank" rel="noopener noreferrer" aria-label="Sitio web personal de Alfredo">
-              <Icon name="ph:skull" width="24" height="24" aria-hidden="true" />
-            </a>
-          </div>
-        </blockquote>
-      </li>
-      <li class={styles.teamMember}>
-        <blockquote>
-          <p>"Catalina, una periodista experimentada con formación en producción, asegura que nuestros proyectos resuenen con narrativas convincentes."</p>
-          <footer><cite><strong>Catalina Valverde</strong> — Responsable de Contenido</cite></footer>
-        </blockquote>
-      </li>
-      <li class={styles.teamMember}>
-        <blockquote>
-          <p>"Gianfranco, nuestro experto en frontend, añade profundidad a las capacidades de nuestro equipo, asegurando diseños y funcionalidades de vanguardia."</p>
-          <footer><cite><strong>Gianfranco Navas</strong> — Desarrollador Frontend</cite></footer>
-        </blockquote>
-      </li>
-      <li class={styles.teamMember}>
-        <Image src={aiImage} alt="Asistente IA - Nuestro miembro digital del equipo" width={120} height={120} loading="lazy" decoding="async" />
-        <blockquote>
-          <div class={styles.teamQuote}>
-            <p>Nuestro asistente de IA, una colaboración entre ChatGPT y Cursor, nos ayuda a avanzar más rápido sin atajos. Desde la estructura del código hasta la investigación y borradores de contenido, amplifica la velocidad, precisión y creatividad de nuestro equipo.</p>
-          </div>
-          <footer><cite><strong>Asistente IA </strong> — Soporte en Análisis, Desarrollo y Contenido</cite></footer>
-        </blockquote>
-      </li>
+      <TeamMember
+        name="Catalina Valverde"
+        role="CEO y Directora de Contenido"
+        bio="Catalina Valverde es nuestra CEO, Directora de Contenido y cofundadora de ElPuas Digital Crafts. Con un título en Producción de Medios y años de experiencia como periodista, aporta una visión estratégica y finura narrativa a cada proyecto. Catalina se asegura de que cada sitio que construimos no solo funcione — habla, conecta e inspira."
+      />
+      <TeamMember
+        image={alfredoImage}
+        alt="Alfredo Navas - CTO y Desarrollador Principal"
+        name="Alfredo Navas Fernandini"
+        role="CTO"
+        bio="Alfredo aporta más de 15 años de experiencia, habiendo desarrollado sitios web para empresas Fortune 500. Lidera proyectos, asegura que cada sitio funcione sin problemas y trabaja estrechamente con los clientes para traducir ideas en experiencias digitales de alto rendimiento. Como orador y defensor de la web abierta, comparte conocimientos sobre WordPress, Astro y tecnologías emergentes."
+        socials={[
+          { 
+            href: 'https://www.linkedin.com/in/elpuasdev/', 
+            icon: 'ph:linkedin-logo', 
+            label: 'Perfil de LinkedIn de Alfredo' 
+          },
+          { 
+            href: 'https://github.com/elpuasdev', 
+            icon: 'ph:github-logo', 
+            label: 'Perfil de GitHub de Alfredo' 
+          },
+          { 
+            href: 'https://www.elpuas.com', 
+            icon: 'ph:skull', 
+            label: 'Sitio web personal de Alfredo' 
+          }
+        ]}
+      />
+      <TeamMember
+        name="Gianfranco Navas"
+        role="Desarrollador Frontend Principal"
+        bio="Gianfranco, nuestro experto en frontend, añade profundidad a las capacidades de nuestro equipo, asegurando diseños y funcionalidades de vanguardia."
+      />
+      <TeamMember
+        name="Asistente IA"
+        role="Soporte en Análisis, Desarrollo y Contenido"
+        bio="Nuestro asistente de IA, una colaboración entre ChatGPT y Cursor, nos ayuda a avanzar más rápido sin atajos. Desde la estructura del código hasta la investigación y borradores de contenido, amplifica la velocidad, precisión y creatividad de nuestro equipo."
+        image={aiImage}
+        alt="Asistente IA - Nuestro miembro digital del equipo"
+      />
     </ul>
   </section>
 
@@ -134,7 +134,7 @@ const process = [
       quote="Construimos una tienda de comercio electrónico a medida para indumentaria médica y estudiantil, y continuamos optimizándola a través de nuestro plan de mantenimiento mensual. Utilizamos herramientas de IA para escribir mejores descripciones de productos y elegir las palabras clave adecuadas, ayudando al sitio a mantenerse por delante de los competidores en los resultados de búsqueda. ¿El resultado? Mayor visibilidad, experiencias de compra más fluidas y un crecimiento constante de las ventas, todo sin la molestia de gestionar la tecnología."
       author="MonkeyScrubs, Cliente de eCommerce + Plan de Soporte"
       buttonLabel="Caso de Estudio"
-      buttonHref="#" 
+      buttonHref="es/crafted-with-love/monkeyscrubs-es/" 
       imgSrc={caseStudyImage}
       imgAlt="Tienda eCommerce MonkeyScrubs mostrada en dispositivo móvil"
     />

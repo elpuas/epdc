@@ -4,7 +4,7 @@ import Button from '../../components/Button.astro';
 import { Icon } from 'astro-icon/components';
 import ProcessStep from '../../components/ProcessStep.astro';
 import CaseStudySection from '../../components/CaseStudySection.astro';
-import {Image} from 'astro:assets';
+import TeamMember from '../../components/TeamMember.astro';
 import alfredoImage from '../../../public/team/alfredo-navas.jpeg';
 import aiImage from '../../../public/team/ai-assistant.png';
 import styles from '../../styles/About.module.css';
@@ -12,7 +12,7 @@ const title = 'Meet ElPuas Digital Crafts | A Family-Led Web Studio';
 const description = 'Discover who we are, what we stand for, and how we craft beautiful, high-performance websites. A small, skilled team with global reach and a personal touch.';
 const lang = 'en';
 // Import case study image
-import caseStudyImage from '../../../public/phone-showcase.jpg';
+import caseStudyImage from '../../../public/monkey-phone.jpg';
 const process = [
   {
     icon: 'ph:magnifying-glass',
@@ -66,11 +66,11 @@ const process = [
 
   <section class={styles.values} aria-labelledby="values-title">
     <h2 id="values-title">What We Stand For</h2>
-    <ul class="values" role="list">
-      <li><Icon name="ph:handshake" width="64" height="64" aria-hidden="true" /> Partnership First</li>
-      <li><Icon name="ph:rocket-launch" width="64" height="64" aria-hidden="true" /> Results-Driven Execution</li>
-      <li><Icon name="ph:brain" width="64" height="64" aria-hidden="true" /> Tech Excellence, Human Touch</li>
-      <li><Icon name="ph:shield-check" width="64" height="64" aria-hidden="true" /> Transparency & Security</li>
+    <ul class={styles.valuesList} role="list">
+      <li class={styles.valueItem}><Icon name="ph:handshake" width="64" height="64" aria-hidden="true" /> <span>Partnership First</span></li>
+      <li class={styles.valueItem}><Icon name="ph:rocket-launch" width="64" height="64" aria-hidden="true" /> <span>Results-Driven Execution</span></li>
+      <li class={styles.valueItem}><Icon name="ph:brain" width="64" height="64" aria-hidden="true" /> <span>Tech Excellence, Human Touch</span></li>
+      <li class={styles.valueItem}><Icon name="ph:shield-check" width="64" height="64" aria-hidden="true" /> <span>Transparency & Security</span></li>
     </ul>
   </section>
 
@@ -78,47 +78,47 @@ const process = [
     <h2 id="team-title">The Team</h2>
     <p class={styles.accent}>Meet the people behind ElPuas Digital Crafts.</p>
     <ul class={styles.teamList} role="list">
-      <li class={styles.teamMember}>
-        <Image src={alfredoImage} alt="Alfredo Navas - CTO and Lead Developer" width={120} height={120} loading="lazy" decoding="async" />
-        <blockquote>
-          <div class={styles.teamQuote}>
-            <p>Alfredo brings over 15 years of expertise, having developed websites for Fortune 500 companies. He leads projects, ensures every site runs smoothly, and works closely with clients to translate ideas into performant digital experiences. As a speaker and open web advocate, he shares insights on WordPress, Astro, and emerging technologies.</p>
-          </div>
-          <footer><cite><strong>Alfredo Navas</strong> — CTO</cite></footer>
-          <div class={styles.teamSocial}>
-            <a href="https://www.linkedin.com/in/elpuasdev/" target="_blank" rel="noopener noreferrer" aria-label="Alfredo's LinkedIn profile">
-              <Icon name="ph:linkedin-logo" width="24" height="24" aria-hidden="true" />
-            </a>
-            <a href="https://github.com/elpuasdev" target="_blank" rel="noopener noreferrer" aria-label="Alfredo's GitHub profile">
-              <Icon name="ph:github-logo" width="24" height="24" aria-hidden="true" />
-            </a>
-            <a href="https://www.elpuas.com" target="_blank" rel="noopener noreferrer" aria-label="Alfredo's personal website">
-              <Icon name="ph:skull" width="24" height="24" aria-hidden="true" />
-            </a>
-          </div>
-        </blockquote>
-      </li>
-      <li class={styles.teamMember}>
-        <blockquote>
-          <p>"Catalina, a seasoned journalist with a production background, ensures our projects resonate with compelling narratives."</p>
-          <footer><cite><strong>Catalina Valverde</strong> — Head of Content</cite></footer>
-        </blockquote>
-      </li>
-      <li class={styles.teamMember}>
-        <blockquote>
-          <p>"Gianfranco, our frontend expert, adds depth to our team's capabilities, ensuring cutting-edge designs and functionality."</p>
-          <footer><cite><strong>Gianfranco Navas</strong> — Frontend Developer</cite></footer>
-        </blockquote>
-      </li>
-      <li class={styles.teamMember}>
-        <Image src={aiImage} alt="AI Assistant - Our digital team member" width={120} height={120} loading="lazy" decoding="async" />
-        <blockquote>
-          <div class={styles.teamQuote}>
-            <p>Our AI assistant, a collaboration between ChatGPT and Cursor, helps us move faster without cutting corners. From code scaffolding to research and content drafts, it amplifies our team's speed, precision, and creativity.</p>
-          </div>
-          <footer><cite><strong>AI Assistant </strong> — Analysis, Development & Content Support</cite></footer>
-        </blockquote>
-      </li>
+      <TeamMember
+        name="Catalina Valverde"
+        role="CEO & Head of Content"
+        bio="Catalina Valverde is our CEO, Head of Content, and co-founder of ElPuas Digital Crafts. With a degree in Media Production and years of experience as a journalist, she brings a strategic eye and storytelling finesse to every project. Catalina ensures that every site we build not only works — it speaks, connects, and inspires."
+      />
+      <TeamMember
+        image={alfredoImage}
+        alt="Alfredo Navas - CTO and Lead Developer"
+        name="Alfredo Navas Fernandini"
+        role="CTO"
+        bio="Alfredo brings over 15 years of expertise, having developed websites for Fortune 500 companies. He leads projects, ensures every site runs smoothly, and works closely with clients to translate ideas into performant digital experiences. As a speaker and open web advocate, he shares insights on WordPress, Astro, and emerging technologies."
+        socials={[
+          { 
+            href: 'https://www.linkedin.com/in/elpuasdev/', 
+            icon: 'ph:linkedin-logo', 
+            label: 'Alfredo\'s LinkedIn profile' 
+          },
+          { 
+            href: 'https://github.com/elpuasdev', 
+            icon: 'ph:github-logo', 
+            label: 'Alfredo\'s GitHub profile' 
+          },
+          { 
+            href: 'https://www.elpuas.com', 
+            icon: 'ph:skull', 
+            label: 'Alfredo\'s personal website' 
+          }
+        ]}
+      />
+      <TeamMember
+        name="Gianfranco Navas"
+        role="Lead Frontend Developer"
+        bio="Gianfranco, our frontend expert, adds depth to our team's capabilities, ensuring cutting-edge designs and functionality."
+      />
+      <TeamMember
+        name="AI Assistant"
+        role="Analysis, Development & Content Support"
+        bio="Our AI assistant, a collaboration between ChatGPT and Cursor, helps us move faster without cutting corners. From code scaffolding to research and content drafts, it amplifies our team's speed, precision, and creativity."
+        image={aiImage}
+        alt="AI Assistant - Our digital team member"
+      />
     </ul>
   </section>
 
@@ -134,7 +134,7 @@ const process = [
       quote="We built a tailored ecommerce store for medical and student apparel, and continue to optimize it through our monthly maintenance plan. We use AI tools to write better product descriptions and choose the right keywords, helping the site stay ahead of competitors in search results. The result? Higher visibility, smoother shopping experiences, and steady sales growth — all without the hassle of managing the tech."
       author="MonkeyScrubs, eCommerce + Support Plan Client"
       buttonLabel="Case Study"
-      buttonHref="#" 
+      buttonHref="/en/crafted-with-love/monkey-scrubs-ecommerce-en" 
       imgSrc={caseStudyImage}
       imgAlt="MonkeyScrubs eCommerce store displayed on mobile device"
     />
@@ -147,7 +147,7 @@ const process = [
   </section>
 
   <section class={styles.cta} aria-label="Contact Call to Action">
-    <Button href="/contact" label="Let's Talk" />
+    <Button href="/en/contact" label="Let's Talk" />
   </section>
 </Layout>
 <script type="module" is:inline>

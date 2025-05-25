@@ -20,7 +20,7 @@ const lang = 'es';
   <section class={styles.intro}>
     <p>Estudio pequeño, grandes resultados.</p>
     <Hero {lang} />
-    <Button href="/es/contacto" label="Hablemos" />
+    <Button href="/es/services/" label="Ver Nuestros Servicios" />
   </section> 
   <section class={styles.services}>
     <div class={`${styles.withPattern} ${styles.dotsPattern}`}>
@@ -37,28 +37,28 @@ const lang = 'es';
         icon="ph:flask" 
         title="Desarrollo Web Personalizado" 
         description="Sitios web a medida construidos para velocidad, rendimiento y escalabilidad." 
-        href="/es/desarrollo-web-personalizado" />
+        href="/es/services/" />
       </li>
       <li>
         <ServiceCard 
         icon="ph:shopping-cart" 
         title="Soluciones de Comercio Electrónico" 
         description="WooCommerce o headless — hacemos que vender sea fluido." 
-        href="/es/soluciones-comercio-electronico" />
+        href="/es/services/" />
       </li>
       <li>
         <ServiceCard 
         icon="ph:lifebuoy" 
         title="Mantenimiento y Soporte" 
         description="Actualizaciones, optimizaciones y tranquilidad — gestionados para ti." 
-        href="/es/mantenimiento-soporte" />
+        href="/es/services/" />
       </li>
       <li>
         <ServiceCard 
         icon="ph:mask-happy" 
         title="Servicios White-Label" 
         description="Construimos discretamente en segundo plano para que tu agencia brille." 
-        href="/es/servicios-white-label" />
+        href="/es/services/" />
       </li>
     </ul>
   </section>
@@ -68,8 +68,8 @@ const lang = 'es';
     paragraph="Construimos un sitio personalizado diseñado para convertir, y continuamos optimizándolo a través de nuestro plan de mantenimiento mensual. ¿El resultado? Mayor visibilidad en búsquedas, mejor rendimiento y un aumento constante en las reservas — todo sin mover un dedo."
     quote="Desde el lanzamiento del nuevo sitio, hemos notado un impulso notable en las reservas y mejor visibilidad en búsquedas. ElPuas entendió nuestros objetivos y entregó resultados."
     author="Richard Krug, FishCostaRica.com"
-    buttonLabel="Caso de Estudio"
-    buttonHref="#" 
+    buttonLabel="Ver Caso de Estudio"
+    buttonHref="es/crafted-with-love/fishcostarica-tourism-es/" 
     imgSrc={caseStudyImage}
     imgAlt="FishCostaRica.com"
   />
@@ -100,7 +100,7 @@ const lang = 'es';
         <h4>Opciones de respuesta prioritaria</h4>
       </li>
     </ul>
-    <Button href="/es/servicios#planes" label="Explora Nuestros Planes" />
+    <Button href="/es/services/#pricing-title" label="Explora Nuestros Planes" />
   </section>
 </Layout>
 
@@ -114,6 +114,6 @@ const lang = 'es';
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
-    border: 0;
+    border: 0; 
   }
 </style> 

@@ -99,16 +99,17 @@
 	> h2 {
 		font-size: var(--fontsize-base);
 		font-weight: 400;
+		letter-spacing: 0.05em;
 	}
 
-	ul {
+	.valuesList {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 		gap: 1.5rem;
 		padding: 0;
 		list-style: none;
 
-		li {
+		.valueItem {
 			display: flex;
 			align-items: center;
 			gap: 2rem;
@@ -133,72 +134,13 @@
 
 	.teamList {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(1, 1fr);
 		gap: var(--space-3xl);
 		padding: 0;
 		list-style: none;
 
-		.teamMember {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			gap: var(--space-lg);
-			background-color: var(--color-secondary);
-			color: var(--color-primary);
-			padding: var(--space-lg) var(--space-2xl);
-			border-radius: 0.5rem;
-			transition: transform 0.3s ease-in-out;
-
-			&:hover {
-				background-color: var(--color-tertiary);
-				transform: scale(1.05);
-
-				img {
-					transform: scale(1.5) translate(-10px, -10px);
-				}
-			}
-
-			p {
-				margin-top: 0;
-				color: var(--color-primary);
-			}
-
-			img {
-				border-radius: 50%;
-				transition: transform 0.3s ease-in-out;
-			}
-		}
-
-		blockquote {
-			margin: 0;
-			
-			footer {
-				text-align: right;
-				margin-top: var(--space-xl);
-			}
-		}
-
-		.teamSocial {
-			margin-top: var(--space-md);
-			display: flex;
-			align-items: center;
-			justify-content: flex-end;
-			gap: 1rem;
-
-			a {
-				color: var(--color-primary);
-				transition: transform 0.3s ease-in-out;
-
-				&:hover {
-					transform: scale(1.5);
-				}
-			}
-		}
-
-		.teamQuote {
-			display: flex;
-			align-items: flex-start;
-			gap: 1rem;
+		@media (min-width: 768px) {
+			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 }
