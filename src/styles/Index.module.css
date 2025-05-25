@@ -46,7 +46,7 @@
 /* Expertise */
 .expertiseSection h2,
 .expertiseSection p {
-  text-align: left;
+  text-align: center;
 }
 
 .expertiseSection p {
@@ -102,6 +102,7 @@
     font-size: var(--fontsize-base);
     margin-bottom: var(--space-lg);
     margin-inline: auto;
+    max-width: 978px;
 
     &:is(.accent) {
       color: var(--color-tertiary);
