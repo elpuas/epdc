@@ -34,7 +34,7 @@ const { title, description = '', date, image, lang = 'en' as Language, tags = []
 						<div class={stylesProject.projectDate}>
 							<FormattedDate date={date} />
 						</div>
-						{image && <Image src={image} alt="" class={stylesProject.projectFeaturedImage} width={1200} height={630} loading="lazy" decoding="async" />}
+						{image && <Image src={image} alt={title} class={stylesProject.projectFeaturedImage} width={1200} height={630} loading="lazy" decoding="async" />}
 						{tags && tags.length > 0 && (
 							<div class={stylesProject.projectTags}>
 								{tags.map(tag => (
