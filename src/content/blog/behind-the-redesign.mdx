@@ -2,48 +2,54 @@
 title: "Behind the Redesign: How We Rebuilt Our Website with Astro and AI"
 lang: "en"
 description: "A look into how we rebuilt our site with Astro, modular components, and AI-assisted workflows. From UX research to final deployment, here’s how we combined performance, clarity, and scale."
-image: "/default.png"
+image: "/blogMayHero.jpg"
 date: "2025-05-25"
+author: Alfredo Navas Fernandini
 ---
+import HeroImage from '../../../public/blogMayHero.jpg';
+import {Image} from 'astro:assets';
 
+<div class="blog-hero-image">
+    {HeroImage && <Image width={1020} height={510} src={HeroImage} alt="Laptop with ElPuas Digital Crafts website open" />}
+</div>
 
-# Behind the Redesign: How We Rebuilt Our Website with Astro and AI
-
-We recently relaunched the ElPuas Digital Crafts website with a fresh design, rebuilt from the ground up using Astro and enhanced by AI-powered workflows. This wasn’t just a visual upgrade—it was a strategic redesign focused on performance, clarity, and conversion.
+We recently relaunched the *ElPuas Digital Crafts* website with a fresh design, rebuilt from the ground up using *Astro* and enhanced by *AI-powered workflows*. This wasn’t just a visual upgrade—it was a strategic redesign focused on performance, clarity, and conversion.
 
 ## Why Astro?
 
-We chose Astro because of its performance-first architecture. It lets us ship fast, lightweight websites without unnecessary JavaScript bloat. As a web development studio, we needed something that reflected our technical standards and gave us full control.
+We chose *Astro* because of its *performance-first architecture*. It lets us ship fast, lightweight websites without unnecessary JavaScript bloat. As a *web development studio*, we needed something that reflected our technical standards and gave us full control.
 
 ## AI as a Creative Partner
 
-For this project, AI played a critical role—not just as a tool, but as a thinking partner. We used ChatGPT, Cursor, and Claude Sonnet to:
+For this project, AI played a critical role—not just as a tool, but as a thinking partner. We used *ChatGPT, Cursor, and Claude Sonnet* to:
 - Draft and refine prompts for content sections
 - Rapidly prototype layout ideas and code
-- Validate UX decisions against best practices and conversion studies
+- *Validate UX decisions* against best practices and conversion studies
 - Keep copy *clear, human, and on-brand*
 
 Every section went through multiple iterations, combining human experience with AI speed.
 
 ## Research-Driven Structure
 
-Before we started designing, we conducted a deep research sprint. We analyzed hundreds of modern agency sites, industry trends, and UX benchmarks to identify:
+Before we started designing, we conducted a *deep research sprint*. We analyzed hundreds of modern agency sites, industry trends, and UX benchmarks to identify:
 - The most effective content structures for trust and conversion
 - Key sections users expect from a service-based site
 - Visual hierarchies that communicate value quickly
 
-This led to a clear content architecture: an impactful hero, strong value proposition, services overview, selected work, client testimonials, and direct calls to action.
+This led to a clear content architecture: an *impactful hero*, *strong value proposition*, *services overview*, *selected work*, *client testimonials*, and *direct calls to action*.
 
 ## Modular, Scalable Design
 
-We built each section as a flexible module. The layout is fully responsive and easy to extend. We also integrated MDX to enable dynamic blog content and future localization support. Everything is optimized for fast loading and future growth.
+We built each section as a *flexible module*. The layout is fully responsive and easy to extend. We also *integrated MDX* to enable dynamic blog content and future *localization support*. Everything is optimized for fast loading and future growth.
 
 ## What’s Next
 
-This site is just the beginning. We’re planning to publish technical articles, case studies, and studio updates—sharing our process and challenges as we build tools and websites for clients across different industries.
+This site is just the beginning. We’re planning to publish *technical articles, case studies, and studio updates*—sharing our process and challenges as we build tools and websites for clients across different industries.
 
-⸻
+<div class="notification">
 
-Check it out: https://elpuasdigitalcrafts.netlify.app
+<p>Check it out: <a href="https://elpuasdigitalcrafts.com">https://elpuasdigitalcrafts.com</a></p>
 
-⸻
+<p>Github: <a href="https://github.com/elpuas/epdc">https://github.com/elpuas/epdc</a></p>
+
+</div>

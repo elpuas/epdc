@@ -5,85 +5,46 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import type { Language } from '../i18n/utils';
+import '../styles/global.css';
+import stylesBlog from '../styles/ProjectLayout.module.css';
+import styles from '../styles/Layout.module.css';
 
-type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description = '', date, image, lang = 'en' as Language } = Astro.props;
+type Props = CollectionEntry<'blog'>['data'] & { author?: string };
+
+const { title, description = '', date, author = 'ElPuas Digital Crafts', lang = 'en' as Language } = Astro.props;
 const pubDate = date;
-const heroImage = image;
-const updatedDate = undefined; // Not in our schema, setting to undefined
 ---
-
+<!DOCTYPE html>
 <html lang={lang}>
 	<head>
 		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
 	</head>
 
 	<body>
-		<Header lang={lang} />
+		<header>
+			<div class:list={styles.wrapper}>
+				<Header lang={lang} />
+			</div>
+		</header>
 		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
+		<article class:list={stylesBlog.article}>
+			<div class="prose" class:list={stylesBlog.prose}>
+				<div class="title">
+					<h1>{title}</h1>
+					<div class="blog-date">
+						<FormattedDate date={pubDate} />
+						<p>By <span class="accent">{author}</span></p>
 					</div>
-					<slot />
 				</div>
-			</article>
-		</main>
+				<slot />
+			</div>
+		</article>
+</main>
+<footer>
+	<div class:list={styles.wrapper}>
 		<Footer lang={lang} />
-	</body>
-</html>
+	</div>
+</footer>
+</body>
+</html> 

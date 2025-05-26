@@ -1,33 +1,34 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../../../layouts/Layout.astro'; 
+import Layout from '../../../layouts/Layout.astro';
 import BlogCard from '../../../components/BlogCard.astro';
+import styles from '../../../styles/BlogIndex.module.css';
 
+// 1. Fetch ALL blog posts
 const allPosts = await getCollection('blog');
 
-// Filter posts for Italian
+// 2. Filter posts for the current language (Italian)
 const italianPosts = allPosts.filter(post => post.data.lang === 'it');
 
-// Sort posts by date
-italianPosts.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+// Sort posts by date if needed (optional, newest first)
+italianPosts.sort((a, b) => (b.data.date?.valueOf() || 0) - (a.data.date?.valueOf() || 0));
 
-const pageTitle = "Blog"; // TODO: Translate title
-const pageDescription = "Ultime notizie e articoli."; // TODO: Translate description
+const pageTitle = "Nel Loop";
+const pageDescription = "In ElPuas Digital Crafts, non costruiamo solo siti web—creiamo esperienze web veloci, scalabili e centrate sull'utente. Questo blog è dove condividiamo il nostro processo, esperimenti e lezioni apprese mentre lavoriamo all'intersezione di design, codice e IA.";
 ---
-<Layout title={pageTitle} description={pageDescription} lang="it"> { /* Added lang prop */}
-  <section class="py-12 md:py-20">
-    <div class="container px-4 mx-auto">
-      <h1 class="text-3xl md:text-4xl font-bold mb-8 text-center">{pageTitle}</h1>
-      
+<Layout title={pageTitle} description={pageDescription}>
+  <section class={styles.hero}>
+    <h1 class="">{pageTitle}</h1>
+    <p>In <span class={styles.accent}>ElPuas Digital Crafts</span>, non costruiamo solo siti web—creiamo esperienze web veloci, scalabili e centrate sull'utente. <span class={styles.accent}>Questo blog è dove condividiamo il nostro processo, esperimenti e lezioni apprese mentre lavoriamo all'intersezione di design, codice e IA.</span> Dai case study alle analisi tecniche, ecco uno sguardo dietro le quinte di come costruiamo per il web moderno.</p>
+    </section>
       {italianPosts.length === 0 ? (
-        <p class="text-center text-gray-500">Nessun post del blog trovato per questa lingua.</p> // TODO: Translate fallback
+        <p class="text-center text-gray-500">Nessun post del blog trovato per questa lingua.</p>
       ) : (
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class={styles.grid}>
           {italianPosts.map((post) => (
-            <BlogCard post={post} lang="it" /> // Pass 'it' lang prop
+            <BlogCard post={post} lang="it" />
           ))}
         </div>
       )}
     </div>
-  </section>
 </Layout>
