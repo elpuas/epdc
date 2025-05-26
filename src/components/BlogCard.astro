@@ -1,44 +1,96 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 
 interface Props {
   post: CollectionEntry<'blog'>;
-  lang: string; // Expect 'en', 'es', 'it', etc.
+  lang: string;
 }
 
 const { post, lang } = Astro.props;
 const { title, description, image } = post.data;
 const postUrl = `/${lang}/blog/${post.slug}`;
+
+// Provide fallback image if none specified
+const displayImage = image || '/blog-placeholder-about.jpg';
 ---
-<article class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+<article class="blog-card">
   <a href={postUrl} aria-label={`Read more about ${title}`}>
-    {image && (
-      <img 
-        src={image} 
-        alt="" // Alt text is empty as the image is decorative within a link context
-        class="w-full h-48 object-cover"
-        width="400" 
-        height="200" 
-        loading="lazy"
-        decoding="async"
-      />
-    )}
+    <Image 
+      src={displayImage} 
+      alt={`Preview image for ${title}`} 
+      width={400} 
+      height={200} 
+      loading="lazy"
+      decoding="async"
+      class="card-image"
+    />
   </a>
-  <div class="p-4">
-    <h2 class="text-xl font-semibold mb-2">
-      <a href={postUrl} class="hover:text-primary transition-colors duration-300">
+  <div class="card-content">
+    <h2 class="card-heading">
+      <a href={postUrl} class="card-link">
         {title}
       </a>
     </h2>
     {description && (
-      <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">{description}</p>
+      <p class="card-description">{description}</p>
     )}
     <a 
       href={postUrl} 
-      class="text-primary hover:underline text-sm font-medium"
+      class="card-link"
       aria-label={`Read more about ${title}`}
     >
       Read more &rarr;
     </a>
   </div>
 </article> 
+
+<style>
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+
+    &:hover {
+      .card-image {
+        filter: grayscale(0%);
+      }
+    }
+  }
+
+  .card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+
+    &:hover {
+      filter: grayscale(0%);
+    }
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .card-heading {
+    font-size: var(--fontsize-h4);
+    font-weight: 400;
+    letter-spacing: 0;
+    margin: 0;
+
+    a {
+      font-size: inherit;
+    }
+  }
+
+  .card-description {
+    font-size: var(--fontsize-base);
+    margin: 0;
+  }
+  
+</style>

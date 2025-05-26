@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../../../layouts/Layout.astro'; // Corrected import to Layout.astro
-import BlogCard from '../../../components/BlogCard.astro'; // Assuming BlogCard exists
+import Layout from '../../../layouts/Layout.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+import styles from '../../../styles/BlogIndex.module.css';
 
 // 1. Fetch ALL blog posts
 const allPosts = await getCollection('blog');
@@ -10,25 +11,24 @@ const allPosts = await getCollection('blog');
 const englishPosts = allPosts.filter(post => post.data.lang === 'en');
 
 // Sort posts by date if needed (optional, newest first)
-englishPosts.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+englishPosts.sort((a, b) => (b.data.date?.valueOf() || 0) - (a.data.date?.valueOf() || 0));
 
-const pageTitle = "Blog"; // Or fetch from a CMS/config
-const pageDescription = "Latest news and articles."; // Or fetch from a CMS/config
+const pageTitle = "In the Loop";
+const pageDescription = "At ElPuas Digital Crafts, we don’t just build websites—we craft fast, scalable, and human-centered web experiences. This blog is where we share our process, experiments, and lessons learned while working at the intersection of design, code, and AI.";
 ---
 <Layout title={pageTitle} description={pageDescription}>
-  <section class="py-12 md:py-20">
-    <div class="container px-4 mx-auto">
-      <h1 class="text-3xl md:text-4xl font-bold mb-8 text-center">{pageTitle}</h1>
-      
+  <section class={styles.hero}>
+    <h1 class="">{pageTitle}</h1>
+    <p>At <span class={styles.accent}>ElPuas Digital Crafts</span>, we don’t just build websites—we craft fast, scalable, and human-centered web experiences. <span class={styles.accent}>This blog is where we share our process, experiments, and lessons learned while working at the intersection of design, code, and AI.</span> From case studies to technical breakdowns, here’s a look behind the scenes of how we build for the modern web.</p>
+    </section>
       {englishPosts.length === 0 ? (
         <p class="text-center text-gray-500">No blog posts found for this language yet.</p>
       ) : (
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class={styles.grid}>
           {englishPosts.map((post) => (
-            <BlogCard post={post} lang="en" /> // Pass lang prop if BlogCard needs it for URL
+            <BlogCard post={post} lang="en" />
           ))}
         </div>
       )}
     </div>
-  </section>
 </Layout>
