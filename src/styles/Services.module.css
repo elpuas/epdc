@@ -1,4 +1,7 @@
 .hero {
+    max-width: 978px;
+    width: 100%;
+
     h1 span {
         font-size: var(--fontsize-h1);
     }
