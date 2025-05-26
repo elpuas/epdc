@@ -5,6 +5,7 @@ import LanguageSwitcher from './LanguageSwitcher.astro';
 import MobileDock from './MobileDock.astro';
 import type { Language } from '../i18n/utils';
 import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
 
 interface Props {
 	lang: Language;
@@ -17,7 +18,7 @@ const currentPath = Astro.url.pathname;
 <header class={styles.siteHeader}>
 	<div class={styles.headerContainer}>
 		<a href={`/${lang}`} class={styles.logo}>
-			<Image src="/logo-updated-150x150.webp" alt="ElPuas logo" width="150" height="150" loading="lazy" decoding="async" />
+			<Image src="/logo-updated-150x150.webp" alt="ElPuas logo" width="150" height="150" loading="eager" decoding="async" />
 		</a>
 		<nav class={styles.mainNav}>
 			<ul>
@@ -28,7 +29,17 @@ const currentPath = Astro.url.pathname;
 				<li><a href={`/${lang}/contact`}>{t('nav.contact', lang)}</a></li>
 			</ul>
 		</nav>
-		<LanguageSwitcher currentLang={lang} />
+		<div class={styles.headerControls}>
+			<LanguageSwitcher currentLang={lang} />
+			<button 
+				id="bw-toggle" 
+				class={styles.bwToggle}
+				aria-label="Toggle black and white mode"
+				type="button"
+			>
+				<Icon name="ph:eye-slash" width="20" height="20" aria-hidden="true" />
+			</button>
+		</div>
 	</div>
 </header>
 

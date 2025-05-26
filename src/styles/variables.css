@@ -82,3 +82,14 @@
   --font-weight-regular: 400;
   --font-weight-bold: 700;
 }
+
+/* Black and White Theme */
+:root[data-theme='bw'] {
+  /* Colors - Grayscale Override */
+  --color-primary: #ffffff;
+  --color-secondary: #000000;
+  --color-tertiary: #666666;
+  --color-quaternary: #cccccc;
+  --color-white: #000000;
+  --color-black: #ffffff;
+}
