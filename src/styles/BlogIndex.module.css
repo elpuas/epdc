@@ -1,0 +1,14 @@
+.hero {
+    max-width: 978px;
+    margin-bottom: var(--space-4xl);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-md);
+}
+
+.accent {
+    color: var(--color-tertiary);
+}
