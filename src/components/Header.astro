@@ -4,6 +4,7 @@ import { t } from '../i18n/utils';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import MobileDock from './MobileDock.astro';
 import type { Language } from '../i18n/utils';
+import { Image } from 'astro:assets';
 
 interface Props {
 	lang: Language;
@@ -16,7 +17,7 @@ const currentPath = Astro.url.pathname;
 <header class={styles.siteHeader}>
 	<div class={styles.headerContainer}>
 		<a href={`/${lang}`} class={styles.logo}>
-			<img src="/logo-updated-150x150.webp" alt="ElPuas logo" width="150" height="150" />
+			<Image src="/logo-updated-150x150.webp" alt="ElPuas logo" width="150" height="150" loading="lazy" decoding="async" />
 		</a>
 		<nav class={styles.mainNav}>
 			<ul>
