@@ -6,6 +6,7 @@ import ProcessStep from '../../components/ProcessStep.astro';
 import CaseStudySection from '../../components/CaseStudySection.astro';
 import TeamMember from '../../components/TeamMember.astro';
 import alfredoImage from '../../../public/team/alfredo-navas.jpeg';
+import gianfrancoImage from '../../../public/team/gianfranco.png';
 import aiImage from '../../../public/team/ai-assistant.png';
 import styles from '../../styles/About.module.css';
 const title = 'Meet ElPuas Digital Crafts | A Family-Led Web Studio';
@@ -108,9 +109,28 @@ const process = [
         ]}
       />
       <TeamMember
+        image={gianfrancoImage}
+        alt="Gianfranco Navas - Lead Frontend Developer"
         name="Gianfranco Navas"
         role="Lead Frontend Developer"
-        bio="Gianfranco, our frontend expert, adds depth to our team's capabilities, ensuring cutting-edge designs and functionality."
+        bio="Gianfranco leads our Rome headquarters and brings a sharp eye for frontend detail. With a background in design systems and component-driven development, he ensures every interface is responsive, accessible, and aligned with brand goals. He collaborates closely with clients and our design team to deliver polished, user-focused digital experiences that feel as good as they look."
+        socials={[
+          { 
+            href: 'https://www.linkedin.com/in/gianfranconavasfernandiniwebdeveloper/', 
+            icon: 'ph:linkedin-logo', 
+            label: 'Gianfranco\'s LinkedIn profile' 
+          },
+          {
+            href: 'https://github.com/gianfranco2605',
+            icon: 'ph:github-logo',
+            label: 'Gianfranco\'s GitHub profile'
+          },
+          {
+            href: 'https://x.com/gianfranco2605',
+            icon: 'ph:x-logo',
+            label: 'Gianfranco\'s personal X profile'
+          }
+        ]}
       />
       <TeamMember
         name="AI Assistant"

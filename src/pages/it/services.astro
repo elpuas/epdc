@@ -5,11 +5,42 @@ import ServiceDetails from '../../components/ServiceDetails.astro';
 import TrustedBy from '../../components/TrustedBy.astro';
 import PricingCard from '../../components/PricingCard.astro';
 import CaseStudySection from '../../components/CaseStudySection.astro';
+import StructuredData from '../../components/StructuredData.astro';
 import styles from '../../styles/Services.module.css';
 const title = 'WordPress, E‑Commerce e Servizi White‑Label | ElPuas Digital Crafts';
 const description = 'Dallo sviluppo su misura ai negozi online e al supporto per agenzie — offriamo servizi web affidabili e accessibili, pensati per crescere con te.';
 import caseStudyImage from '../../../public/cas-showcase.jpg';
 const lang = 'it';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Servizi WordPress, E‑Commerce e White‑Label | ElPuas Digital Crafts',
+  description: 'Dallo sviluppo WordPress su misura a WooCommerce e supporto per agenzie — offriamo servizi web affidabili pensati per le tue esigenze e la crescita del tuo business.',
+  url: 'https://elpuasdigitalcrafts.com/it/services',
+  hasPart: [
+    {
+      '@type': 'Service',
+      name: 'Sviluppo Web',
+      description: 'Siti web personalizzati o adattati con caricamento veloce, design responsive, SEO e integrazione CMS.'
+    },
+    {
+      '@type': 'Service',
+      name: 'Soluzioni E‑Commerce',
+      description: 'Negozi WooCommerce ottimizzati per la conversione, integrati con logistica e checkout semplificato.'
+    },
+    {
+      '@type': 'Service',
+      name: 'Manutenzione e Supporto',
+      description: 'Piani che includono aggiornamenti di sicurezza, backup, monitoraggio e ore di sviluppo incluse.'
+    },
+    {
+      '@type': 'Service',
+      name: 'Servizi White‑Label',
+      description: 'Supporto tecnico riservato e di alta qualità per agenzie e studi creativi.'
+    }
+  ]
+}
 ---
 
 <Layout {title} {description} {lang}>
@@ -152,4 +183,5 @@ const lang = 'it';
     <h2 id="cta-title">Pronto a lanciare o scalare il tuo prossimo progetto digitale?</h2>
     <Button href="/contact" label="Inizia Oggi" aria-label="Contattaci per iniziare con il tuo progetto" />
   </section>
+  <StructuredData data={structuredData} />
 </Layout> 

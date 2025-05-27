@@ -6,6 +6,7 @@ import ProcessStep from '../../components/ProcessStep.astro';
 import CaseStudySection from '../../components/CaseStudySection.astro';
 import TeamMember from '../../components/TeamMember.astro';
 import alfredoImage from '../../../public/team/alfredo-navas.jpeg';
+import gianfrancoImage from '../../../public/team/gianfranco.png';
 import aiImage from '../../../public/team/ai-assistant.png';
 import styles from '../../styles/About.module.css';
 const title = 'Conocé ElPuas Digital Crafts | Un Estudio Web Familiar';
@@ -108,9 +109,28 @@ const process = [
         ]}
       />
       <TeamMember
+        image={gianfrancoImage}
+        alt="Gianfranco Navas - Lead Frontend Developer"
         name="Gianfranco Navas"
-        role="Desarrollador Frontend Principal"
-        bio="Gianfranco, nuestro experto en frontend, añade profundidad a las capacidades de nuestro equipo, asegurando diseños y funcionalidades de vanguardia."
+        role="Lead Frontend Developer"
+        bio="Gianfranco lidera nuestra sede en Roma y aporta una mirada experta al desarrollo frontend. Con experiencia en sistemas de diseño y desarrollo basado en componentes, se asegura de que cada interfaz sea accesible, responsiva y coherente con los objetivos de marca. Trabaja de cerca con los clientes y nuestro equipo de diseño para entregar experiencias digitales pulidas, centradas en el usuario y visualmente impecables."
+        socials={[
+          { 
+            href: 'https://www.linkedin.com/in/gianfranconavasfernandiniwebdeveloper/', 
+            icon: 'ph:linkedin-logo', 
+            label: 'Perfil de LinkedIn de Gianfranco' 
+          },
+          {
+            href: 'https://github.com/gianfranco2605',
+            icon: 'ph:github-logo',
+            label: 'Perfil de GitHub de Gianfranco'
+          },
+          {
+            href: 'https://x.com/gianfranco2605',
+            icon: 'ph:x-logo',
+            label: 'Perfil de X de Gianfranco'
+          }
+        ]}
       />
       <TeamMember
         name="Asistente IA"

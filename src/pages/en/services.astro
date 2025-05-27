@@ -5,11 +5,42 @@ import ServiceDetails from '../../components/ServiceDetails.astro';
 import TrustedBy from '../../components/TrustedBy.astro';
 import PricingCard from '../../components/PricingCard.astro';
 import CaseStudySection from '../../components/CaseStudySection.astro';
+import StructuredData from '../../components/StructuredData.astro';
 import styles from '../../styles/Services.module.css';
 const title = 'WordPress, E‑Commerce & White‑Label Services | ElPuas Digital Crafts';
 const description = 'From custom WordPress development to WooCommerce and agency support — we offer reliable web services that fit your needs, budget, and growth plans.';
 import caseStudyImage from '../../../public/cas-showcase.jpg';
 const lang = 'en';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'WordPress, E‑Commerce & White‑Label Services',
+  description: 'From custom WordPress development to WooCommerce and agency support — we offer reliable web services that fit your needs, budget, and growth plans.',
+  url: 'https://elpuasdigitalcrafts.com/en/services',
+  hasPart: [
+    {
+      '@type': 'Service',
+      name: 'Web Development',
+      description: 'Custom-built or adapted websites with fast load times, SEO, responsive design, and CMS integrations.'
+    },
+    {
+      '@type': 'Service',
+      name: 'E-Commerce Solutions',
+      description: 'WooCommerce sites optimized for conversion, logistics integration, and smooth checkout.'
+    },
+    {
+      '@type': 'Service',
+      name: 'Maintenance & Support',
+      description: 'Plans including security updates, backups, monitoring, and expert dev time.'
+    },
+    {
+      '@type': 'Service',
+      name: 'White-Label Services',
+      description: 'Confidential, pixel-perfect development support for creative agencies and studios.'
+    }
+  ]
+}
 ---
 
 <Layout {title} {description} {lang}>
@@ -153,4 +184,5 @@ const lang = 'en';
     <h2 id="cta-title">Ready to launch or scale your next digital project?</h2>
     <Button href="/contact" label="Get Started Today" aria-label="Contact us to get started with your project" />
   </section>
+  <StructuredData data={structuredData} />
 </Layout> 

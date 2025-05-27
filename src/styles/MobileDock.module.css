@@ -41,6 +41,14 @@
   transition: color 0.2s ease;
 }
 
+:root[data-theme='bw'] .navLink {
+  color: var(--color-black);
+
+  &:hover {
+    color: var(--color-tertiary);
+  }
+}
+
 .navLink:hover {
   color: var(--color-tertiary);
 }
