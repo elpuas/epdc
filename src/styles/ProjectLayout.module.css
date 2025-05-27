@@ -41,6 +41,7 @@
 
         .projectTags {
             display: flex;
+            flex-wrap: wrap;
             gap: var(--space-md);
             justify-content: center;
             background-color: var(--color-secondary);
