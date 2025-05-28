@@ -1,18 +1,19 @@
 ---
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
-import '../styles/global.css';
+// import '../styles/global.css';
 import { SITE_TITLE } from '../consts';
 
 interface Props {
 	title: string;
 	description: string;
 	image?: string;
+	deferCSS?: boolean;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = '/default.png' } = Astro.props;
+const { title, description, image = '/default.png', deferCSS = false } = Astro.props;
 ---
 
 <!-- Global Metadata -->
@@ -38,7 +39,14 @@ const { title, description, image = '/default.png' } = Astro.props;
 <meta name="description" content={description} />
 <meta name="robots" content="index, follow" />
 <link rel="sitemap" href="/sitemap-index.xml" />
-
+{deferCSS && (
+	<link
+		rel="stylesheet"
+		href="/_astro/_slug_.D56h_XWw.css"
+		media="print"
+		onload="this.media='all'"
+	/>
+)}
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
