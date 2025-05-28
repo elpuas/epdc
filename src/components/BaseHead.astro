@@ -53,22 +53,37 @@ const { title, description, image = '/default.png' } = Astro.props;
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-<!-- Google tag (gtag.js) -->
-<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-V1LSD3LCDX"></script>
-<script is:inline>
+<!-- Google tag (gtag.js) - Partytown Integration -->
+<script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-V1LSD3LCDX"></script>
+<script type="text/partytown">
 	window.dataLayer = window.dataLayer || [];
 	function gtag(){dataLayer.push(arguments);}
 	gtag('js', new Date());
-
 	gtag('config', 'G-V1LSD3LCDX');
 </script>
 
-<script type="application/ld+json">
-	{
-		"@context": "https://schema.org",
-		"@type": "Organization",
-		"name": "ElPuas Digital Crafts",
-		"url": "https://elpuasdigitalcrafts.com",
-		"logo": "https://elpuasdigitalcrafts.com/logo-updated-150x150.webp"
+<!-- Organization Structured Data with Social Profiles -->
+<script type="application/ld+json" is:raw>
+{
+	"@context": "https://schema.org",
+	"@type": "Organization",
+	"name": "ElPuas Digital Crafts",
+	"url": "https://elpuasdigitalcrafts.com",
+	"logo": "https://elpuasdigitalcrafts.com/logo-updated-150x150.webp",
+	"sameAs": [
+		"https://github.com/elpuas",
+		"https://www.linkedin.com/company/elpuas-digital-crafts/"
+	],
+	"description": "Expert WordPress development, WooCommerce solutions, and white-label services for agencies and businesses worldwide.",
+	"foundingDate": "2020",
+	"address": {
+		"@type": "PostalAddress",
+		"addressCountry": "CR"
+	},
+	"contactPoint": {
+		"@type": "ContactPoint",
+		"contactType": "customer service",
+		"url": "https://elpuasdigitalcrafts.com/en/contact"
 	}
+}
 </script>
