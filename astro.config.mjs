@@ -14,7 +14,6 @@ export default defineConfig({
 		sitemap(), 
 		icons({
 			include: {
-				// Use a simpler approach with fewer icons to reduce build issues
 				ph: ['*'],
 				'circle-flags': ['*']
 			},
