@@ -4,6 +4,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import StructuredData from '../components/StructuredData.astro';
 import { Image } from 'astro:assets';
 import type { Language } from '../i18n/utils';
 import '../styles/global.css';
@@ -12,12 +13,37 @@ import stylesProject from '../styles/ProjectLayout.module.css';
 type Props = CollectionEntry<'portfolio'>['data'];
 
 const { title, description = '', date, image, lang = 'en' as Language, tags = [] } = Astro.props;
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CreativeWork',
+	headline: title,
+	description,
+	datePublished: date,
+	inLanguage: lang,
+	...(image && {
+		image: {
+			'@type': 'ImageObject',
+			url: image,
+			width: 1200,
+			height: 630
+		}
+	}),
+	...(tags.length > 0 && {
+		keywords: tags.join(', ')
+	}),
+	mainEntityOfPage: {
+		'@type': 'WebPage',
+		'@id': `https://elpuasdigitalcrafts.com/${lang}/portfolio/${Astro.url.pathname.split('/').pop()}`
+	}
+}
 ---
 
 <!DOCTYPE html>
 <html lang={lang}>
 	<head>
 		<BaseHead title={title} description={description} />
+		<StructuredData data={structuredData} />
 	</head>
 
 	<body>
@@ -55,5 +81,37 @@ const { title, description = '', date, image, lang = 'en' as Language, tags = []
 				<Footer lang={lang} />
 			</div>
 		</footer>
+		<script>
+			// Black and White Theme Toggle with Persistence
+			document.addEventListener('DOMContentLoaded', () => {
+			const bwToggle = document.getElementById('bw-toggle');
+			const html = document.documentElement;
+			
+			// Load saved theme from localStorage
+			const savedTheme = localStorage.getItem('epdc-theme');
+			if (savedTheme && (savedTheme === 'light' || savedTheme === 'bw')) {
+				html.setAttribute('data-theme', savedTheme);
+			}
+			
+			if (bwToggle) {
+				bwToggle.addEventListener('click', () => {
+				const currentTheme = html.getAttribute('data-theme');
+				const newTheme = currentTheme === 'light' ? 'bw' : 'light';
+				
+				// Update DOM
+				html.setAttribute('data-theme', newTheme);
+				
+				// Save to localStorage
+				localStorage.setItem('epdc-theme', newTheme);
+				
+				// Update button aria-label
+				const isBlackWhite = newTheme === 'bw';
+				bwToggle.setAttribute('aria-label', 
+					isBlackWhite ? 'Switch to color mode' : 'Toggle black and white mode'
+				);
+				});
+			}
+			});
+		</script>
 	</body>
 </html> 

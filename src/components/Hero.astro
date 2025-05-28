@@ -7,9 +7,9 @@ const { lang } = Astro.props;
 
 // Define the rotating verbs for each language
 const verbs = {
-    en: ['code', 'craft', 'build', 'design', 'optimize'],
-    es: ['programamos', 'creamos', 'construimos', 'diseñamos', 'optimizamos'],
-    it: ['programmiamo', 'creiamo', 'costruiamo', 'progettiamo', 'ottimizziamo']
+    en: ['code', 'build', 'design', 'optimize'],
+    es: ['codificamos', 'creamos', 'diseñamos', 'pulimos'],
+    it: ['scriviamo', 'creiamo', 'curiamo', 'ottimizziamo']
 };
 
 // Get the appropriate verbs for the current language
@@ -65,8 +65,8 @@ const currentVerbs = verbs[lang as keyof typeof verbs] || verbs.en;
     // Define the verbs for each language
     const verbs = {
       en: ['code', 'craft', 'build', 'design', 'optimize'],
-      es: ['programamos', 'creamos', 'construimos', 'diseñamos', 'optimizamos'],
-      it: ['programmiamo', 'creiamo', 'costruiamo', 'progettiamo', 'ottimizziamo']
+      es: ['codificamos', 'creamos', 'diseñamos', 'pulimos'],
+      it: ['scriviamo', 'creiamo', 'curiamo', 'ottimizziamo']
     };
     
     // Define labels for each language

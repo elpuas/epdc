@@ -1,6 +1,6 @@
 :root {
   /* Font Sizes */
-  --fontsize-h1: clamp(74px, calc(4.625rem + ((1vw - 7.68px) * 4.661)), 96px);
+  --fontsize-h1: clamp(64px, calc(3.625rem + ((1vw - 7.68px) * 4.661)), 96px);
   --fontsize-h2: clamp(42px, calc(2.625rem + ((1vw - 7.68px) * 6.7797)), 64px);
   --fontsize-h3: clamp(36px, calc(2.25rem + ((1vw - 7.68px) * 1.2712)), 42px);
   --fontsize-h4: clamp(24px, calc(1.5rem + ((1vw - 7.68px) * 2.5424)), 36px);
