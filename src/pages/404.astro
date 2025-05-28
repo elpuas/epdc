@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import styles from '../styles/404.module.css';
+
+const title = '404 — Page Not Found | ElPuas Digital Crafts';
+const description = 'The page you are looking for could not be found. Return to our homepage to explore our web development services.';
+const lang = 'en';
+---
+
+<Layout {title} {description} {lang}>
+  <section class={styles.errorPage} aria-labelledby="error-title">
+    <div class={styles.errorContent}>
+      <h1 id="error-title">404 — Page Not Found</h1>
+      <p class={styles.errorMessage}>
+        Sorry, the page you are looking for doesn't exist or has been moved.
+      </p>
+      <p class={styles.helpText}>
+        Let's get you back on track with our web development services.
+      </p>
+      <div class={styles.actions}>
+        <Button href="/en/" label="Return Home" />
+        <Button href="/en/contact" label="Contact Us" variant="outline" />
+      </div>
+    </div>
+  </section>
+</Layout> 

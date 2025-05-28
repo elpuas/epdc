@@ -13,12 +13,12 @@ const spanishPosts = allPosts.filter(post => post.data.lang === 'es');
 // Sort posts by date if needed (optional, newest first)
 spanishPosts.sort((a, b) => (b.data.date?.valueOf() || 0) - (a.data.date?.valueOf() || 0));
 
-const pageTitle = "En el Bucle";
-const pageDescription = "En ElPuas Digital Crafts, no solo construimos sitios web—creamos experiencias web rápidas, escalables y centradas en el usuario. Este blog es donde compartimos nuestro proceso, experimentos y lecciones aprendidas mientras trabajamos en la intersección del diseño, código e IA.";
+const pageTitle = "Blog de Desarrollo WordPress | Insights de Diseño Web | ElPuas Digital Crafts";
+const pageDescription = "Insights expertos sobre desarrollo WordPress, soluciones WooCommerce y diseño web moderno. Aprende de nuestro proceso, experimentos y lecciones en la intersección del diseño, código e IA.";
 ---
-<Layout title={pageTitle} description={pageDescription}>
+<Layout title={pageTitle} description={pageDescription} lang="es">
   <section class={styles.hero}>
-    <h1 class="">{pageTitle}</h1>
+    <h1 class="">En el Bucle</h1>
     <p>En <span class={styles.accent}>ElPuas Digital Crafts</span>, no solo construimos sitios web—creamos experiencias web rápidas, escalables y centradas en el usuario. <span class={styles.accent}>Este blog es donde compartimos nuestro proceso, experimentos y lecciones aprendidas mientras trabajamos en la intersección del diseño, código e IA.</span> Desde estudios de caso hasta análisis técnicos, aquí tienes una mirada detrás de escena de cómo construimos para la web moderna.</p>
     </section>
       {spanishPosts.length === 0 ? (

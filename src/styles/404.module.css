@@ -1,0 +1,45 @@
+.errorPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+}
+
+.errorContent {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.errorContent h1 {
+  font-size: var(--fontsize-h1);
+  color: var(--color-accent);
+  margin-bottom: var(--space-lg);
+}
+
+.errorMessage {
+  font-size: var(--fontsize-lg);
+  color: var(--color-secondary);
+  margin-bottom: var(--space-md);
+}
+
+.helpText {
+  font-size: var(--fontsize-base);
+  color: var(--color-muted);
+  margin-bottom: var(--space-xl);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .actions {
+    flex-direction: column;
+    align-items: center;
+  }
+} 
