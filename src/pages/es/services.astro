@@ -5,11 +5,42 @@ import ServiceDetails from '../../components/ServiceDetails.astro';
 import TrustedBy from '../../components/TrustedBy.astro';
 import PricingCard from '../../components/PricingCard.astro';
 import CaseStudySection from '../../components/CaseStudySection.astro';
+import StructuredData from '../../components/StructuredData.astro';
 import styles from '../../styles/Services.module.css';
 const title = 'WordPress, E‑Commerce y Soporte White‑Label | ElPuas Digital Crafts';
 const description = 'Desde desarrollos a medida hasta tiendas en línea y soporte a agencias — ofrecemos servicios web confiables, escalables y adaptados a tu presupuesto.';
 import caseStudyImage from '../../../public/cas-showcase.jpg';
 const lang = 'es';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Servicios WordPress, E‑Commerce y White‑Label | ElPuas Digital Crafts',
+  description: 'Desde desarrollo WordPress personalizado hasta WooCommerce y soporte para agencias — ofrecemos servicios web confiables que se adaptan a tus necesidades y planes de crecimiento.',
+  url: 'https://elpuasdigitalcrafts.com/es/services',
+  hasPart: [
+    {
+      '@type': 'Service',
+      name: 'Desarrollo Web',
+      description: 'Sitios personalizados o adaptados con tiempos de carga rápidos, diseño responsive, SEO y CMS integrado.'
+    },
+    {
+      '@type': 'Service',
+      name: 'Soluciones E‑Commerce',
+      description: 'Tiendas WooCommerce optimizadas para conversión, integradas con logística y checkout eficiente.'
+    },
+    {
+      '@type': 'Service',
+      name: 'Mantenimiento y Soporte',
+      description: 'Planes que incluyen actualizaciones de seguridad, backups, monitoreo y horas de desarrollo.'
+    },
+    {
+      '@type': 'Service',
+      name: 'Servicios White‑Label',
+      description: 'Soporte de desarrollo confidencial y de alta calidad para agencias y estudios creativos.'
+    }
+  ]
+}
 ---
 
 <Layout {title} {description} {lang}>
@@ -67,8 +98,8 @@ const lang = 'es';
             Trabajamos perfectamente tras bambalinas para que tu <span class={styles.accent}>agencia pueda escalar</span> sin estrés. Desde <span class={styles.accent}>desarrollos pixel-perfect</span> hasta soporte continuo confiable, te hacemos quedar bien — tus clientes nunca necesitan saber que estuvimos allí.
           </div>
         </ServiceDetails>
-
     </div>
+    <p class={styles.tacLink}><a href="/es/terms-and-conditions">Términos y Condiciones</a></p>
   </section>
 
   <section class={styles.pricing} aria-labelledby="pricing-title" role="region">
@@ -150,6 +181,7 @@ const lang = 'es';
 
   <section class={styles.ctaBlock} aria-labelledby="cta-title" role="region">
     <h2 id="cta-title">¿Listo para lanzar o escalar tu próximo proyecto digital?</h2>
-    <Button href="/contact" label="Comienza Hoy" aria-label="Contáctanos para comenzar con tu proyecto" />
+    <Button href="/es/contact" label="Comienza Hoy" aria-label="Contáctanos para comenzar con tu proyecto" />
   </section>
+  <StructuredData data={structuredData} />
 </Layout> 

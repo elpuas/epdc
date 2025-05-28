@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import partytown from '@astrojs/partytown';
 import mdx from '@astrojs/mdx';
 import icons from 'astro-icon';
 import sitemap from '@astrojs/sitemap';
@@ -13,11 +14,11 @@ export default defineConfig({
 		sitemap(), 
 		icons({
 			include: {
-				// Use a simpler approach with fewer icons to reduce build issues
 				ph: ['*'],
 				'circle-flags': ['*']
 			},
-		})
+		}),
+		partytown({ config: { forward: ['dataLayer.push'] } })
 	],
 	i18n: {
 		defaultLocale: DEFAULT_LANGUAGE,

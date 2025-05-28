@@ -102,6 +102,10 @@ const projectUrl = `/${lang}/crafted-with-love/${project.slug}`;
     padding: var(--space-sm) var(--space-lg);
     transform: rotateY(180deg);
 
+    @media (max-width: 768px) {
+      justify-content: space-around;
+    }
+
     .project-content {
       display: flex;
       flex-direction: column;
@@ -130,6 +134,10 @@ const projectUrl = `/${lang}/crafted-with-love/${project.slug}`;
         font-weight: 400;
         margin-bottom: 1rem;
         margin-top: 0;
+
+        @media (max-width: 768px) {
+          display: none;
+        }
       }
     }
   }
@@ -158,6 +166,10 @@ const projectUrl = `/${lang}/crafted-with-love/${project.slug}`;
     padding: var(--space-sm) var(--space-lg);
     text-transform: uppercase;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    @media (max-width: 768px) {
+        text-align: center;
+    }
 
     &:hover {
       background-color: var(--color-secondary);

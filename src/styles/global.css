@@ -131,7 +131,7 @@ a:hover {
 	display: flex;
 	gap: var(--space-2xl);
 	margin: var(--space-3xl) 0;
-	align-items: flex-start;
+	align-items: center;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -211,6 +211,12 @@ a:hover {
 			color: var(--color-tertiary);
 			text-decoration: underline;
 		}
+	}
+}
+
+:root[data-theme='bw'] {
+	img {
+		filter: grayscale(100%);
 	}
 }
 

@@ -1,0 +1,103 @@
+---
+title: "Top FAQs About Our WordPress Services"
+lang: "en"
+description: "Get clear answers to the most common questions about our WordPress development, WooCommerce, support, white-label, and SEO services. Optimized for search engines and generative AI."
+image: "/faq.jpg"
+date: "2025-05-27"
+author: Alfredo Navas Fernandini
+---
+import HeroImage from '../../../public/faq.jpg';
+import {Image} from 'astro:assets';
+import StructuredData from '../../components/StructuredData.astro'
+
+export const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    name: 'Top FAQs About Our WordPress Services – AEO & GEO Ready',
+    description: 'Get clear answers to the most common questions about our WordPress development, WooCommerce, support, white-label, and SEO services. Optimized for search engines and generative AI.',
+    url: 'https://elpuasdigitalcrafts.com/en/blog/top-faq-about-our-services',
+    mainEntity: [
+        {
+        '@type': 'Question',
+        name: 'What does a WordPress web development service include?',
+        acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'It includes custom theme development, performance optimization, responsive design, SEO-ready architecture, and CMS integrations—tailored to your business needs and goals.'
+        }
+        },
+        {
+        '@type': 'Question',
+        name: 'What makes your WooCommerce solutions different?',
+        acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Our WooCommerce stores are designed for conversion: fast, mobile-first, and with advanced features like inventory sync, custom checkout flows, and marketing automation.'
+        }
+        },
+        {
+        '@type': 'Question',
+        name: 'Do your support plans include hosting and backups?',
+        acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Yes. Our plans include daily backups, uptime monitoring, performance tuning, plugin/theme updates, and optional hosting—plus dev time for support and improvements.'
+        }
+        },
+        {
+        '@type': 'Question',
+        name: 'What are white-label development services?',
+        acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'We develop websites under your agency brand. You deliver to the client, we handle development, estimates, and support. Fast, confidential, and pixel-perfect.'
+        }
+        },
+        {
+        '@type': 'Question',
+        name: 'How do you help with SEO and technical optimization?',
+        acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'We build sites with semantic HTML, schema markup, lazy-loaded assets, fast Core Web Vitals, and clear content hierarchies—ready to rank and optimize for search and AI.'
+        }
+        }
+    ]
+}
+
+<div class="blog-hero-image">
+    {HeroImage && <Image width={1020} height={510} src={HeroImage} alt="FAQ about our services" />}
+</div>
+
+Below you'll find answers to the most common questions clients and agencies ask us about WordPress development, WooCommerce, web support, white-label services, and technical SEO.
+
+### 1. What's included in a custom WordPress website?
+We *build custom websites tailored to your needs*. This includes responsive design, SEO best practices, fast load times, and a user-friendly admin interface using block editor or ACF as needed. Hosting, security, and ongoing support can be included.
+
+### 2. Do you develop online stores with WooCommerce?
+Yes. We specialize in *building WooCommerce* stores that are conversion-focused, optimized for speed, and include custom features like inventory sync, one-page checkout, and third-party API integrations.
+
+### 3. What kind of support and maintenance do you offer?
+We offer *monthly maintenance plans* that cover security updates, plugin and core updates, uptime monitoring, backups, performance optimization, and dev hours for small tasks. Support is direct and fast via Slack or email.
+
+### 4. Do you offer white-label development for agencies?
+Absolutely. We work behind the scenes to deliver pixel-perfect builds, scoped estimates, and reliable dev support. Your agency gets credit; we stay invisible. Ideal for busy studios or growing digital teams. *White-label development* is a service we offer to agencies and studios. We work behind the scenes to deliver pixel-perfect builds, scoped estimates, and reliable dev support. Your agency gets credit; we stay invisible. Ideal for busy studios or growing digital teams.
+
+### 5. Can you help with SEO?
+Yes. We *implement technical SEO foundations* like proper heading structure, performance tuning, semantic HTML, metadata, Open Graph tags, and structured data. We also help with keyword mapping and site architecture.
+
+### 6. How long does a website project usually take?
+Depending on scope, a basic site can be done in 2–4 weeks. More complex e-commerce or multilingual projects take 6–8 weeks or more. *We provide detailed timelines in our proposals.*
+
+### 7. Can you redesign my existing website?
+Yes. We often take *existing websites and rebuild them* using modern tools like Astro, WordPress block themes, or hybrid stacks. We improve performance, UX, and maintain your content.
+
+### 8. What makes your service different?
+We *combine speed, performance, and communication*. Every project is *handcrafted with care*, and we use *AI-assisted workflows* to streamline delivery without cutting corners. You get direct access to expert developers.
+
+### 9. Where are you based?
+Our team is based in *Costa Rica, USA, and Italy*. We serve clients worldwide and work across time zones. *Communication is always fast and clear.*
+
+### 10. What's the best way to get started?
+Just [*reach out via our contact form*](/en/contact) or [*book a quick call*](https://calendar.app.google/WVLmA19nLHZEisQb7). We'll assess your needs and provide a plan that matches your goals and budget.
+
+<div style="margin-top: var(--space-4xl);">
+    &nbsp;
+</div>
+
+<StructuredData data={structuredData} />
