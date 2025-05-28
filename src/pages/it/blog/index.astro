@@ -13,12 +13,12 @@ const italianPosts = allPosts.filter(post => post.data.lang === 'it');
 // Sort posts by date if needed (optional, newest first)
 italianPosts.sort((a, b) => (b.data.date?.valueOf() || 0) - (a.data.date?.valueOf() || 0));
 
-const pageTitle = "Nel Loop";
-const pageDescription = "In ElPuas Digital Crafts, non costruiamo solo siti web—creiamo esperienze web veloci, scalabili e centrate sull'utente. Questo blog è dove condividiamo il nostro processo, esperimenti e lezioni apprese mentre lavoriamo all'intersezione di design, codice e IA.";
+const pageTitle = "Blog di Sviluppo WordPress | Insights di Web Design | ElPuas Digital Crafts";
+const pageDescription = "Insights esperti su sviluppo WordPress, soluzioni WooCommerce e web design moderno. Impara dal nostro processo, esperimenti e lezioni all'intersezione di design, codice e IA.";
 ---
-<Layout title={pageTitle} description={pageDescription}>
+<Layout title={pageTitle} description={pageDescription} lang="it">
   <section class={styles.hero}>
-    <h1 class="">{pageTitle}</h1>
+    <h1 class="">Nel Loop</h1>
     <p>In <span class={styles.accent}>ElPuas Digital Crafts</span>, non costruiamo solo siti web—creiamo esperienze web veloci, scalabili e centrate sull'utente. <span class={styles.accent}>Questo blog è dove condividiamo il nostro processo, esperimenti e lezioni apprese mentre lavoriamo all'intersezione di design, codice e IA.</span> Dai case study alle analisi tecniche, ecco uno sguardo dietro le quinte di come costruiamo per il web moderno.</p>
     </section>
       {italianPosts.length === 0 ? (
