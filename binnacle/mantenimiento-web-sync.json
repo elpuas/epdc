@@ -1,0 +1,23 @@
+{
+  "synchronization_timestamp": "2025-01-07T11:45:00.000Z",
+  "languages_synchronized": ["en", "it"],
+  "source_file": "src/content/blog/mantenimiento-web.es.mdx",
+  "generated_files": [
+    {
+      "language": "en",
+      "path": "src/content/blog/mantenimiento-web.en.mdx",
+      "sha256_hash": "1c17fe57686dfea9627f032ef7e161de5df0b743c434759ccc4a3180f65f2a9a"
+    },
+    {
+      "language": "it", 
+      "path": "src/content/blog/mantenimiento-web.it.mdx",
+      "sha256_hash": "8aad58ffaf7a449da57b3185b78f293dc02b71aed0464da2433fa1bf91f8baf7"
+    }
+  ],
+  "translation_notes": {
+    "methodology": "Professional translation maintaining MDX structure, headings, blockquotes, and code blocks",
+    "tone": "Business-focused for owners and IT/marketing managers",
+    "preserved_elements": ["ElPuas Digital Crafts brand name", "frontmatter structure", "markdown formatting", "component imports"],
+    "cultural_adaptations": ["Currency adapted to euros for Italian version", "Formal tone maintained across both languages"]
+  }
+} 
