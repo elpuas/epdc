@@ -1,0 +1,40 @@
+# ElPuas Digital Crafts
+
+> [EN] A boutique web development studio (WordPress, WooCommerce, Astro) combining creativity, technical support, and modern technologies for micro‑businesses, agencies, and global brands.  
+> [ES] Boutique de desarrollo web (WordPress, WooCommerce, Astro) que combina creatividad, soporte técnico y tecnologías modernas para microempresas, agencias y marcas globales.  
+> [IT] Studio di sviluppo web boutique (WordPress, WooCommerce, Astro) che unisce creatività, supporto tecnico e tecnologie moderne per microimprese, agenzie e marchi internazionali.
+
+## Services / Servicios / Servizi
+- https://elpuas.dev/en/services  
+  [EN] Clear description of key services: WordPress, e-commerce, support, and white-label.  
+  [ES] Descripción clara de servicios clave: WordPress, e-commerce, soporte y desarrollo white-label.  
+  [IT] Descrizione chiara dei servizi principali: WordPress, e-commerce, supporto e servizi white-label.
+
+## Portfolio / Portafolio / Portfolio
+- https://elpuas.dev/en/crafted-with-love  
+  [EN] Project showcase with real examples and success stories.  
+  [ES] Portafolio de proyectos con ejemplos reales y casos de éxito.  
+  [IT] Portfolio con esempi reali e storie di successo.
+
+## Blog
+- https://elpuas.dev/en/blog/behind-the-redesign  
+  [EN] Case study: redesign with Astro and AI-assisted process.  
+  [ES] Estudio de caso: rediseño usando Astro y proceso asistido por IA.  
+  [IT] Studio di caso: redesign con Astro e processo supportato da IA.
+
+- https://elpuas.dev/en/blog/top-faq-about-our-services  
+  [EN] FAQ optimized for clients and search engines.  
+  [ES] Preguntas frecuentes optimizadas para usuarios y motores de búsqueda.  
+  [IT] Domande frequenti ottimizzate per utenti e motori di ricerca.
+
+## Contact / Contacto / Contatto
+- https://elpuas.dev/en/contact  
+  [EN] Contact form and details.  
+  [ES] Formulario de contacto y datos.  
+  [IT] Modulo di contatto e dettagli.
+
+## Terms and Conditions / Términos y condiciones / Termini e condizioni
+- https://elpuas.dev/en/terms-and-conditions  
+  [EN] Legal terms, support, payments, and limitations.  
+  [ES] Términos legales, soporte, pagos y limitaciones.  
+  [IT] Termini legali, supporto, pagamenti e limitazioni.
