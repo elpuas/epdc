@@ -8,7 +8,7 @@ const { lang } = Astro.props;
 // Define the rotating verbs for each language
 const verbs = {
     en: ['code', 'build', 'design', 'optimize'],
-    es: ['codificamos', 'creamos', 'diseñamos', 'pulimos'],
+    es: ['codificamos', 'creamos', 'diseñamos', 'optimizamos'],
     it: ['scriviamo', 'creiamo', 'curiamo', 'ottimizziamo']
 };
 
@@ -22,7 +22,7 @@ const currentVerbs = verbs[lang as keyof typeof verbs] || verbs.en;
             <h1 id="hero-heading">We <span id="verb-rotator" aria-live="polite" aria-label={`Current action: ${currentVerbs[0]}`}>{currentVerbs[0]}</span> digital crafts <strong>for</strong> humans.</h1>
         )}
         {lang === 'es' && (
-            <h1 id="hero-heading">Nosotros <span id="verb-rotator" aria-live="polite" aria-label={`Acción actual: ${currentVerbs[0]}`}>{currentVerbs[0]}</span> artesanías digitales <strong>para</strong> humanos.</h1>
+            <h1 id="hero-heading">Nosotros <span id="verb-rotator" aria-live="polite" aria-label={`Acción actual: ${currentVerbs[0]}`}>{currentVerbs[0]}</span> artes digitales <strong>para</strong> humanos.</h1>
         )}
         {lang === 'it' && (
             <h1 id="hero-heading">Noi <span id="verb-rotator" aria-live="polite" aria-label={`Azione attuale: ${currentVerbs[0]}`}>{currentVerbs[0]}</span> artigianato digitale <strong>per</strong> umani.</h1>
