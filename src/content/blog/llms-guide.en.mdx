@@ -1,0 +1,74 @@
+---
+title: "Practical Guide: What is llms.txt and Why Your Site Should Have One"
+lang: "en"
+description: "We explore the new llms.txt file that's gaining popularity among companies and SEO tools. Is it useful for your site? Should you implement it now?"
+image: "/llms-hero.jpg"
+date: "2025-07-07"
+author: Catalina Valverde
+---
+
+import HeroImage from '../../../public/llms-hero.jpg';
+import {Image} from 'astro:assets';
+
+<div class="blog-hero-image">
+    {HeroImage && <Image width={1020} height={510} src={HeroImage} alt="llms.txt in practice" />}
+</div>
+
+Have you heard of *llms.txt*? If not, don't worry—you're in the right place! In this article, we'll break down what it is, what it's for, and why you should consider implementing it on your website.
+
+*Think of it as a treasure map for language agents, not just another robots.txt.*
+
+Since mid-2024, several websites have started incorporating a new file on their servers: `llms.txt`. This file doesn't replace the old robots.txt or sitemaps.xml, but seeks to fulfill a new function: *guiding language models (LLMs) toward the most relevant and high-quality content.*
+
+## What is llms.txt for?
+
+Models like *GPT, Claude, or Gemini* consume text from the web to answer questions or generate content. But unlike a Google bot, they don't need to explore all menus, widgets, or complex structures. `llms.txt` helps them focus on what matters.
+
+In other words: *it defines a curated and optimized version of the content that truly represents your brand.*
+
+## How is it structured?
+
+An `llms.txt` file is simply a plain text file located at the site root (/llms.txt) and has this basic Markdown structure:
+
+```markdown
+# ElPuas Digital Crafts
+> We design WordPress, AI and web content solutions with human impact.
+
+## Services
+- [Custom WordPress Development](https://elpuasdigitalcrafts.com/servicios/wordpress)
+- [Custom Plugins](https://elpuasdigitalcrafts.com/servicios/plugins)
+- [Gutenberg Block Design](https://elpuasdigitalcrafts.com/servicios/bloques)
+
+## Featured Projects
+- [MonkeyScrubs](https://monkeyscrubs.com)
+- [pb-cr](https://pb-cr.com)
+- [Costa Rica Adventurers](https://costaricaadventurers.com)
+```
+
+## Who's already using it?
+- Yoast SEO included support for llms.txt in June 2025.
+- Mintlify, Anthropic, and Cloudflare already use it to improve semantic ingestion.
+- More than *2,000 domains* have an active version of the file (as of June 2025).
+
+## Benefits
+- Reduces tokenization costs for LLMs.
+- Improves your brand representation in AI-powered tools.
+- Prevents models from learning outdated or unauthorized content.
+
+## Risks or criticisms
+- Google has indicated it doesn't recognize concrete benefits (*for now*).
+- If misconfigured, it could generate duplication or confusion.
+- There's no official standard accepted by all LLM engines.
+
+## Should you implement it?
+
+In our opinion, yes. Although it's still in experimental phase, it's an easy way to start controlling how your content is interpreted by AI agents.
+
+## Resources
+- [llmstxt.org](https://llmstxt.org)
+- [Yoast on llms.txt](https://yoast.com/features/llms-txt/)
+- [Mintlify: The value of llms.txt](https://mintlify.com/blog/the-value-of-llms-txt-hype-or-real)
+
+<div class="notification">
+    <p>Want us to configure your custom `llms.txt`? [Contact us](mailto:management@elpuasdev.com) and we'll include it in your next deployment.</p>
+</div>
