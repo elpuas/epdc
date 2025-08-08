@@ -193,6 +193,11 @@ a:hover {
 		text-underline-offset: 3px;
 		text-decoration-color: var(--color-tertiary);
 	}
+
+	h3 {
+		font-weight: 500;
+		font-size: var(--fontsize-h4);
+	}
 }
 
 .blog-date {
