@@ -71,27 +71,40 @@ const { title, description, image = '/default.png', deferCSS = false } = Astro.p
 </script>
 
 <!-- Organization Structured Data with Social Profiles -->
-<script type="application/ld+json" is:raw>
-{
+<script type="application/ld+json">
+	{JSON.stringify({
 	"@context": "https://schema.org",
-	"@type": "Organization",
+	"@type": "LocalBusiness",
 	"name": "ElPuas Digital Crafts",
 	"url": "https://elpuasdigitalcrafts.com",
-	"logo": "https://elpuasdigitalcrafts.com/logo-updated-150x150.webp",
-	"sameAs": [
-		"https://github.com/elpuas",
-		"https://www.linkedin.com/company/elpuas-digital-crafts/"
-	],
-	"description": "Expert WordPress development, WooCommerce solutions, and white-label services for agencies and businesses worldwide.",
-	"foundingDate": "2020",
+	"image": "https://elpuasdigitalcrafts.com/logo-updated-150x150.webp",
+	"description": "WordPress and web development with AI workflows. Based in Costa Rica, serving clients in the USA and Italy.",
 	"address": {
 		"@type": "PostalAddress",
-		"addressCountry": "CR"
+		"addressCountry": "CR",
+		"addressLocality": "San José",
+		"addressRegion": "SJ"
 	},
-	"contactPoint": {
-		"@type": "ContactPoint",
-		"contactType": "customer service",
-		"url": "https://elpuasdigitalcrafts.com/en/contact"
-	}
-}
+	"areaServed": [
+		{
+		"@type": "Country",
+		"name": "Costa Rica"
+		},
+		{
+		"@type": "Country",
+		"name": "United States"
+		},
+		{
+		"@type": "Country",
+		"name": "Italy"
+		}
+	],
+	"founder": {
+		"@type": "Person",
+		"name": "Alfredo Navas"
+	},
+	"sameAs": [
+		"https://github.com/elpuas",
+	]
+	})}
 </script>
