@@ -102,6 +102,12 @@ a:hover {
 	color: var(--color-tertiary);
 }
 
+pre {
+	padding: var(--space-lg);
+	border-radius: 4px;
+	border: 1px solid var(--color-quaternary);
+}
+
 /* Screen reader only */
 .sr-only {
 	position: absolute;

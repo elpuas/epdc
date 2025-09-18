@@ -1,0 +1,92 @@
+---
+title: "Cómo WordPress está integrando la inteligencia artificial"
+lang: "es"
+description: "Cuatro proyectos clave que están llevando la IA al corazón de WordPress."
+image: "/post-gianfranco.jpg"
+date: "2025-09-15"
+author: Gianfranco Navas
+---
+
+import HeroImage from '../../../public/post-gianfranco.jpg';
+import Telex from '../../../public/telex.png'
+import CloseImage from '../../../public/wordpress-bien-hecho-parte-dos.webp';
+
+import {Image} from 'astro:assets';
+
+<div class="blog-hero-image">
+    {HeroImage && <Image width={1020} height={510} src={HeroImage} alt="llms.txt en la práctica" />}
+</div>
+
+
+En los últimos meses han aparecido cuatro piezas que empiezan a encajar para llevar la *IA al corazón de WordPress*. No es humo. Son proyectos reales, abiertos, y con una dirección clara: integrar modelos y asistentes de forma estándar, segura y útil para el día a día.
+
+Alfredo Navas, quien es nuestro CTO en *ElPuas Digital Crafts*. Él estuvo en [WordCamp US](https://us.wordcamp.org/2025/) y asistió a la charla donde justamente se presentó esta visión de WordPress con IA. Lo que queremos ahora es compartirles lo que vimos ahí y cómo creemos que puede ayudar a cualquiera que use WordPress en su trabajo diario.
+
+## PHP AI client SDK
+Es una *librería de PHP* que unifica cómo hablar con distintos modelos, desde texto hasta tareas multimodales, y permite que el sitio tenga las credenciales en un solo lugar para todos los plugins que usen IA. Si alguna vez sufriste con SDKs distintos por proveedor, esto reduce ese dolor y prepara el terreno para experiencias consistentes. Se puede instalar con Composer y ya trae ejemplos de uso. Hoy está activo dentro de la iniciativa de “[AI Building Blocks](https://make.wordpress.org/ai/2025/07/17/ai-building-blocks/)” y expone una API uniforme para varios proveedores. 
+
+```bash
+composer require wordpress/php-ai-client
+```
+```php
+<?php
+use WordPress\AiClient\AiClient;
+
+add_action('init', function () {
+	$response = AiClient::prompt('Resume en 100 palabras por qué usar bloques en WordPress.')
+		->usingModel('google:gemini-2.5-flash')
+		->generateText();
+
+	if (!is_wp_error($response)) {
+		error_log('[AI DEMO] ' . trim((string) $response));
+	}
+});
+```
+## Abilities API
+La idea es sencilla y poderosa: dar a *WordPress un lenguaje común* para declarar lo que un plugin o tema sabe hacer, de forma legible por humanos y máquinas. Con esto, las funcionalidades dejan de ser “cajas negras” y pasan a un registro estándar con descripciones, esquemas de entrada y salida, y permisos claros. Gracias a esa base, otras herramientas pueden descubrir y usar esas capacidades sin acoplarse al código interno de cada plugin.
+
+```php
+add_action('init', function () {
+	if (!function_exists('wp_register_ability')) return;
+
+	wp_register_ability('elpuas/summarize-post', [
+		'label'       => __('Generar resumen', 'elpuas'),
+		'description' => __('Crea un resumen de un post dado su ID', 'elpuas'),
+		'permission_callback' => 'edit_posts',
+		'input_schema'  => [
+			'type' => 'object',
+			'properties' => [
+				'post_id' => ['type' => 'integer', 'required' => true],
+			],
+		],
+		'output_schema' => [
+			'type' => 'object',
+			'properties' => [
+				'summary' => ['type' => 'string', 'required' => true],
+			],
+		],
+		'execute_callback' => function ($args) {
+			$post = get_post((int) $args['post_id']);
+			$content = wp_strip_all_tags($post->post_content);
+			return ['summary' => mb_substr($content, 0, 240) . '…'];
+		},
+	]);
+});
+```
+## MCP Adapter
+Conecta las *“abilities”* de WordPress al *Model Context Protocol* para que asistentes compatibles puedan descubrirlas e invocarlas con un protocolo abierto. WordPress puede actuar como servidor MCP y también como cliente para hablar con otros servicios, usando transporte por REST y opciones de streaming, y apoyándose en mecanismos nativos como application passwords y el sistema de capacidades para controlar acceso. Esto no es teoría. Ya hay un plugin canónico en desarrollo con arquitectura, validaciones y manejo de permisos documentados.
+
+## Telex
+<div class="blog-image" style="margin:auto; text-align:center;">
+    {Telex && <Image width={1020} height={510} src={Telex} alt="Telex en la práctica" />}
+</div>
+Es una [herramienta experimental](https://telex.automattic.ai/) presentada en WordCamp US que permite pedir un bloque de Gutenberg con un prompt y recibir un archivo zip instalable en un sitio o en WordPress Playground. Está en etapa temprana, pero enseña hacia dónde se quiere llevar la experiencia de crear bloques con ayuda de IA.
+
+*¿Qué significa todo esto para alguien que está empezando?* Que integrar IA en WordPress deja de ser un rompecabezas de SDKs, formas de autenticación y pegamento ad hoc. Puedes *construir funciones con una API consistente*, describir lo que tu plugin hace de manera estándar y exponer esas capacidades a asistentes que entienden el protocolo. Hoy estos proyectos ya tienen releases iniciales, con movimiento reciente en los repositorios, lo que confirma que el trabajo avanza y es público.  ￼
+
+En *ElPuas Digital Crafts* ya estamos adoptando esta base para productos reales. Imaginamos asistentes editoriales dentro del admin que ayudan a organizar y mejorar contenido, *automatizaciones para migraciones* y reportes que orquestan varias tareas con MCP, y experiencias de comercio con recomendaciones que se alimentan de las abilities del sitio. También vemos valor en *prototipar bloques asistidos por IA para campañas puntuales*, y en ofrecer a nuestros clientes un panel único donde administran sus credenciales de IA y activan funcionalidades sin fricción.
+
+<div class="notification">
+<p>Si quieres probarlo con tu proyecto, te ayudamos a evaluar el punto de partida, preparar un entorno de pruebas con Composer y Playground, y definir un caso de uso medible que demuestre valor sin comprometer seguridad ni performance.
+[Contactanos](mailto:management@elpuasdev.com) hoy!</p>
+</div>
