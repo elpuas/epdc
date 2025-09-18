@@ -33,7 +33,7 @@ composer require wordpress/php-ai-client
 use WordPress\AiClient\AiClient;
 
 add_action('init', function () {
-	$response = AiClient::prompt('Resume en 100 palabras por qué usar bloques en WordPress.')
+	$response = AiClient::prompt('Riassumi in 100 parole perché usare i blocchi in WordPress.')
 		->usingModel('google:gemini-2.5-flash')
 		->generateText();
 

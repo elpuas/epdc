@@ -1,21 +1,25 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
+import { t, type Language } from '../i18n/utils';
 
 interface Props {
   post: CollectionEntry<'blog'>;
-  lang: string;
+  lang: Language;
 }
 
 const { post, lang } = Astro.props;
 const { title, description, image } = post.data;
 const postUrl = `/${lang}/blog/${post.slug}`;
 
+const readMore = t('common.readMore', lang);
+const readMoreLabel = `${readMore} ${title}`;
+
 // Provide fallback image if none specified
 const displayImage = image || '/blog-placeholder-about.jpg';
 ---
 <article class="blog-card">
-  <a href={postUrl} aria-label={`Read more about ${title}`}>
+  <a href={postUrl} aria-label={readMoreLabel}>
     <Image 
       src={displayImage} 
       alt={`Preview image for ${title}`} 
@@ -38,9 +42,9 @@ const displayImage = image || '/blog-placeholder-about.jpg';
     <a 
       href={postUrl} 
       class="card-link"
-      aria-label={`Read more about ${title}`}
+      aria-label={readMoreLabel}
     >
-      Read more &rarr;
+      {readMore} &rarr;
     </a>
   </div>
 </article> 
