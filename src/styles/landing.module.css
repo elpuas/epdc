@@ -1,0 +1,43 @@
+.columns {
+    display: flex;
+    gap: var(--space-xl);
+
+    .column {
+        &.column--half {
+            max-width: 50%;
+
+            img {
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                aspect-ratio: auto;
+            } 
+        }
+    }
+}
+
+.wcsj-hero__subtitle {
+    font-weight: 400;
+}
+
+.highlight {
+    color: var(--color-tertiary);
+    font-size:inherit;
+    font-weight: inherit;
+}
+
+.highlight-red {
+    color: red;
+    font-weight: bold;
+}
+
+.checkbox,
+.checkbox a {
+    font-size: .875rem;
+}
+
+.checkbox a {
+    color: var(--color-tertiary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
