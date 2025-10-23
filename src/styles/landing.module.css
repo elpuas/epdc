@@ -16,6 +16,18 @@
     }
 }
 
+@media (max-width: 768px) {
+    .columns {
+        flex-direction: column;
+
+        .column {
+            &.column--half {
+                max-width: 100%;
+            }
+        }
+    }
+}
+
 .wcsj-hero__subtitle {
     font-weight: 400;
 }
