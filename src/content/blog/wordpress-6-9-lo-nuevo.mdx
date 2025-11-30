@@ -1,0 +1,109 @@
+---
+title: "WordPress 6.9: mejoras que tu sitio debería aprovechar en 2026"
+lang: "es"
+description: "WordPress 6.9 trae nuevos bloques, notas y herramientas que hacen tu sitio más simple y eficiente."
+image: "/blog-wp-new.webp"
+date: "2025-11-28"
+author: Catalina Valverde
+---
+
+import HeroImage from '../../../public/blog-wp-new.webp';
+import {Image} from 'astro:assets';
+
+<div class="blog-hero-image">
+    {HeroImage && <Image width={1020} height={510} src={HeroImage} alt="llms.txt en la práctica" />}
+</div>
+
+WordPress 6.9 llega este 2 de diciembre y trae mejoras pensadas para que administrar un sitio, una tienda o un proyecto de contenido sea más fácil y más rápido. Estas son las novedades que realmente pueden ayudarte en el día a día.
+
+## Nuevos Bloques que Eliminan Plugins
+WordPress sigue incorporando funciones que antes requerían plugins externos. Al tenerlas de forma nativa, tu sitio se vuelve más estable y con menos mantenimiento.
+
+Entre los más prácticos:
+- Accordion: perfecto para preguntas frecuentes o detalles de un producto.
+- Time-to-Read: muestra el tiempo estimado de lectura.
+- Term Query: lista categorías y temas automáticamente.
+- Fit Text: ajusta encabezados según el espacio.
+
+Para cualquier negocio, estos bloques ayudan a presentar la información de manera más clara y profesional sin depender de plugins extra.
+
+## Notas en el Editor: colaboración asincrónica
+Esta función permite dejar comentarios directamente sobre los bloques, parecido a Google Docs, pero dentro de WordPress.
+
+Sirve para revisar contenido, dejar instrucciones o aprobar cambios sin correos ni capturas de pantalla.
+Para equipos pequeños o tiendas online, reduce mucho la fricción al actualizar el sitio.
+
+## Block Bindings: actualizaciones desde un solo lugar
+
+Si repetís información en varias páginas, los Block Bindings te permiten actualizar todo desde un punto central.
+Cambiás un dato una vez y WordPress lo refleja automáticamente donde se use.
+
+Esto funciona muy bien para:
+- servicios
+- precios
+- listados
+- datos que cambian con frecuencia
+
+## Abilities API: integraciones más fáciles
+
+Aunque suene técnico, la idea es simple.
+La Abilities API prepara WordPress para integrarse mejor con herramientas externas y automatizar tareas sin depender de tantos plugins.
+
+En un negocio real esto significa procesos más estables y menos trabajo manual.
+
+Si te interesa conocer más a fondo qué es y cómo funciona, acá te dejo un [artículo donde lo explico con más detalle](https://elpuasdigitalcrafts.com/es/blog/como-wordpress-esta-integrando-la-iaes/). 
+
+## Un Editor Más Claro
+
+El editor ahora tiene dos modos:
+- Escribir para contenido
+- Diseñar para estructura y estilos
+
+Esto hace la experiencia más simple para cualquier persona que edite el sitio, evitando errores y reduciendo tiempo de soporte.
+
+## Conclusión
+WordPress 6.9 trae mejoras pensadas para que un sitio sea más fácil de mantener, más rápido y más flexible, tanto para negocios como para equipos de contenido.
+
+Si ya usás WordPress o estás pensando en actualizar tu sitio, te puedo hacer una evaluación gratuita. Solo dejá tu correo y la URL de tu sitio y te envío un resumen con recomendaciones claras.
+
+<form
+	name="site-evaluation"
+	method="POST"
+	data-netlify="true"
+	data-netlify-honeypot="bot-field"
+    class="site-evaluation-form"
+>
+	<input type="hidden" name="form-name" value="site-evaluation" />
+
+	<div class="hidden">
+		<label>Si sos humano, dejá esto vacío:</label>
+        <input name="bot-field" />
+	</div>
+    <div class="fields-group">
+        <div class="field">
+            <label for="email">Correo</label>
+            <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                placeholder="tu@correo.com"
+                autocomplete="email"
+            />
+        </div>
+        <div class="field">
+            <label for="site-url">URL del sitio</label>
+            <input
+                id="site-url"
+                name="siteUrl"
+                type="url"
+                required
+                placeholder="https://tusitio.com"
+                inputmode="url"
+            />
+        </div>
+        <button type="submit">
+            Enviar solicitud
+        </button>
+    </div>
+</form>
