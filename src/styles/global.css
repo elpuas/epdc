@@ -266,9 +266,18 @@ pre {
         gap: var(--space-lg);
         margin-top: var(--space-lg);
 		align-items: flex-end;
+		flex-direction: column;
+
+		@media (min-width: 800px) {
+			flex-direction: row;
+		}
 
 		> * {
-			width: calc(100% / 3 - var(--space-lg) / 3);
+			width: 100%;
+
+			@media (min-width: 800px) {
+				width: calc(100% / 3 - var(--space-lg) / 3);
+			}
 		}
 
 		.field {
