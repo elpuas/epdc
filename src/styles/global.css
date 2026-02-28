@@ -139,6 +139,10 @@ pre {
 	margin: var(--space-3xl) 0;
 	align-items: center;
 
+	&:is(.align-top) {
+		align-items: flex-start;
+	}
+
 	@media (max-width: 768px) {
 		flex-direction: column;
 	}
@@ -153,6 +157,14 @@ pre {
 			height: 100%;
 			max-height: 768px;
 			object-fit: contain;
+		}
+
+		&:is(.full-width) {
+			max-width: 100%;
+
+			img {
+				max-height: 100%;
+			}
 		}
 
 		&:has(video) {

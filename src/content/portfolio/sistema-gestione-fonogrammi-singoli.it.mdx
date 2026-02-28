@@ -1,0 +1,94 @@
+---
+title: "Sistema di Gestione di Fonogrammi e Singoli"
+description: "Applicazione WordPress personalizzata per la gestione strutturata di opere musicali, automazione delle relazioni ed esportazioni amministrative."
+date: "2026-02-25"
+image: "/portfolio/hero-aiecostarica.webp"
+tags: [
+    "WordPress",
+    "Custom Post Types",
+    "ACF",
+    "Gravity Forms",
+    "Advanced Post Creation",
+]
+lang: "it"
+slug: "sistema-gestione-fonogrammi-singoli-it"
+---
+
+import { Image } from 'astro:assets';
+import image from '../../../public/portfolio/aiecostarica-mobile.webp';
+
+Il *Sistema di Gestione di Fonogrammi e Singoli* è stato sviluppato come applicazione basata su WordPress per modellare e amministrare dati strutturati del settore musicale. Più che un semplice sito web, è stata progettata un’architettura applicativa capace di automatizzare relazioni, notifiche e flussi amministrativi complessi.
+
+<div class="project-gallery align-top">
+    <div class="project-gallery-item full-width">
+        <Image src={image} width={727} height={1470} alt="Sistema di gestione diritti musicali" loading="lazy" decoding="async" />
+    </div>
+    <div class="project-gallery-content">
+
+        ## La Sfida
+
+        L’agenzia aveva bisogno di una soluzione in grado di:
+
+        - Registrare fonogrammi e singoli con più autori ed esecutori.
+        - Modellare relazioni dinamiche tra le opere e le persone coinvolte.
+        - Gestire strutture complesse con repeater annidati.
+        - Automatizzare le notifiche in base al ruolo (autore, esecutore, amministratore).
+        - Generare esportazioni strutturate compatibili con i processi interni.
+        - Consentire importazioni massive senza compromettere l’integrità dei dati.
+
+        Non si trattava di creare contenuti semplici, ma di progettare un flusso solido per la gestione di informazioni critiche.
+
+        ## La Nostra Soluzione
+
+        Nell’ambito di un progetto *white label*, abbiamo sviluppato un’architettura personalizzata basata su:
+
+        - Custom Post Types (`fonograma` e `sencillo`).
+        - Modellazione avanzata con ACF e repeater strutturati.
+        - Gravity Forms + Advanced Post Creation.
+        - Integrazione tramite REST API per interrogare dinamicamente gli autori.
+        - Inserimento automatico degli autori nei repeater di Gravity Forms tramite JavaScript.
+        - Registrazione automatica delle relazioni tra opera e partecipanti.
+        - Sistema di notifiche segmentate per ruolo.
+        - Plugin personalizzato per le esportazioni.
+        - Estensione del sistema di esportazione nativo di WordPress per adattare il formato a esigenze operative specifiche.
+
+        Inoltre, è stato sviluppato un importatore custom che consente caricamenti strutturati mantenendo la coerenza delle relazioni tra i dati.
+
+        Il risultato è stata un’applicazione interna stabile, in cui WordPress funziona come motore dati e non solo come gestore di contenuti.
+    </div>
+</div>
+
+<div class="project-columns">
+    <div class="project-column">
+
+        ## Tecnologie Utilizzate
+
+        - WordPress.
+        - Custom Post Types.
+        - Advanced Custom Fields (ACF).
+        - Gravity Forms + Advanced Post Creation.
+        - REST API.
+        - JavaScript personalizzato.
+        - Plugin custom per le esportazioni.
+        - Importatore personalizzato.
+        - Sistema di notifiche automatizzate.
+        - Modellazione dati strutturata.
+
+    </div>
+    <div class="project-column">
+
+        ## Risultati
+
+        - Flusso affidabile per la creazione e la gestione di opere musicali.
+        - Automazione delle relazioni tra autori, esecutori e opere.
+        - Notifiche intelligenti in base al tipo di utente.
+        - Esportazioni strutturate adattate ai processi amministrativi.
+        - Architettura scalabile e manutenibile.
+        - Riduzione degli errori manuali nella registrazione e nella gestione dei dati.
+
+    </div>
+</div>
+
+> ### "Il lavoro realizzato ha permesso di trasformare un flusso amministrativo complesso in una soluzione tecnologica chiara e stabile. L’architettura sviluppata non ha solo risolto il problema attuale, ma ha anche lasciato una base solida per la crescita futura del sistema."
+>
+> — Voyager Comunicación (White Label)

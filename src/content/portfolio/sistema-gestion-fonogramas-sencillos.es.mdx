@@ -1,0 +1,94 @@
+---
+title: "Sistema de Gestión de Fonogramas y Sencillos"
+description: "Aplicación personalizada sobre WordPress para gestión estructurada de obras musicales, automatización de relaciones y exportaciones."
+date: "2026-02-25"
+image: "/portfolio/hero-aiecostarica.webp"
+tags: [
+    "WordPress",
+    "Custom Post Types",
+    "ACF",
+    "Gravity Forms",
+    "Advanced Post Creation",
+]
+lang: "es"
+slug: "sistema-gestion-fonogramas-sencillos-es"
+---
+
+import { Image } from 'astro:assets';
+import image from '../../../public/portfolio/aiecostarica-mobile.webp';
+
+El *Sistema de Gestión de Fonogramas y Sencillos* fue desarrollado como una aplicación sobre WordPress para modelar y administrar datos estructurados del sector musical. Más que un sitio web, se diseñó una arquitectura que automatiza relaciones, notificaciones y flujos administrativos complejos.
+
+<div class="project-gallery align-top">
+    <div class="project-gallery-item full-width">
+        <Image src={image} width={727} height={1470} alt="Sistema Gestión Musical" loading="lazy" decoding="async" />
+    </div>
+    <div class="project-gallery-content">
+
+        ## El Desafío
+
+        La agencia requería una solución capaz de:
+
+        - Registrar fonogramas y sencillos con múltiples autores y ejecutantes.
+        - Modelar relaciones dinámicas entre obras y personas involucradas.
+        - Gestionar estructuras complejas con repeaters anidados.
+        - Automatizar notificaciones según rol (autor, ejecutante, administrador).
+        - Generar exportaciones estructuradas compatibles con procesos internos.
+        - Permitir importaciones masivas sin comprometer integridad de datos.
+
+        No se trataba de crear contenido simple, sino de diseñar un flujo robusto de gestión de información crítica.
+
+        ## Nuestra Solución
+
+        Como parte de un proyecto *white label*, desarrollamos una arquitectura personalizada basada en:
+
+        - Custom Post Types (`fonograma` y `sencillo`).
+        - Modelado avanzado con ACF y repeaters estructurados.
+        - Gravity Forms + Advanced Post Creation.
+        - Integración vía REST API para consultar autores dinámicamente.
+        - Inserción automática de autores dentro de repeaters de Gravity Forms mediante JavaScript.
+        - Registro automático de relaciones entre obra y participantes.
+        - Sistema de notificaciones segmentadas por rol.
+        - Plugin personalizado para exportaciones.
+        - Extensión del sistema de exportación nativo de WordPress para adaptar el formato a necesidades específicas.
+
+        Además, se desarrolló un importador custom que permite cargas estructuradas manteniendo consistencia en las relaciones entre datos.
+
+        El resultado fue una aplicación interna estable, donde WordPress funciona como motor de datos y no solo como gestor de contenido.
+    </div>
+</div>
+
+<div class="project-columns">
+    <div class="project-column">
+
+        ## Tecnologías Utilizadas
+
+        - WordPress.
+        - Custom Post Types.
+        - Advanced Custom Fields (ACF).
+        - Gravity Forms + Advanced Post Creation.
+        - REST API.
+        - JavaScript personalizado.
+        - Plugin custom de exportaciones.
+        - Importador personalizado.
+        - Sistema de notificaciones automatizadas.
+        - Modelado de datos estructurado.
+
+    </div>
+    <div class="project-column">
+
+        ## Resultados
+
+        - Flujo confiable para creación y gestión de obras musicales.
+        - Automatización de relaciones entre autores, ejecutantes y obras.
+        - Notificaciones inteligentes según tipo de usuario.
+        - Exportaciones estructuradas adaptadas a procesos administrativos.
+        - Arquitectura escalable y mantenible.
+        - Reducción de errores manuales en registro y gestión de datos.
+
+    </div>
+</div>
+
+> ### "El trabajo realizado permitió convertir un flujo administrativo complejo en una solución tecnológica clara y estable. La arquitectura desarrollada no solo resolvió el problema actual, sino que dejó una base sólida para el crecimiento futuro del sistema."
+>
+> — Voyager Comunicación (White Label)

@@ -1,0 +1,94 @@
+---
+title: "Phonogram and Single Management System"
+description: "Custom WordPress application for structured music rights data, relationship automation, and administrative exports."
+date: "2026-02-25"
+image: "/portfolio/hero-aiecostarica.webp"
+tags: [
+    "WordPress",
+    "Custom Post Types",
+    "ACF",
+    "Gravity Forms",
+    "Advanced Post Creation",
+]
+lang: "en"
+slug: "phonogram-single-management-system-en"
+---
+
+import { Image } from 'astro:assets';
+import image from '../../../public/portfolio/aiecostarica-mobile.webp';
+
+The *Phonogram and Single Management System* was developed as a WordPress-based application to model and manage structured data for the music sector. Rather than a conventional website, it was designed as an application layer that automates relationships, notifications, and complex administrative workflows.
+
+<div class="project-gallery align-top">
+    <div class="project-gallery-item full-width">
+        <Image src={image} width={727} height={1470} alt="Music Rights Management System" loading="lazy" decoding="async" />
+    </div>
+    <div class="project-gallery-content">
+
+        ## The Challenge
+
+        The agency needed a solution capable of:
+
+        - Registering phonograms and singles with multiple authors and performers.
+        - Modeling dynamic relationships between works and the people involved.
+        - Managing complex structures with nested repeaters.
+        - Automating notifications by role (author, performer, administrator).
+        - Generating structured exports compatible with internal processes.
+        - Supporting bulk imports without compromising data integrity.
+
+        This was not about publishing simple content, but about designing a robust system for handling critical information workflows.
+
+        ## Our Solution
+
+        As part of a *white label* project, we built a custom architecture based on:
+
+        - Custom Post Types (`fonograma` and `sencillo`).
+        - Advanced modeling with ACF and structured repeaters.
+        - Gravity Forms + Advanced Post Creation.
+        - REST API integration to query authors dynamically.
+        - Automatic insertion of authors inside Gravity Forms repeaters through JavaScript.
+        - Automated registration of relationships between each work and its participants.
+        - A role-based notification system.
+        - A custom export plugin.
+        - Extension of WordPress’s native export system to adapt the output format to specific operational requirements.
+
+        In addition, we developed a custom importer that supports structured uploads while preserving consistency across data relationships.
+
+        The result was a stable internal application where WordPress operates as a data engine, not just a content management system.
+    </div>
+</div>
+
+<div class="project-columns">
+    <div class="project-column">
+
+        ## Technologies Used
+
+        - WordPress.
+        - Custom Post Types.
+        - Advanced Custom Fields (ACF).
+        - Gravity Forms + Advanced Post Creation.
+        - REST API.
+        - Custom JavaScript.
+        - Custom export plugin.
+        - Custom importer.
+        - Automated notification system.
+        - Structured data modeling.
+
+    </div>
+    <div class="project-column">
+
+        ## Results
+
+        - Reliable workflow for creating and managing musical works.
+        - Automated relationships between authors, performers, and works.
+        - Smart notifications based on user type.
+        - Structured exports tailored to administrative processes.
+        - Scalable, maintainable architecture.
+        - Reduced manual errors in data entry and management.
+
+    </div>
+</div>
+
+> ### "The work carried out transformed a complex administrative process into a clear and stable technology solution. The architecture not only solved the current problem, but also established a solid foundation for the system’s future growth."
+>
+> — Voyager Comunicación (White Label)
