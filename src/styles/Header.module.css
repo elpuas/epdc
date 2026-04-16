@@ -63,7 +63,7 @@
   a {
     font-weight: 400;
     font-size: var(--fontsize-base);
-    color: var(--color-primary);
+    color: var(--color-secondary);
     text-decoration: none;
     padding: var(--padding-xs) var(--padding-sm);
     border-radius: 4px;

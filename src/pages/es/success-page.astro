@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/Button.astro';
+const lang = 'es';
+---
+
+<Layout lang={lang} title="¡Gracias por contactarnos!" description="Hemos recibido tu mensaje y nos pondremos en contacto contigo pronto.">
+    <section class="success-page-hero">
+        <div class="container">
+            <h1>¡Gracias por confiar en nosotros!</h1>
+            <p>Hemos recibido tu solicitud para activar tu plan de soporte y mantenimiento web.</p>
+            <p>En las próximas horas recibirás un correo con los detalles y pasos para iniciar tu proceso de activación.</p>
+            <p>Si desean revisar algún detalle o necesitan instrucciones para acceder al contenido completo, pueden agendar una llamada conmigo en este <a style="color: var(--color-tertiary); text-decoration: underline; text-underline-offset: 4px;" href="https://calendar.app.google/WVLmA19nLHZEisQb7">enlace</a>. Quedo atento a su decisión o cualquier comentario adicional.</p>
+        </div>
+        <Button href="/es/" label="Regresar a la página principal" />
+    </section>
+</Layout>

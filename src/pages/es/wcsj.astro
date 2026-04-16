@@ -1,0 +1,87 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import wcsj from '../../../public/images/wcsj.webp';
+import wcsjDos from '../../../public/images/wcsj-form.webp';
+import { Image } from "astro:assets";
+import styles from '../../styles/Contact.module.css';
+import lp from '../../styles/landing.module.css';
+const lang = 'es';
+---
+
+<Layout lang={lang} title="Tu sitio web siempre en línea. Nosotros nos encargamos de todo." description="Planes de soporte y mantenimiento WordPress con actualizaciones, seguridad y soporte continuo para que tu negocio nunca se detenga.">
+<section class="wcsj-hero">
+    <div class="container">
+        <h1 class="wcsj-hero__title">Tu <span class={lp.highlight}>eCommerce siempre en línea.</span> Nosotros nos encargamos de todo.</h1>
+        <h4 class={lp['wcsj-hero__subtitle']}>Aprovecha nuestra oferta exclusiva del <span class={lp.highlight}>WordCamp San José : Plan completo de soporte y mantenimiento para eCommerce por $150/mes </span> el primer año (precio regular $180).</h4>
+        <h4 class={lp['wcsj-hero__subtitle']}>Mantener tu web no es opcional. Un sitio sin mantenimiento puede volverse lento, inseguro o fallar justo cuando más lo necesitas. Nuestros planes garantizan que tu web esté optimizada, segura y actualizada.</h4>
+    </div>
+</section>
+<section class={lp.columns} >
+    <div class:list={[lp.column, lp['column--half']]}>
+        <Image src={wcsj} alt="WordCamp San José 2025" />
+    </div>
+    <div class:list={[styles.column, styles['column--half']]}>
+        <h4>Todo lo que tu eCommerce necesita para mantenerse rápido, seguro y profesional:</h4>
+        <ul>
+            <li>Hosting optimizado incluido</li>
+            <li>Actualizaciones regulares de WordPress, plugins y temas</li>
+            <li>Copias de seguridad automáticas</li>
+            <li>Seguridad avanzada y limpieza de malware</li>
+            <li>Monitoreo de uptime 24/7</li>
+            <li>Soporte técnico prioritario</li>
+            <li>4 horas de desarrollo o ajustes mensuales</li>
+            <li>Licencias premium incluidas<span class={lp['highlight-red']}>*</span></li>
+            <li>Desarrollo del tema basado en plantilla premium y personalizado a tu marca<span class={lp['highlight-red']}>*</span></li>
+    </div>
+</section>
+<section class={lp.benefits}>
+    <div class="container">
+        <h4>Más que mantenimiento: acompañamiento técnico y evolución continua. Supervisamos tu sitio mes a mes para mantener su rendimiento, compatibilidad y diseño siempre al día.</h4>
+    </div>
+</section>
+<section class="wcsj-cta">
+    <div class={lp.columns}>
+        <div class:list={[lp.column, lp['column--half']]}>
+            <form
+                name="soporte-web"
+                method="POST"
+                action="/es/success-page"
+                data-netlify="true"
+                class={styles.contactForm}
+                netlify-honeypot="bot-field"
+            >
+                <h3>Activa tu plan de soporte</h3>
+
+                <input type="hidden" name="form-name" value="soporte-web" />
+
+                <label for="name">Nombre completo</label>
+                <input type="text" id="name" name="name" required />
+
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" required />
+
+                <label for="website">URL del sitio web</label>
+                <input
+                    type="url"
+                    id="website"
+                    name="website"
+                    placeholder="https://tusitio.com"
+                />
+
+                <label for="promo">Código promocional</label>
+                <input type="text" id="promo" name="promo" value="WCSJO" readonly />
+
+                <button type="submit">Contratar ahora</button>
+
+                <label class={lp.checkbox}>
+                    <input type="checkbox" name="terms" required />
+                    He leído y acepto los <a href="http://localhost:4321/es/terms-and-conditions" target="_blank" rel="noopener">Términos y Condiciones</a>. Oferta válida del <strong>31 de octubre al 31 de enero</strong>. <span class={lp['highlight-red']}>*</span> El plan incluye el desarrollo del sitio usando una plantilla premium y licencias de plugins necesarias para el funcionamiento del sitio bajo la gestión de ElPuas Digital Crafts. Las licencias no se transfieren al cliente y son válidas mientras el plan esté activo. El plan eCommerce contempla hasta 50 productos. Cualquier personalización, ampliación o funcionalidad adicional se cotiza aparte. Oferta válida solo para nuevos clientes que contraten en el WordCamp San José 2025. Precio especial de $150/mes durante el primer año. Después del primer año, el precio regular de $180/mes se aplicará automáticamente.
+                </label>
+            </form>
+        </div>
+        <div class:list={[lp.column, lp['column--half']]}>
+            <Image src={wcsjDos} alt="WordCamp San José 2025" />
+        </div>
+    </div>
+</section>
+</Layout>
