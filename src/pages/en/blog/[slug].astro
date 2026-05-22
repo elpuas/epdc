@@ -8,7 +8,6 @@ export async function getStaticPaths() {
 	const posts = await getCollection('blog', ({ data }) => {
 		return data.lang === 'en';
 	});
-	console.log("getStaticPaths (en) found posts:", JSON.stringify(posts.map(p => p.slug), null, 2)); // Log slugs found
 	// Map posts to paths using post.slug
 	return posts.map((post) => ({
 		params: { slug: post.slug }, // Use post.slug

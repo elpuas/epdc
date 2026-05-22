@@ -197,7 +197,8 @@ pre {
 }
 
 /* Blog post specific styles */
-.blog-hero-image {
+.blog-hero-image,
+.blog-internal-image {
 	margin-bottom: var(--space-4xl);
 	max-height: 1024px;
 	overflow: hidden;
@@ -211,6 +212,13 @@ pre {
 		height: 100%;
 		object-fit: cover;
 		object-position: bottom;
+	}
+}
+
+.blog-internal-image {
+	margin: var(--space-2xl) auto;
+	img {
+		max-width: 100%;
 	}
 }
 
