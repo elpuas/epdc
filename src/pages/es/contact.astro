@@ -16,22 +16,23 @@ const lang = 'es';
     <input type="hidden" name="form-name" value="contact" />
   
     <p class={styles.hidden}>
-      <label>No completes esto si eres humano: <input name="bot-field" /></label>
+      <label for="bot-field-es">No completes esto si eres humano:</label>
+      <input id="bot-field-es" name="bot-field" />
     </p>
   
     <p>
-      <label>¿Cuál es tu nombre? *</label>
-      <input type="text" name="name" placeholder="Juan Pérez" required />
+      <label for="name-es">¿Cuál es tu nombre? *</label>
+      <input id="name-es" type="text" name="name" placeholder="Juan Pérez" required />
     </p>
   
     <p>
-      <label>Tu mejor correo electrónico *</label>
-      <input type="email" name="email" placeholder="tu@ejemplo.com" required />
+      <label for="email-es">Tu mejor correo electrónico *</label>
+      <input id="email-es" type="email" name="email" placeholder="tu@ejemplo.com" required />
     </p>
   
     <p>
-      <label>¿Qué necesitas? *</label>
-      <select name="service" required>
+      <label for="service-es">¿Qué necesitas? *</label>
+      <select id="service-es" name="service" required>
         <option value="">Elige un servicio...</option>
         <option value="Full Website">Necesito el paquete completo (Diseño + Desarrollo + Hosting)</option>
         <option value="E-Commerce">Una tienda online que realmente venda</option>
@@ -42,15 +43,13 @@ const lang = 'es';
     </p>
   
     <p>
-      <label>Cuéntanos tu historia *</label>
-      <textarea name="message" rows="5" placeholder="Nos encantaría saber sobre tu proyecto, objetivos o incluso desafíos..." required></textarea>
+      <label for="message-es">Cuéntanos tu historia *</label>
+      <textarea id="message-es" name="message" rows="5" placeholder="Nos encantaría saber sobre tu proyecto, objetivos o incluso desafíos..." required></textarea>
     </p>
   
     <p>
-      <label>
-        <input type="checkbox" name="consent" required />
-        Estoy feliz de recibir comunicaciones de ElPuas Digital Crafts.
-      </label>
+      <input id="consent-es" type="checkbox" name="consent" required />
+      <label for="consent-es">Estoy feliz de recibir comunicaciones de ElPuas Digital Crafts.</label>
     </p>
   
     <p>

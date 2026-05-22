@@ -14,12 +14,46 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = '/default.png', deferCSS = false } = Astro.props;
+const organizationStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'LocalBusiness',
+	name: 'ElPuas Digital Crafts',
+	url: 'https://elpuasdigitalcrafts.com',
+	image: 'https://elpuasdigitalcrafts.com/logo-updated-150x150.webp',
+	description:
+		'WordPress and web development with AI workflows. Based in Costa Rica, serving clients in the USA and Italy.',
+	address: {
+		'@type': 'PostalAddress',
+		addressCountry: 'CR',
+		addressLocality: 'San Jose',
+		addressRegion: 'SJ'
+	},
+	areaServed: [
+		{
+			'@type': 'Country',
+			name: 'Costa Rica'
+		},
+		{
+			'@type': 'Country',
+			name: 'United States'
+		},
+		{
+			'@type': 'Country',
+			name: 'Italy'
+		}
+	],
+	founder: {
+		'@type': 'Person',
+		name: 'Alfredo Navas'
+	},
+	sameAs: ['https://github.com/elpuas']
+};
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/logo-updated-150x150.webp" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="manifest" href="/manifest.webmanifest" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link
@@ -38,7 +72,6 @@ const { title, description, image = '/default.png', deferCSS = false } = Astro.p
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <meta name="robots" content="index, follow" />
-<link rel="sitemap" href="/sitemap-index.xml" />
 {deferCSS && (
 	<link
 		rel="stylesheet"
@@ -71,40 +104,4 @@ const { title, description, image = '/default.png', deferCSS = false } = Astro.p
 </script>
 
 <!-- Organization Structured Data with Social Profiles -->
-<script type="application/ld+json">
-	{JSON.stringify({
-	"@context": "https://schema.org",
-	"@type": "LocalBusiness",
-	"name": "ElPuas Digital Crafts",
-	"url": "https://elpuasdigitalcrafts.com",
-	"image": "https://elpuasdigitalcrafts.com/logo-updated-150x150.webp",
-	"description": "WordPress and web development with AI workflows. Based in Costa Rica, serving clients in the USA and Italy.",
-	"address": {
-		"@type": "PostalAddress",
-		"addressCountry": "CR",
-		"addressLocality": "San José",
-		"addressRegion": "SJ"
-	},
-	"areaServed": [
-		{
-		"@type": "Country",
-		"name": "Costa Rica"
-		},
-		{
-		"@type": "Country",
-		"name": "United States"
-		},
-		{
-		"@type": "Country",
-		"name": "Italy"
-		}
-	],
-	"founder": {
-		"@type": "Person",
-		"name": "Alfredo Navas"
-	},
-	"sameAs": [
-		"https://github.com/elpuas",
-	]
-	})}
-</script>
+<script type="application/ld+json" set:html={JSON.stringify(organizationStructuredData)} />

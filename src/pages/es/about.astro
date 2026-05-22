@@ -172,12 +172,10 @@ const process = [
 </Layout>
 <script type="module" is:inline>
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('Process step animation script loaded');
     
     // Force a small initial delay to ensure everything is loaded
     setTimeout(() => {
       const icons = document.querySelectorAll('.step-icon');
-      console.log('Found step icons:', icons.length);
       
       // Manually apply animation to any icons already in viewport on page load
       let iconsArray = Array.from(icons);
@@ -187,7 +185,6 @@ const process = [
         (entries, obs) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              console.log('Icon in view:', entry.target);
               
               // Remove any existing animation classes and force reflow
               entry.target.classList.remove('animate');
@@ -221,7 +218,6 @@ const process = [
         if (isInViewport) {
           // Stagger the animation for icons already in viewport
           setTimeout(() => {
-            console.log('Animating icon in viewport:', index);
             icon.classList.add('animate');
           }, index * 150);
         } else {
