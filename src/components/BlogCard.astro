@@ -3,20 +3,30 @@ import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import { t, type Language } from '../i18n/utils';
 
+type SupportedEntry = CollectionEntry<'blog'> | CollectionEntry<'labs'>;
+
 interface Props {
-  post: CollectionEntry<'blog'>;
+  post: SupportedEntry;
   lang: Language;
+  pathPrefix?: string;
 }
 
-const { post, lang } = Astro.props;
-const { title, description, image } = post.data;
-const postUrl = `/${lang}/blog/${post.slug}`;
+const { post, lang, pathPrefix = `/${lang}/blog` } = Astro.props;
+
+const title = post.data.title;
+const description = 'description' in post.data ? post.data.description : undefined;
+const excerpt = 'excerpt' in post.data ? post.data.excerpt : undefined;
+const image = 'image' in post.data ? post.data.image : undefined;
+const featuredImage = 'featuredImage' in post.data ? post.data.featuredImage : undefined;
+const publicSlug = 'publicSlug' in post.data && post.data.publicSlug ? post.data.publicSlug : post.slug;
+const summary = excerpt || description;
+const postUrl = `${pathPrefix}/${publicSlug}`;
 
 const readMore = t('common.readMore', lang);
 const readMoreLabel = `${readMore} ${title}`;
 
 // Provide fallback image if none specified
-const displayImage = image || '/blog-placeholder-about.jpg';
+const displayImage = featuredImage || image || '/blog-placeholder-about.jpg';
 ---
 <article class="blog-card">
   <a href={postUrl} aria-label={readMoreLabel}>
@@ -36,8 +46,8 @@ const displayImage = image || '/blog-placeholder-about.jpg';
         {title}
       </a>
     </h2>
-    {description && (
-      <p class="card-description">{description}</p>
+    {summary && (
+      <p class="card-description">{summary}</p>
     )}
     <a 
       href={postUrl} 

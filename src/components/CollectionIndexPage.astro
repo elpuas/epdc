@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import BlogCard from './BlogCard.astro';
+import styles from '../styles/BlogIndex.module.css';
+import type { Language } from '../i18n/utils';
+
+type SupportedEntry = CollectionEntry<'blog'> | CollectionEntry<'labs'>;
+
+interface Props {
+  lang: Language;
+  pageTitle: string;
+  pageDescription: string;
+  heading: string;
+  intro: string;
+  entries: SupportedEntry[];
+  emptyMessage: string;
+  pathPrefix: string;
+}
+
+const {
+  lang,
+  pageTitle,
+  pageDescription,
+  heading,
+  intro,
+  entries,
+  emptyMessage,
+  pathPrefix,
+} = Astro.props;
+---
+
+<Layout title={pageTitle} description={pageDescription} lang={lang}>
+  <section class={styles.hero}>
+    <h1>{heading}</h1>
+    <p>{intro}</p>
+  </section>
+
+  {entries.length === 0 ? (
+    <p>{emptyMessage}</p>
+  ) : (
+    <div class={styles.grid}>
+      {entries.map((entry) => (
+        <BlogCard post={entry} lang={lang} pathPrefix={pathPrefix} />
+      ))}
+    </div>
+  )}
+</Layout>
