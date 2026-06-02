@@ -1,71 +1,92 @@
 ---
 title: "EPDC Conversations"
-excerpt: "A reusable AI conversation system for productized client interactions, internal execution flows, and context-aware task handoffs."
+excerpt: "A modern WordPress CTA and conversation system focused on WhatsApp conversions, real metrics, and custom tools built for real business needs."
 publishedAt: "2026-06-02"
 featuredImage: "/codex-screen.png"
 featured: true
 tags:
-  - AI workflows
+  - WordPress
   - Internal tools
-  - Prompt architecture
+  - WhatsApp conversion
   - Product systems
+  - CTAs
 github: "https://github.com/elpuas/epdc"
 lang: "en"
 publicSlug: "epdc-conversations"
 ---
 
-## Overview
+# We Build Real Tools for Real Problems
 
-EPDC Conversations is a structured conversation system we use to turn vague requests into executable work. It is designed for internal use first: scoped conversations, reusable prompts, operating rules, and delivery patterns that let the team move from request to implementation without rebuilding context every time.
+At ElPuas Digital Crafts, we spend a large part of our time creating custom solutions for our clients. Very often, the problem is not solved by installing more generic plugins, but by truly understanding how the business works and building specific tools around that.
 
-This is not a chatbot landing page. It is an engineering surface.
+One of the most recent examples is EPDC Conversations, a modern CTA and conversation system for WordPress focused on WhatsApp conversions.
 
-## What It Solves
+The project started after identifying something very common across many websites in Latin America: WhatsApp became the main sales and support channel, but most available solutions were heavy, hard to customize, and offered almost no useful metrics about real conversions.
 
-Most AI-assisted workflows break for predictable reasons:
+Instead of depending on external widgets, we decided to build our own solution.
 
-- context arrives too late
-- instructions drift between tasks
-- technical constraints are implied instead of explicit
-- useful decisions disappear inside chat history
+EPDC Conversations includes:
 
-EPDC Conversations exists to reduce that entropy. It gives each conversation a stable structure so the result is closer to a working system than an isolated answer.
+- modern floating buttons
+- dynamic Gutenberg blocks
+- reusable shortcodes
+- Google Analytics 4 integration
+- local conversion tracking
+- internal metrics dashboard
+- performance-optimized architecture
+- server-side rendering
+- accessibility and responsive design
 
-## System Shape
+But most importantly, we can now better understand how users interact with each site:
 
-At a high level, the system combines four layers:
+- which pages generate the most conversations
+- which campaigns convert better
+- what kind of traffic is actually working
+- which CTA performs best
 
-1. project context
-2. operating instructions
-3. task-specific execution
-4. validation and logging
+All of this information is recorded in a lightweight and privacy-aware way, making it possible to have real metrics without depending only on external platforms.
 
-That lets us reuse the same conversation surface for different kinds of work without flattening everything into the same prompt.
+And this is not the only internal project we have developed.
 
-```ts
-type ConversationRun = {
-  objective: string;
-  contextFiles: string[];
-  constraints: string[];
-  deliverables: string[];
-  validation: ('build' | 'review' | 'content-check')[];
-};
-```
+Across different projects, we have built specific tools to solve very concrete client needs, for example:
 
-## Why It Matters
+- Puro Confort Product Pricing  
+  Lightweight system to display product configurations and prices without the full complexity of WooCommerce.
 
-The value is not just speed. The value is continuity.
+- EPDC Product Selector  
+  Dynamic product selector focused on fast experiences that are easy for clients to manage.
 
-When the context model is stable, we can document decisions, hand work across tools, and keep the output aligned with the product instead of generating one-off artifacts that are expensive to maintain.
+- GreenPack Core  
+  Modular WooCommerce controls built specifically for the GreenPack platform.
 
-## Current Use Cases
+- PBCR Agent Mode  
+  System that enables a “broker mode” to share properties through unique, minimalist, no-branding URLs.
 
-- internal product documentation
-- implementation handoffs
-- AI-assisted coding sessions
-- structured client request intake
-- repeatable QA and verification flows
+- PBCR Similar Properties Filter  
+  Custom similar-properties filter based on deep hierarchical locations.
 
-## Next Direction
+- Premium Brokers – Agent Form CC  
+  RealHomes extension that adds automatic CC behavior to agent forms.
 
-The architecture is intentionally compatible with richer metadata over time, including technical diagrams, demo links, screenshots, and embedded walkthroughs. The content model in EPDC Labs keeps those doors open without forcing the UI to solve everything in the first release.
+- Smart Home Leads  
+  Integration between RealHomes forms and the Smart Home API for centralized lead handling.
+
+- AgentPress  
+  AI-powered chatbot for real estate agents using APIs and automation for real estate and ecommerce.
+
+We have also worked on:
+
+- smart hub systems
+- automated platform-to-platform connections
+- Agent Mode workflows
+- internal tools for lead handling and automation
+- custom WordPress blocks
+- optimized dashboards and editorial flows
+
+Many of these projects start first as internal solutions and then evolve into reusable tools that we can adapt to different clients and scenarios.
+
+In addition, much of this work is developed under an open source philosophy. We like building maintainable, transparent, and reusable tools, not black boxes that are impossible to extend.
+
+Because in the end, for us, the goal is not to add complexity.
+
+It is to create tools that genuinely help businesses work better.

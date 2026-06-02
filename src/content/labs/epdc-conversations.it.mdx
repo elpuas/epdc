@@ -1,71 +1,92 @@
 ---
 title: "EPDC Conversations"
-excerpt: "Un sistema riutilizzabile di conversazioni AI per interazioni di prodotto, workflow interni di esecuzione e handoff con contesto."
+excerpt: "Un moderno sistema di CTA e conversazioni per WordPress, pensato per conversioni via WhatsApp, metriche reali e strumenti personalizzati per bisogni concreti."
 publishedAt: "2026-06-02"
 featuredImage: "/codex-screen.png"
 featured: true
 tags:
-  - Workflow AI
+  - WordPress
   - Strumenti interni
-  - Architettura prompt
+  - Conversioni WhatsApp
   - Sistemi di prodotto
+  - CTA
 github: "https://github.com/elpuas/epdc"
 lang: "it"
 publicSlug: "epdc-conversations"
 ---
 
-## Panoramica
+# Costruiamo strumenti reali per problemi reali
 
-EPDC Conversations è un sistema strutturato di conversazioni che usiamo per trasformare richieste vaghe in lavoro eseguibile. È pensato prima di tutto per uso interno: conversazioni delimitate, prompt riutilizzabili, regole operative e pattern di consegna che permettono di passare dalla richiesta all'implementazione senza ricostruire il contesto ogni volta.
+In ElPuas Digital Crafts trascorriamo gran parte del nostro tempo creando soluzioni personalizzate per i nostri clienti. Molto spesso il problema non si risolve installando più plugin generici, ma comprendendo davvero come funziona il business e costruendo strumenti specifici attorno a questo.
 
-Non è una landing page per chatbot. È una superficie di ingegneria.
+Uno degli esempi più recenti è EPDC Conversations, un moderno sistema di CTA e conversazioni per WordPress focalizzato sulle conversioni via WhatsApp.
 
-## Quale problema risolve
+Il progetto è nato dopo aver individuato qualcosa di molto comune in molti siti dell'America Latina: WhatsApp è diventato il principale canale di vendita e supporto, ma la maggior parte delle soluzioni disponibili era pesante, difficile da personalizzare e praticamente non offriva metriche utili sulle conversioni reali.
 
-La maggior parte dei workflow assistiti dall'AI si rompe per ragioni prevedibili:
+Invece di dipendere da widget esterni, abbiamo deciso di creare la nostra soluzione.
 
-- il contesto arriva troppo tardi
-- le istruzioni cambiano da un task all'altro
-- i vincoli tecnici restano impliciti
-- le decisioni utili si perdono nella cronologia
+EPDC Conversations include:
 
-EPDC Conversations nasce per ridurre questa entropia. Dà a ogni conversazione una struttura stabile, così il risultato somiglia più a un sistema funzionante che a una risposta isolata.
+- pulsanti flottanti moderni
+- blocchi dinamici per Gutenberg
+- shortcode riutilizzabili
+- integrazione con Google Analytics 4
+- tracciamento locale delle conversioni
+- dashboard interno di metriche
+- architettura ottimizzata per le performance
+- rendering server-side
+- accessibilità e responsive design
 
-## Struttura del sistema
+Ma soprattutto, ora possiamo capire meglio come gli utenti interagiscono con ogni sito:
 
-A livello generale, il sistema combina quattro livelli:
+- quali pagine generano più conversazioni
+- quali campagne convertono meglio
+- quale tipo di traffico sta realmente funzionando
+- quale CTA ha il rendimento migliore
 
-1. contesto del progetto
-2. istruzioni operative
-3. esecuzione specifica del task
-4. validazione e logging
+Tutte queste informazioni vengono registrate in modo leggero e nel rispetto della privacy, permettendo di avere metriche reali senza dipendere esclusivamente da piattaforme esterne.
 
-Questo rende possibile riutilizzare la stessa superficie conversazionale per tipi di lavoro diversi senza comprimere tutto nello stesso prompt.
+E questo non è l'unico progetto interno che abbiamo sviluppato.
 
-```ts
-type ConversationRun = {
-  objective: string;
-  contextFiles: string[];
-  constraints: string[];
-  deliverables: string[];
-  validation: ('build' | 'review' | 'content-check')[];
-};
-```
+Nel corso di diversi progetti abbiamo costruito strumenti specifici per risolvere esigenze molto concrete dei nostri clienti, per esempio:
 
-## Perché conta
+- Puro Confort Product Pricing  
+  Sistema leggero per mostrare configurazioni e prezzi dei prodotti senza tutta la complessità di WooCommerce.
 
-Il valore non è solo la velocità. Il valore è la continuità.
+- EPDC Product Selector  
+  Selettore dinamico di prodotti focalizzato su esperienze rapide e facili da gestire per i clienti.
 
-Quando il modello di contesto è stabile, possiamo documentare decisioni, passare il lavoro tra strumenti diversi e mantenere l'output allineato al prodotto invece di generare artefatti isolati difficili da mantenere.
+- GreenPack Core  
+  Controlli modulari per WooCommerce sviluppati specificamente per la piattaforma GreenPack.
 
-## Casi d'uso attuali
+- Modalità Agente PBCR  
+  Sistema che abilita una “modalità broker” per condividere proprietà tramite URL uniche, minimaliste e senza branding.
 
-- documentazione interna di prodotto
-- handoff di implementazione
-- sessioni di coding assistite da AI
-- intake strutturato delle richieste cliente
-- workflow ripetibili di QA e validazione
+- PBCR Similar Properties Filter  
+  Filtro personalizzato di proprietà simili basato su località gerarchiche profonde.
 
-## Direzione futura
+- Premium Brokers – Agent Form CC  
+  Estensione per RealHomes che aggiunge il CC automatico nei moduli degli agenti.
 
-L'architettura è già compatibile con metadati più ricchi, inclusi diagrammi tecnici, link a demo, screenshot e walkthrough incorporati. Il modello contenutistico di EPDC Labs lascia aperta questa evoluzione senza costringere la UI a risolvere tutto nella prima release.
+- Smart Home Leads  
+  Integrazione tra i moduli di RealHomes e l'API di Smart Home per una gestione centralizzata dei lead.
+
+- AgentPress  
+  Chatbot per agenti immobiliari basato su AI, che utilizza API e automazione per real estate ed ecommerce.
+
+Abbiamo lavorato anche su:
+
+- sistemi di hub intelligenti
+- connessioni automatizzate tra piattaforme
+- workflow Agent Mode
+- strumenti interni per la gestione dei lead e l'automazione
+- blocchi personalizzati per WordPress
+- dashboard e flussi editoriali ottimizzati
+
+Molti di questi progetti nascono prima come soluzioni interne e poi evolvono in strumenti riutilizzabili che possiamo adattare a clienti e scenari diversi.
+
+Inoltre, gran parte di questo lavoro viene sviluppata seguendo una filosofia open source. Ci piace costruire strumenti manutenibili, trasparenti e riutilizzabili, non scatole nere impossibili da estendere.
+
+Perché alla fine, per noi, l'obiettivo non è aggiungere complessità.
+
+È creare strumenti che aiutino davvero le aziende a funzionare meglio.

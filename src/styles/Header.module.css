@@ -105,6 +105,57 @@
   }
 }
 
+.navDropdown {
+  position: relative;
+}
+
+.navDropdownTrigger {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.navDropdownButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--color-secondary);
+  cursor: pointer;
+  padding: var(--padding-xs);
+  border-radius: 4px;
+  transition: color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-tertiary);
+    outline: none;
+  }
+}
+
+.navDropdownMenu {
+  position: absolute;
+  inset-block-start: calc(100% + 0.5rem);
+  inset-inline-start: 0;
+  min-width: 180px;
+  background: var(--color-primary);
+  border: 1px solid var(--color-quaternary);
+  border-radius: 8px;
+  padding: 0.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  z-index: 20;
+
+  li {
+    width: 100%;
+  }
+
+  a {
+    display: block;
+    width: 100%;
+  }
+}
+
 /* Header Controls Container */
 .headerControls {
   display: flex;
