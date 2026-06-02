@@ -174,9 +174,12 @@
     background: transparent;
     color: var(--color-tertiary);
     opacity: 1;
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    text-decoration: none;
     outline: none;
+
+    &::after {
+      width: 100%;
+    }
   }
 }
 
