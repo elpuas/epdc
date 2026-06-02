@@ -1,0 +1,71 @@
+---
+title: "EPDC Conversations"
+excerpt: "A reusable AI conversation system for productized client interactions, internal execution flows, and context-aware task handoffs."
+publishedAt: "2026-06-02"
+featuredImage: "/codex-screen.png"
+featured: true
+tags:
+  - AI workflows
+  - Internal tools
+  - Prompt architecture
+  - Product systems
+github: "https://github.com/elpuas/epdc"
+lang: "en"
+publicSlug: "epdc-conversations"
+---
+
+## Overview
+
+EPDC Conversations is a structured conversation system we use to turn vague requests into executable work. It is designed for internal use first: scoped conversations, reusable prompts, operating rules, and delivery patterns that let the team move from request to implementation without rebuilding context every time.
+
+This is not a chatbot landing page. It is an engineering surface.
+
+## What It Solves
+
+Most AI-assisted workflows break for predictable reasons:
+
+- context arrives too late
+- instructions drift between tasks
+- technical constraints are implied instead of explicit
+- useful decisions disappear inside chat history
+
+EPDC Conversations exists to reduce that entropy. It gives each conversation a stable structure so the result is closer to a working system than an isolated answer.
+
+## System Shape
+
+At a high level, the system combines four layers:
+
+1. project context
+2. operating instructions
+3. task-specific execution
+4. validation and logging
+
+That lets us reuse the same conversation surface for different kinds of work without flattening everything into the same prompt.
+
+```ts
+type ConversationRun = {
+  objective: string;
+  contextFiles: string[];
+  constraints: string[];
+  deliverables: string[];
+  validation: ('build' | 'review' | 'content-check')[];
+};
+```
+
+## Why It Matters
+
+The value is not just speed. The value is continuity.
+
+When the context model is stable, we can document decisions, hand work across tools, and keep the output aligned with the product instead of generating one-off artifacts that are expensive to maintain.
+
+## Current Use Cases
+
+- internal product documentation
+- implementation handoffs
+- AI-assisted coding sessions
+- structured client request intake
+- repeatable QA and verification flows
+
+## Next Direction
+
+The architecture is intentionally compatible with richer metadata over time, including technical diagrams, demo links, screenshots, and embedded walkthroughs. The content model in EPDC Labs keeps those doors open without forcing the UI to solve everything in the first release.

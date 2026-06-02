@@ -1,0 +1,71 @@
+---
+title: "EPDC Conversations"
+excerpt: "Un sistema riutilizzabile di conversazioni AI per interazioni di prodotto, workflow interni di esecuzione e handoff con contesto."
+publishedAt: "2026-06-02"
+featuredImage: "/codex-screen.png"
+featured: true
+tags:
+  - Workflow AI
+  - Strumenti interni
+  - Architettura prompt
+  - Sistemi di prodotto
+github: "https://github.com/elpuas/epdc"
+lang: "it"
+publicSlug: "epdc-conversations"
+---
+
+## Panoramica
+
+EPDC Conversations è un sistema strutturato di conversazioni che usiamo per trasformare richieste vaghe in lavoro eseguibile. È pensato prima di tutto per uso interno: conversazioni delimitate, prompt riutilizzabili, regole operative e pattern di consegna che permettono di passare dalla richiesta all'implementazione senza ricostruire il contesto ogni volta.
+
+Non è una landing page per chatbot. È una superficie di ingegneria.
+
+## Quale problema risolve
+
+La maggior parte dei workflow assistiti dall'AI si rompe per ragioni prevedibili:
+
+- il contesto arriva troppo tardi
+- le istruzioni cambiano da un task all'altro
+- i vincoli tecnici restano impliciti
+- le decisioni utili si perdono nella cronologia
+
+EPDC Conversations nasce per ridurre questa entropia. Dà a ogni conversazione una struttura stabile, così il risultato somiglia più a un sistema funzionante che a una risposta isolata.
+
+## Struttura del sistema
+
+A livello generale, il sistema combina quattro livelli:
+
+1. contesto del progetto
+2. istruzioni operative
+3. esecuzione specifica del task
+4. validazione e logging
+
+Questo rende possibile riutilizzare la stessa superficie conversazionale per tipi di lavoro diversi senza comprimere tutto nello stesso prompt.
+
+```ts
+type ConversationRun = {
+  objective: string;
+  contextFiles: string[];
+  constraints: string[];
+  deliverables: string[];
+  validation: ('build' | 'review' | 'content-check')[];
+};
+```
+
+## Perché conta
+
+Il valore non è solo la velocità. Il valore è la continuità.
+
+Quando il modello di contesto è stabile, possiamo documentare decisioni, passare il lavoro tra strumenti diversi e mantenere l'output allineato al prodotto invece di generare artefatti isolati difficili da mantenere.
+
+## Casi d'uso attuali
+
+- documentazione interna di prodotto
+- handoff di implementazione
+- sessioni di coding assistite da AI
+- intake strutturato delle richieste cliente
+- workflow ripetibili di QA e validazione
+
+## Direzione futura
+
+L'architettura è già compatibile con metadati più ricchi, inclusi diagrammi tecnici, link a demo, screenshot e walkthrough incorporati. Il modello contenutistico di EPDC Labs lascia aperta questa evoluzione senza costringere la UI a risolvere tutto nella prima release.

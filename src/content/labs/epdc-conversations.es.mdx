@@ -1,0 +1,71 @@
+---
+title: "EPDC Conversations"
+excerpt: "Un sistema reutilizable de conversaciones con IA para interacciones productizadas, flujos internos de ejecución y handoffs con contexto."
+publishedAt: "2026-06-02"
+featuredImage: "/codex-screen.png"
+featured: true
+tags:
+  - Flujos con IA
+  - Herramientas internas
+  - Arquitectura de prompts
+  - Sistemas de producto
+github: "https://github.com/elpuas/epdc"
+lang: "es"
+publicSlug: "epdc-conversations"
+---
+
+## Visión general
+
+EPDC Conversations es un sistema estructurado de conversaciones que usamos para convertir solicitudes ambiguas en trabajo ejecutable. Está pensado primero para uso interno: conversaciones delimitadas, prompts reutilizables, reglas operativas y patrones de entrega que permiten pasar de una solicitud a una implementación sin reconstruir el contexto cada vez.
+
+No es una landing de chatbot. Es una superficie de ingeniería.
+
+## Qué resuelve
+
+La mayoría de los flujos asistidos por IA fallan por razones bastante previsibles:
+
+- el contexto llega demasiado tarde
+- las instrucciones cambian entre tareas
+- las restricciones técnicas quedan implícitas
+- las decisiones útiles se pierden dentro del historial
+
+EPDC Conversations existe para reducir esa entropía. Le da a cada conversación una estructura estable para que el resultado se parezca más a un sistema funcional que a una respuesta aislada.
+
+## Forma del sistema
+
+A nivel general, el sistema combina cuatro capas:
+
+1. contexto del proyecto
+2. instrucciones operativas
+3. ejecución específica por tarea
+4. validación y registro
+
+Eso permite reutilizar la misma superficie conversacional para distintos tipos de trabajo sin aplanarlo todo dentro del mismo prompt.
+
+```ts
+type ConversationRun = {
+  objective: string;
+  contextFiles: string[];
+  constraints: string[];
+  deliverables: string[];
+  validation: ('build' | 'review' | 'content-check')[];
+};
+```
+
+## Por qué importa
+
+El valor no está solo en la velocidad. Está en la continuidad.
+
+Cuando el modelo de contexto es estable, podemos documentar decisiones, pasar trabajo entre herramientas y mantener el resultado alineado con el producto en lugar de generar artefactos aislados que luego cuestan mantener.
+
+## Casos de uso actuales
+
+- documentación interna de producto
+- handoffs de implementación
+- sesiones de código asistidas por IA
+- intake estructurado de solicitudes de cliente
+- flujos repetibles de QA y validación
+
+## Próxima dirección
+
+La arquitectura es compatible a futuro con metadatos más ricos, incluyendo diagramas técnicos, enlaces a demos, screenshots y recorridos embebidos. El modelo de contenido en EPDC Labs deja esa puerta abierta sin obligar a resolver todo en la primera versión de la UI.
