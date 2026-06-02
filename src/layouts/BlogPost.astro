@@ -47,6 +47,9 @@ const {
 const pubDate = publishedAt ?? date;
 const summary = excerpt || description;
 const heroImage = featuredImage ?? image;
+const absoluteHeroImage = heroImage
+  ? new URL(heroImage, Astro.site ?? Astro.url).toString()
+  : undefined;
 const schemaType = contentType === "labs" ? "TechArticle" : "Article";
 const resolvedEntryPath = entryPath ?? Astro.url.pathname;
 const isLabsEntry = contentType === "labs";
@@ -69,6 +72,14 @@ const data = {
   ...(tags.length > 0 && {
     keywords: tags.join(", "),
   }),
+  ...(heroImage && {
+    image: {
+      "@type": "ImageObject",
+      url: absoluteHeroImage,
+      width: 1200,
+      height: 630,
+    },
+  }),
   mainEntityOfPage: {
     "@type": "WebPage",
     "@id": `https://elpuasdigitalcrafts.com${resolvedEntryPath}`,
@@ -79,7 +90,7 @@ const data = {
 <!doctype html>
 <html lang={lang}>
   <head>
-    <BaseHead title={title} description={summary} />
+    <BaseHead title={title} description={summary} ogImage={heroImage} />
     <StructuredData {data} />
   </head>
 
