@@ -15,6 +15,9 @@ lang: "en"
 publicSlug: "epdc-conversations"
 ---
 
+import LabFeatures from '../../components/LabFeatures.astro';
+import LabFeatureCard from '../../components/LabFeatureCard.astro';
+
 # We Build Real Tools for Real Problems
 
 At ElPuas Digital Crafts, we spend a large part of our time creating custom solutions for our clients. Very often, the problem is not solved by installing more generic plugins, but by truly understanding how the business works and building specific tools around that.
@@ -48,31 +51,50 @@ All of this information is recorded in a lightweight and privacy-aware way, maki
 
 And this is not the only internal project we have developed.
 
-Across different projects, we have built specific tools to solve very concrete client needs, for example:
+## Related Internal Tools
 
-- Puro Confort Product Pricing  
-  Lightweight system to display product configurations and prices without the full complexity of WooCommerce.
-
-- EPDC Product Selector  
-  Dynamic product selector focused on fast experiences that are easy for clients to manage.
-
-- GreenPack Core  
-  Modular WooCommerce controls built specifically for the GreenPack platform.
-
-- PBCR Agent Mode  
-  System that enables a “broker mode” to share properties through unique, minimalist, no-branding URLs.
-
-- PBCR Similar Properties Filter  
-  Custom similar-properties filter based on deep hierarchical locations.
-
-- Premium Brokers – Agent Form CC  
-  RealHomes extension that adds automatic CC behavior to agent forms.
-
-- Smart Home Leads  
-  Integration between RealHomes forms and the Smart Home API for centralized lead handling.
-
-- AgentPress  
-  AI-powered chatbot for real estate agents using APIs and automation for real estate and ecommerce.
+<LabFeatures intro="Across different projects, we have built specific tools to solve very concrete client needs. This is part of the internal engineering ecosystem behind how we design reusable solutions.">
+  <LabFeatureCard
+    icon="ph:package"
+    title="Puro Confort Product Pricing"
+    description="Lightweight system to display product configurations and prices without the full complexity of WooCommerce."
+  />
+  <LabFeatureCard
+    icon="ph:shopping-cart"
+    title="EPDC Product Selector"
+    description="Dynamic product selector focused on fast experiences that are easy for clients to manage."
+  />
+  <LabFeatureCard
+    icon="ph:squares-four"
+    title="GreenPack Core"
+    description="Modular WooCommerce controls built specifically for the GreenPack platform."
+  />
+  <LabFeatureCard
+    icon="ph:buildings"
+    title="PBCR Agent Mode"
+    description="System that enables a broker mode to share properties through unique, minimalist, no-branding URLs."
+  />
+  <LabFeatureCard
+    icon="ph:git-branch"
+    title="PBCR Similar Properties Filter"
+    description="Custom similar-properties filter based on deep hierarchical locations."
+  />
+  <LabFeatureCard
+    icon="ph:files"
+    title="Premium Brokers – Agent Form CC"
+    description="RealHomes extension that adds automatic CC behavior to agent forms."
+  />
+  <LabFeatureCard
+    icon="ph:database"
+    title="Smart Home Leads"
+    description="Integration between RealHomes forms and the Smart Home API for centralized lead handling."
+  />
+  <LabFeatureCard
+    icon="ph:robot"
+    title="AgentPress"
+    description="AI-powered chatbot for real estate agents using APIs and automation for real estate and ecommerce."
+  />
+</LabFeatures>
 
 We have also worked on:
 

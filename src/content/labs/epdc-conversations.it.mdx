@@ -15,6 +15,9 @@ lang: "it"
 publicSlug: "epdc-conversations"
 ---
 
+import LabFeatures from '../../components/LabFeatures.astro';
+import LabFeatureCard from '../../components/LabFeatureCard.astro';
+
 # Costruiamo strumenti reali per problemi reali
 
 In ElPuas Digital Crafts trascorriamo gran parte del nostro tempo creando soluzioni personalizzate per i nostri clienti. Molto spesso il problema non si risolve installando più plugin generici, ma comprendendo davvero come funziona il business e costruendo strumenti specifici attorno a questo.
@@ -48,31 +51,50 @@ Tutte queste informazioni vengono registrate in modo leggero e nel rispetto dell
 
 E questo non è l'unico progetto interno che abbiamo sviluppato.
 
-Nel corso di diversi progetti abbiamo costruito strumenti specifici per risolvere esigenze molto concrete dei nostri clienti, per esempio:
+## Strumenti interni correlati
 
-- Puro Confort Product Pricing  
-  Sistema leggero per mostrare configurazioni e prezzi dei prodotti senza tutta la complessità di WooCommerce.
-
-- EPDC Product Selector  
-  Selettore dinamico di prodotti focalizzato su esperienze rapide e facili da gestire per i clienti.
-
-- GreenPack Core  
-  Controlli modulari per WooCommerce sviluppati specificamente per la piattaforma GreenPack.
-
-- Modalità Agente PBCR  
-  Sistema che abilita una “modalità broker” per condividere proprietà tramite URL uniche, minimaliste e senza branding.
-
-- PBCR Similar Properties Filter  
-  Filtro personalizzato di proprietà simili basato su località gerarchiche profonde.
-
-- Premium Brokers – Agent Form CC  
-  Estensione per RealHomes che aggiunge il CC automatico nei moduli degli agenti.
-
-- Smart Home Leads  
-  Integrazione tra i moduli di RealHomes e l'API di Smart Home per una gestione centralizzata dei lead.
-
-- AgentPress  
-  Chatbot per agenti immobiliari basato su AI, che utilizza API e automazione per real estate ed ecommerce.
+<LabFeatures intro="Nel corso di diversi progetti abbiamo costruito strumenti specifici per risolvere esigenze molto concrete dei nostri clienti. Questa è parte dell'ecosistema interno di ingegneria con cui trasformiamo soluzioni puntuali in capacità riutilizzabili.">
+  <LabFeatureCard
+    icon="ph:package"
+    title="Puro Confort Product Pricing"
+    description="Sistema leggero per mostrare configurazioni e prezzi dei prodotti senza tutta la complessità di WooCommerce."
+  />
+  <LabFeatureCard
+    icon="ph:shopping-cart"
+    title="EPDC Product Selector"
+    description="Selettore dinamico di prodotti focalizzato su esperienze rapide e facili da gestire per i clienti."
+  />
+  <LabFeatureCard
+    icon="ph:squares-four"
+    title="GreenPack Core"
+    description="Controlli modulari per WooCommerce sviluppati specificamente per la piattaforma GreenPack."
+  />
+  <LabFeatureCard
+    icon="ph:buildings"
+    title="Modalità Agente PBCR"
+    description="Sistema che abilita una modalità broker per condividere proprietà tramite URL uniche, minimaliste e senza branding."
+  />
+  <LabFeatureCard
+    icon="ph:git-branch"
+    title="PBCR Similar Properties Filter"
+    description="Filtro personalizzato di proprietà simili basato su località gerarchiche profonde."
+  />
+  <LabFeatureCard
+    icon="ph:files"
+    title="Premium Brokers – Agent Form CC"
+    description="Estensione per RealHomes che aggiunge il CC automatico nei moduli degli agenti."
+  />
+  <LabFeatureCard
+    icon="ph:database"
+    title="Smart Home Leads"
+    description="Integrazione tra i moduli di RealHomes e l'API di Smart Home per una gestione centralizzata dei lead."
+  />
+  <LabFeatureCard
+    icon="ph:robot"
+    title="AgentPress"
+    description="Chatbot per agenti immobiliari basato su AI, che utilizza API e automazione per real estate ed ecommerce."
+  />
+</LabFeatures>
 
 Abbiamo lavorato anche su:
 

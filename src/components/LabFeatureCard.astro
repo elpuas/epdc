@@ -1,0 +1,94 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  icon: string;
+  title: string;
+  description: string;
+  repoUrl?: string;
+  demoUrl?: string;
+  docsUrl?: string;
+}
+
+const { icon, title, description, repoUrl, demoUrl, docsUrl } = Astro.props as Props;
+const titleId = `lab-feature-${title.toLowerCase().replace(/[^a-z0-9]+/gi, '-')}`;
+const links = [
+  repoUrl ? { href: repoUrl, label: 'Repo' } : null,
+  demoUrl ? { href: demoUrl, label: 'Demo' } : null,
+  docsUrl ? { href: docsUrl, label: 'Docs' } : null,
+].filter(Boolean) as { href: string; label: string }[];
+---
+
+<article class="lab-feature-card" aria-labelledby={titleId}>
+  <div class="lab-feature-icon" aria-hidden="true">
+    <Icon name={icon} width="20" height="20" />
+  </div>
+  <div class="lab-feature-content">
+    <h3 id={titleId}>{title}</h3>
+    <p>{description}</p>
+    {
+      links.length > 0 && (
+        <div class="lab-feature-links" aria-label={`${title} links`}>
+          {links.map((link) => (
+            <a href={link.href}>{link.label}</a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .lab-feature-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-md);
+    align-items: start;
+    padding: var(--space-md);
+    border: 1px solid var(--color-quaternary);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--color-primary) 94%, var(--color-secondary) 6%);
+  }
+
+  .lab-feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--color-quaternary);
+    border-radius: 8px;
+    color: var(--color-tertiary);
+    flex-shrink: 0;
+  }
+
+  .lab-feature-content {
+    min-width: 0;
+  }
+
+  .lab-feature-content h3 {
+    margin: 0 0 0.35rem;
+    font-size: clamp(1.1rem, 1rem + 0.3vw, 1.25rem);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+  }
+
+  .lab-feature-content p {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  .lab-feature-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: var(--space-sm);
+  }
+
+  .lab-feature-links a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-size: 0.92rem;
+  }
+</style>
