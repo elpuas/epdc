@@ -8,12 +8,14 @@ interface Props {
 	title: string;
 	description: string;
 	image?: string;
+	ogImage?: string;
 	deferCSS?: boolean;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = '/default.png', deferCSS = false } = Astro.props;
+const { title, description, image, ogImage, deferCSS = false } = Astro.props;
+const resolvedImage = ogImage ?? image ?? '/default.png';
 const organizationStructuredData = {
 	'@context': 'https://schema.org',
 	'@type': 'LocalBusiness',
@@ -88,14 +90,14 @@ const organizationStructuredData = {
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={new URL(resolvedImage, Astro.url)} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta property="twitter:image" content={new URL(resolvedImage, Astro.url)} />
 
 <!-- Google tag (gtag.js) - Partytown Integration -->
 <script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-V1LSD3LCDX"></script>
