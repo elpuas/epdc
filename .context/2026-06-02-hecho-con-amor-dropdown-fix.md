@@ -49,6 +49,18 @@
 - Confirmed no layout-affecting JS toggle remains in `Header.astro`.
 - Started the local dev server outside the sandbox for live inspection support, but final validation in this environment was primarily build/CSS/markup based.
 
+## Visual Refinement Pass
+- Removed the visible border from the dropdown container.
+- Removed the filled green hover treatment from the dropdown item.
+- Kept the dropdown visually minimal:
+  - no border
+  - no box shadow
+  - no filled hover background
+- Moved the dropdown closer to the parent link by reducing the vertical offset.
+- Added an invisible hover bridge above the submenu using `::before` so the cursor can move from the parent item into the dropdown without flicker.
+- Kept keyboard support via `:focus-within`.
+- Kept mobile navigation unchanged.
+
 ## Files Modified
 - `src/components/Header.astro`
 - `src/styles/Header.module.css`
