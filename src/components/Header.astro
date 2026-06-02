@@ -14,7 +14,6 @@ interface Props {
 const { lang } = Astro.props;
 const currentPath = Astro.url.pathname;
 const craftedMenuId = `crafted-menu-${lang}`;
-const craftedMenuButtonId = `crafted-menu-button-${lang}`;
 ---
 
 <header class={styles.siteHeader}>
@@ -23,35 +22,33 @@ const craftedMenuButtonId = `crafted-menu-button-${lang}`;
 			<Image src="/logo-updated-150x150.webp" alt="ElPuas logo" width="150" height="150" loading="eager" decoding="async" />
 		</a>
 		<nav class={styles.mainNav}>
-			<ul>
+			<ul class={styles.navList}>
 				<li><a href={`/${lang}/about`}>{t('nav.about', lang)}</a></li>
 				<li><a href={`/${lang}/services`}>{t('nav.services', lang)}</a></li>
 				<li class={styles.navDropdown}>
-					<div class={styles.navDropdownTrigger}>
-						<a href={`/${lang}/crafted-with-love/`}>{t('nav.crafted', lang)}</a>
-						<button
-							id={craftedMenuButtonId}
-							class={styles.navDropdownButton}
-							type="button"
-							aria-haspopup="true"
-							aria-expanded="false"
-							aria-controls={craftedMenuId}
-							data-nav-dropdown-button
-						>
-							<span class="sr-only">Toggle {t('nav.crafted', lang)} menu</span>
-							<Icon name="ph:caret-down" width="16" height="16" aria-hidden="true" />
-						</button>
-					</div>
+					<a
+						href={`/${lang}/crafted-with-love/`}
+						class={styles.navDropdownLink}
+						aria-haspopup="menu"
+						aria-controls={craftedMenuId}
+					>
+						<span>{t('nav.crafted', lang)}</span>
+						<Icon name="ph:caret-down" width="16" height="16" aria-hidden="true" />
+					</a>
 					<ul
 						id={craftedMenuId}
 						class={styles.navDropdownMenu}
 						role="menu"
-						aria-labelledby={craftedMenuButtonId}
-						hidden
-						data-nav-dropdown-menu
+						aria-label={`${t('nav.crafted', lang)} submenu`}
 					>
 						<li role="none">
-							<a href={`/${lang}/epdc-labs`} role="menuitem">{t('nav.labs', lang)}</a>
+							<a
+								href={`/${lang}/epdc-labs`}
+								role="menuitem"
+								class={styles.navDropdownItem}
+							>
+								{t('nav.labs', lang)}
+							</a>
 						</li>
 					</ul>
 				</li>
@@ -74,63 +71,3 @@ const craftedMenuButtonId = `crafted-menu-button-${lang}`;
 </header>
 
 <MobileDock lang={lang} currentPath={currentPath} />
-
-<script>
-	const dropdownButtons = document.querySelectorAll('[data-nav-dropdown-button]');
-
-	const closeDropdown = (button: Element) => {
-		const menuId = button.getAttribute('aria-controls');
-		const menu = menuId ? document.getElementById(menuId) : null;
-
-		button.setAttribute('aria-expanded', 'false');
-		menu?.setAttribute('hidden', '');
-	};
-
-	const openDropdown = (button: Element) => {
-		const menuId = button.getAttribute('aria-controls');
-		const menu = menuId ? document.getElementById(menuId) : null;
-
-		button.setAttribute('aria-expanded', 'true');
-		menu?.removeAttribute('hidden');
-	};
-
-	dropdownButtons.forEach((button) => {
-		button.addEventListener('click', (event) => {
-			event.preventDefault();
-			event.stopPropagation();
-			const isExpanded = button.getAttribute('aria-expanded') === 'true';
-
-			dropdownButtons.forEach((otherButton) => {
-				if (otherButton !== button) closeDropdown(otherButton);
-			});
-
-			if (isExpanded) {
-				closeDropdown(button);
-			} else {
-				openDropdown(button);
-			}
-		});
-	});
-
-	document.addEventListener('click', (event) => {
-		dropdownButtons.forEach((button) => {
-			const menuId = button.getAttribute('aria-controls');
-			const menu = menuId ? document.getElementById(menuId) : null;
-			const target = event.target;
-
-			if (
-				target instanceof Node &&
-				!button.contains(target) &&
-				!(menu?.contains(target))
-			) {
-				closeDropdown(button);
-			}
-		});
-	});
-
-	document.addEventListener('keydown', (event) => {
-		if (event.key === 'Escape') {
-			dropdownButtons.forEach((button) => closeDropdown(button));
-		}
-	});
-</script>
