@@ -2,7 +2,7 @@
 title: "EPDC Conversations"
 excerpt: "Un moderno sistema di CTA e conversazioni per WordPress, pensato per conversioni via WhatsApp, metriche reali e strumenti personalizzati per bisogni concreti."
 publishedAt: "2026-06-02"
-featuredImage: "/codex-screen.png"
+featuredImage: "/lab/epdc-conversations/lab-epdc-conversations.webp"
 featured: true
 tags:
   - WordPress
@@ -10,50 +10,61 @@ tags:
   - Conversioni WhatsApp
   - Sistemi di prodotto
   - CTA
-github: "https://github.com/elpuas/epdc"
+github: "https://github.com/elpuas/epdc-conversations"
 lang: "it"
 publicSlug: "epdc-conversations"
 ---
 
 import LabFeatures from '../../components/LabFeatures.astro';
 import LabFeatureCard from '../../components/LabFeatureCard.astro';
+import ContentImage from '../../../public/lab/epdc-conversations/epdc-conversations-settings.webp';
+import ContentImage2 from '../../../public/lab/epdc-conversations/lab-epdc-conversations-dashboard.webp';
+import {Image} from 'astro:assets';
 
 # Costruiamo strumenti reali per problemi reali
 
-In ElPuas Digital Crafts trascorriamo gran parte del nostro tempo creando soluzioni personalizzate per i nostri clienti. Molto spesso il problema non si risolve installando più plugin generici, ma comprendendo davvero come funziona il business e costruendo strumenti specifici attorno a questo.
+In *ElPuas Digital Crafts* trascorriamo gran parte del nostro tempo *creando soluzioni personalizzate per i nostri clienti*. Molto spesso il problema non si risolve installando più plugin generici, ma comprendendo davvero come funziona il business e costruendo strumenti specifici attorno a questo.
 
-Uno degli esempi più recenti è EPDC Conversations, un moderno sistema di CTA e conversazioni per WordPress focalizzato sulle conversioni via WhatsApp.
+Uno degli esempi più recenti è *EPDC Conversations*, un moderno sistema di CTA e conversazioni per WordPress focalizzato sulle conversioni via WhatsApp.
 
-Il progetto è nato dopo aver individuato qualcosa di molto comune in molti siti dell'America Latina: WhatsApp è diventato il principale canale di vendita e supporto, ma la maggior parte delle soluzioni disponibili era pesante, difficile da personalizzare e praticamente non offriva metriche utili sulle conversioni reali.
+Il progetto è nato dopo aver individuato qualcosa di molto comune in molti siti dell'America Latina: *WhatsApp è diventato il principale canale di vendita e supporto*, ma la maggior parte delle soluzioni disponibili era pesante, difficile da personalizzare e praticamente non offriva metriche utili sulle conversioni reali.
 
 Invece di dipendere da widget esterni, abbiamo deciso di creare la nostra soluzione.
 
 EPDC Conversations include:
 
-- pulsanti flottanti moderni
-- blocchi dinamici per Gutenberg
-- shortcode riutilizzabili
-- integrazione con Google Analytics 4
-- tracciamento locale delle conversioni
-- dashboard interno di metriche
-- architettura ottimizzata per le performance
-- rendering server-side
-- accessibilità e responsive design
+- Pulsanti flottanti moderni
+- Blocchi dinamici per Gutenberg
+- Shortcode riutilizzabili
+- Integrazione con Google Analytics 4
+- Tracciamento locale delle conversioni
+- Dashboard interno di metriche
+- Architettura ottimizzata per le performance
+- Rendering server-side
+- Accessibilità e responsive design
+
+<div class="blog-internal-image">
+    {ContentImage && <Image width={1020} height={510} src={ContentImage} alt="Impostazioni di EPDC Conversations in WordPress" />}
+</div>
 
 Ma soprattutto, ora possiamo capire meglio come gli utenti interagiscono con ogni sito:
 
-- quali pagine generano più conversazioni
-- quali campagne convertono meglio
-- quale tipo di traffico sta realmente funzionando
-- quale CTA ha il rendimento migliore
+- Quali pagine generano più conversazioni
+- Quali campagne convertono meglio
+- Quale tipo di traffico sta realmente funzionando
+- Quale CTA ha il rendimento migliore
 
-Tutte queste informazioni vengono registrate in modo leggero e nel rispetto della privacy, permettendo di avere metriche reali senza dipendere esclusivamente da piattaforme esterne.
+<div class="blog-internal-image">
+    {ContentImage2 && <Image width={1020} height={510} src={ContentImage2} alt="Dashboard di EPDC Conversations" />}
+</div>
+
+Tutte queste informazioni vengono *registrate in modo leggero e nel rispetto della privacy*, permettendo di avere metriche reali senza dipendere esclusivamente da piattaforme esterne.
 
 E questo non è l'unico progetto interno che abbiamo sviluppato.
 
-## Strumenti interni correlati
-
-<LabFeatures intro="Nel corso di diversi progetti abbiamo costruito strumenti specifici per risolvere esigenze molto concrete dei nostri clienti. Questa è parte dell'ecosistema interno di ingegneria con cui trasformiamo soluzioni puntuali in capacità riutilizzabili.">
+<LabFeatures 
+title="Altri Prodotti e Strumenti Interni"
+intro="Nel corso di diversi progetti abbiamo costruito strumenti specifici per risolvere esigenze molto concrete dei nostri clienti. Questa è parte dell'ecosistema interno di ingegneria con cui trasformiamo soluzioni puntuali in capacità riutilizzabili.">
   <LabFeatureCard
     icon="ph:package"
     title="Puro Confort Product Pricing"
@@ -63,6 +74,7 @@ E questo non è l'unico progetto interno che abbiamo sviluppato.
     icon="ph:shopping-cart"
     title="EPDC Product Selector"
     description="Selettore dinamico di prodotti focalizzato su esperienze rapide e facili da gestire per i clienti."
+    repoUrl='https://github.com/elpuas/epdc-product-selector'
   />
   <LabFeatureCard
     icon="ph:squares-four"
@@ -96,19 +108,13 @@ E questo non è l'unico progetto interno che abbiamo sviluppato.
   />
 </LabFeatures>
 
-Abbiamo lavorato anche su:
+Molti di questi *progetti nascono prima come soluzioni interne e poi evolvono in strumenti riutilizzabili* che possiamo adattare a clienti e scenari diversi.
 
-- sistemi di hub intelligenti
-- connessioni automatizzate tra piattaforme
-- workflow Agent Mode
-- strumenti interni per la gestione dei lead e l'automazione
-- blocchi personalizzati per WordPress
-- dashboard e flussi editoriali ottimizzati
+Inoltre, gran parte di questo lavoro viene sviluppata seguendo una filosofia *open source*. Ci piace costruire strumenti manutenibili, trasparenti e riutilizzabili, non scatole nere impossibili da estendere.
 
-Molti di questi progetti nascono prima come soluzioni interne e poi evolvono in strumenti riutilizzabili che possiamo adattare a clienti e scenari diversi.
+Perché alla fine, per noi, l'obiettivo non è aggiungere complessità. *È creare strumenti che aiutino davvero le aziende a funzionare meglio*.
 
-Inoltre, gran parte di questo lavoro viene sviluppata seguendo una filosofia open source. Ci piace costruire strumenti manutenibili, trasparenti e riutilizzabili, non scatole nere impossibili da estendere.
-
-Perché alla fine, per noi, l'obiettivo non è aggiungere complessità.
-
-È creare strumenti che aiutino davvero le aziende a funzionare meglio.
+<div class="callout callout-info" style="margin: var(--space-4xl) 0;">
+  <strong>Vuoi saperne di più su EPDC Conversations o su uno dei nostri strumenti interni?</strong><br />
+  Non esitare a <a href="/it/contact">contattarci</a> o a consultare i <a href="https://github.com/elpuas">repository pubblici</a> per vedere come stiamo costruendo soluzioni reali per problemi reali.
+</div>
