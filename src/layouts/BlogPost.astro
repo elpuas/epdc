@@ -1,206 +1,199 @@
 ---
-import { Image } from "astro:assets";
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import FormattedDate from "../components/FormattedDate.astro";
-import StructuredData from "../components/StructuredData.astro";
-import type { Language } from "../i18n/utils";
-import "../styles/global.css";
-import stylesBlog from "../styles/ProjectLayout.module.css";
-import styles from "../styles/Layout.module.css";
+import { Image } from 'astro:assets';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import StructuredData from '../components/StructuredData.astro';
+import type { Language } from '../i18n/utils';
+import '../styles/global.css';
+import stylesBlog from '../styles/ProjectLayout.module.css';
+import styles from '../styles/Layout.module.css';
 
 interface Props {
-  title: string;
-  description?: string;
-  excerpt?: string;
-  date?: Date;
-  publishedAt?: Date;
-  author?: string;
-  lang?: Language;
-  image?: string;
-  featuredImage?: string;
-  contentType?: "blog" | "labs";
-  entryPath?: string;
-  tags?: string[];
-  github?: string;
-  demoUrl?: string;
+	title: string;
+	description?: string;
+	excerpt?: string;
+	date?: Date;
+	publishedAt?: Date;
+	author?: string;
+	lang?: Language;
+	image?: string;
+	featuredImage?: string;
+	contentType?: 'blog' | 'labs';
+	entryPath?: string;
+	tags?: string[];
+	github?: string;
+	demoUrl?: string;
+	showHeroImage?: boolean;
 }
 
 const {
-  title,
-  description = "",
-  excerpt = "",
-  date,
-  publishedAt,
-  author,
-  lang = "en" as Language,
-  image,
-  featuredImage,
-  contentType = "blog",
-  entryPath,
-  tags = [],
-  github,
-  demoUrl,
+	title,
+	description = '',
+	excerpt = '',
+	date,
+	publishedAt,
+	author = 'ElPuas Digital Crafts',
+	lang = 'en' as Language,
+	image,
+	featuredImage,
+	contentType = 'blog',
+	entryPath,
+	tags = [],
+	showHeroImage = false,
 } = Astro.props as Props;
 
 const pubDate = publishedAt ?? date;
 const summary = excerpt || description;
 const heroImage = featuredImage ?? image;
 const absoluteHeroImage = heroImage
-  ? new URL(heroImage, Astro.site ?? Astro.url).toString()
-  : undefined;
-const schemaType = contentType === "labs" ? "TechArticle" : "Article";
+	? new URL(heroImage, Astro.site ?? Astro.url).toString()
+	: undefined;
+const schemaType = contentType === 'labs' ? 'TechArticle' : 'Article';
 const resolvedEntryPath = entryPath ?? Astro.url.pathname;
-const isLabsEntry = contentType === "labs";
+const isLabsEntry = contentType === 'labs';
 
 const data = {
-  "@context": "https://schema.org",
-  "@type": schemaType,
-  headline: title,
-  description: summary,
-  ...(author && {
-    author: {
-      "@type": "Organization",
-      name: author,
-    },
-  }),
-  ...(pubDate && {
-    datePublished: pubDate.toISOString(),
-  }),
-  inLanguage: lang,
-  ...(tags.length > 0 && {
-    keywords: tags.join(", "),
-  }),
-  ...(heroImage && {
-    image: {
-      "@type": "ImageObject",
-      url: absoluteHeroImage,
-      width: 1200,
-      height: 630,
-    },
-  }),
-  mainEntityOfPage: {
-    "@type": "WebPage",
-    "@id": `https://elpuasdigitalcrafts.com${resolvedEntryPath}`,
-  },
+	'@context': 'https://schema.org',
+	'@type': schemaType,
+	headline: title,
+	description: summary,
+	...(author && {
+		author: {
+			'@type': 'Organization',
+			name: author,
+		},
+	}),
+	...(pubDate && {
+		datePublished: pubDate.toISOString(),
+	}),
+	inLanguage: lang,
+	...(tags.length > 0 && {
+		keywords: tags.join(', '),
+	}),
+	...(heroImage && {
+		image: {
+			'@type': 'ImageObject',
+			url: absoluteHeroImage,
+			width: 1200,
+			height: 630,
+		},
+	}),
+	mainEntityOfPage: {
+		'@type': 'WebPage',
+		'@id': `https://elpuasdigitalcrafts.com${resolvedEntryPath}`,
+	},
 };
 ---
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang={lang}>
-  <head>
-    <BaseHead title={title} description={summary} ogImage={heroImage} />
-    <StructuredData {data} />
-  </head>
+	<head>
+		<BaseHead title={title} description={summary} ogImage={heroImage} />
+		<StructuredData {data} />
+	</head>
 
-  <body>
-    <header>
-      <div class:list={styles.wrapper}>
-        <Header lang={lang} />
-      </div>
-    </header>
-    <main>
-      <article class:list={stylesBlog.article}>
-        <div class="prose" class:list={stylesBlog.prose}>
-          <div class="title">
-            <h1>{title}</h1>
-            {
-              !isLabsEntry && (pubDate || author) && (
-                <div class="blog-date">
-                  <FormattedDate date={pubDate} />
-                  {author && (
-                    <p>
-                      By <span class="accent">{author}</span>
-                    </p>
-                  )}
-                </div>
-              )
-            }
-          </div>
-          {
-            isLabsEntry && tags.length > 0 && (
-              <div class="entry-meta" aria-label="Entry metadata">
-                <div class="entry-tags">
-                  {tags.map((tag) => (
-                    <span class="entry-tag">{tag}</span>
-                  ))}
-                </div>
-              </div>
-            )
-          }
-          {
-            heroImage && (
-              <div class="blog-hero-image">
-                <Image src={heroImage} alt={title} width={1280} height={720} />
-              </div>
-            )
-          }
-          <slot />
-        </div>
-      </article>
-    </main>
-    <footer>
-      <div class:list={styles.wrapper}>
-        <Footer lang={lang} />
-      </div>
-    </footer>
-    <script>
-      // Black and White Theme Toggle with Persistence
-      document.addEventListener("DOMContentLoaded", () => {
-        const bwToggle = document.getElementById("bw-toggle");
-        const html = document.documentElement;
+	<body>
+		<header>
+			<div class:list={styles.wrapper}>
+				<Header lang={lang} />
+			</div>
+		</header>
+		<main>
+			<article class:list={stylesBlog.article}>
+				<div class="prose" class:list={stylesBlog.prose}>
+					<div class="title">
+						<h1>{title}</h1>
+						{
+							!isLabsEntry && (pubDate || author) && (
+								<div class="blog-date">
+									{pubDate && <FormattedDate date={pubDate} />}
+									{author && <p>By <span class="accent">{author}</span></p>}
+								</div>
+							)
+						}
+					</div>
+					{
+						isLabsEntry && tags.length > 0 && (
+							<div class="entry-meta" aria-label="Entry metadata">
+								<div class="entry-tags">
+									{tags.map((tag) => (
+										<span class="entry-tag">{tag}</span>
+									))}
+								</div>
+							</div>
+						)
+					}
+					{
+						showHeroImage && heroImage && (
+							<div class="blog-hero-image">
+								<Image src={heroImage} alt={title} width={1280} height={720} loading="eager" decoding="async" />
+							</div>
+						)
+					}
+					<slot />
+				</div>
+			</article>
+		</main>
+		<footer>
+			<div class:list={styles.wrapper}>
+				<Footer lang={lang} />
+			</div>
+		</footer>
+		<script>
+			// Black and White Theme Toggle with Persistence
+			document.addEventListener('DOMContentLoaded', () => {
+				const bwToggle = document.getElementById('bw-toggle');
+				const html = document.documentElement;
 
-        // Load saved theme from localStorage
-        const savedTheme = localStorage.getItem("epdc-theme");
-        if (savedTheme && (savedTheme === "light" || savedTheme === "bw")) {
-          html.setAttribute("data-theme", savedTheme);
-        }
+				// Load saved theme from localStorage
+				const savedTheme = localStorage.getItem('epdc-theme');
+				if (savedTheme && (savedTheme === 'light' || savedTheme === 'bw')) {
+					html.setAttribute('data-theme', savedTheme);
+				}
 
-        if (bwToggle) {
-          bwToggle.addEventListener("click", () => {
-            const currentTheme = html.getAttribute("data-theme");
-            const newTheme = currentTheme === "light" ? "bw" : "light";
+				if (bwToggle) {
+					bwToggle.addEventListener('click', () => {
+						const currentTheme = html.getAttribute('data-theme');
+						const newTheme = currentTheme === 'light' ? 'bw' : 'light';
 
-            // Update DOM
-            html.setAttribute("data-theme", newTheme);
+						// Update DOM
+						html.setAttribute('data-theme', newTheme);
 
-            // Save to localStorage
-            localStorage.setItem("epdc-theme", newTheme);
+						// Save to localStorage
+						localStorage.setItem('epdc-theme', newTheme);
 
-            // Update button aria-label
-            const isBlackWhite = newTheme === "bw";
-            bwToggle.setAttribute(
-              "aria-label",
-              isBlackWhite
-                ? "Switch to color mode"
-                : "Toggle black and white mode",
-            );
-          });
-        }
-      });
-    </script>
-    <style>
-      .entry-meta {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-md);
-        margin: 0 0 var(--space-2xl);
-      }
+						// Update button aria-label
+						const isBlackWhite = newTheme === 'bw';
+						bwToggle.setAttribute(
+							'aria-label',
+							isBlackWhite ? 'Switch to color mode' : 'Toggle black and white mode',
+						);
+					});
+				}
+			});
+		</script>
+		<style>
+			.entry-meta {
+				display: flex;
+				flex-direction: column;
+				gap: var(--space-md);
+				margin: 0 0 var(--space-2xl);
+			}
 
-      .entry-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-sm);
-      }
+			.entry-tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: var(--space-sm);
+			}
 
-      .entry-tag {
-        border: 1px solid var(--color-quaternary);
-        border-radius: 999px;
-        padding: 0.35rem 0.75rem;
-        font-size: 0.9rem;
-        line-height: 1;
-      }
-    </style>
-  </body>
+			.entry-tag {
+				border: 1px solid var(--color-quaternary);
+				border-radius: 999px;
+				padding: 0.35rem 0.75rem;
+				font-size: 0.9rem;
+				line-height: 1;
+			}
+		</style>
+	</body>
 </html>
