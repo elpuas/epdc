@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import BlogPost from '../../../layouts/BlogPost.astro';
+import { getLabPublicSlug, getLabStaticPaths } from '../../../data/labs';
+
+export async function getStaticPaths() {
+  return getLabStaticPaths('it');
+}
+
+interface Props {
+  lab: CollectionEntry<'labs'>;
+}
+
+const { lab } = Astro.props as Props;
+const { Content } = await render(lab);
+---
+
+<BlogPost
+  title={lab.data.title}
+  description={lab.data.excerpt}
+  excerpt={lab.data.excerpt}
+  publishedAt={lab.data.publishedAt}
+  featuredImage={lab.data.featuredImage}
+  lang="it"
+  contentType="labs"
+  entryPath={`/it/epdc-labs/${getLabPublicSlug(lab)}`}
+  tags={lab.data.tags}
+  github={lab.data.github}
+  demoUrl={lab.data.demoUrl}
+>
+  <Content />
+</BlogPost>

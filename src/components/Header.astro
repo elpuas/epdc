@@ -13,6 +13,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const currentPath = Astro.url.pathname;
+const craftedMenuId = `crafted-menu-${lang}`;
 ---
 
 <header class={styles.siteHeader}>
@@ -21,10 +22,36 @@ const currentPath = Astro.url.pathname;
 			<Image src="/logo-updated-150x150.webp" alt="ElPuas logo" width="150" height="150" loading="eager" decoding="async" />
 		</a>
 		<nav class={styles.mainNav}>
-			<ul>
+			<ul class={styles.navList}>
 				<li><a href={`/${lang}/about`}>{t('nav.about', lang)}</a></li>
 				<li><a href={`/${lang}/services`}>{t('nav.services', lang)}</a></li>
-				<li><a href={`/${lang}/crafted-with-love/`}>{t('nav.crafted', lang)}</a></li>
+				<li class={styles.navDropdown}>
+					<a
+						href={`/${lang}/crafted-with-love/`}
+						class={styles.navDropdownLink}
+						aria-haspopup="menu"
+						aria-controls={craftedMenuId}
+					>
+						<span>{t('nav.crafted', lang)}</span>
+						<Icon name="ph:caret-down" width="16" height="16" aria-hidden="true" />
+					</a>
+					<ul
+						id={craftedMenuId}
+						class={styles.navDropdownMenu}
+						role="menu"
+						aria-label={`${t('nav.crafted', lang)} submenu`}
+					>
+						<li role="none">
+							<a
+								href={`/${lang}/epdc-labs`}
+								role="menuitem"
+								class={styles.navDropdownItem}
+							>
+								{t('nav.labs', lang)}
+							</a>
+						</li>
+					</ul>
+				</li>
 				<li><a href={`/${lang}/blog`}>{t('nav.blog', lang)}</a></li>
 				<li><a href={`/${lang}/contact`}>{t('nav.contact', lang)}</a></li>
 			</ul>

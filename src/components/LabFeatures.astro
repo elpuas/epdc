@@ -1,0 +1,55 @@
+---
+interface Props {
+  title?: string;
+  intro?: string;
+}
+
+const { title, intro } = Astro.props as Props;
+---
+
+<section class="lab-features" aria-label={title ?? 'Related internal tools'}>
+  {
+    title && (
+      <div class="lab-features-header">
+        <h2>{title}</h2>
+        {intro && <p>{intro}</p>}
+      </div>
+    )
+  }
+  <div class="lab-features-grid">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .lab-features {
+    margin: var(--space-2xl) 0;
+  }
+
+  .lab-features-header {
+    margin-bottom: var(--space-lg);
+
+    h2 {
+      margin-bottom: var(--space-sm);
+    }
+
+    p {
+      margin: 0;
+      max-width: 72ch;
+    }
+  }
+
+  .lab-features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (min-width: 1080px) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

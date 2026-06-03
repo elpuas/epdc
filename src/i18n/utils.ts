@@ -9,6 +9,7 @@ type Translations = {
       about: string;
       services: string;
       crafted: string;
+      labs: string;
       blog: string;
       contact: string;
     };
