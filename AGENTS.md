@@ -15,19 +15,19 @@ A multilingual Astro website for ElPuas Digital Crafts with MDX content manageme
 
 ```bash
 # Install dependencies
-pnpm install
+npm install
 
 # Start development server (runs on localhost:4321)
-pnpm dev
+npm dev
 
 # Build for production
-pnpm build
+npm build
 
 # Preview production build
-pnpm preview
+npm preview
 
 # Run Astro CLI commands
-pnpm astro --help
+npm astro --help
 ```
 
 ## Development Workflow

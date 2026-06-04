@@ -28,13 +28,54 @@ const lang = "en";
 
   <section class="portfolio-grid">
     <div class="container">
-      <MadeWithLoveGrid projects={englishProjects} lang={lang} />
+      <MadeWithLoveGrid projects={englishProjects} lang={lang} animateOnView={true} />
     </div>
     <div class="align-center">
       <Button href="/en/contact" label="Let's Talk" aria-label="Contact us to discuss your project" />
     </div>
   </section>
 </Layout>
+
+<script type="module" is:inline>
+  if (typeof window !== 'undefined') {
+    const cards = [...document.querySelectorAll('[data-crafted-enter="true"]:not([data-enter-bound])')];
+
+    if (cards.length > 0) {
+      const enableCards = () => {
+        cards.forEach((card) => {
+          card.classList.add('is-visible');
+          card.setAttribute('data-enter-ready', 'true');
+          card.setAttribute('data-enter-bound', 'true');
+        });
+      };
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+        enableCards();
+      } else {
+        cards.forEach((card) => {
+          card.setAttribute('data-enter-ready', 'true');
+          card.setAttribute('data-enter-bound', 'true');
+        });
+
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-visible');
+              obs.unobserve(entry.target);
+            });
+          },
+          {
+            threshold: 0.2,
+            rootMargin: '0px 0px -8% 0px',
+          }
+        );
+
+        cards.forEach((card) => observer.observe(card));
+      }
+    }
+  }
+</script>
 
 <style>
   .align-center {
@@ -75,6 +116,10 @@ const lang = "en";
   }
   
   @media (max-width: 480px) {
+    .container {
+      padding-inline: 0;
+    }
+
     .portfolio-header h1 {
       font-size: 2rem;
     }

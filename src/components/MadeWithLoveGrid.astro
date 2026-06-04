@@ -6,9 +6,10 @@ import MadeWithLoveCard from './MadeWithLoveCard.astro';
 interface Props {
   projects: CollectionEntry<'portfolio'>[];
   lang: Language;
+  animateOnView?: boolean;
 }
 
-const { projects, lang } = Astro.props;
+const { projects, lang, animateOnView = false } = Astro.props;
 
 const emptyMessages = {
   en: 'No projects available yet. Check back soon!',
@@ -25,7 +26,7 @@ const emptyMessages = {
   ) : (
     <div class="projects-grid">
       {projects.map((project, index) => (
-        <MadeWithLoveCard project={project} lang={lang} index={index} />
+        <MadeWithLoveCard project={project} lang={lang} index={index} animateOnView={animateOnView} />
       ))}
     </div>
   )

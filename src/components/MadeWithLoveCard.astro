@@ -7,9 +7,10 @@ interface Props {
   project: CollectionEntry<'portfolio'>;
   lang: Language;
   index?: number;
+  animateOnView?: boolean;
 }
 
-const { project, lang, index = 0 } = Astro.props;
+const { project, lang, index = 0, animateOnView = false } = Astro.props;
 const { title, description } = project.data;
 const projectUrl = `/${lang}/crafted-with-love/${project.slug}`;
 const animationDelay = `${Math.min(index * 70, 560)}ms`;
@@ -51,7 +52,14 @@ function getProjectIcon(entry: CollectionEntry<'portfolio'>) {
 const iconName = getProjectIcon(project);
 ---
 
-<article class="made-with-love-card" style={`--entry-delay: ${animationDelay};`}>
+<article
+  class:list={[
+    'made-with-love-card',
+    animateOnView && 'made-with-love-card--animated',
+  ]}
+  style={`--entry-delay: ${animationDelay};`}
+  data-crafted-enter={animateOnView ? 'true' : undefined}
+>
   <a href={projectUrl} class="card-shell" aria-label={title}>
     <span class="media" aria-hidden="true">
       <Icon name={iconName} width="20" height="20" />
@@ -86,9 +94,6 @@ const iconName = getProjectIcon(project);
     background: color-mix(in srgb, var(--color-primary) 94%, var(--color-secondary) 6%);
     color: inherit;
     text-decoration: none;
-    opacity: 0;
-    animation: made-with-love-card-fade-in 560ms ease forwards;
-    animation-delay: var(--entry-delay, 0ms);
     transition:
       transform 180ms ease,
       border-color 180ms ease,
@@ -167,16 +172,21 @@ const iconName = getProjectIcon(project);
     outline-offset: 3px;
   }
 
-  @keyframes made-with-love-card-fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(12px);
-    }
+  .made-with-love-card--animated[data-enter-ready='true'] .card-shell {
+    opacity: 0;
+    transform: translateY(12px);
+  }
 
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .made-with-love-card--animated[data-enter-ready='true'].is-visible .card-shell {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 560ms ease,
+      transform 560ms ease,
+      border-color 180ms ease,
+      background 180ms ease,
+      box-shadow 180ms ease;
+    transition-delay: var(--entry-delay, 0ms);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -185,9 +195,10 @@ const iconName = getProjectIcon(project);
       transition: none;
     }
 
-    .card-shell {
+    .made-with-love-card--animated[data-enter-ready='true'] .card-shell,
+    .made-with-love-card--animated[data-enter-ready='true'].is-visible .card-shell {
       opacity: 1;
-      animation: none;
+      transform: none;
     }
   }
 </style>
