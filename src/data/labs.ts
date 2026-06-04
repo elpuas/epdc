@@ -8,6 +8,7 @@ type LabsIndexCopy = {
   pageDescription: string;
   heading: string;
   intro: string;
+  kicker: string;
   emptyMessage: string;
 };
 
@@ -17,6 +18,7 @@ export const labsIndexCopy: Record<Language, LabsIndexCopy> = {
     pageDescription:
       'EPDC Labs is where ElPuas Digital Crafts documents internal tools, AI workflows, plugins, and reusable engineering systems.',
     heading: 'EPDC Labs',
+    kicker: 'Internal products, AI workflows, and engineering systems',
     intro:
       'A focused archive of internal tools, product systems, AI workflows, plugins, and reusable engineering experiments built at ElPuas Digital Crafts. Each entry is practical, technical, and grounded in implementation.',
     emptyMessage: 'No lab entries are available yet.',
@@ -26,6 +28,7 @@ export const labsIndexCopy: Record<Language, LabsIndexCopy> = {
     pageDescription:
       'EPDC Labs reúne herramientas internas, flujos de IA, plugins y sistemas reutilizables creados por ElPuas Digital Crafts.',
     heading: 'EPDC Labs',
+    kicker: 'Productos internos, flujos con IA y sistemas de ingeniería',
     intro:
       'Un archivo técnico de herramientas internas, sistemas de producto, flujos con IA, plugins y experimentos reutilizables creados en ElPuas Digital Crafts. Cada entrada parte de implementación real, no de marketing.',
     emptyMessage: 'Todavía no hay entradas en EPDC Labs.',
@@ -35,6 +38,7 @@ export const labsIndexCopy: Record<Language, LabsIndexCopy> = {
     pageDescription:
       'EPDC Labs raccoglie strumenti interni, workflow AI, plugin e sistemi riutilizzabili creati da ElPuas Digital Crafts.',
     heading: 'EPDC Labs',
+    kicker: 'Prodotti interni, workflow AI e sistemi di ingegneria',
     intro:
       'Un archivio tecnico di strumenti interni, sistemi di prodotto, workflow con IA, plugin ed esperimenti riutilizzabili creati in ElPuas Digital Crafts. Ogni voce nasce da implementazioni reali.',
     emptyMessage: 'Non ci sono ancora voci disponibili in EPDC Labs.',

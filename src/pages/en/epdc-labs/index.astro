@@ -1,12 +1,12 @@
 ---
-import CollectionIndexPage from '../../../components/CollectionIndexPage.astro';
+import LabsIndexPage from '../../../components/LabsIndexPage.astro';
 import { getLabsByLanguage, labsIndexCopy } from '../../../data/labs';
 
 const labs = await getLabsByLanguage('en');
 const copy = labsIndexCopy.en;
 ---
 
-<CollectionIndexPage
+<LabsIndexPage
   lang="en"
   pageTitle={copy.pageTitle}
   pageDescription={copy.pageDescription}

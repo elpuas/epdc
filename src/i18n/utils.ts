@@ -15,6 +15,7 @@ type Translations = {
     };
     common: {
       readMore: string;
+      viewProject: string;
       loading: string;
       error: string;
       welcome: string;
