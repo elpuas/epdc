@@ -19,13 +19,13 @@ const currentVerbs = verbs[lang as keyof typeof verbs] || verbs.en;
 <section class="hero" aria-labelledby="hero-heading">
     <div class="hero-content">
         {lang === 'en' && (
-            <h1 id="hero-heading">We <span id="verb-rotator" aria-live="polite" aria-label={`Current action: ${currentVerbs[0]}`}>{currentVerbs[0]}</span> digital crafts <strong>for</strong> humans.</h1>
+            <h1 id="hero-heading" class="text-gradient-brand">We <span id="verb-rotator" aria-live="polite" aria-label={`Current action: ${currentVerbs[0]}`}>{currentVerbs[0]}</span> digital crafts <strong>for</strong> humans.</h1>
         )}
         {lang === 'es' && (
-            <h1 id="hero-heading">Nosotros <span id="verb-rotator" aria-live="polite" aria-label={`Acción actual: ${currentVerbs[0]}`}>{currentVerbs[0]}</span> artes digitales <strong>para</strong> humanos.</h1>
+            <h1 id="hero-heading" class="text-gradient-brand">Nosotros <span id="verb-rotator" aria-live="polite" aria-label={`Acción actual: ${currentVerbs[0]}`}>{currentVerbs[0]}</span> artes digitales <strong>para</strong> humanos.</h1>
         )}
         {lang === 'it' && (
-            <h1 id="hero-heading">Noi <span id="verb-rotator" aria-live="polite" aria-label={`Azione attuale: ${currentVerbs[0]}`}>{currentVerbs[0]}</span> artigianato digitale <strong>per</strong> umani.</h1>
+            <h1 id="hero-heading" class="text-gradient-brand">Noi <span id="verb-rotator" aria-live="polite" aria-label={`Azione attuale: ${currentVerbs[0]}`}>{currentVerbs[0]}</span> artigianato digitale <strong>per</strong> umani.</h1>
         )}
     </div>
 </section>
@@ -46,7 +46,6 @@ const currentVerbs = verbs[lang as keyof typeof verbs] || verbs.en;
         min-width: 80px;
         font-weight: inherit;
         font-size: var(--fontsize-h1);
-        color: var(--color-tertiary);
         position: relative;
         transition: opacity 0.3s ease-in-out;
     }
@@ -65,7 +64,7 @@ const currentVerbs = verbs[lang as keyof typeof verbs] || verbs.en;
     // Define the verbs for each language
     const verbs = {
       en: ['code', 'craft', 'build', 'design', 'optimize'],
-      es: ['codificamos', 'creamos', 'diseñamos', 'pulimos'],
+      es: ['codificamos', 'creamos', 'diseñamos', 'optimizamos'],
       it: ['scriviamo', 'creiamo', 'curiamo', 'ottimizziamo']
     };
     
