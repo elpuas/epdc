@@ -1,0 +1,46 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import type { Language } from '../i18n/utils';
+import LabsCard from './LabsCard.astro';
+import styles from '../styles/LabsIndex.module.css';
+
+interface Props {
+  lang: Language;
+  pageTitle: string;
+  pageDescription: string;
+  heading: string;
+  intro: string;
+  entries: CollectionEntry<'labs'>[];
+  emptyMessage: string;
+  pathPrefix: string;
+}
+
+const {
+  lang,
+  pageTitle,
+  pageDescription,
+  heading,
+  intro,
+  entries,
+  emptyMessage,
+  pathPrefix,
+} = Astro.props;
+---
+
+<Layout title={pageTitle} description={pageDescription} lang={lang}>
+  <section class={styles.hero}>
+    <h1>{heading}</h1>
+    <p>{intro}</p>
+  </section>
+
+  {entries.length === 0 ? (
+    <p>{emptyMessage}</p>
+  ) : (
+    <div class={styles.grid}>
+      {entries.map((entry) => (
+        <LabsCard lab={entry} lang={lang} pathPrefix={pathPrefix} />
+      ))}
+    </div>
+  )}
+</Layout>

@@ -33,6 +33,7 @@ const labsCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     excerpt: z.string(),
+    status: z.string().optional(),
     publishedAt: z.coerce.date(),
     featuredImage: z.string().optional(),
     featured: z.boolean().optional().default(false),
