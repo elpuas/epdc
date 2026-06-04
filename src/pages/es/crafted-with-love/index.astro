@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
-import ProjectCard from '../../../components/ProjectCard.astro';
+import MadeWithLoveGrid from '../../../components/MadeWithLoveGrid.astro';
 import styles from '../../../styles/Portfolio.module.css';
 import Button from '../../../components/Button.astro';
 
@@ -21,7 +21,7 @@ const lang = "es";
 
 <Layout title={pageTitle} description={pageDescription} lang={lang}>
   <section class={styles.hero} aria-labelledby="hero-title">
-    <h1 id="hero-title">Creado con <span class={styles.accent}>Amor</span></h1>
+    <h1 id="hero-title" class="text-gradient-brand">Creado con Amor</h1>
     <p>En ElPuas Digital Crafts, cada proyecto que emprendemos está <span class={styles.accent}>creado con amor, cuidado y gran atención al detalle</span>. Nos enorgullecemos de convertir ideas en experiencias digitales sorprendentes que no solo satisfacen las necesidades de nuestros clientes, sino que también superan sus expectativas. Al aprovechar <span class={styles.accent}>herramientas y técnicas potenciadas por IA</span>, mejoramos el proceso de desarrollo, garantizando una entrega más rápida, soluciones más inteligentes y resultados innovadores.</p>
 
     <p>Aquí puedes explorar parte de nuestro <span class={styles.accent}>trabajo</span>, mostrando la amplia gama de soluciones web personalizadas que hemos creado para empresas de todo el mundo. Cada proyecto es un testimonio de nuestro compromiso con la <span class={styles.accent}>calidad, creatividad y artesanía</span>, amplificado por el poder de la IA.</p>
@@ -29,17 +29,7 @@ const lang = "es";
 
   <section class="portfolio-grid">
     <div class="container">
-      {spanishProjects.length === 0 ? (
-        <div class="no-projects">
-          <p>No hay proyectos disponibles aún. ¡Vuelve pronto!</p>
-        </div>
-      ) : (
-        <div class="projects-grid">
-          {spanishProjects.map((project) => (
-            <ProjectCard project={project} lang={lang} />
-          ))}
-        </div>
-      )}
+      <MadeWithLoveGrid projects={spanishProjects} lang={lang} />
     </div>
         <div class="align-center">
           <Button href="/es/contact" label="Hablemos" aria-label="Contáctanos para discutir tu proyecto" />
@@ -78,35 +68,14 @@ const lang = "es";
   .portfolio-grid {
     padding: 2rem 0 5rem;
   }
-  
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-    gap: 2rem;
-  }
-  
-  .no-projects {
-    text-align: center;
-    padding: 3rem 0;
-    font-size: 1.25rem;
-    color: var(--color-text-secondary, #718096);
-  }
-  
+
   @media (max-width: 768px) {
-    .projects-grid {
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    }
-    
     .portfolio-header h1 {
       font-size: 2.5rem;
     }
   }
   
   @media (max-width: 480px) {
-    .projects-grid {
-      grid-template-columns: 1fr;
-    }
-    
     .portfolio-header h1 {
       font-size: 2rem;
     }

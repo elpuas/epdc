@@ -1,0 +1,60 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { Language } from '../i18n/utils';
+import MadeWithLoveCard from './MadeWithLoveCard.astro';
+
+interface Props {
+  projects: CollectionEntry<'portfolio'>[];
+  lang: Language;
+}
+
+const { projects, lang } = Astro.props;
+
+const emptyMessages = {
+  en: 'No projects available yet. Check back soon!',
+  es: 'No hay proyectos disponibles aún. ¡Vuelve pronto!',
+  it: 'Nessun progetto disponibile ancora. Torna presto!',
+} satisfies Record<Language, string>;
+---
+
+{
+  projects.length === 0 ? (
+    <div class="no-projects">
+      <p>{emptyMessages[lang]}</p>
+    </div>
+  ) : (
+    <div class="projects-grid">
+      {projects.map((project, index) => (
+        <MadeWithLoveCard project={project} lang={lang} index={index} />
+      ))}
+    </div>
+  )
+}
+
+<style>
+  .projects-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+    gap: var(--space-lg);
+  }
+
+  .no-projects {
+    padding: 3rem 0;
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--color-white);
+  }
+
+  @media (min-width: 768px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .projects-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>
