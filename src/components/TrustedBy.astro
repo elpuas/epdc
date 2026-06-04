@@ -36,7 +36,7 @@ const logos = [
 ---
 
 <section class="trusted-by" aria-labelledby="trusted-by-title">
-    <h2 id="trusted-by-title" class="trusted-title">{title}</h2>
+    <h2 id="trusted-by-title" class="trusted-title text-gradient-brand">{title}</h2>
     <div class="logo-row" role="list" aria-label="Partner logos">
         {logos.map(({ src, alt }, index) => (
             <div role="listitem" data-index={index}>
@@ -54,7 +54,6 @@ const logos = [
 
     .trusted-title {
         font-size: var(--fontsize-h3);
-        color: var(--color-secondary);
         margin-bottom: var(--space-lg);
     }
 

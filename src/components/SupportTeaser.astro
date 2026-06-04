@@ -1,0 +1,95 @@
+---
+import Button from './Button.astro';
+import ServiceCard from './ServiceCard.astro';
+import styles from '../styles/Index.module.css';
+
+interface SupportCard {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  cards: SupportCard[];
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+const { title, description, cards, ctaLabel, ctaHref } = Astro.props as Props;
+---
+
+<section class="support-teaser" aria-labelledby="support-teaser-title">
+  <div class="support-copy">
+    <h3 id="support-teaser-title" class="text-gradient-brand">{title}</h3>
+    <p>{description}</p>
+  </div>
+
+  <ul class={`${styles.servicesGrid} support-grid`}>
+    {
+      cards.map((card, index) => (
+        <li style={`--service-enter-delay: ${0.08 + index * 0.1}s;`}>
+          <ServiceCard
+            icon={card.icon}
+            title={card.title}
+            description={card.description}
+            href={ctaHref}
+          />
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="support-cta">
+    <Button href={ctaHref} label={ctaLabel} />
+  </div>
+</section>
+
+<style>
+  .support-teaser {
+    display: grid;
+    gap: clamp(var(--space-xl), 4vw, var(--space-3xl));
+    padding-block: var(--space-2xl);
+  }
+
+  .support-copy {
+    text-align: center;
+  }
+
+  .support-copy h3 {
+    margin: 0 0 var(--space-md);
+    font-size: var(--fontsize-h2);
+    text-align: center;
+  }
+
+  .support-copy p {
+    margin: 0 auto;
+    max-width: 62ch;
+    color: var(--color-tertiary);
+    font-size: var(--fontsize-base);
+    line-height: 1.6;
+  }
+
+  .support-grid {
+    row-gap: clamp(var(--space-lg), 3vw, var(--space-2xl));
+    margin-top: 0;
+
+    li {
+      min-height: 136px;
+    }
+  }
+
+  .support-cta {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .support-grid :global(.service-card) {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
+</style>
