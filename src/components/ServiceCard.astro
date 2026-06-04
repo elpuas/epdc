@@ -15,90 +15,171 @@ const titleId = `service-title-${title.toLowerCase().replace(/\s+/g, '-')}`;
 ---
 
 <a class="service-card" href={href} aria-labelledby={titleId}>
-    <Icon name={icon} width="48" height="48" class="icon-services" aria-hidden="true" />
+    <div class="icon-shell" aria-hidden="true">
+        <Icon name={icon} width="20" height="20" class="icon-services" />
+    </div>
     <div class="card-content">
-        <h3 id={titleId}>{title}</h3>
+        <h3 id={titleId} class="text-gradient-brand">{title}</h3>
         <p>{description}</p>
     </div>
 </a>
 
 <style>
 .service-card {
-    position: relative;
-    display: flex;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
     gap: var(--space-md);
+    width: 100%;
+    padding: clamp(1rem, 0.85rem + 0.6vw, 1.3rem);
+    border: 1px solid var(--color-quaternary);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--color-primary) 94%, var(--color-secondary) 6%);
     color: var(--color-secondary);
-    padding: var(--padding-lg);
-    border-radius: 0.5rem;
     text-align: left;
-    text-decoration: none;  
-    overflow: hidden;
-    z-index: 0;
-    isolation: isolate;
-    transform: skew(0deg, 0deg);
-    transition: transform 0.3s ease;
+    text-decoration: none;
+    transition:
+        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
+    transition-delay: var(--service-enter-delay, 0s);
 
-    h4,
+    h3,
     p {
         text-align: left;
     }
-
-    &::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        border-radius: 0.5rem;
-        padding: 2px;
-        background: linear-gradient(
-            130deg,
-            #000 30%,
-            var(--color-secondary) 50%,
-            transparent 100%
-        );
-        background-size: 200% 100%;
-        background-position: -150% 0;
-        opacity: 0;
-        transition: opacity 0.8s ease;
-        mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-        mask-composite: exclude;
-        -webkit-mask-composite: destination-out;
-        z-index: 1;
-    }
-
-    .icon-services {
-        zoom: 1;
-        transform: translate(0, 0);
-        transition: transform 0.4s ease;
-    }
 }
 
-.service-card:hover::before {
+.service-card[data-enter-state='pending'] {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+}
+
+.service-card.is-visible {
     opacity: 1;
-    animation: shimmer-border 8s linear infinite;
+    transform: translate3d(0, 0, 0);
 }
 
-.service-card:hover {
-    transform: skew(4deg, 8deg);
-
-    .icon-services {
-        zoom: 2;
-        transform: translate(-5px, -20px);
-    }
+.icon-shell {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--color-quaternary);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--color-tertiary);
+    flex-shrink: 0;
 }
 
-@keyframes shimmer-border {
-    0% {
-    background-position: -150% 0;
+.icon-services {
+    transform: scale(1);
+    transition:
+        transform 0.25s ease,
+        color 0.25s ease;
+}
+
+.card-content {
+    min-width: 0;
+}
+
+.card-content h3 {
+    margin: 0 0 0.45rem;
+    font-size: clamp(1.35rem, 1.1rem + 0.7vw, 1.8rem);
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+}
+
+.card-content p {
+    margin: 0;
+    color: var(--color-tertiary);
+    font-size: clamp(0.98rem, 0.94rem + 0.12vw, 1.05rem);
+    line-height: 1.55;
+    max-width: 28ch;
+}
+
+.service-card:hover,
+.service-card:focus-visible {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--color-tertiary) 38%, var(--color-quaternary));
+    background: color-mix(in srgb, var(--color-primary) 92%, var(--color-secondary) 8%);
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.14),
+        0 0 0 1px color-mix(in srgb, var(--color-tertiary) 12%, transparent);
+}
+
+.service-card:hover .icon-shell,
+.service-card:focus-visible .icon-shell {
+    border-color: color-mix(in srgb, var(--color-tertiary) 42%, var(--color-quaternary));
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-tertiary) 12%, transparent);
+}
+
+.service-card:hover .icon-services,
+.service-card:focus-visible .icon-services {
+    transform: scale(1.06);
+    color: var(--color-secondary);
+}
+
+.service-card:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--color-tertiary) 50%, transparent);
+    outline-offset: 3px;
+}
+
+@media (max-width: 31.25rem) {
+    .service-card {
+        padding: 0.95rem;
     }
-    50% {
-        background-position: 150% 0;
+
+    .card-content h3 {
+        font-size: clamp(1.2rem, 1.05rem + 0.7vw, 1.45rem);
     }
-    100% {
-    background-position: -150% 0;
+
+    .card-content p {
+        max-width: none;
     }
 }
 </style>
+
+<script>
+    if (typeof window !== 'undefined') {
+        const cards = [...document.querySelectorAll('.service-card:not([data-enter-bound])')];
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+            cards.forEach((card) => {
+                card.classList.add('is-visible');
+                card.setAttribute('data-enter-bound', 'true');
+            });
+        } else if (!window.__epdcServiceCardObserver) {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    for (const entry of entries) {
+                        if (!entry.isIntersecting) continue;
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                },
+                {
+                    threshold: 0.2,
+                    rootMargin: '0px 0px -8% 0px',
+                }
+            );
+
+            const observeCards = (targets) => {
+                targets.forEach((card) => {
+                    card.setAttribute('data-enter-state', 'pending');
+                    card.setAttribute('data-enter-bound', 'true');
+                    observer.observe(card);
+                });
+            };
+
+            window.__epdcServiceCardObserver = { observer, observeCards };
+            observeCards(cards);
+        } else {
+            window.__epdcServiceCardObserver.observeCards(cards);
+        }
+    }
+</script>
