@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Button from '../../components/Button.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
-import { Icon } from 'astro-icon/components';
+import SupportTeaser from '../../components/SupportTeaser.astro';
 import styles from '../../styles/Index.module.css';
 import TrustedBy from '../../components/TrustedBy.astro';
 import CaseStudySection from '../../components/CaseStudySection.astro';
@@ -24,12 +24,12 @@ const lang = 'es';
   </section> 
   <section class={styles.services}>
     <div class={`${styles.withPattern} ${styles.dotsPattern}`}>
-      <h2>En <span class={`${styles.brand} ${styles.accent}`}>ElPuas Digital Crafts</span>, no solo construimos sitios web — creamos plataformas digitales de alto rendimiento, impulsadas por IA y respaldadas por mantenimiento experto para crecer con tu negocio.</h2>
+      <h2>En <span class={`${styles.brand} ${styles.accent}`}>ElPuas Digital Crafts</span>, no solo construimos sitios web, creamos plataformas digitales de alto rendimiento, impulsadas por IA y respaldadas por mantenimiento experto para crecer con tu negocio.</h2>
     </div>
   </section>
   <section class={styles.expertiseSection}>
-    <h2>Nuestra Experiencia</h2>
-    <p class="subtitle">Entregamos más que código — aportamos artesanía digital inteligente y confiable.</p>
+    <h2 class="text-gradient-brand">Qué Hacemos</h2>
+    <p class="subtitle">Entregamos más que código, construimos soluciones digitales que impulsan tu negocio.</p>
   
     <ul class={styles.servicesGrid}>
       <li>
@@ -73,34 +73,36 @@ const lang = 'es';
     imgSrc={caseStudyImage}
     imgAlt="FishCostaRica.com"
   />
+  <SupportTeaser
+    title="Planes por Suscripción"
+    description="Planes mensuales para mantener tu sitio actualizado, seguro y en constante mejora."
+    cards={[
+      {
+        icon: 'ph:shield-check',
+        title: 'Actualizaciones y seguridad',
+        description: 'Mantén WordPress, plugins y temas al día con copias de seguridad gestionadas.',
+      },
+      {
+        icon: 'ph:code',
+        title: 'Desarrollo continuo',
+        description: 'Horas incluidas para mejoras, ajustes y nuevas funcionalidades.',
+      },
+      {
+        icon: 'ph:gauge',
+        title: 'Rendimiento estable',
+        description: 'Revisiones proactivas para mantener el sitio rápido y confiable.',
+      },
+      {
+        icon: 'ph:lightning',
+        title: 'Soporte prioritario',
+        description: 'Atención rápida para incidencias y solicitudes importantes.',
+      },
+    ]}
+    ctaLabel="Explora Nuestros Planes"
+    ctaHref="/es/services/#pricing-title"
+  />
   <section class={styles.trustedBy}>
     <TrustedBy title="Con la confianza de marcas visionarias" />
-  </section>
-  <section class={styles.supportTeaser}>
-    <h3>Soporte Continuo Que Crece Contigo</h3>
-    <p class={styles.accent}>
-      Desde ajustes de rendimiento hasta actualizaciones completas, nuestros planes de cuidado mensual mantienen tu sitio rápido, seguro y en evolución.
-    </p>
-  
-    <ul class={styles.features}>
-      <li>
-        <Icon name="ph:shield-check" width="48" height="48" aria-hidden="true" />
-        <h4>Actualizaciones y copias de seguridad regulares</h4>
-      </li>
-      <li>
-        <Icon name="ph:code" width="48" height="48" aria-hidden="true" />
-        <h4>Horas de desarrollo experto incluidas</h4>
-      </li>
-      <li>
-        <Icon name="ph:gauge" width="48" height="48" aria-hidden="true" />
-        <h4>Verificaciones proactivas de rendimiento</h4>
-      </li>
-      <li>
-        <Icon name="ph:lightning" width="48" height="48" aria-hidden="true" />
-        <h4>Opciones de respuesta prioritaria</h4>
-      </li>
-    </ul>
-    <Button href="/es/services/#pricing-title" label="Explora Nuestros Planes" />
   </section>
 </Layout>
 

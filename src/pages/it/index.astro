@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Button from '../../components/Button.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
-import { Icon } from 'astro-icon/components';
+import SupportTeaser from '../../components/SupportTeaser.astro';
 import styles from '../../styles/Index.module.css';
 import TrustedBy from '../../components/TrustedBy.astro';
 import CaseStudySection from '../../components/CaseStudySection.astro';
@@ -28,7 +28,7 @@ const lang = 'it';
     </div>
   </section>
   <section class={styles.expertiseSection}>
-    <h2>La Nostra Competenza</h2>
+    <h2 class="text-gradient-brand">La Nostra Competenza</h2>
     <p class="subtitle">Offriamo più che codice — portiamo artigianato digitale intelligente e affidabile.</p>
   
     <ul class={styles.servicesGrid}>
@@ -73,34 +73,36 @@ const lang = 'it';
     imgSrc={caseStudyImage}
     imgAlt="FishCostaRica.com"
   />
+  <SupportTeaser
+    title="Supporto Continuo Che Cresce Con Te"
+    description="Piani mensili per mantenere il tuo sito aggiornato, sicuro e in costante miglioramento."
+    cards={[
+      {
+        icon: 'ph:shield-check',
+        title: 'Aggiornamenti e sicurezza',
+        description: 'Mantieni WordPress, plugin e temi aggiornati con backup gestiti.',
+      },
+      {
+        icon: 'ph:code',
+        title: 'Sviluppo continuo',
+        description: 'Ore incluse per miglioramenti, modifiche e nuove funzionalità.',
+      },
+      {
+        icon: 'ph:gauge',
+        title: 'Prestazioni stabili',
+        description: 'Controlli proattivi per mantenere il sito veloce e affidabile.',
+      },
+      {
+        icon: 'ph:lightning',
+        title: 'Supporto prioritario',
+        description: 'Risposta più rapida per problemi e richieste importanti.',
+      },
+    ]}
+    ctaLabel="Esplora I Nostri Piani"
+    ctaHref="/it/services/#pricing-title"
+  />
   <section class={styles.trustedBy}>
     <TrustedBy title="Scelti da brand innovativi" />
-  </section>
-  <section class={styles.supportTeaser}>
-    <h3>Supporto Continuo Che Cresce Con Te</h3>
-    <p class={styles.accent}>
-      Dagli aggiustamenti delle prestazioni agli aggiornamenti completi, i nostri piani di assistenza mensile mantengono il tuo sito veloce, sicuro e in evoluzione.
-    </p>
-  
-    <ul class={styles.features}>
-      <li>
-        <Icon name="ph:shield-check" width="48" height="48" aria-hidden="true" />
-        <h4>Aggiornamenti e backup regolari</h4>
-      </li>
-      <li>
-        <Icon name="ph:code" width="48" height="48" aria-hidden="true" />
-        <h4>Ore di sviluppo esperto incluse</h4>
-      </li>
-      <li>
-        <Icon name="ph:gauge" width="48" height="48" aria-hidden="true" />
-        <h4>Controlli proattivi delle prestazioni</h4>
-      </li>
-      <li>
-        <Icon name="ph:lightning" width="48" height="48" aria-hidden="true" />
-        <h4>Opzioni di risposta prioritaria</h4>
-      </li>
-    </ul>
-    <Button href="/it/services/#pricing-title" label="Esplora I Nostri Piani" />
   </section>
 </Layout>
 

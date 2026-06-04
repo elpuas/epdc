@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Button from '../../components/Button.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
-import { Icon } from 'astro-icon/components';
+import SupportTeaser from '../../components/SupportTeaser.astro';
 import styles from '../../styles/Index.module.css';
 import TrustedBy from '../../components/TrustedBy.astro';
 import CaseStudySection from '../../components/CaseStudySection.astro';
@@ -28,7 +28,7 @@ const lang = 'en';
       </div>
     </section>
     <section class={styles.expertiseSection}>
-      <h2>Our Expertise</h2>
+      <h2 class="text-gradient-brand">Our Expertise</h2>
       <p class="subtitle">We deliver more than code — we bring smart, reliable digital craftsmanship.</p>
     
       <ul class={styles.servicesGrid}>
@@ -73,34 +73,36 @@ const lang = 'en';
       imgSrc={caseStudyImage}
       imgAlt="FishCostaRica.com"
     />
+    <SupportTeaser
+      title="Ongoing Support That Grows With You"
+      description="Monthly plans to keep your website updated, secure, and continuously improving."
+      cards={[
+        {
+          icon: 'ph:shield-check',
+          title: 'Updates and security',
+          description: 'Keep WordPress, plugins, and themes up to date with managed backups.',
+        },
+        {
+          icon: 'ph:code',
+          title: 'Continuous development',
+          description: 'Included development hours for improvements, adjustments, and new features.',
+        },
+        {
+          icon: 'ph:gauge',
+          title: 'Stable performance',
+          description: 'Proactive reviews to keep the site fast and reliable.',
+        },
+        {
+          icon: 'ph:lightning',
+          title: 'Priority support',
+          description: 'Faster attention for important issues and requests.',
+        },
+      ]}
+      ctaLabel="Explore Our Plans"
+      ctaHref="/en/services/#pricing-title"
+    />
     <section class={styles.trustedBy}>
       <TrustedBy title="Trusted by forward-thinking brands" />
-    </section>
-    <section class={styles.supportTeaser}>
-      <h3>Ongoing Support That Grows With You</h3>
-      <p class={styles.accent}>
-        From performance tweaks to full-scale updates, our monthly care plans keep your site fast, secure, and evolving.
-      </p>
-    
-      <ul class={styles.features}>
-        <li>
-          <Icon name="ph:shield-check" width="48" height="48" aria-hidden="true" />
-          <h4>Regular updates & backups</h4>
-        </li>
-        <li>
-          <Icon name="ph:code" width="48" height="48" aria-hidden="true" />
-          <h4>Expert dev hours included</h4>
-        </li>
-        <li>
-          <Icon name="ph:gauge" width="48" height="48" aria-hidden="true" />
-          <h4>Proactive performance checks</h4>
-        </li>
-        <li>
-          <Icon name="ph:lightning" width="48" height="48" aria-hidden="true" />
-          <h4>Priority response options</h4>
-        </li>
-      </ul>
-      <Button href="/en/services/#pricing-title" label="Explore Our Plans" />
     </section>
 </Layout>
 
