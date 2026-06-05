@@ -4,12 +4,10 @@ import Hero from '../../components/Hero.astro';
 import Button from '../../components/Button.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import SupportTeaser from '../../components/SupportTeaser.astro';
+import HomeProjectShowcase from '../../components/HomeProjectShowcase.astro';
+import HomeProjectShowcaseVisual from '../../components/HomeProjectShowcaseVisual.astro';
 import styles from '../../styles/Index.module.css';
 import TrustedBy from '../../components/TrustedBy.astro';
-import CaseStudySection from '../../components/CaseStudySection.astro';
-
-// Import case study image
-import caseStudyImage from '../../../public/phone-showcase.jpg';
 
 const title = 'ElPuas Digital Crafts | Web Development with Love and Precision';
 const description = 'We build fast, affordable, and beautifully crafted websites for businesses and agencies — powered by WordPress, Astro, and AI-enhanced workflows. Based in Costa Rica, with clients worldwide.';
@@ -62,17 +60,25 @@ const lang = 'en';
         </li>
       </ul>
     </section>
-    <CaseStudySection
-      title="From Website to Growth Engine"
-      accentText="FishCostaRica.com didn't just get a website — they got a partner."
-      paragraph="We built a custom site designed to convert, and continue to optimize it through our monthly maintenance plan. The result? Higher search visibility, better performance, and a steady increase in bookings — all without lifting a finger."
-      quote="Since launching the new site, we've seen a noticeable boost in bookings and better visibility on search. ElPuas understood our goals and delivered results."
-      author="Richard Krug, FishCostaRica.com"
-      buttonLabel="Case Study"
-      buttonHref="/en/crafted-with-love/fishcostarica-tourism-en" 
-      imgSrc={caseStudyImage}
-      imgAlt="FishCostaRica.com"
-    />
+    <HomeProjectShowcase
+      title="Nuara Pelletterie"
+      description="Premium ecommerce experience developed for an Italian handcrafted leather goods brand."
+      linkLabel="View Project"
+      tags={[
+        { icon: 'ph:shopping-cart', label: 'WooCommerce' },
+        { icon: 'ph:pencil-line', label: 'Custom Design' },
+        { icon: 'ph:globe-hemisphere-west', label: 'Multilingual' },
+        { icon: 'ph:headset', label: 'Ongoing Support' },
+      ]}
+      tagsLabel="Project features"
+      href="/en/crafted-with-love/nuara-pelletterie-ecommerce-en/"
+    >
+      <HomeProjectShowcaseVisual
+        slot="visual"
+        src="/epdc-nuara-card.webp"
+        alt="Nuara Pelletterie project showcase image"
+      />
+    </HomeProjectShowcase>
     <SupportTeaser
       title="Ongoing Support That Grows With You"
       description="Monthly plans to keep your website updated, secure, and continuously improving."

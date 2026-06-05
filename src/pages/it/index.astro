@@ -4,12 +4,10 @@ import Hero from '../../components/Hero.astro';
 import Button from '../../components/Button.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import SupportTeaser from '../../components/SupportTeaser.astro';
+import HomeProjectShowcase from '../../components/HomeProjectShowcase.astro';
+import HomeProjectShowcaseVisual from '../../components/HomeProjectShowcaseVisual.astro';
 import styles from '../../styles/Index.module.css';
 import TrustedBy from '../../components/TrustedBy.astro';
-import CaseStudySection from '../../components/CaseStudySection.astro';
-
-// Import case study image
-import caseStudyImage from '../../../public/phone-showcase.jpg';
 
 const title = 'ElPuas Digital Crafts | Sviluppo Web con Amore e Precisione';
 const description = 'Realizziamo siti veloci, accessibili e scalabili con WordPress, Astro e flussi di lavoro potenziati dall’IA. Partner fidati di agenzie e aziende in tutto il mondo.';
@@ -62,17 +60,25 @@ const lang = 'it';
       </li>
     </ul>
   </section>
-  <CaseStudySection
-    title="Da Sito Web a Motore di Crescita"
-    accentText="FishCostaRica.com non ha ottenuto solo un sito web — ha trovato un partner."
-    paragraph="Abbiamo costruito un sito personalizzato progettato per convertire, e continuiamo a ottimizzarlo attraverso il nostro piano di manutenzione mensile. Il risultato? Maggiore visibilità nelle ricerche, migliori prestazioni e un costante aumento delle prenotazioni — il tutto senza muovere un dito."
-    quote="Dal lancio del nuovo sito, abbiamo visto un notevole incremento nelle prenotazioni e una migliore visibilità nelle ricerche. ElPuas ha compreso i nostri obiettivi e ha fornito risultati."
-    author="Richard Krug, FishCostaRica.com"
-    buttonLabel="Caso Studio"
-    buttonHref="/it/crafted-with-love/fishcostarica-tourism-it/" 
-    imgSrc={caseStudyImage}
-    imgAlt="FishCostaRica.com"
-  />
+  <HomeProjectShowcase
+    title="Nuara Pelletterie"
+    description="Ecommerce premium sviluppato per un marchio italiano di articoli artigianali in pelle."
+    linkLabel="Vedi Progetto"
+    tags={[
+      { icon: 'ph:shopping-cart', label: 'WooCommerce' },
+      { icon: 'ph:pencil-line', label: 'Design Personalizzato' },
+      { icon: 'ph:globe-hemisphere-west', label: 'Multilingua' },
+      { icon: 'ph:headset', label: 'Supporto Continuo' },
+    ]}
+    tagsLabel="Caratteristiche del progetto"
+    href="/it/crafted-with-love/nuara-pelletterie-ecommerce-it/"
+  >
+    <HomeProjectShowcaseVisual
+      slot="visual"
+      src="/epdc-nuara-card.webp"
+      alt="Immagine del progetto Nuara Pelletterie nella homepage"
+    />
+  </HomeProjectShowcase>
   <SupportTeaser
     title="Supporto Continuo Che Cresce Con Te"
     description="Piani mensili per mantenere il tuo sito aggiornato, sicuro e in costante miglioramento."
