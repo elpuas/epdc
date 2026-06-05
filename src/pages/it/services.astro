@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
 import Button from '../../components/Button.astro';
 import ServiceDetails from '../../components/ServiceDetails.astro';
 import TrustedBy from '../../components/TrustedBy.astro';
@@ -103,66 +104,77 @@ const structuredData = {
   </section>
 
   <section class={styles.pricing} aria-labelledby="pricing-title" role="region">
-    <h2 id="pricing-title">Piani Che Crescono Con Te</h2>
-    <p class="subtitle" id="pricing-subtitle">Scegli il piano che si adatta al tuo ritmo — ognuno supportato da esperti e potente tempo di sviluppo.</p>
-    <div class={styles.pricingGrid} role="list" aria-describedby="pricing-subtitle">
+    <p class={styles.pricingEyebrow}>Piani in Abbonamento</p>
+    <h2 id="pricing-title" class="text-gradient-brand">Scegli il piano che sostiene la prossima fase di crescita del tuo business.</h2>
+    <p class={styles.pricingDescription} id="pricing-subtitle">Piani mensili pensati per mantenere il tuo sito aggiornato, sicuro e in costante miglioramento.</p>
+    <div class={styles.pricingGrid} role="list" aria-describedby="pricing-subtitle" data-pricing-reveal-group>
       <PricingCard
-        title="Base"
-        price="$150/mese"
-        icon="ph:browser"
+        title="Essential"
+        description="Tutto il necessario per mantenere il tuo sito operativo senza intoppi."
+        price="$150"
+        period="/ mese"
+        icon="ph:rocket-launch"
+        href="/it/contact"
+        ctaLabel="Inizia"
+        enterDelay="0s"
+        enterFrom="left"
         features={[
-          'Aggiornamenti regolari di WordPress per sicurezza e stabilità',
-          'Backup programmati per prevenire la perdita di dati',
-          'Sicurezza rafforzata contro virus e attacchi',
-          'Ottimizzazione delle prestazioni per tempi di caricamento più rapidi',
-          'Supporto tecnico per problemi relativi al web',
-          'Canale Slack dedicato per emergenze',
-          'Web design + supporto',
-          'Manutenzione di base',
-          'Monitoraggio email e uptime'
+          'Aggiornamenti e manutenzione',
+          'Backup regolari',
+          'Sicurezza e monitoraggio',
+          'Supporto via email'
         ]}
       />
 
       <PricingCard
-        title="Crescita"
-        price="$180/mese"
-        icon="ph:chart-line-up-bold"
+        title="Growth"
+        description="Per aziende che vogliono evolvere con continuità."
+        price="$180"
+        period="/ mese"
+        icon="ph:trend-up"
         highlight
+        badge="Più Scelto"
+        href="/it/contact"
+        ctaLabel="Inizia"
+        enterDelay="0.15s"
+        enterFrom="bottom"
         features={[
-          'Aggiornamenti regolari di WordPress per sicurezza e stabilità',
-          'Backup programmati per prevenire la perdita di dati',
-          'Sicurezza rafforzata contro virus e attacchi',
-          'Ottimizzazione delle prestazioni per tempi di caricamento più rapidi',
-          'Supporto tecnico per problemi relativi al web',
-          'Canale Slack dedicato per emergenze',
-          'Web design + supporto',
-          'Manutenzione prioritaria',
-          'Monitoraggio uptime',
+          'Tutto ciò che include Essential',
           'Hosting incluso',
-          '4 ore di sviluppo / mese'
+          'Ore di sviluppo (2h/mese)',
+          'Ottimizzazione delle performance',
+          'Report mensili'
         ]}
       />
 
       <PricingCard
-        title="Pro"
-        price="$250/mese"
-        icon="ph:rocket-launch-bold"
+        title="Premium"
+        description="Supporto prioritario e capacità continua di sviluppo."
+        price="$250"
+        period="/ mese"
+        icon="ph:diamond"
+        href="/it/contact"
+        ctaLabel="Inizia"
+        enterDelay="0.3s"
+        enterFrom="right"
         features={[
-          'Aggiornamenti regolari di WordPress per sicurezza e stabilità',
-          'Backup programmati per prevenire la perdita di dati',
-          'Sicurezza rafforzata contro virus e attacchi',
-          'Ottimizzazione delle prestazioni per tempi di caricamento più rapidi',
-          'Supporto tecnico per problemi relativi al web',
-          'Canale Slack dedicato per emergenze',
-          'Web design + supporto',
-          'Manutenzione prioritaria',
-          'Monitoraggio uptime',
-          '8 ore di sviluppo / mese',
-          'Supporto prioritario'
+          'Tutto ciò che include Growth',
+          'Ore di sviluppo (5h/mese)',
+          'Supporto prioritario',
+          'Consulenza tecnica',
+          'Implementazioni avanzate'
         ]}
       />
     </div>
-    <p class={styles.tacLink}><a href="/it/terms-and-conditions">Termini e Condizioni</a></p>
+    <p class={styles.pricingTrust}>
+      <span class={styles.pricingTrustIcon} aria-hidden="true">
+        <Icon name="ph:shield-check" width="16" height="16" />
+      </span>
+      Tutti i piani includono aggiornamenti, monitoraggio e backup. <a href="/it/terms-and-conditions">Termini e Condizioni &rarr;</a>
+    </p>
+    <a class={styles.pricingSecondaryCta} href="/it/contact">
+      Non sei sicuro di quale scegliere? Parliamone <span class={styles.pricingSecondaryCtaArrow} aria-hidden="true">&rarr;</span>
+    </a>
   </section>
 
   <section class={styles.testimonial} aria-labelledby="testimonial-title" role="region">

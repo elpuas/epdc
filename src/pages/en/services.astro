@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
 import Button from '../../components/Button.astro';
 import ServiceDetails from '../../components/ServiceDetails.astro';
 import TrustedBy from '../../components/TrustedBy.astro';
@@ -103,66 +104,77 @@ const structuredData = {
   </section>
 
   <section class={styles.pricing} aria-labelledby="pricing-title" role="region">
-    <h2 id="pricing-title">Plans That Grow With You</h2>
-    <p class="subtitle" id="pricing-subtitle">Choose the plan that fits your pace — each one backed by expert support and powerful dev time.</p>
-    <div class={styles.pricingGrid} role="list" aria-describedby="pricing-subtitle">
+    <p class={styles.pricingEyebrow}>Subscription Plans</p>
+    <h2 id="pricing-title" class="text-gradient-brand">Choose the plan that supports your next stage of growth.</h2>
+    <p class={styles.pricingDescription} id="pricing-subtitle">Monthly plans designed to keep your site updated, secure, and improving over time.</p>
+    <div class={styles.pricingGrid} role="list" aria-describedby="pricing-subtitle" data-pricing-reveal-group>
       <PricingCard
-        title="Starter"
-        price="$150/mo"
-        icon="ph:browser"
+        title="Essential"
+        description="Everything you need to keep your site running smoothly."
+        price="$150"
+        period="/ month"
+        icon="ph:rocket-launch"
+        href="/en/contact"
+        ctaLabel="Get started"
+        enterDelay="0s"
+        enterFrom="left"
         features={[
-          'Regular WordPress updates for security and stability',
-          'Scheduled backups to prevent data loss',
-          'Hardened security against viruses and attacks',
-          'Performance optimization for faster load times',
-          'Technical support for web-related issues',
-          'Dedicated Slack channel for emergencies',
-          'Web design + support',
-          'Basic maintenance',
-          'Email & uptime monitoring'
+          'Updates and maintenance',
+          'Regular backups',
+          'Security and monitoring',
+          'Email support'
         ]}
       />
 
       <PricingCard
         title="Growth"
-        price="$180/mo"
-        icon="ph:chart-line-up-bold"
+        description="For companies that want to keep evolving."
+        price="$180"
+        period="/ month"
+        icon="ph:trend-up"
         highlight
+        badge="Most Popular"
+        href="/en/contact"
+        ctaLabel="Get started"
+        enterDelay="0.15s"
+        enterFrom="bottom"
         features={[
-          'Regular WordPress updates for security and stability',
-          'Scheduled backups to prevent data loss',
-          'Hardened security against viruses and attacks',
-          'Performance optimization for faster load times',
-          'Technical support for web-related issues',
-          'Dedicated Slack channel for emergencies',
-          'Web design + support',
-          'Priority maintenance',
-          'Uptime monitoring',
+          'Everything in Essential',
           'Hosting included',
-          '4 dev hours / month'
+          'Development hours (2h/month)',
+          'Performance optimization',
+          'Monthly reporting'
         ]}
       />
 
       <PricingCard
-        title="Pro"
-        price="$250/mo"
-        icon="ph:rocket-launch-bold"
+        title="Premium"
+        description="Priority support with continuous development capacity."
+        price="$250"
+        period="/ month"
+        icon="ph:diamond"
+        href="/en/contact"
+        ctaLabel="Get started"
+        enterDelay="0.3s"
+        enterFrom="right"
         features={[
-          'Regular WordPress updates for security and stability',
-          'Scheduled backups to prevent data loss',
-          'Hardened security against viruses and attacks',
-          'Performance optimization for faster load times',
-          'Technical support for web-related issues',
-          'Dedicated Slack channel for emergencies',
-          'Web design + support',
-          'Priority maintenance',
-          'Uptime monitoring',
-          '8 dev hours / month',
-          'Priority support'
+          'Everything in Growth',
+          'Development hours (5h/month)',
+          'Priority support',
+          'Technical consulting',
+          'Advanced implementations'
         ]}
       />
     </div>
-    <p class={styles.tacLink}><a href="/en/terms-and-conditions">Terms and Conditions</a></p>
+    <p class={styles.pricingTrust}>
+      <span class={styles.pricingTrustIcon} aria-hidden="true">
+        <Icon name="ph:shield-check" width="16" height="16" />
+      </span>
+      All plans include updates, monitoring, and backups. <a href="/en/terms-and-conditions">Terms and Conditions &rarr;</a>
+    </p>
+    <a class={styles.pricingSecondaryCta} href="/en/contact">
+      Not sure which one fits best? Let’s talk <span class={styles.pricingSecondaryCtaArrow} aria-hidden="true">&rarr;</span>
+    </a>
   </section>
 
   <section class={styles.testimonial} aria-labelledby="testimonial-title" role="region">

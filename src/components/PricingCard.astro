@@ -4,100 +4,396 @@ import { Icon } from 'astro-icon/components';
 interface Props {
     title: string;
     price: string;
+    period?: string;
+    description: string;
     features: string[];
     icon?: string;
     highlight?: boolean;
+    badge?: string;
+    ctaLabel?: string;
+    href?: string;
+    enterDelay?: string;
+    enterFrom?: 'left' | 'bottom' | 'right';
 }
 
-const { title, price, features, icon = 'ph:rocket-launch-bold', highlight = false } = Astro.props;
+const {
+    title,
+    price,
+    period = '/ mes',
+    description,
+    features,
+    icon = 'ph:rocket-launch',
+    highlight = false,
+    badge,
+    ctaLabel = 'Comenzar',
+    href = '/es/contact',
+    enterDelay = '0s',
+    enterFrom = 'bottom',
+} = Astro.props;
+
+const titleId = `pricing-title-${title.toLowerCase().replace(/\s+/g, '-')}`;
 ---
 
-<article class={`pricing-card ${highlight ? 'highlight' : ''}`} role="listitem" aria-labelledby={`pricing-title-${title.toLowerCase()}`}>
-    <div class="card-header">
-        <Icon name={icon} width="64" height="64" class="card-icon" aria-hidden="true" />
-        <h3 class="card-title" id={`pricing-title-${title.toLowerCase()}`}>{title}</h3>
+<article
+    class={`pricing-card ${highlight ? 'highlight' : ''}`}
+    role="listitem"
+    aria-labelledby={titleId}
+    data-enter-from={enterFrom}
+    style={`--pricing-enter-delay: ${enterDelay};`}
+>
+    {badge && <p class="card-badge">{badge}</p>}
+
+    <div class="card-top">
+        <div class="icon-shell" aria-hidden="true">
+            <Icon name={icon} width="20" height="20" class="card-icon" />
+        </div>
+        <div class="card-copy">
+            <h3 class="card-title text-gradient-brand" id={titleId}>{title}</h3>
+            <p class="card-description">{description}</p>
+        </div>
     </div>
+
+    <div class="card-divider" aria-hidden="true"></div>
+
+    <p class="price" aria-label={`Price: ${price} ${period}`}>
+        <span class="price-value">{price}</span>
+        <span class="price-period">{period}</span>
+    </p>
 
     <ul class="feature-list" aria-label={`${title} plan features`}>
         {features.map((feature) => (
-        <li class="feature-item">{feature}</li>
+            <li class="feature-item">
+                <span class="feature-icon-shell" aria-hidden="true">
+                    <Icon name="ph:check" width="12" height="12" class="feature-icon" />
+                </span>
+                <span>{feature}</span>
+            </li>
         ))}
     </ul>
-    <p class="price" aria-label={`Price: ${price}`}>{price}</p>
+
+    <div class="card-divider card-divider-bottom" aria-hidden="true"></div>
+
+    <a class="card-link" href={href}>
+        {ctaLabel} <span class="card-link-arrow" aria-hidden="true">&rarr;</span>
+    </a>
 </article>
 
-<style scoped>
+<style>
 .pricing-card {
-    padding: var(--space-xl);
-    color: var(--color-black);
-    border-radius: var(--space-sm);
-    background-color: var(--color-tertiary);
-    transition: border-color 0.3s, transform 0.3s;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-md);
-    margin-top: var(--space-md);
     position: relative;
+    display: grid;
+    grid-template-rows: auto auto auto 1fr auto auto;
+    align-items: start;
+    width: 100%;
+    box-sizing: border-box;
+    gap: clamp(0.72rem, 1vw, 0.95rem);
+    min-height: 100%;
+    padding: clamp(1rem, 0.92rem + 0.65vw, 1.35rem);
+    border: 1px solid var(--color-quaternary);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--color-primary) 95%, var(--color-secondary) 5%);
+    color: var(--color-secondary);
+    overflow: visible;
+    text-align: left;
+    will-change: transform, opacity;
+    transition:
+        opacity 0.95s ease-out,
+        transform 0.95s ease-out,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
+    transition-delay: var(--pricing-enter-delay, 0s);
 }
 
-.pricing-card:hover {
-    border-color: var(--color-secondary);
-    transform: translateY(-16px);
-    cursor: e-resize;
+.pricing-card[data-enter-state='pending'] {
+    opacity: 0;
+    transform: translate3d(0, 96px, 0);
+}
+
+.pricing-card[data-enter-state='pending'][data-enter-from='left'] {
+    transform: translate3d(calc(-100% - 96px), 0, 0);
+}
+
+.pricing-card[data-enter-state='pending'][data-enter-from='right'] {
+    transform: translate3d(calc(100% + 96px), 0, 0);
+}
+
+.pricing-card[data-enter-state='visible'],
+.pricing-card.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+.pricing-card:hover,
+.pricing-card:focus-within {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--color-tertiary) 38%, var(--color-quaternary));
+    background: color-mix(in srgb, var(--color-primary) 92%, var(--color-secondary) 8%);
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.14),
+        0 0 0 1px color-mix(in srgb, var(--color-tertiary) 12%, transparent);
 }
 
 .highlight {
-    color: var(--color-black);
-    background-color: var(--color-secondary);
-    margin-top: var(--space-md);
-
-    @container (width > 768px) {
-        margin-top: -36px;
-    }
+    border-color: color-mix(in srgb, var(--color-secondary) 42%, var(--color-quaternary));
+    background:
+        linear-gradient(180deg, color-mix(in srgb, var(--color-secondary) 9%, var(--color-primary)) 0%, var(--color-primary) 100%);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-secondary) 16%, transparent);
 }
 
-.card-header {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-    width: 100%;
-    justify-content: center;
-    align-items: center;
+.card-badge {
+    margin: 0;
+    position: absolute;
+    top: -0.95rem;
+    left: 60%;
+    transform: translateX(-50%);
+    padding: 0.56rem 1.12rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-secondary) 16%, var(--color-primary));
+    color: var(--color-secondary);
+    border: 1px solid color-mix(in srgb, var(--color-secondary) 58%, var(--color-quaternary));
+    box-shadow:
+        0 0 0 1px color-mix(in srgb, var(--color-secondary) 16%, transparent),
+        0 6px 14px rgba(0, 0, 0, 0.14);
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
 
-    .card-title {
-        color: var(--color-black);
-        font-size: var(--fontsize-h3);
-    }
+.card-top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.icon-shell {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--color-quaternary);
+    border-radius: 8px;
+    color: var(--color-tertiary);
+    flex-shrink: 0;
+    background: transparent;
 }
 
 .card-icon {
-    color: var(--color-black);
-    transition: transform 0.3s;
-    text-align: center;
+    transition:
+        transform 0.25s ease,
+        color 0.25s ease;
 }
 
-.pricing-card:hover .card-icon {
-    transform: scale(1.15) rotate(8deg);
+.card-copy {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 0.25rem;
+    min-width: 0;
+    text-align: left;
+}
+
+.card-title {
+    margin: 0;
+    font-size: clamp(1.6rem, 1.3rem + 0.85vw, 2.05rem);
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+    text-wrap: balance;
+    text-align: left;
+    justify-self: start;
+}
+
+.card-description {
+    margin: 0;
+    color: var(--color-tertiary);
+    font-size: clamp(0.95rem, 0.92rem + 0.12vw, 1.01rem);
+    line-height: 1.38;
+    text-align: left;
+}
+
+.card-divider {
+    width: 100%;
+    height: 1px;
+    background: color-mix(in srgb, var(--color-quaternary) 72%, transparent);
 }
 
 .price {
-    font-size: var(--fontsize-h4);
-    font-weight: bold;
-    color: var(--color-black);
-    margin-top: auto;
+    display: flex;
+    align-items: flex-end;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+    margin: 0;
+    min-block-size: 3.35rem;
+}
+
+.price-value {
+    font-size: clamp(2.75rem, 2.1rem + 1.6vw, 3.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+}
+
+.price-period {
+    color: var(--color-tertiary);
+    font-size: clamp(0.98rem, 0.95rem + 0.16vw, 1.05rem);
+    line-height: 1.2;
+    margin-bottom: 0.35rem;
 }
 
 .feature-list {
-    list-style: square;
-    padding: 0;
     display: grid;
-    gap: var(--space-sm);
-    
-    .feature-item {
-        color: var(--color-black);
-        font-size: 14px;
+    gap: 0.65rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    align-content: start;
+}
+
+.card-divider-bottom {
+    margin-top: 0.3rem;
+}
+
+.feature-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.6rem;
+    align-items: start;
+    color: var(--color-white);
+    font-size: clamp(0.94rem, 0.91rem + 0.12vw, 1rem);
+    line-height: 1.4;
+
+    span:not(.feature-icon-shell) {
+        line-height: 1;
+    }
+}
+
+.feature-icon-shell {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-top: 0.1rem;
+    border: 1px solid color-mix(in srgb, var(--color-secondary) 42%, var(--color-quaternary));
+    border-radius: 999px;
+    color: var(--color-secondary);
+}
+
+.card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0;
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-size: clamp(0.98rem, 0.95rem + 0.12vw, 1.04rem);
+    line-height: 1.2;
+}
+
+.card-link-arrow {
+    transition: transform 0.25s ease;
+}
+
+.pricing-card:hover .icon-shell,
+.pricing-card:focus-within .icon-shell {
+    border-color: color-mix(in srgb, var(--color-tertiary) 42%, var(--color-quaternary));
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-tertiary) 12%, transparent);
+}
+
+.pricing-card:hover .card-icon,
+.pricing-card:focus-within .card-icon {
+    transform: scale(1.06);
+    color: var(--color-secondary);
+}
+
+.pricing-card:hover .card-link-arrow,
+.pricing-card:focus-within .card-link-arrow {
+    transform: translateX(2px);
+}
+
+.card-link:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--color-tertiary) 50%, transparent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+@media (max-width: 31.25rem) {
+    .pricing-card {
+        padding: 1rem;
+        grid-template-rows: auto auto auto 1fr auto;
+    }
+
+    .card-copy {
+        min-block-size: auto;
+    }
+
+    .card-badge {
+        left: 58%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pricing-card,
+    .card-icon,
+    .card-link-arrow {
+        transition: none;
     }
 }
 </style>
+
+<script>
+    if (typeof window !== 'undefined') {
+        const cards = [...document.querySelectorAll('.pricing-card:not([data-enter-bound])')];
+        const groups = [...new Set(cards.map((card) => card.closest('[data-pricing-reveal-group]')).filter(Boolean))];
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+            cards.forEach((card) => {
+                card.classList.add('is-visible');
+                card.setAttribute('data-enter-state', 'visible');
+                card.setAttribute('data-enter-bound', 'true');
+            });
+            groups.forEach((group) => {
+                group.setAttribute('data-pricing-reveal-bound', 'true');
+            });
+        } else if (!window.__epdcPricingCardObserver) {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    for (const entry of entries) {
+                        if (!entry.isIntersecting) continue;
+                        const targets = [...entry.target.querySelectorAll('.pricing-card[data-enter-bound]')];
+                        targets.forEach((card) => {
+                            card.setAttribute('data-enter-state', 'visible');
+                            card.classList.add('is-visible');
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                },
+                {
+                    threshold: 0.2,
+                    rootMargin: '0px 0px -8% 0px',
+                }
+            );
+
+            const observeCards = (targets) => {
+                targets.forEach((card) => {
+                    card.setAttribute('data-enter-state', 'pending');
+                    card.setAttribute('data-enter-bound', 'true');
+                });
+
+                groups.forEach((group) => {
+                    if (group.hasAttribute('data-pricing-reveal-bound')) return;
+                    group.setAttribute('data-pricing-reveal-bound', 'true');
+                    observer.observe(group);
+                });
+            };
+
+            window.__epdcPricingCardObserver = { observer, observeCards };
+            observeCards(cards);
+        } else {
+            window.__epdcPricingCardObserver.observeCards(cards);
+        }
+    }
+</script>
