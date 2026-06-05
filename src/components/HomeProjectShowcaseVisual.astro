@@ -1,0 +1,258 @@
+---
+interface Props {
+  label?: string;
+  src?: string;
+  alt?: string;
+}
+
+const {
+  label = 'Project screenshot placeholder',
+  src,
+  alt = 'Project showcase image',
+} = Astro.props as Props;
+---
+
+<div
+  class:list={[
+    'showcase-visual-card',
+    src && 'showcase-visual-card--image',
+  ]}
+  aria-label={src ? undefined : label}
+  role={src ? undefined : 'img'}
+>
+  {
+    src ? (
+      <div class="visual-image-wrap">
+        <img class="visual-image" src={src} alt={alt} loading="lazy" decoding="async" />
+      </div>
+    ) : (
+      <div class="visual-screen">
+        <div class="screen-top">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="screen-body">
+          <div class="screen-line screen-line-short"></div>
+          <div class="screen-line screen-line-medium"></div>
+          <div class="screen-hero"></div>
+          <div class="screen-grid">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    )
+  }
+  {!src && <div class="placeholder-note">{label}</div>}
+</div>
+
+<style>
+  .showcase-visual-card {
+    position: relative;
+    width: min(100%, 21rem);
+    aspect-ratio: 0.54;
+    margin: 0;
+    padding: 0.9rem;
+    border-radius: 34px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
+      color-mix(in srgb, var(--color-primary) 76%, white 24%);
+    box-shadow:
+      0 24px 70px rgba(0, 0, 0, 0.32),
+      0 0 0 1px rgba(216, 255, 0, 0.08);
+    transform: rotate(7deg);
+    transform-origin: center;
+    overflow: hidden;
+  }
+
+  .showcase-visual-card--image {
+    width: auto;
+    aspect-ratio: auto;
+    padding: 0;
+    background: transparent;
+    box-shadow:
+      0 24px 70px rgba(0, 0, 0, 0.34),
+      0 0 0 1px rgba(216, 255, 0, 0.08);
+    border-radius: 0;
+    transform: rotate(7deg) translateZ(0);
+    overflow: visible;
+    transition:
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .showcase-visual-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+    pointer-events: none;
+  }
+
+  .showcase-visual-card--image::after {
+    content: none;
+  }
+
+  .visual-image-wrap {
+    display: block;
+    width: min(100%, 21rem);
+    height: auto;
+  }
+
+  .visual-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 0;
+    margin-left: clamp(1.5rem, 5vw, 5rem);
+    filter: drop-shadow(0 8px 14px rgba(255, 255, 255, 0.04));
+    transition:
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  :global(.home-project-showcase:hover) .showcase-visual-card--image,
+  :global(.home-project-showcase:focus-visible) .showcase-visual-card--image {
+    transform: rotate(5.6deg) translate3d(0, -8px, 0) scale(1.015);
+  }
+
+  :global(.home-project-showcase:hover) .showcase-visual-card--image .visual-image,
+  :global(.home-project-showcase:focus-visible) .showcase-visual-card--image .visual-image {
+    filter:
+      drop-shadow(0 18px 28px rgba(0, 0, 0, 0.22))
+      drop-shadow(0 10px 18px rgba(216, 255, 0, 0.06));
+  }
+
+  .visual-screen {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    width: 100%;
+    height: 100%;
+    border-radius: 28px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(243, 245, 240, 0.94));
+    overflow: hidden;
+  }
+
+  .screen-top {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.45rem;
+    padding: 0.85rem 0.9rem;
+    background: rgba(43, 43, 43, 0.92);
+  }
+
+  .screen-top span {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72);
+  }
+
+  .screen-body {
+    display: grid;
+    grid-template-rows: auto auto minmax(8rem, 1fr) auto;
+    gap: 0.9rem;
+    padding: 1.15rem 1rem 1rem;
+  }
+
+  .screen-line {
+    height: 0.45rem;
+    border-radius: 999px;
+    background: rgba(34, 34, 34, 0.18);
+  }
+
+  .screen-line-short {
+    width: 34%;
+  }
+
+  .screen-line-medium {
+    width: 62%;
+  }
+
+  .screen-hero {
+    border-radius: 22px;
+    background:
+      radial-gradient(circle at 50% 32%, rgba(94, 111, 0, 0.3), transparent 32%),
+      linear-gradient(145deg, rgba(226, 228, 220, 0.95), rgba(246, 246, 243, 0.96));
+    min-height: 12rem;
+  }
+
+  .screen-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .screen-grid span {
+    display: block;
+    aspect-ratio: 0.8;
+    border-radius: 16px;
+    background: rgba(34, 34, 34, 0.08);
+  }
+
+  .placeholder-note {
+    position: absolute;
+    inset-inline: 1.4rem;
+    bottom: 1.6rem;
+    padding: 0.65rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.9);
+    color: color-mix(in srgb, var(--color-primary) 24%, #9b5400 76%);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.01em;
+  }
+
+  @media (max-width: 44rem) {
+    .showcase-visual-card {
+      width: min(100%, 17rem);
+      transform: rotate(5deg);
+    }
+
+    .showcase-visual-card--image {
+      width: auto;
+      transform: rotate(5deg) translateZ(0);
+    }
+
+    .showcase-visual-card--image .visual-image {
+      width: 100%;
+      margin-left: clamp(0.5rem, 3vw, 1.4rem);
+    }
+
+    .showcase-visual-card--image .visual-image-wrap {
+      width: min(100%, 17rem);
+    }
+
+    .screen-hero {
+      min-height: 10rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .showcase-visual-card {
+      transform: none;
+    }
+
+    .showcase-visual-card--image,
+    .visual-image {
+      transition: none;
+    }
+
+    :global(.home-project-showcase:hover) .showcase-visual-card--image,
+    :global(.home-project-showcase:focus-visible) .showcase-visual-card--image {
+      transform: none;
+    }
+
+    :global(.home-project-showcase:hover) .showcase-visual-card--image .visual-image,
+    :global(.home-project-showcase:focus-visible) .showcase-visual-card--image .visual-image {
+      filter: drop-shadow(0 8px 14px rgba(255, 255, 255, 0.04));
+    }
+  }
+</style>
