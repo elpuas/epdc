@@ -56,10 +56,11 @@ const structuredData = {
     <p class={`${styles.accent} ${styles.subtitle}`}>From initial launch to long-term growth, we provide complete digital craftsmanship tailored to your business needs.</p>
     <div class={styles.servicesIntroGrid}>
         <ServiceDetails 
-          icon="ph:flask" 
+          icon="ph:code" 
           title="Web Development" 
           features={["Responsive, mobile-first design", "Fast load times & SEO optimization", "Custom CMS integrations", "API and third-party service connectivity"]}
           reverse={true}
+          animateOnView={true}
         >
           <div slot="description">
             We <span class={styles.accent}>craft websites</span> that fit your goals — and your budget. Whether you need a fully custom build or a smartly adapted template, we create <span class={styles.accent}>high-performance websites</span> tailored to your business. From fast-launch starter sites to complex platforms, every project is optimized for speed, scalability, and ease of management." 
@@ -71,6 +72,7 @@ const structuredData = {
           title="E-Commerce Solutions" 
           features={["Conversion-focused product pages", "Streamlined checkout experiences", "Inventory & logistics integration", "Custom reports & automation"]}
           reverse={false}
+          animateOnView={true}
         >
           <div slot="description">
             Whether you're launching your <span class={styles.accent}>first store</span> or scaling to thousands of orders, we build <span class={styles.accent}>WooCommerce solutions</span> that are fast, reliable, and conversion-optimized. From custom themes to advanced checkout flows and integrations, we help you sell more — with less friction and full support.
@@ -82,6 +84,7 @@ const structuredData = {
           title="Maintenance & Support"  
           features={["Scheduled plugin and theme updates", "Performance & uptime monitoring", "Expert dev time included", "Priority bug fixes"]}
           reverse={true}
+          animateOnView={true}
         >
           <div slot="description">
             We handle the <span class={styles.accent}>updates, security, and performance</span> so you don't have to. Our maintenance and support plans include WordPress core and plugin updates, uptime monitoring, <span class={styles.accent}>regular backups</span>, security checks, and <span class={styles.accent}>performance tuning</span>. Need help fast? Reach us directly via Slack. Perfect for businesses that want peace of mind and proactive support — without hiring an in-house dev team. 
@@ -94,6 +97,7 @@ const structuredData = {
           title="White-Label Services" 
           features={["Invisible client-ready code", "Fast delivery & scoped estimates", "Reliable dev support", "Confidential partnerships"]}
           reverse={false}
+          animateOnView={true}
         >
           <div slot="description">
             We work seamlessly behind the scenes so your <span class={styles.accent}>agency can scale</span> without the stress. From <span class={styles.accent}>pixel-perfect builds</span> to reliable ongoing support, we make you look good — your clients never need to know we were there. 

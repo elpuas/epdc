@@ -6,25 +6,64 @@ interface Props {
     title: string;
     features: string[];
     reverse?: boolean;
+    animateOnView?: boolean;
 }
 
-const { icon, title, features, reverse = false } = Astro.props;
+const {
+    icon,
+    title,
+    features,
+    reverse = false,
+    animateOnView = false,
+} = Astro.props;
+
+const titleId = `service-title-${title.toLowerCase().replace(/\s+/g, '-')}`;
+const contentEnterFrom = reverse ? 'right' : 'left';
 ---
 
-<article class={`service-details ${reverse ? 'reverse' : ''}`} role="region" aria-labelledby={`service-title-${title.toLowerCase().replace(/\s+/g, '-')}`}>
+<article
+    class={`service-details ${reverse ? 'reverse' : ''} ${animateOnView ? 'service-details--animated' : ''}`}
+    role="region"
+    aria-labelledby={titleId}
+    data-service-reveal-group={animateOnView ? 'true' : undefined}
+>
     <div class="text-block">
         <div class="service-header">
-        <h3 id={`service-title-${title.toLowerCase().replace(/\s+/g, '-')}`}>{title}</h3>
+        <h3
+            id={titleId}
+            class={animateOnView ? 'service-reveal-target' : undefined}
+            data-enter-from={animateOnView ? 'left' : undefined}
+            style={animateOnView ? '--service-enter-delay: 0s;' : undefined}
+        >
+            {title}
+        </h3>
         </div>
-        <p class="service-description"><slot name="description" /></p>
+        <div
+            class={`service-copy ${animateOnView ? 'service-reveal-target' : ''}`}
+            data-enter-from={animateOnView ? contentEnterFrom : undefined}
+            style={animateOnView ? '--service-enter-delay: 0.22s;' : undefined}
+        >
+            <p class="service-description"><slot name="description" /></p>
 
-        <ul class="service-features" aria-label={`${title} features`}>
-        {features.map((feature) => (
-            <li>{feature}</li>
-        ))}
-        </ul>
+            <ul class="service-features" aria-label={`${title} features`}>
+            {features.map((feature, index) => (
+                <li
+                    class={animateOnView ? 'service-feature-pill service-reveal-target' : 'service-feature-pill'}
+                    data-enter-from={animateOnView ? contentEnterFrom : undefined}
+                    style={animateOnView ? `--service-enter-delay: ${0.3 + index * 0.08}s;` : undefined}
+                >
+                    <span class="service-feature-label">{feature}</span>
+                </li>
+            ))}
+            </ul>
+        </div>
     </div>
-    <div class="icon" aria-hidden="true">
+    <div
+        class={`icon ${animateOnView ? 'service-reveal-target' : ''}`}
+        aria-hidden="true"
+        data-enter-from={animateOnView ? 'bottom' : undefined}
+        style={animateOnView ? '--service-enter-delay: 0.11s;' : undefined}
+    >
         <Icon name={icon} width="240" height="240" class="icon-animate" aria-hidden="true" />
     </div>
 </article>
@@ -74,6 +113,10 @@ const { icon, title, features, reverse = false } = Astro.props;
     color: var(--color-secondary);
 }
 
+.service-copy {
+    display: block;
+}
+
 .service-description {
     font-size: var(--fontsize-base);
     margin-bottom: var(--space-md);
@@ -81,38 +124,131 @@ const { icon, title, features, reverse = false } = Astro.props;
 }
 
 .service-features {
-    list-style: square;
+    list-style: none;
     padding: 0;
-    display: grid;
-    gap: var(--space-sm);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
     max-width: 48ch;
-    padding-left: var(--space-md);
-
-    ::marker {
-        color: var(--color-tertiary);
-    }
 }
 
-@keyframes pulse-float-rotate-color {
-    0% {
-        transform: translateY(0) scale(1) rotate(0deg);
-        color: var(--color-secondary);
-    }
-    50% {
-        transform: translateY(-4px) scale(1.05) rotate(2deg);
-        color: var(--color-tertiary);
-    }
-    100% {
-        transform: translateY(0) scale(1) rotate(0deg);
-        color: var(--color-secondary);
-    }
+.service-feature-pill {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    padding: 0.95rem 1rem;
+    border: 1px solid var(--color-quaternary);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--color-primary) 94%, var(--color-secondary) 6%);
+    transition:
+        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
+    transition-delay: var(--service-enter-delay, 0s);
+}
+
+.service-feature-label {
+    min-width: 0;
+    color: var(--color-secondary);
+    font-size: clamp(0.96rem, 0.92rem + 0.16vw, 1.08rem);
+    line-height: 1.2;
+}
+
+.service-details:hover .service-feature-pill,
+.service-details:focus-within .service-feature-pill {
+    border-color: color-mix(in srgb, var(--color-tertiary) 38%, var(--color-quaternary));
+    background: color-mix(in srgb, var(--color-primary) 92%, var(--color-secondary) 8%);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-tertiary) 12%, transparent);
+}
+
+.service-details--animated .service-reveal-target {
+    will-change: transform, opacity;
+    transition:
+        opacity 0.95s ease-out,
+        transform 0.95s ease-out;
+    transition-delay: var(--service-enter-delay, 0s);
+}
+
+.service-details--animated .service-reveal-target[data-enter-state='pending'] {
+    opacity: 0;
+    transform: translate3d(0, 96px, 0);
+}
+
+.service-details--animated .service-reveal-target[data-enter-state='pending'][data-enter-from='left'] {
+    transform: translate3d(calc(-100% - 96px), 0, 0);
+}
+
+.service-details--animated .service-reveal-target[data-enter-state='pending'][data-enter-from='right'] {
+    transform: translate3d(calc(100% + 96px), 0, 0);
+}
+
+.service-details--animated .service-reveal-target[data-enter-state='visible'],
+.service-details--animated .service-reveal-target.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
 }
 
 .icon-animate {
-    animation: pulse-float-rotate-color 5s ease-in-out infinite;
-    transform-origin: center;
     display: inline-block;
-    will-change: transform, color;
-    transition: color 0.5s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .service-details--animated .service-reveal-target {
+        transition: none;
+    }
 }
 </style>
+
+<script>
+    if (typeof window !== 'undefined') {
+        const groups = [...document.querySelectorAll('.service-details--animated[data-service-reveal-group]:not([data-service-reveal-bound])')];
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+            groups.forEach((group) => {
+                const targets = [...group.querySelectorAll('.service-reveal-target')];
+                targets.forEach((target) => {
+                    target.classList.add('is-visible');
+                    target.setAttribute('data-enter-state', 'visible');
+                });
+                group.setAttribute('data-service-reveal-bound', 'true');
+            });
+        } else if (!window.__epdcServiceDetailsObserver) {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    for (const entry of entries) {
+                        if (!entry.isIntersecting) continue;
+                        const targets = [...entry.target.querySelectorAll('.service-reveal-target')];
+                        targets.forEach((target) => {
+                            target.setAttribute('data-enter-state', 'visible');
+                            target.classList.add('is-visible');
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                },
+                {
+                    threshold: 0.2,
+                    rootMargin: '0px 0px -8% 0px',
+                }
+            );
+
+            const observeGroups = (targets) => {
+                targets.forEach((group) => {
+                    const revealTargets = [...group.querySelectorAll('.service-reveal-target')];
+                    revealTargets.forEach((target) => {
+                        target.setAttribute('data-enter-state', 'pending');
+                    });
+
+                    group.setAttribute('data-service-reveal-bound', 'true');
+                    observer.observe(group);
+                });
+            };
+
+            window.__epdcServiceDetailsObserver = { observer, observeGroups };
+            observeGroups(groups);
+        } else {
+            window.__epdcServiceDetailsObserver.observeGroups(groups);
+        }
+    }
+</script>
