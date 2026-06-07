@@ -58,7 +58,17 @@ const structuredData = {
         <ServiceDetails 
           icon="ph:code" 
           title="Desarrollo Web" 
-          features={["Diseño responsivo y mobile-first", "Tiempos de carga rápidos y optimización SEO", "Integraciones personalizadas con CMS", "Conectividad API y servicios de terceros"]}
+          highlight={{
+            icon: "ph:rocket-launch",
+            title: "Rápido y Escalable",
+            description: "Hecho para rendir, crecer y mantenerse fácil."
+          }}
+          features={[
+            { label: "Mobile First", icon: "ph:device-mobile" },
+            { label: "Alto Rendimiento", icon: "ph:lightning" },
+            { label: "CMS Flexible", icon: "ph:puzzle-piece" },
+            { label: "APIs Integradas", icon: "ph:plugs-connected" }
+          ]}
           reverse={true}
           animateOnView={true}
         >
@@ -70,7 +80,17 @@ const structuredData = {
         <ServiceDetails 
           icon="ph:shopping-cart" 
           title="Soluciones de Comercio Electrónico" 
-          features={["Páginas de productos enfocadas en conversión", "Experiencias de pago optimizadas", "Integración de inventario y logística", "Informes personalizados y automatización"]}
+          highlight={{
+            icon: "ph:trend-up",
+            title: "Enfocado en Conversión",
+            description: "Diseñado para convertir visitas en clientes."
+          }}
+          features={[
+            { label: "Páginas que Venden", icon: "ph:storefront" },
+            { label: "Checkout Ágil", icon: "ph:credit-card" },
+            { label: "Inventario Sincronizado", icon: "ph:package" },
+            { label: "Automatización Inteligente", icon: "ph:gear-six" }
+          ]}
           reverse={false}
           animateOnView={true}
         >
@@ -82,7 +102,17 @@ const structuredData = {
         <ServiceDetails 
           icon="ph:lifebuoy" 
           title="Mantenimiento y Soporte"  
-          features={["Actualizaciones programadas de plugins y temas", "Monitoreo de rendimiento y disponibilidad", "Tiempo de desarrollo experto incluido", "Correcciones prioritarias de errores"]}
+          highlight={{
+            icon: "ph:shield-check",
+            title: "Siempre Protegido",
+            description: "Monitoreo, actualizaciones y soporte continuo."
+          }}
+          features={[
+            { label: "Actualizaciones Programadas", icon: "ph:arrows-clockwise" },
+            { label: "Monitoreo Activo", icon: "ph:heartbeat" },
+            { label: "Horas Dev Incluidas", icon: "ph:code" },
+            { label: "Soporte Prioritario", icon: "ph:wrench" }
+          ]}
           reverse={true}
           animateOnView={true}
         >
@@ -95,7 +125,17 @@ const structuredData = {
         <ServiceDetails 
           icon="ph:mask-happy" 
           title="Servicios White-Label" 
-          features={["Código invisible listo para clientes", "Entrega rápida y estimaciones definidas", "Soporte de desarrollo confiable", "Asociaciones confidenciales"]}
+          highlight={{
+            icon: "ph:handshake",
+            title: "Alianza Invisible",
+            description: "Tu agencia brilla mientras construimos detrás."
+          }}
+          features={[
+            { label: "Código para Cliente", icon: "ph:eye-slash" },
+            { label: "Entrega Rápida", icon: "ph:timer" },
+            { label: "Soporte Confiable", icon: "ph:lifebuoy" },
+            { label: "Socio Confidencial", icon: "ph:handshake" }
+          ]}
           reverse={false}
           animateOnView={true}
         >

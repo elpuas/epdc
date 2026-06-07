@@ -4,7 +4,15 @@ import { Icon } from 'astro-icon/components';
 interface Props {
     icon: string;
     title: string;
-    features: string[];
+    features: Array<{
+        label: string;
+        icon: string;
+    }>;
+    highlight: {
+        icon: string;
+        title: string;
+        description: string;
+    };
     reverse?: boolean;
     animateOnView?: boolean;
 }
@@ -13,12 +21,14 @@ const {
     icon,
     title,
     features,
+    highlight,
     reverse = false,
     animateOnView = false,
 } = Astro.props;
 
 const titleId = `service-title-${title.toLowerCase().replace(/\s+/g, '-')}`;
 const contentEnterFrom = reverse ? 'right' : 'left';
+const highlightEnterFrom = reverse ? 'left' : 'right';
 ---
 
 <article
@@ -31,10 +41,13 @@ const contentEnterFrom = reverse ? 'right' : 'left';
         <div class="service-header">
         <h3
             id={titleId}
-            class={animateOnView ? 'service-reveal-target' : undefined}
-            data-enter-from={animateOnView ? 'left' : undefined}
+            class={`text-gradient-brand ${animateOnView ? 'service-reveal-target' : ''}`}
+            data-enter-from={animateOnView ? contentEnterFrom : undefined}
             style={animateOnView ? '--service-enter-delay: 0s;' : undefined}
         >
+            <span class="service-title-icon" aria-hidden="true">
+                <Icon name={icon} width="24" height="24" />
+            </span>
             {title}
         </h3>
         </div>
@@ -52,48 +65,61 @@ const contentEnterFrom = reverse ? 'right' : 'left';
                     data-enter-from={animateOnView ? contentEnterFrom : undefined}
                     style={animateOnView ? `--service-enter-delay: ${0.3 + index * 0.08}s;` : undefined}
                 >
-                    <span class="service-feature-label">{feature}</span>
+                    <span class="service-feature-icon" aria-hidden="true">
+                        <Icon name={feature.icon} width="18" height="18" />
+                    </span>
+                    <span class="service-feature-label">{feature.label}</span>
                 </li>
             ))}
             </ul>
         </div>
     </div>
-    <div
-        class={`icon ${animateOnView ? 'service-reveal-target' : ''}`}
-        aria-hidden="true"
-        data-enter-from={animateOnView ? 'bottom' : undefined}
-        style={animateOnView ? '--service-enter-delay: 0.11s;' : undefined}
+
+    <aside
+        class={`service-highlight ${animateOnView ? 'service-reveal-target' : ''}`}
+        aria-label={`${title} highlight`}
+        data-enter-from={animateOnView ? highlightEnterFrom : undefined}
+        style={animateOnView ? '--service-enter-delay: 0.14s;' : undefined}
     >
-        <Icon name={icon} width="240" height="240" class="icon-animate" aria-hidden="true" />
-    </div>
+        <span class="service-highlight-icon-shell" aria-hidden="true">
+            <Icon name={highlight.icon} width="20" height="20" class="service-highlight-icon" />
+        </span>
+        <div class="service-highlight-copy">
+            <p class="service-highlight-eyebrow">Key Benefit</p>
+            <h4 class="service-highlight-title text-gradient-brand">{highlight.title}</h4>
+            <p class="service-highlight-description">{highlight.description}</p>
+        </div>
+    </aside>
 </article>
 
 <style scoped>
 .service-details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-xl);
+    display: grid;
+    gap: clamp(var(--space-lg), 3vw, var(--space-2xl));
     padding-block: var(--space-xl);
-    flex-wrap: wrap;
-
-    @container (width > 768px) {
-        justify-content: space-between;
-        flex-direction: row;
-    }
-}
-
-.service-details.reverse {
-    flex-direction: row-reverse;
+    text-align: center;
 }
 
 .text-block {
-    flex: 1;
+    max-width: 44rem;
+    margin-inline: auto;
 
     h3 {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
         font-weight: 400;
+        flex-wrap: wrap;
     }
+}
+
+.service-details.reverse .text-block {
+    text-align: left;
+}
+
+.service-details:not(.reverse) .text-block {
+    text-align: right;
 }
 
 .image-block img {
@@ -103,13 +129,22 @@ const contentEnterFrom = reverse ? 'right' : 'left';
 
 .service-header {
     display: flex;
-    align-items: center;
-    gap: var(--space-md);
+    justify-content: center;
     margin-bottom: var(--space-md);
 }
 
-.icon {
-    flex-shrink: 0;
+.service-details.reverse .service-header {
+    justify-content: flex-start;
+}
+
+.service-details:not(.reverse) .service-header {
+    justify-content: flex-end;
+}
+
+.service-title-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     color: var(--color-secondary);
 }
 
@@ -117,10 +152,84 @@ const contentEnterFrom = reverse ? 'right' : 'left';
     display: block;
 }
 
+.service-highlight {
+    display: grid;
+    align-content: start;
+    gap: 0.8rem;
+    padding: clamp(1rem, 0.92rem + 0.55vw, 1.25rem);
+    border: 1px solid var(--color-quaternary);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--color-primary) 94%, var(--color-secondary) 6%);
+    text-align: left;
+    transition:
+        opacity 0.95s ease-out,
+        transform 0.95s ease-out,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
+    transition-delay: var(--service-enter-delay, 0s);
+}
+
+.service-highlight-icon-shell {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--color-quaternary);
+    border-radius: 8px;
+    color: var(--color-tertiary);
+    background: transparent;
+}
+
+.service-highlight-icon {
+    transition:
+        transform 0.25s ease,
+        color 0.25s ease;
+}
+
+.service-highlight-copy {
+    display: grid;
+    gap: 0.4rem;
+}
+
+.service-highlight-eyebrow {
+    margin: 0;
+    color: var(--color-tertiary);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.service-highlight-title {
+    margin: 0;
+    font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+}
+
+.service-highlight-description {
+    margin: 0;
+    color: var(--color-tertiary);
+    font-size: clamp(0.96rem, 0.93rem + 0.12vw, 1.02rem);
+    line-height: 1.5;
+}
+
 .service-description {
     font-size: var(--fontsize-base);
     margin-bottom: var(--space-md);
     max-width: 65ch;
+    margin-inline: auto;
+}
+
+.service-details.reverse .service-description {
+    margin-inline: 0 auto;
+}
+
+.service-details:not(.reverse) .service-description {
+    margin-inline: auto 0;
 }
 
 .service-features {
@@ -128,13 +237,26 @@ const contentEnterFrom = reverse ? 'right' : 'left';
     padding: 0;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 0.85rem;
-    max-width: 48ch;
+    max-width: 52rem;
+    margin-inline: auto;
+}
+
+.service-details.reverse .service-features {
+    justify-content: flex-start;
+    margin-inline: 0 auto;
+}
+
+.service-details:not(.reverse) .service-features {
+    justify-content: flex-end;
+    margin-inline: auto 0;
 }
 
 .service-feature-pill {
     display: inline-flex;
     align-items: center;
+    gap: 0.55rem;
     min-width: 0;
     padding: 0.95rem 1rem;
     border: 1px solid var(--color-quaternary);
@@ -149,6 +271,14 @@ const contentEnterFrom = reverse ? 'right' : 'left';
     transition-delay: var(--service-enter-delay, 0s);
 }
 
+.service-feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-tertiary);
+    flex-shrink: 0;
+}
+
 .service-feature-label {
     min-width: 0;
     color: var(--color-secondary);
@@ -161,6 +291,27 @@ const contentEnterFrom = reverse ? 'right' : 'left';
     border-color: color-mix(in srgb, var(--color-tertiary) 38%, var(--color-quaternary));
     background: color-mix(in srgb, var(--color-primary) 92%, var(--color-secondary) 8%);
     box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-tertiary) 12%, transparent);
+}
+
+.service-details:hover .service-highlight,
+.service-details:focus-within .service-highlight {
+    border-color: color-mix(in srgb, var(--color-tertiary) 38%, var(--color-quaternary));
+    background: color-mix(in srgb, var(--color-primary) 92%, var(--color-secondary) 8%);
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.14),
+        0 0 0 1px color-mix(in srgb, var(--color-tertiary) 12%, transparent);
+}
+
+.service-details:hover .service-highlight-icon-shell,
+.service-details:focus-within .service-highlight-icon-shell {
+    border-color: color-mix(in srgb, var(--color-tertiary) 42%, var(--color-quaternary));
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-tertiary) 12%, transparent);
+}
+
+.service-details:hover .service-highlight-icon,
+.service-details:focus-within .service-highlight-icon {
+    transform: scale(1.06);
+    color: var(--color-secondary);
 }
 
 .service-details--animated .service-reveal-target {
@@ -190,8 +341,62 @@ const contentEnterFrom = reverse ? 'right' : 'left';
     transform: translate3d(0, 0, 0);
 }
 
-.icon-animate {
-    display: inline-block;
+@media (min-width: 48rem) {
+    .service-details {
+        grid-template-columns: minmax(0, 1.6fr) minmax(18rem, 22rem);
+        align-items: center;
+    }
+
+    .service-details.reverse {
+        direction: rtl;
+    }
+
+    .service-details.reverse .text-block,
+    .service-details.reverse .service-highlight {
+        direction: ltr;
+    }
+
+    .service-details .text-block {
+        grid-column: 1;
+    }
+
+    .service-details .service-highlight {
+        grid-column: 2;
+    }
+}
+
+@media (max-width: 47.99rem) {
+    .service-details,
+    .service-details.reverse .text-block,
+    .service-details:not(.reverse) .text-block {
+        text-align: center;
+    }
+
+    .service-details.reverse .service-header,
+    .service-details:not(.reverse) .service-header {
+        justify-content: center;
+    }
+
+    .service-details.reverse .service-description,
+    .service-details:not(.reverse) .service-description,
+    .service-details.reverse .service-features,
+    .service-details:not(.reverse) .service-features,
+    .service-details.reverse .text-block,
+    .service-details:not(.reverse) .text-block {
+        margin-inline: auto;
+    }
+
+    .service-details.reverse .service-features,
+    .service-details:not(.reverse) .service-features {
+        justify-content: center;
+    }
+
+    .service-highlight {
+        width: 100%;
+        max-width: none;
+        margin-inline: auto;
+        text-align: left;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {

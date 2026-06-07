@@ -58,7 +58,17 @@ const structuredData = {
         <ServiceDetails 
           icon="ph:code" 
           title="Web Development" 
-          features={["Responsive, mobile-first design", "Fast load times & SEO optimization", "Custom CMS integrations", "API and third-party service connectivity"]}
+          highlight={{
+            icon: "ph:rocket-launch",
+            title: "Fast & Scalable",
+            description: "Built for performance, growth, and maintainability."
+          }}
+          features={[
+            { label: "Mobile First", icon: "ph:device-mobile" },
+            { label: "High Performance", icon: "ph:lightning" },
+            { label: "Flexible CMS", icon: "ph:puzzle-piece" },
+            { label: "API Integrations", icon: "ph:plugs-connected" }
+          ]}
           reverse={true}
           animateOnView={true}
         >
@@ -70,7 +80,17 @@ const structuredData = {
         <ServiceDetails 
           icon="ph:shopping-cart" 
           title="E-Commerce Solutions" 
-          features={["Conversion-focused product pages", "Streamlined checkout experiences", "Inventory & logistics integration", "Custom reports & automation"]}
+          highlight={{
+            icon: "ph:trend-up",
+            title: "Conversion Focused",
+            description: "Designed to turn visitors into customers."
+          }}
+          features={[
+            { label: "Product Pages", icon: "ph:storefront" },
+            { label: "Smooth Checkout", icon: "ph:credit-card" },
+            { label: "Inventory Sync", icon: "ph:package" },
+            { label: "Smart Automation", icon: "ph:gear-six" }
+          ]}
           reverse={false}
           animateOnView={true}
         >
@@ -82,7 +102,17 @@ const structuredData = {
         <ServiceDetails 
           icon="ph:lifebuoy" 
           title="Maintenance & Support"  
-          features={["Scheduled plugin and theme updates", "Performance & uptime monitoring", "Expert dev time included", "Priority bug fixes"]}
+          highlight={{
+            icon: "ph:shield-check",
+            title: "Always Protected",
+            description: "Continuous monitoring, updates, and support."
+          }}
+          features={[
+            { label: "Scheduled Updates", icon: "ph:arrows-clockwise" },
+            { label: "Uptime Monitoring", icon: "ph:heartbeat" },
+            { label: "Dev Hours Included", icon: "ph:code" },
+            { label: "Priority Fixes", icon: "ph:wrench" }
+          ]}
           reverse={true}
           animateOnView={true}
         >
@@ -95,7 +125,17 @@ const structuredData = {
         <ServiceDetails 
           icon="ph:mask-happy" 
           title="White-Label Services" 
-          features={["Invisible client-ready code", "Fast delivery & scoped estimates", "Reliable dev support", "Confidential partnerships"]}
+          highlight={{
+            icon: "ph:handshake",
+            title: "Invisible Partnership",
+            description: "Your agency shines while we build behind the scenes."
+          }}
+          features={[
+            { label: "Client-Ready Code", icon: "ph:eye-slash" },
+            { label: "Fast Turnaround", icon: "ph:timer" },
+            { label: "Reliable Dev Support", icon: "ph:lifebuoy" },
+            { label: "Confidential Partner", icon: "ph:handshake" }
+          ]}
           reverse={false}
           animateOnView={true}
         >
