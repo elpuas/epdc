@@ -7,7 +7,8 @@
     }
 
     > p {
-        font-size: var(--fontsize-h5);
+        font-size: var(--fontsize-editorial);
+        line-height: var(--lineheight-editorial);
         margin-bottom: calc(var(--space-md) * 4);
     }
 }
@@ -18,7 +19,9 @@
 }
 
 .subtitle {
-    font-size: var(--fontsize-h5);
+    font-size: var(--fontsize-editorial);
+    line-height: var(--lineheight-editorial);
+    margin-inline: auto;
     margin-bottom: calc(var(--space-md) * 4);
 }
 
@@ -61,8 +64,8 @@
 }
 
 .pricingDescription {
-    font-size: clamp(1.08rem, 1rem + 0.35vw, 1.45rem);
-    line-height: 1.55;
+    font-size: var(--fontsize-editorial);
+    line-height: var(--lineheight-editorial);
 }
 
 .pricingGrid {

@@ -110,7 +110,7 @@ const highlightEnterFrom = reverse ? 'left' : 'right';
         justify-content: center;
         gap: 0.75rem;
         font-weight: 400;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
     }
 }
 
@@ -213,14 +213,14 @@ const highlightEnterFrom = reverse ? 'left' : 'right';
 .service-highlight-description {
     margin: 0;
     color: var(--color-tertiary);
-    font-size: clamp(0.96rem, 0.93rem + 0.12vw, 1.02rem);
-    line-height: 1.5;
+    font-size: 1.125rem;
+    line-height: var(--lineheight-editorial);
 }
 
 .service-description {
     font-size: var(--fontsize-base);
+    line-height: var(--lineheight-base);
     margin-bottom: var(--space-md);
-    max-width: 65ch;
     margin-inline: auto;
 }
 
@@ -366,15 +366,18 @@ const highlightEnterFrom = reverse ? 'left' : 'right';
 }
 
 @media (max-width: 47.99rem) {
-    .service-details,
+    .service-details {
+        text-align: left;
+    }
+
     .service-details.reverse .text-block,
     .service-details:not(.reverse) .text-block {
-        text-align: center;
+        text-align: left;
     }
 
     .service-details.reverse .service-header,
     .service-details:not(.reverse) .service-header {
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .service-details.reverse .service-description,
@@ -383,18 +386,18 @@ const highlightEnterFrom = reverse ? 'left' : 'right';
     .service-details:not(.reverse) .service-features,
     .service-details.reverse .text-block,
     .service-details:not(.reverse) .text-block {
-        margin-inline: auto;
+        margin-inline: 0;
     }
 
     .service-details.reverse .service-features,
     .service-details:not(.reverse) .service-features {
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .service-highlight {
         width: 100%;
         max-width: none;
-        margin-inline: auto;
+        margin-inline: 0;
         text-align: left;
     }
 }

@@ -2,62 +2,99 @@
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/Button.astro';
 import { Icon } from 'astro-icon/components';
-import ProcessStep from '../../components/ProcessStep.astro';
+import ServiceDetails from '../../components/ServiceDetails.astro';
 import CaseStudySection from '../../components/CaseStudySection.astro';
 import TeamMember from '../../components/TeamMember.astro';
 import alfredoImage from '../../../public/team/alfredo-navas.jpeg';
 import gianfrancoImage from '../../../public/team/gianfranco.png';
-import aiImage from '../../../public/team/ai-assistant.png';
 import styles from '../../styles/About.module.css';
 const title = 'Conocé ElPuas Digital Crafts | Un Estudio Web Familiar';
 const description = 'Descubrí quiénes somos, qué nos mueve y cómo creamos sitios web de alto rendimiento con un enfoque humano y personalizado. Un equipo pequeño con visión global.';
 const lang = 'es';
 // Import case study image
 import caseStudyImage from '../../../public/monkey-phone.jpg';
-const process = [
+const collaborationPoints = [
   {
-    icon: 'ph:magnifying-glass',
-    title: 'Descubrimiento y Comprensión',
-    description: 'Comenzamos recopilando toda la información posible sobre tu negocio, desafíos y objetivos. Entender tus necesidades es la base de un proyecto exitoso.'
+    icon: 'ph:chat-centered-text',
+    title: 'Comunicación Clara',
+    highlight: {
+      icon: 'ph:chat-circle-dots',
+      title: 'Directa y ágil',
+      description: 'Trabajás directamente con personas técnicas que explican prioridades, decisiones y próximos pasos con claridad.'
+    },
+    features: [
+      { label: 'Contacto directo', icon: 'ph:phone-call' },
+      { label: 'Respuestas rápidas', icon: 'ph:lightning' },
+      { label: 'Prioridades claras', icon: 'ph:list-checks' },
+      { label: 'Sin capas innecesarias', icon: 'ph:users-three' }
+    ],
+    description: 'Trabajar con EPDC se siente simple. Las preguntas se responden, las decisiones técnicas se entienden y la comunicación se mantiene directa desde el inicio hasta el soporte continuo.',
+    reverse: true
   },
   {
-    icon: 'ph:brain',
-    title: 'Planificación Estratégica con IA',
-    description: 'Utilizando la información recopilada, analizamos e identificamos el mejor enfoque. Con IA, descubrimos soluciones innovadoras, optimizamos flujos de trabajo y nos aseguramos de que no se pase por alto ningún detalle.'
+    icon: 'ph:cpu',
+    title: 'Experiencia Técnica Senior',
+    highlight: {
+      icon: 'ph:certificate',
+      title: 'Experiencia que reduce fricción',
+      description: 'Recibís criterio técnico sólido, sin complejidad innecesaria ni decisiones improvisadas.'
+    },
+    features: [
+      { label: 'Visión de arquitectura', icon: 'ph:tree-structure' },
+      { label: 'Enfoque en performance', icon: 'ph:gauge' },
+      { label: 'Resolución de problemas', icon: 'ph:wrench' },
+      { label: 'Ejecución confiable', icon: 'ph:check-circle' }
+    ],
+    description: 'Los clientes confían en EPDC porque podemos tomar buenas decisiones técnicas, resolver casos complejos con rapidez y mantener la calidad sin perder ritmo.',
+    reverse: false
   },
   {
-    icon: 'ph:pen-nib',
-    title: 'Estrategia de Diseño',
-    description: 'Creamos una estrategia de diseño adaptada a tu visión y público objetivo. Esto garantiza una experiencia fácil de usar y visualmente atractiva que se alinea con tus objetivos.'
+    icon: 'ph:rocket-launch',
+    title: 'Tecnología Moderna, Decisiones Prácticas',
+    highlight: {
+      icon: 'ph:code',
+      title: 'Stack moderno, decisiones sensatas',
+      description: 'Elegimos herramientas que ayudan al proyecto, mejoran el mantenimiento y acompañan el crecimiento.'
+    },
+    features: [
+      { label: 'Astro y React', icon: 'ph:atom' },
+      { label: 'WordPress inteligente', icon: 'ph:puzzle-piece' },
+      { label: 'Flujos con IA', icon: 'ph:sparkle' },
+      { label: 'Implementaciones mantenibles', icon: 'ph:stack' }
+    ],
+    description: 'EPDC combina frameworks modernos, decisiones pragmáticas de CMS y flujos asistidos por IA para entregar sitios rápidos, flexibles y más fáciles de sostener en el tiempo.',
+    reverse: true
   },
   {
-    icon: 'ph:code',
-    title: 'Selección de Tecnología y Desarrollo',
-    description: 'Ya sea WordPress por su flexibilidad o React para aplicaciones dinámicas, elegimos el mejor framework para tus necesidades. La IA ayuda a optimizar el desarrollo y resolver desafíos más rápido.'
-  },
-  {
-    icon: 'ph:truck',
-    title: 'Entrega',
-    description: 'Una vez que todo está perfeccionado, entregamos tu proyecto a tiempo, asegurándonos de que cumpla con tus expectativas y funcione perfectamente.'
-  },
-  {
-    icon: 'ph:chart-line-up',
-    title: 'Soporte Continuo y Optimización con IA',
-    description: 'Nuestro compromiso no termina con la entrega. Con soporte continuo, utilizamos IA para monitorear y mejorar continuamente tu sitio web, adaptándonos a nuevos desafíos y oportunidades.'
+    icon: 'ph:lifebuoy',
+    title: 'Soporte a Largo Plazo',
+    highlight: {
+      icon: 'ph:shield-check',
+      title: 'Soporte que sigue presente',
+      description: 'No desaparecemos después de la entrega. Ayudamos a mantener, mejorar y extender el sitio con el tiempo.'
+    },
+    features: [
+      { label: 'Mejoras continuas', icon: 'ph:arrows-clockwise' },
+      { label: 'Correcciones prioritarias', icon: 'ph:first-aid-kit' },
+      { label: 'Seguridad y actualizaciones', icon: 'ph:lock-key' },
+      { label: 'Relación continua', icon: 'ph:handshake' }
+    ],
+    description: 'Muchos clientes siguen con EPDC porque el soporte forma parte de la relación. Acompañamos actualizaciones, mejoras y nuevas decisiones a medida que el negocio evoluciona.',
+    reverse: false
   }
 ];
 ---
 
 <Layout {title} {description} {lang}>
   <section class={styles.hero} aria-labelledby="page-title">
-    <h1 id="page-title" class="page-title">Bienvenido a ElPuas Digital Crafts</h1>
+    <h1 id="page-title" class="page-title text-gradient-brand">Bienvenido a ElPuas Digital Crafts</h1>
     <p class={styles.lead}>
-      Empoderamos a agencias y empresas con sitios web de alto rendimiento y pixel-perfect — construidos con cuidado y respaldados por soporte experto.
+      Empoderamos a agencias y empresas con sitios web de alto rendimiento y pixel-perfect, construidos con cuidado y respaldados por soporte experto.
     </p>
   </section> 
 
   <section class={styles.about} aria-label="Sobre Nosotros">
-    <p>Somos <span class={styles.accent}>ElPuas Digital Crafts</span> — un estudio web familiar que construye sitios web de alto rendimiento con amor, código y café.</p>
+    <p>Somos <span class={styles.accent}>ElPuas Digital Crafts</span>, un estudio web familiar que construye sitios web de alto rendimiento con amor, código y café.</p>
 
     <p>Creemos que los grandes sitios web van más allá del diseño. Deben ser ultrarrápidos, fáciles de gestionar y listos para crecer con tu negocio. Por eso utilizamos frameworks modernos como <span class={styles.accent}>Astro</span>, soluciones inteligentes de <span class={styles.accent}>WordPress</span> y flujos de trabajo <span class={styles.accent}>asistidos por IA</span> para entregar sitios web de alto rendimiento sin el alto costo de mantenimiento.</p>
 
@@ -67,11 +104,23 @@ const process = [
 
   <section class={styles.values} aria-labelledby="values-title">
     <h2 id="values-title">Nuestros Valores</h2>
-    <ul class={styles.valuesList} role="list">
-      <li class={styles.valueItem}><Icon name="ph:handshake" width="64" height="64" aria-hidden="true" /> <span>Alianza Primero</span></li>
-      <li class={styles.valueItem}><Icon name="ph:rocket-launch" width="64" height="64" aria-hidden="true" /> <span>Ejecución Orientada a Resultados</span></li>
-      <li class={styles.valueItem}><Icon name="ph:brain" width="64" height="64" aria-hidden="true" /> <span>Excelencia Técnica, Toque Humano</span></li>
-      <li class={styles.valueItem}><Icon name="ph:shield-check" width="64" height="64" aria-hidden="true" /> <span>Transparencia y Seguridad</span></li>
+    <ul class={styles.valuesList} role="list" data-values-reveal-group>
+      <li class={styles.valueItem} data-values-pill style="--service-enter-delay: 0s;">
+        <span class={styles.valueIcon} aria-hidden="true"><Icon name="ph:handshake" width="18" height="18" /></span>
+        <span>Alianza Primero</span>
+      </li>
+      <li class={styles.valueItem} data-values-pill style="--service-enter-delay: 0.08s;">
+        <span class={styles.valueIcon} aria-hidden="true"><Icon name="ph:rocket-launch" width="18" height="18" /></span>
+        <span>Orientados a Resultados</span>
+      </li>
+      <li class={styles.valueItem} data-values-pill style="--service-enter-delay: 0.16s;">
+        <span class={styles.valueIcon} aria-hidden="true"><Icon name="ph:brain" width="18" height="18" /></span>
+        <span>Toque Humano</span>
+      </li>
+      <li class={styles.valueItem} data-values-pill style="--service-enter-delay: 0.24s;">
+        <span class={styles.valueIcon} aria-hidden="true"><Icon name="ph:shield-check" width="18" height="18" /></span>
+        <span>Seguridad y Confianza</span>
+      </li>
     </ul>
   </section>
 
@@ -82,14 +131,19 @@ const process = [
       <TeamMember
         name="Catalina Valverde"
         role="CEO y Directora de Contenido"
-        bio="Catalina Valverde es nuestra CEO, Directora de Contenido y cofundadora de ElPuas Digital Crafts. Con un título en Producción de Medios y años de experiencia como periodista, aporta una visión estratégica y finura narrativa a cada proyecto. Catalina se asegura de que cada sitio que construimos no solo funcione — habla, conecta e inspira."
+        expertise={['Estrategia de contenido', 'Direccion editorial', 'Narrativa de marca']}
+        bio="Catalina define la voz y la direccion editorial de cada proyecto para que cada sitio comunique con claridad, intención y coherencia de marca."
+        enterDelay="0s"
       />
       <TeamMember
         image={alfredoImage}
         alt="Alfredo Navas - CTO y Desarrollador Principal"
         name="Alfredo Navas Fernandini"
         role="CTO"
-        bio="Alfredo aporta más de 15 años de experiencia, habiendo desarrollado sitios web para empresas Fortune 500. Lidera proyectos, asegura que cada sitio funcione sin problemas y trabaja estrechamente con los clientes para traducir ideas en experiencias digitales de alto rendimiento. Como orador y defensor de la web abierta, comparte conocimientos sobre WordPress, Astro y tecnologías emergentes."
+        expertise={['Arquitectura WordPress', 'Desarrollo Astro', 'Liderazgo tecnico']}
+        bio="Alfredo lidera la estrategia tecnica y la ejecucion, con mas de 15 años de experiencia senior en desarrollos a medida, rendimiento y plataformas web escalables."
+        reverse={true}
+        enterDelay="0.08s"
         socials={[
           { 
             href: 'https://www.linkedin.com/in/elpuasdev/', 
@@ -113,7 +167,9 @@ const process = [
         alt="Gianfranco Navas - Lead Frontend Developer"
         name="Gianfranco Navas"
         role="Lead Frontend Developer"
-        bio="Gianfranco lidera nuestra sede en Roma y aporta una mirada experta al desarrollo frontend. Con experiencia en sistemas de diseño y desarrollo basado en componentes, se asegura de que cada interfaz sea accesible, responsiva y coherente con los objetivos de marca. Trabaja de cerca con los clientes y nuestro equipo de diseño para entregar experiencias digitales pulidas, centradas en el usuario y visualmente impecables."
+        expertise={['Sistemas de diseño', 'Frontend', 'Interfaces accesibles']}
+        bio="Gianfranco se enfoca en una ejecución frontend pulida, convirtiendo decisiones de diseño en interfaces responsivas, accesibles y consistentes."
+        enterDelay="0.16s"
         socials={[
           { 
             href: 'https://www.linkedin.com/in/gianfranconavasfernandiniwebdeveloper/', 
@@ -132,19 +188,12 @@ const process = [
           }
         ]}
       />
-      <TeamMember
-        name="Asistente IA"
-        role="Soporte en Análisis, Desarrollo y Contenido"
-        bio="Nuestro asistente de IA, una colaboración entre ChatGPT y Cursor, nos ayuda a avanzar más rápido sin atajos. Desde la estructura del código hasta la investigación y borradores de contenido, amplifica la velocidad, precisión y creatividad de nuestro equipo."
-        image={aiImage}
-        alt="Asistente IA - Nuestro miembro digital del equipo"
-      />
     </ul>
   </section>
 
   <section class={styles.philosophy} aria-label="Nuestra Filosofía">
     <h2>
-      En ElPuas Digital Crafts, nuestra filosofía es simple:<span class={styles.accent}>"Creamos Artesanía Digital para Humanos"</span> Cada proyecto está impregnado de cuidado, creatividad y artesanía, entregando no solo sitios web, sino experiencias digitales inolvidables.
+      En ElPuas Digital Crafts, nuestra filosofía es simple:<span class={styles.accent}>"Creamos Artes Digitales para Humanos"</span> Cada proyecto está impregnado de cuidado, creatividad y artesanía, entregando no solo sitios web, sino experiencias digitales inolvidables.
     </h2>
   </section>
 
@@ -161,9 +210,24 @@ const process = [
   </section>
 
   <section class={styles.process} aria-labelledby="process-title">
-    <h2 id="process-title">Cómo Damos Vida a Tu Visión</h2>
-    <p class={styles.accent}>Desde la idea hasta la entrega, así es como convertimos la estrategia en acción.</p>
-    <ProcessStep steps={process} />
+    <h2 id="process-title" class="text-gradient-brand">Cómo Se Siente Trabajar con EPDC</h2>
+    <p class={styles.accent}>Colaboración directa, ejecución senior, herramientas modernas y soporte que sigue siendo útil después del primer lanzamiento.</p>
+    <div class={styles.processList}>
+      {collaborationPoints.map((item) => (
+        <ServiceDetails
+          icon={item.icon}
+          title={item.title}
+          highlight={item.highlight}
+          features={item.features}
+          reverse={item.reverse}
+          animateOnView={true}
+        >
+          <div slot="description">
+            {item.description}
+          </div>
+        </ServiceDetails>
+      ))}
+    </div>
   </section>
 
   <section class={styles.cta} aria-label="Llamada a la Acción de Contacto">
@@ -172,59 +236,36 @@ const process = [
 </Layout>
 <script type="module" is:inline>
   document.addEventListener('DOMContentLoaded', () => {
-    
-    // Force a small initial delay to ensure everything is loaded
-    setTimeout(() => {
-      const icons = document.querySelectorAll('.step-icon');
-      
-      // Manually apply animation to any icons already in viewport on page load
-      let iconsArray = Array.from(icons);
-      
-      // Create an observer for icons not yet in view
-      const observer = new IntersectionObserver(
-        (entries, obs) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              
-              // Remove any existing animation classes and force reflow
-              entry.target.classList.remove('animate');
-              void entry.target.offsetWidth; // Force reflow
-              
-              // Apply the animation class
-              entry.target.classList.add('animate');
-              
-              // Stop observing this icon
+    const valuePills = Array.from(document.querySelectorAll('[data-values-pill]'));
+
+    if (valuePills.length > 0) {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+        valuePills.forEach((pill) => {
+          pill.classList.add('is-visible');
+          pill.setAttribute('data-enter-state', 'visible');
+        });
+      } else {
+        const valuesObserver = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-visible');
+              entry.target.setAttribute('data-enter-state', 'visible');
               obs.unobserve(entry.target);
-            }
-          });
-        },
-        { 
-          threshold: 0.3,
-          rootMargin: '-10px' 
-        }
-      );
-      
-      // Apply staggered animation for icons
-      iconsArray.forEach((icon, index) => {
-        // Check if icon is already in viewport to animate immediately
-        const rect = icon.getBoundingClientRect();
-        const isInViewport = (
-          rect.top >= 0 &&
-          rect.left >= 0 &&
-          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            });
+          },
+          {
+            threshold: 0.2,
+            rootMargin: '0px 0px -8% 0px',
+          }
         );
-        
-        if (isInViewport) {
-          // Stagger the animation for icons already in viewport
-          setTimeout(() => {
-            icon.classList.add('animate');
-          }, index * 150);
-        } else {
-          // Observe icons not yet in viewport
-          observer.observe(icon);
-        }
-      });
-    }, 800); // Longer delay to ensure all resources are loaded
+
+        valuePills.forEach((pill) => {
+          pill.setAttribute('data-enter-state', 'pending');
+          valuesObserver.observe(pill);
+        });
+      }
+    }
+
   });
-</script> 
+</script>
