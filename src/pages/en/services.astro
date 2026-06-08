@@ -3,21 +3,20 @@ import Layout from '../../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 import Button from '../../components/Button.astro';
 import ServiceDetails from '../../components/ServiceDetails.astro';
-import TrustedBy from '../../components/TrustedBy.astro';
 import PricingCard from '../../components/PricingCard.astro';
-import CaseStudySection from '../../components/CaseStudySection.astro';
 import StructuredData from '../../components/StructuredData.astro';
 import styles from '../../styles/Services.module.css';
 const title = 'WordPress, E‑Commerce & White‑Label Services | ElPuas Digital Crafts';
 const description = 'From custom WordPress development to WooCommerce and agency support — we offer reliable web services that fit your needs, budget, and growth plans.';
-import caseStudyImage from '../../../public/portfolio/cas-showcase.jpg';
+import HomeProjectShowcase from '../../components/HomeProjectShowcase.astro';
+import HomeProjectShowcaseVisual from '../../components/HomeProjectShowcaseVisual.astro';
 const lang = 'en';
 
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'WordPress, E‑Commerce & White‑Label Services',
-  description: 'From custom WordPress development to WooCommerce and agency support — we offer reliable web services that fit your needs, budget, and growth plans.',
+  name: 'WordPress, E‑Commerce & White‑Label Services | ElPuas Digital Crafts',
+  description: 'From custom WordPress development to WooCommerce and agency support — we offer reliable web services that match your needs and growth plans.',
   url: 'https://elpuasdigitalcrafts.com/en/services',
   hasPart: [
     {
@@ -73,7 +72,7 @@ const structuredData = {
           animateOnView={true}
         >
           <div slot="description">
-            We <span class={styles.accent}>craft websites</span> that fit your goals — and your budget. Whether you need a fully custom build or a smartly adapted template, we create <span class={styles.accent}>high-performance websites</span> tailored to your business. From fast-launch starter sites to complex platforms, every project is optimized for speed, scalability, and ease of management." 
+            We <span class={styles.accent}>craft websites</span> that fit your goals — and your budget. Whether you need a fully custom build or a smartly adapted template, we create <span class={styles.accent}>high-performance websites</span> tailored to your business. From fast-launch starter sites to complex platforms, every project is optimized for speed, scalability, and ease of management.
           </div>
         </ServiceDetails>
 
@@ -86,7 +85,7 @@ const structuredData = {
             description: "Designed to turn visitors into customers."
           }}
           features={[
-            { label: "Product Pages", icon: "ph:storefront" },
+            { label: "Selling Pages", icon: "ph:storefront" },
             { label: "Smooth Checkout", icon: "ph:credit-card" },
             { label: "Inventory Sync", icon: "ph:package" },
             { label: "Smart Automation", icon: "ph:gear-six" }
@@ -149,7 +148,7 @@ const structuredData = {
 
   <section class={styles.pricing} aria-labelledby="pricing-title" role="region">
     <p class={styles.pricingEyebrow}>Subscription Plans</p>
-    <h2 id="pricing-title" class="text-gradient-brand">Choose the plan that supports your next stage of growth.</h2>
+    <h2 id="pricing-title" class="text-gradient-brand">Choose the plan that drives your business growth.</h2>
     <p class={styles.pricingDescription} id="pricing-subtitle">Monthly plans designed to keep your site updated, secure, and improving over time.</p>
     <div class={styles.pricingGrid} role="list" aria-describedby="pricing-subtitle" data-pricing-reveal-group>
       <PricingCard
@@ -159,7 +158,6 @@ const structuredData = {
         period="/ month"
         icon="ph:rocket-launch"
         href="/en/contact"
-        ctaLabel="Get started"
         enterDelay="0s"
         enterFrom="left"
         features={[
@@ -179,7 +177,6 @@ const structuredData = {
         highlight
         badge="Most Popular"
         href="/en/contact"
-        ctaLabel="Get started"
         enterDelay="0.15s"
         enterFrom="bottom"
         features={[
@@ -198,7 +195,6 @@ const structuredData = {
         period="/ month"
         icon="ph:diamond"
         href="/en/contact"
-        ctaLabel="Get started"
         enterDelay="0.3s"
         enterFrom="right"
         features={[
@@ -222,22 +218,29 @@ const structuredData = {
   </section>
 
   <section class={styles.testimonial} aria-labelledby="testimonial-title" role="region">
-    <CaseStudySection
-      title="Partnering Behind the Scenes"
-      accentText=" We support agencies and studios through reliable, white-label execution."
-      quote="Working with ElPuas has been a game-changer. They consistently deliver high-quality work on time, handle complex technical specs with ease, and elevate the quality of our agency's output. Our clients are happy — and that makes us look great."
-      author=" Avalanche Advertising (White-label Partner)"
-      buttonLabel="Crafted With Love"
-      buttonHref="/en/crafted-with-love/" 
-      imgSrc={caseStudyImage}
-      imgAlt="Avalanche Advertising - White-label Partner"
+    <HomeProjectShowcase
+    title="Avalanche Advertising"
+    description="Ongoing white-label collaboration to support technical execution of web and digital projects."
+    linkLabel="View Project"
+    tags={[
+      { icon: 'ph:handshake', label: 'White Label' },
+      { icon: 'ph:buildings', label: 'Agencies' },
+      { icon: 'ph:code', label: 'Web Development' },
+      { icon: 'ph:headset', label: 'Ongoing Support' },
+    ]}
+    tagsLabel="Project features"
+    href="/en/crafted-with-love/cleveland-auto-show-wordpress-en/"
+  >
+    <HomeProjectShowcaseVisual
+      slot="visual"
+      src="/portfolio/CAS.webp"
+      alt="Avalanche Advertising project showcase on the homepage"
     />
+  </HomeProjectShowcase>
   </section>
 
-  <TrustedBy title="Trusted by forward-thinking brands" />
-
   <section class={styles.ctaBlock} aria-labelledby="cta-title" role="region">
-    <h2 id="cta-title">Ready to launch or scale your next digital project?</h2>
+    <h2 id="cta-title" class="text-gradient-brand">Ready to launch or scale your next digital project?</h2>
     <Button href="/en/contact" label="Get Started Today" aria-label="Contact us to get started with your project" />
   </section>
   <StructuredData data={structuredData} />

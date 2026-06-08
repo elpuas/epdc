@@ -3,14 +3,13 @@ import Layout from '../../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 import Button from '../../components/Button.astro';
 import ServiceDetails from '../../components/ServiceDetails.astro';
-import TrustedBy from '../../components/TrustedBy.astro';
 import PricingCard from '../../components/PricingCard.astro';
-import CaseStudySection from '../../components/CaseStudySection.astro';
 import StructuredData from '../../components/StructuredData.astro';
 import styles from '../../styles/Services.module.css';
 const title = 'WordPress, E‑Commerce e Servizi White‑Label | ElPuas Digital Crafts';
-const description = 'Dallo sviluppo su misura ai negozi online e al supporto per agenzie — offriamo servizi web affidabili e accessibili, pensati per crescere con te.';
-import caseStudyImage from '../../../public/portfolio/cas-showcase.jpg';
+const description = 'Dallo sviluppo su misura ai negozi online e al supporto per agenzie — offriamo servizi web affidabili, scalabili e adattati al tuo budget.';
+import HomeProjectShowcase from '../../components/HomeProjectShowcase.astro';
+import HomeProjectShowcaseVisual from '../../components/HomeProjectShowcaseVisual.astro';
 const lang = 'it';
 
 const structuredData = {
@@ -149,7 +148,7 @@ const structuredData = {
 
   <section class={styles.pricing} aria-labelledby="pricing-title" role="region">
     <p class={styles.pricingEyebrow}>Piani in Abbonamento</p>
-    <h2 id="pricing-title" class="text-gradient-brand">Scegli il piano che sostiene la prossima fase di crescita del tuo business.</h2>
+    <h2 id="pricing-title" class="text-gradient-brand">Scegli il piano che sostiene la crescita del tuo business.</h2>
     <p class={styles.pricingDescription} id="pricing-subtitle">Piani mensili pensati per mantenere il tuo sito aggiornato, sicuro e in costante miglioramento.</p>
     <div class={styles.pricingGrid} role="list" aria-describedby="pricing-subtitle" data-pricing-reveal-group>
       <PricingCard
@@ -159,7 +158,6 @@ const structuredData = {
         period="/ mese"
         icon="ph:rocket-launch"
         href="/it/contact"
-        ctaLabel="Inizia"
         enterDelay="0s"
         enterFrom="left"
         features={[
@@ -179,7 +177,6 @@ const structuredData = {
         highlight
         badge="Più Scelto"
         href="/it/contact"
-        ctaLabel="Inizia"
         enterDelay="0.15s"
         enterFrom="bottom"
         features={[
@@ -198,7 +195,6 @@ const structuredData = {
         period="/ mese"
         icon="ph:diamond"
         href="/it/contact"
-        ctaLabel="Inizia"
         enterDelay="0.3s"
         enterFrom="right"
         features={[
@@ -222,22 +218,29 @@ const structuredData = {
   </section>
 
   <section class={styles.testimonial} aria-labelledby="testimonial-title" role="region">
-    <CaseStudySection
-      title="Partnership Dietro le Quinte"
-      accentText="Supportiamo agenzie e studi attraverso un'esecuzione affidabile in white-label."
-      quote="Lavorare con ElPuas è stato un punto di svolta. Consegnano costantemente lavoro di alta qualità nei tempi previsti, gestiscono specifiche tecniche complesse con facilità e migliorano la qualità dell'output della nostra agenzia. I nostri clienti sono felici — e questo ci fa apparire al meglio."
-      author="Avalanche Advertising (Partner White-label)"
-      buttonLabel="Creato con Amore"
-      buttonHref="/it/crafted-with-love/" 
-      imgSrc={caseStudyImage}
-      imgAlt="Avalanche Advertising - Partner White-label"
+    <HomeProjectShowcase
+    title="Avalanche Advertising"
+    description="Collaborazione white-label continua per supportare l'esecuzione tecnica di progetti web e digitali."
+    linkLabel="Vedi Progetto"
+    tags={[
+      { icon: 'ph:handshake', label: 'White Label' },
+      { icon: 'ph:buildings', label: 'Agenzie' },
+      { icon: 'ph:code', label: 'Sviluppo Web' },
+      { icon: 'ph:headset', label: 'Supporto Continuo' },
+    ]}
+    tagsLabel="Caratteristiche del progetto"
+    href="/it/crafted-with-love/cleveland-auto-show-wordpress-it/"
+  >
+    <HomeProjectShowcaseVisual
+      slot="visual"
+      src="/portfolio/CAS.webp"
+      alt="Vista del progetto Avalanche Advertising nella homepage"
     />
+  </HomeProjectShowcase>
   </section>
 
-  <TrustedBy title="Scelto da brand lungimiranti" />
-
   <section class={styles.ctaBlock} aria-labelledby="cta-title" role="region">
-    <h2 id="cta-title">Pronto a lanciare o scalare il tuo prossimo progetto digitale?</h2>
+    <h2 id="cta-title" class="text-gradient-brand">Pronto a lanciare o scalare il tuo prossimo progetto digitale?</h2>
     <Button href="/it/contact" label="Inizia Oggi" aria-label="Contattaci per iniziare con il tuo progetto" />
   </section>
   <StructuredData data={structuredData} />
