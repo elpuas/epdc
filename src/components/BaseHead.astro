@@ -15,13 +15,13 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image, ogImage, deferCSS = false } = Astro.props;
-const resolvedImage = ogImage ?? image ?? '/default.png';
+const resolvedImage = ogImage ?? image ?? '/general/default.png';
 const organizationStructuredData = {
 	'@context': 'https://schema.org',
 	'@type': 'LocalBusiness',
 	name: 'ElPuas Digital Crafts',
 	url: 'https://elpuasdigitalcrafts.com',
-	image: 'https://elpuasdigitalcrafts.com/logo-updated-150x150.webp',
+	image: 'https://elpuasdigitalcrafts.com/logos/logo-updated-150x150.webp',
 	description:
 		'WordPress and web development with AI workflows. Based in Costa Rica, serving clients in the USA and Italy.',
 	address: {
