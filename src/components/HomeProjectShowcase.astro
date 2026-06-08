@@ -46,7 +46,6 @@ const { title, description, tags, tagsLabel = 'Project features', href, linkLabe
   </div>
 
   <div class="showcase-visual">
-    <div class="visual-glow" aria-hidden="true"></div>
     <slot name="visual" />
   </div>
 </a>
@@ -66,7 +65,7 @@ const { title, description, tags, tagsLabel = 'Project features', href, linkLabe
     isolation: isolate;
 
     @container (width > 900px) {
-      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+      grid-template-columns: minmax(0, 0.92fr) minmax(380px, 1.08fr);
     }
   }
 
@@ -212,7 +211,8 @@ const { title, description, tags, tagsLabel = 'Project features', href, linkLabe
     justify-content: center;
     align-items: center;
     min-width: 0;
-    padding: 0.4rem 0;
+    width: 100%;
+    padding: 0;
     order: -1;
     opacity: 0;
     transform: translate3d(0, 32px, 0);
@@ -240,11 +240,18 @@ const { title, description, tags, tagsLabel = 'Project features', href, linkLabe
   }
 
   @container (width > 900px) {
+    .home-project-showcase {
+      gap: clamp(1.5rem, 2.4vw, 2.5rem);
+      align-items: stretch;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    }
+
     .showcase-visual {
-      justify-content: flex-end;
+      justify-content: center;
+      align-items: stretch;
       order: 0;
-      padding-left: clamp(1rem, 3vw, 2.5rem);
-      padding-right: clamp(0rem, 1.4vw, 0.9rem);
+      padding: 0;
+      height: 100%;
       transform: translate3d(48px, 0, 0);
     }
 
