@@ -22,9 +22,7 @@ const {
 >
   {
     src ? (
-      <div class="visual-image-wrap">
-        <img class="visual-image" src={src} alt={alt} loading="lazy" decoding="async" />
-      </div>
+      <img class="visual-image" src={src} alt={alt} loading="lazy" decoding="async" />
     ) : (
       <div class="visual-screen">
         <div class="screen-top">
@@ -62,21 +60,22 @@ const {
     box-shadow:
       0 24px 70px rgba(0, 0, 0, 0.32),
       0 0 0 1px rgba(216, 255, 0, 0.08);
-    transform: rotate(7deg);
+    /* transform: rotate(7deg); */
     transform-origin: center;
     overflow: hidden;
   }
 
   .showcase-visual-card--image {
-    width: auto;
+    display: grid;
+    place-items: end stretch;
+    width: 100%;
+    max-width: none;
     aspect-ratio: auto;
     padding: 0;
-    background: transparent;
-    box-shadow:
-      0 24px 70px rgba(0, 0, 0, 0.34),
-      0 0 0 1px rgba(216, 255, 0, 0.08);
+    background: none;
+    box-shadow: none;
     border-radius: 0;
-    transform: rotate(7deg) translateZ(0);
+    border: 0;
     overflow: visible;
     transition:
       transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -96,20 +95,15 @@ const {
     content: none;
   }
 
-  .visual-image-wrap {
-    display: block;
-    width: min(100%, 21rem);
-    height: auto;
-  }
-
   .visual-image {
     display: block;
     width: 100%;
+    max-width: 320px;
     height: auto;
     object-fit: contain;
     object-position: center;
+    margin-inline: auto;
     border-radius: 0;
-    margin-left: clamp(1.5rem, 5vw, 5rem);
     filter: drop-shadow(0 8px 14px rgba(255, 255, 255, 0.04));
     transition:
       transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -217,17 +211,13 @@ const {
     }
 
     .showcase-visual-card--image {
-      width: auto;
+      width: 100%;
+      max-width: min(100%, 24rem);
       transform: rotate(5deg) translateZ(0);
     }
 
     .showcase-visual-card--image .visual-image {
-      width: 100%;
-      margin-left: clamp(0.5rem, 3vw, 1.4rem);
-    }
-
-    .showcase-visual-card--image .visual-image-wrap {
-      width: min(100%, 17rem);
+      width: min(100%, 24rem);
     }
 
     .screen-hero {
@@ -253,6 +243,14 @@ const {
     :global(.home-project-showcase:hover) .showcase-visual-card--image .visual-image,
     :global(.home-project-showcase:focus-visible) .showcase-visual-card--image .visual-image {
       filter: drop-shadow(0 8px 14px rgba(255, 255, 255, 0.04));
+    }
+  }
+
+  @container (width > 900px) {
+    .showcase-visual-card--image .visual-image {
+      width: 100%;
+      height: auto;
+      max-width: 320px;
     }
   }
 </style>
