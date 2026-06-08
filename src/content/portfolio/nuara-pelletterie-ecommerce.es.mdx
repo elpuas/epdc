@@ -16,6 +16,7 @@ slug: "nuara-pelletterie-ecommerce-es"
 
 import { Image } from 'astro:assets';
 import videoSrc from '../../../public/portfolio/nuara-mobile.webm';
+import videoSrcMp4 from '../../../public/portfolio/nuara-mobile.mp4';
 
 [Nuara Pelletterie](https://nuarapelletterie.com/) es una tienda online de bolsos desarrollada para el mercado italiano, basada en *una marca con más de 40 años de experiencia en el sector del pellame y la marroquinería*. El proyecto abarcó diseño, desarrollo, cumplimiento normativo y soporte continuo.
 
@@ -32,6 +33,8 @@ import videoSrc from '../../../public/portfolio/nuara-mobile.webm';
             aria-label="Nuara Pelletterie Mobile"
         >
             <source src={videoSrc} type="video/webm" />
+            <source src={videoSrcMp4} type="video/mp4" />
+            Tu navegador no soporta el elemento de video.
         </video>
 	</div>
 	<div class="project-gallery-content">
