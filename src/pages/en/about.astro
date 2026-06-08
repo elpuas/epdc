@@ -3,7 +3,6 @@ import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/Button.astro';
 import { Icon } from 'astro-icon/components';
 import ServiceDetails from '../../components/ServiceDetails.astro';
-import CaseStudySection from '../../components/CaseStudySection.astro';
 import TeamMember from '../../components/TeamMember.astro';
 import alfredoImage from '../../../public/team/alfredo-navas.jpeg';
 import gianfrancoImage from '../../../public/team/gianfranco.png';
@@ -11,8 +10,8 @@ import styles from '../../styles/About.module.css';
 const title = 'Meet ElPuas Digital Crafts | A Family-Led Web Studio';
 const description = 'Discover who we are, what we stand for, and how we craft beautiful, high-performance websites. A small, skilled team with global reach and a personal touch.';
 const lang = 'en';
-// Import case study image
-import caseStudyImage from '../../../public/portfolio/monkey-phone.jpg';
+import HomeProjectShowcase from '../../components/HomeProjectShowcase.astro';
+import HomeProjectShowcaseVisual from '../../components/HomeProjectShowcaseVisual.astro';
 const collaborationPoints = [
   {
     icon: 'ph:chat-centered-text',
@@ -198,15 +197,25 @@ const collaborationPoints = [
   </section>
 
   <section class={styles.testimonial} aria-labelledby="case-study-title">
-    <CaseStudySection
-      title="E‑Commerce Built to Scale"
-      quote="We built a tailored ecommerce store for medical and student apparel, and continue to optimize it through our monthly maintenance plan. We use AI tools to write better product descriptions and choose the right keywords, helping the site stay ahead of competitors in search results. The result? Higher visibility, smoother shopping experiences, and steady sales growth — all without the hassle of managing the tech."
-      author="MonkeyScrubs, eCommerce + Support Plan Client"
-      buttonLabel="Case Study"
-      buttonHref="/en/crafted-with-love/monkey-scrubs-ecommerce-en/" 
-      imgSrc={caseStudyImage}
-      imgAlt="MonkeyScrubs eCommerce store displayed on mobile device"
+    <HomeProjectShowcase
+    title="Monkey Scrubs"
+    description="Ecommerce built to grow, continuously optimized through technical support, SEO, and automation."
+    linkLabel="View Project"
+    tags={[
+      { icon: 'ph:shopping-cart', label: 'WooCommerce' },
+      { icon: 'ph:chart-line-up', label: 'Continuous Growth' },
+      { icon: 'ph:magnifying-glass', label: 'SEO' },
+      { icon: 'ph:headset', label: 'Monthly Support' },
+    ]}
+    tagsLabel="Project features"
+    href="/en/crafted-with-love/monkey-scrubs-ecommerce-en/"
+  >
+    <HomeProjectShowcaseVisual
+      slot="visual"
+      src="/portfolio/monkeyscrubs-mobile.webp"
+      alt="Monkey Scrubs project showcase on the homepage"
     />
+  </HomeProjectShowcase>
   </section>
 
   <section class={styles.process} aria-labelledby="process-title">

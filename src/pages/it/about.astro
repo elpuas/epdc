@@ -3,7 +3,6 @@ import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/Button.astro';
 import { Icon } from 'astro-icon/components';
 import ServiceDetails from '../../components/ServiceDetails.astro';
-import CaseStudySection from '../../components/CaseStudySection.astro';
 import TeamMember from '../../components/TeamMember.astro';
 import alfredoImage from '../../../public/team/alfredo-navas.jpeg';
 import gianfrancoImage from '../../../public/team/gianfranco.png';
@@ -11,8 +10,8 @@ import styles from '../../styles/About.module.css';
 const title = 'Scopri ElPuas Digital Crafts | Uno Studio Web a Conduzione Familiare';
 const description = 'Scopri chi siamo, cosa ci ispira e come creiamo esperienze digitali performanti. Un piccolo team con un grande cuore e visione globale.';
 const lang = 'it';
-// Import case study image
-import caseStudyImage from '../../../public/portfolio/monkey-phone.jpg';
+import HomeProjectShowcase from '../../components/HomeProjectShowcase.astro';
+import HomeProjectShowcaseVisual from '../../components/HomeProjectShowcaseVisual.astro';
 const collaborationPoints = [
   {
     icon: 'ph:chat-centered-text',
@@ -198,15 +197,25 @@ const collaborationPoints = [
   </section>
 
   <section class={styles.testimonial} aria-labelledby="case-study-title">
-    <CaseStudySection
-      title="E‑Commerce Costruito per Scalare"
-      quote="Abbiamo costruito un negozio e-commerce su misura per abbigliamento medico e studenti, e continuiamo a ottimizzarlo attraverso il nostro piano di manutenzione mensile. Utilizziamo strumenti di IA per scrivere descrizioni di prodotti migliori e scegliere le parole chiave giuste, aiutando il sito a rimanere davanti ai concorrenti nei risultati di ricerca. Il risultato? Maggiore visibilità, esperienze di acquisto più fluide e una crescita costante delle vendite — tutto senza il fastidio di gestire la tecnologia."
-      author="MonkeyScrubs, Cliente eCommerce + Piano di Supporto"
-      buttonLabel="Caso Studio"
-      buttonHref="/it/crafted-with-love/monkey-scrubs-ecommerce-it/" 
-      imgSrc={caseStudyImage}
-      imgAlt="Negozio eCommerce MonkeyScrubs mostrato su dispositivo mobile"
+    <HomeProjectShowcase
+    title="Monkey Scrubs"
+    description="Ecommerce progettato per crescere, ottimizzato continuamente tramite supporto tecnico, SEO e automazione."
+    linkLabel="Vedi Progetto"
+    tags={[
+      { icon: 'ph:shopping-cart', label: 'WooCommerce' },
+      { icon: 'ph:chart-line-up', label: 'Crescita Continua' },
+      { icon: 'ph:magnifying-glass', label: 'SEO' },
+      { icon: 'ph:headset', label: 'Supporto Mensile' },
+    ]}
+    tagsLabel="Caratteristiche del progetto"
+    href="/it/crafted-with-love/monkey-scrubs-ecommerce-it/"
+  >
+    <HomeProjectShowcaseVisual
+      slot="visual"
+      src="/portfolio/monkeyscrubs-mobile.webp"
+      alt="Vista del progetto Monkey Scrubs nella homepage"
     />
+  </HomeProjectShowcase>
   </section>
 
   <section class={styles.process} aria-labelledby="process-title">
