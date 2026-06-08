@@ -1,6 +1,11 @@
 .contactIntro {
     max-width: 978px;
     width: 100%;
+
+    p {
+        font-size: var(--fontsize-editorial);
+        line-height: var(--lineheight-editorial);
+    }
 }
 
 .hidden {
@@ -119,4 +124,3 @@ button[type="submit"] {
         color: var(--color-tertiary);
     }
 }
-

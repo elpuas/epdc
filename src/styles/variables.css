@@ -6,9 +6,13 @@
   --fontsize-h4: clamp(24px, calc(1.5rem + ((1vw - 7.68px) * 2.5424)), 36px);
   --fontsize-h5: 24px;
   --fontsize-base: clamp(18px, calc(1.125rem + ((1vw - 7.68px) * 0.6356)), 24px);
+  --fontsize-reading: 1.125rem;
+  --fontsize-editorial: clamp(1.125rem, 1.005rem + 0.5128vw, 1.5rem);
 
   /* Line Heights */
   --lineheight-base: 1.5;
+  --lineheight-reading: 1.65;
+  --lineheight-editorial: 1.58;
   --lineheight-heading: 1.2;
 
   /* Colors */
