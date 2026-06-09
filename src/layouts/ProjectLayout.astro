@@ -56,18 +56,20 @@ const structuredData = {
 			<article class={stylesProject.article}>
 				<section class={stylesProject.hero} aria-labelledby="hero-title">
 					<h1 id="hero-title">{title}</h1>
-					<div class={stylesProject.projectMeta}>
-						<div class={stylesProject.projectDate}>
-							<FormattedDate date={date} />
-						</div>
-						{image && <Image src={image} alt={title} class={stylesProject.projectFeaturedImage} width={1200} height={630} loading="lazy" decoding="async" />}
-						{tags && tags.length > 0 && (
+					{tags && tags.length > 0 && (
+						<div class={stylesProject.projectEntryMeta} aria-label="Project metadata">
 							<div class={stylesProject.projectTags}>
 								{tags.map(tag => (
 									<span class={stylesProject.projectTag}>{tag}</span>
 								))}
 							</div>
-						)}
+						</div>
+					)}
+					<div class={stylesProject.projectMeta}>
+						<div class={stylesProject.projectDate}>
+							<FormattedDate date={date} />
+						</div>
+						{image && <Image src={image} alt={title} class={stylesProject.projectFeaturedImage} width={1200} height={630} loading="lazy" decoding="async" />}
 					</div>
 				</section>
 				
