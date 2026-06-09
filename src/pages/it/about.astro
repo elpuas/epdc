@@ -4,8 +4,9 @@ import Button from '../../components/Button.astro';
 import { Icon } from 'astro-icon/components';
 import ServiceDetails from '../../components/ServiceDetails.astro';
 import TeamMember from '../../components/TeamMember.astro';
-import alfredoImage from '../../../public/team/alfredo-navas.jpeg';
-import gianfrancoImage from '../../../public/team/gianfranco.png';
+import alfredoImageDos from '../../../public/team/foto-uno.webp';
+import gianfrancoImageDos from '../../../public/team/gianfranco.webp';
+import catalinaImage from '../../../public/team/catalina-valverde-dos.webp';
 import styles from '../../styles/About.module.css';
 const title = 'Scopri ElPuas Digital Crafts | Uno Studio Web a Conduzione Familiare';
 const description = 'Scopri chi siamo, cosa ci ispira e come creiamo esperienze digitali performanti. Un piccolo team con un grande cuore e visione globale.';
@@ -49,7 +50,7 @@ const collaborationPoints = [
   },
   {
     icon: 'ph:rocket-launch',
-    title: 'Tecnologia Moderna, Scelte Pratiche',
+    title: 'Tecnologia Moderna.',
     highlight: {
       icon: 'ph:code',
       title: 'Stack moderno, scelte sensate',
@@ -128,14 +129,16 @@ const collaborationPoints = [
     <p class={styles.accent}>Incontra le persone dietro ElPuas Digital Crafts.</p>
     <ul class={styles.teamList} role="list">
       <TeamMember
+        image={catalinaImage}
+        alt="Catalina Valverde - CEO e Direttrice dei Contenuti"
         name="Catalina Valverde"
-        role="CEO e Direttore dei Contenuti"
+        role="CEO e Direttrice dei Contenuti"
         expertise={['Strategia dei contenuti', 'Direzione editoriale', 'Storytelling di brand']}
-        bio="Catalina definisce la voce e la direzione editoriale di ogni progetto, affinché ogni sito comunichi con chiarezza, intenzione e coerenza di brand."
+        bio="Catalina definisce la voce e la direzione editoriale di ogni progetto, così ogni sito comunica con chiarezza, intenzione e coerenza di brand."
         enterDelay="0s"
       />
       <TeamMember
-        image={alfredoImage}
+        image={alfredoImageDos}
         alt="Alfredo Navas - CTO e Lead Developer"
         name="Alfredo Navas Fernandini"
         role="CTO"
@@ -162,7 +165,7 @@ const collaborationPoints = [
         ]}
       />
       <TeamMember
-        image={gianfrancoImage}
+        image={gianfrancoImageDos}
         alt="Gianfranco Navas - Lead Frontend Developer"
         name="Gianfranco Navas"
         role="Lead Frontend Developer"
@@ -192,7 +195,7 @@ const collaborationPoints = [
 
   <section class={styles.philosophy} aria-label="La Nostra Filosofia">
     <h2>
-      In ElPuas Digital Crafts, la nostra filosofia è semplice:<span class={styles.accent}>"Codiamo Artigianato Digitale per Umani"</span> Ogni progetto è impregnato di cura, creatività e artigianalità, offrendo non solo siti web, ma esperienze digitali indimenticabili.
+      In ElPuas Digital Crafts, la nostra filosofia è semplice:<span class={styles.accent}>"Codiamo Artigianato Digitale per Umani"</span> Ogni progetto è impregnato di cura e creatività, offrendo non solo siti web, ma esperienze digitali.
     </h2>
   </section>
 
@@ -203,9 +206,9 @@ const collaborationPoints = [
     linkLabel="Vedi Progetto"
     tags={[
       { icon: 'ph:shopping-cart', label: 'WooCommerce' },
-      { icon: 'ph:chart-line-up', label: 'Crescita Continua' },
+      { icon: 'ph:wrench', label: 'Supporto Tecnico' },
       { icon: 'ph:magnifying-glass', label: 'SEO' },
-      { icon: 'ph:headset', label: 'Supporto Mensile' },
+      { icon: 'ph:robot', label: 'Automazione' },
     ]}
     tagsLabel="Caratteristiche del progetto"
     href="/it/crafted-with-love/monkey-scrubs-ecommerce-it/"
