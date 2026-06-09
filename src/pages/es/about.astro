@@ -5,7 +5,8 @@ import { Icon } from 'astro-icon/components';
 import ServiceDetails from '../../components/ServiceDetails.astro';
 import TeamMember from '../../components/TeamMember.astro';
 import alfredoImageDos from '../../../public/team/foto-uno.webp';
-import gianfrancoImage from '../../../public/team/gianfranco.png';
+import gianfrancoImageDos from '../../../public/team/gianfranco.webp';
+import catalinaImage from '../../../public/team/catalina-valverde-dos.webp';
 import styles from '../../styles/About.module.css';
 const title = 'Conocé ElPuas Digital Crafts | Un Estudio Web Familiar';
 const description = 'Descubrí quiénes somos, qué nos mueve y cómo creamos sitios web de alto rendimiento con un enfoque humano y personalizado. Un equipo pequeño con visión global.';
@@ -130,6 +131,8 @@ const collaborationPoints = [
     <p class={styles.accent}>Conoce a las personas detrás de ElPuas Digital Crafts.</p>
     <ul class={styles.teamList} role="list">
       <TeamMember
+        image={catalinaImage}
+        alt="Catalina Valverde - CEO y Directora de Contenido"
         name="Catalina Valverde"
         role="CEO y Directora de Contenido"
         expertise={['Estrategia de contenido', 'Direccion editorial', 'Narrativa de marca']}
@@ -164,7 +167,7 @@ const collaborationPoints = [
         ]}
       />
       <TeamMember
-        image={gianfrancoImage}
+        image={gianfrancoImageDos}
         alt="Gianfranco Navas - Lead Frontend Developer"
         name="Gianfranco Navas"
         role="Lead Frontend Developer"
