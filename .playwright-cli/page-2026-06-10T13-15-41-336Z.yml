@@ -1,0 +1,181 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - link "ElPuas logo" [ref=e6] [cursor=pointer]:
+          - /url: /en/
+          - img "ElPuas logo" [ref=e7]
+        - navigation [ref=e8]:
+          - list [ref=e9]:
+            - listitem [ref=e10]:
+              - link "About Us" [ref=e11] [cursor=pointer]:
+                - /url: /en/about/
+            - listitem [ref=e12]:
+              - link "Services" [ref=e13] [cursor=pointer]:
+                - /url: /en/services/
+            - listitem [ref=e14]:
+              - link "Crafted with Love" [ref=e15] [cursor=pointer]:
+                - /url: /en/crafted-with-love/
+                - generic [ref=e16]: Crafted with Love
+                - img [ref=e17]
+            - listitem [ref=e19]:
+              - link "Blog" [ref=e20] [cursor=pointer]:
+                - /url: /en/blog/
+            - listitem [ref=e21]:
+              - link "Contact" [ref=e22] [cursor=pointer]:
+                - /url: /en/contact/
+        - generic [ref=e23]:
+          - button "Change language from English" [ref=e25] [cursor=pointer]:
+            - img [ref=e26]
+          - button "Toggle black and white mode" [ref=e28] [cursor=pointer]:
+            - img [ref=e29]
+  - main [ref=e31]:
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - paragraph [ref=e35]: Small studio, big results.
+        - 'region "We Current action: code digital crafts for humans." [ref=e36]':
+          - 'heading "We Current action: code digital crafts for humans." [level=1] [ref=e38]':
+            - text: We
+            - 'generic "Current action: code" [ref=e39]': code
+            - text: digital crafts
+            - strong [ref=e40]: for
+            - text: humans.
+        - link "View Our Services" [ref=e41] [cursor=pointer]:
+          - /url: /en/services/
+      - heading "At ElPuas Digital Crafts, we don't just build websites — we craft high-performance digital platforms, powered by AI and backed by expert maintenance to grow with your business." [level=2] [ref=e44]
+      - generic [ref=e45]:
+        - heading "Our Expertise" [level=2] [ref=e46]
+        - paragraph [ref=e47]: We deliver more than code — we bring smart, reliable digital craftsmanship.
+        - list [ref=e48]:
+          - listitem [ref=e49]:
+            - link "Custom Web Development" [ref=e50] [cursor=pointer]:
+              - /url: /en/services/
+              - img [ref=e52]
+              - generic [ref=e54]:
+                - heading "Custom Web Development" [level=3] [ref=e55]
+                - paragraph [ref=e56]: Tailor-made websites built for speed, performance, and scalability.
+          - listitem [ref=e57]:
+            - link "E-Commerce Solutions" [ref=e58] [cursor=pointer]:
+              - /url: /en/services/
+              - img [ref=e60]
+              - generic [ref=e62]:
+                - heading "E-Commerce Solutions" [level=3] [ref=e63]
+                - paragraph [ref=e64]: WooCommerce or headless — we make selling seamless.
+          - listitem [ref=e65]:
+            - link "Maintenance & Support" [ref=e66] [cursor=pointer]:
+              - /url: /en/services/
+              - img [ref=e68]
+              - generic [ref=e70]:
+                - heading "Maintenance & Support" [level=3] [ref=e71]
+                - paragraph [ref=e72]: Updates, optimizations, and peace of mind — handled for you.
+          - listitem [ref=e73]:
+            - link "White-Label Services" [ref=e74] [cursor=pointer]:
+              - /url: /en/services/
+              - img [ref=e76]
+              - generic [ref=e78]:
+                - heading "White-Label Services" [level=3] [ref=e79]
+                - paragraph [ref=e80]: We build quietly behind the scenes so your agency shines.
+      - link "Nuara Pelletterie" [ref=e81] [cursor=pointer]:
+        - /url: /en/crafted-with-love/nuara-pelletterie-ecommerce-en/
+        - generic [ref=e82]:
+          - heading "Nuara Pelletterie" [level=2] [ref=e83]
+          - paragraph [ref=e84]: Premium ecommerce experience developed for an Italian handcrafted leather goods brand.
+          - generic [ref=e85]:
+            - text: View Project
+            - generic [ref=e86]: →
+          - list "Project features" [ref=e87]:
+            - listitem [ref=e88]:
+              - img [ref=e90]
+              - generic [ref=e92]: WooCommerce
+            - listitem [ref=e93]:
+              - img [ref=e95]
+              - generic [ref=e97]: Custom Design
+            - listitem [ref=e98]:
+              - img [ref=e100]
+              - generic [ref=e102]: Multilingual
+            - listitem [ref=e103]:
+              - img [ref=e105]
+              - generic [ref=e107]: Ongoing Support
+        - generic [ref=e109]:
+          - img "Nuara Pelletterie project showcase image"
+      - region "Ongoing Support That Grows With You" [ref=e110]:
+        - generic [ref=e111]:
+          - heading "Ongoing Support That Grows With You" [level=3] [ref=e112]
+          - paragraph [ref=e113]: Monthly plans to keep your website updated, secure, and continuously improving.
+        - list [ref=e114]:
+          - listitem [ref=e115]:
+            - link "Updates and security" [ref=e116] [cursor=pointer]:
+              - /url: /en/services/#pricing-title
+              - img [ref=e118]
+              - generic [ref=e120]:
+                - heading "Updates and security" [level=3] [ref=e121]
+                - paragraph [ref=e122]: Keep WordPress, plugins, and themes up to date with managed backups.
+          - listitem [ref=e123]:
+            - link "Continuous development" [ref=e124] [cursor=pointer]:
+              - /url: /en/services/#pricing-title
+              - img [ref=e126]
+              - generic [ref=e128]:
+                - heading "Continuous development" [level=3] [ref=e129]
+                - paragraph [ref=e130]: Included development hours for improvements, adjustments, and new features.
+          - listitem [ref=e131]:
+            - link "Stable performance" [ref=e132] [cursor=pointer]:
+              - /url: /en/services/#pricing-title
+              - img [ref=e134]
+              - generic [ref=e136]:
+                - heading "Stable performance" [level=3] [ref=e137]
+                - paragraph [ref=e138]: Proactive reviews to keep the site fast and reliable.
+          - listitem [ref=e139]:
+            - link "Priority support" [ref=e140] [cursor=pointer]:
+              - /url: /en/services/#pricing-title
+              - img [ref=e142]
+              - generic [ref=e144]:
+                - heading "Priority support" [level=3] [ref=e145]
+                - paragraph [ref=e146]: Faster attention for important issues and requests.
+        - link "Explore Our Plans" [ref=e148] [cursor=pointer]:
+          - /url: /en/services/#pricing-title
+      - region "Trusted by forward-thinking brands" [ref=e150]:
+        - heading "Trusted by forward-thinking brands" [level=2] [ref=e151]
+        - list "Partner logos" [ref=e152]:
+          - listitem [ref=e153]:
+            - img "Avalanche Advertising Logo" [ref=e154]
+          - listitem [ref=e155]:
+            - img "Premium Brokers Logo" [ref=e156]
+          - listitem [ref=e157]:
+            - img "Monkey Scrubs Logo" [ref=e158]
+          - listitem [ref=e159]:
+            - img "FishCostaRica Logo" [ref=e160]
+          - listitem [ref=e161]:
+            - img "Voyager Logo" [ref=e162]
+  - contentinfo [ref=e163]:
+    - contentinfo [ref=e165]:
+      - generic [ref=e166]:
+        - generic [ref=e167]:
+          - generic [ref=e170]:
+            - paragraph [ref=e171]: Cartago, Costa Rica
+            - paragraph [ref=e172]:
+              - link "Email Us" [ref=e173] [cursor=pointer]:
+                - /url: mailto:management@elpuasdev.com
+            - paragraph [ref=e174]:
+              - link "+506 6060 1034" [ref=e175] [cursor=pointer]:
+                - /url: tel:+506 6060 1034
+          - generic [ref=e178]:
+            - paragraph [ref=e179]: Miami, USA
+            - paragraph [ref=e180]:
+              - link "Email Us" [ref=e181] [cursor=pointer]:
+                - /url: mailto:management@elpuasdev.com
+            - paragraph [ref=e182]:
+              - link "+1 (786) 314 7968" [ref=e183] [cursor=pointer]:
+                - /url: tel:+1 (786) 314 7968
+          - generic [ref=e186]:
+            - paragraph [ref=e187]: Rome, Italy
+            - paragraph [ref=e188]:
+              - link "Email Us" [ref=e189] [cursor=pointer]:
+                - /url: mailto:management@elpuasdev.com
+            - paragraph [ref=e190]:
+              - link "+39 338 283 5594" [ref=e191] [cursor=pointer]:
+                - /url: tel:+39 338 283 5594
+        - paragraph [ref=e193]:
+          - text: © 2026 ElPuas Digital Crafts. All rights reserved.
+          - link "LinkedIn" [ref=e194] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/elpuas-digital-crafts/
+            - img [ref=e195]

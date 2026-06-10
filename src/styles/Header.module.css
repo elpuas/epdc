@@ -24,6 +24,9 @@
 .logo {
   display: flex;
   align-items: center;
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
   transition: transform 0.2s ease;
 
   &:hover {
@@ -205,6 +208,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  touch-action: manipulation;
   transition: all 0.2s ease;
   color: var(--color-secondary);
 

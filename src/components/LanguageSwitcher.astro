@@ -5,9 +5,10 @@ import { Icon } from 'astro-icon/components';
 
 interface Props {
   currentLang: Language;
+  currentPath: string;
 }
 
-const { currentLang = 'en' as Language } = Astro.props;
+const { currentLang = 'en' as Language, currentPath = '/en/' } = Astro.props;
 
 const LANGUAGES = {
   en: { code: 'en', icon: 'circle-flags:us', name: 'English' },
@@ -17,6 +18,12 @@ const LANGUAGES = {
 
 // Ensure we have a valid language reference even if currentLang is somehow undefined
 const lang = LANGUAGES[currentLang ?? 'en'];
+const normalizedPath = currentPath.endsWith('/') ? currentPath : `${currentPath}/`;
+
+const buildLanguagePath = (targetLang: Language) => {
+  const pathWithoutLang = normalizedPath.replace(/^\/(en|es|it)(?=\/)/, '') || '/';
+  return `/${targetLang}${pathWithoutLang}`.replace(/\/{2,}/g, '/');
+};
 ---
 
 <div class={styles.switcher}>
@@ -40,9 +47,8 @@ const lang = LANGUAGES[currentLang ?? 'en'];
   >
     {Object.entries(LANGUAGES).map(([code, { icon, name }]) => (
       <a
-        href={`/${code}`}
+        href={buildLanguagePath(code as Language)}
         role="menuitem"
-        data-lang={code}
         class={styles.menuItem}
         aria-label={`Switch to ${name}`}
       >
@@ -55,25 +61,13 @@ const lang = LANGUAGES[currentLang ?? 'en'];
 <script>
   const switcher = document.getElementById('language-switcher');
   const dropdown = document.getElementById('language-dropdown');
-  const links = dropdown?.querySelectorAll('a');
 
   // Toggle dropdown
-  switcher?.addEventListener('click', () => {
+  switcher?.addEventListener('click', (event) => {
+    event.stopPropagation();
     const isExpanded = switcher.getAttribute('aria-expanded') === 'true';
     switcher.setAttribute('aria-expanded', (!isExpanded).toString());
     dropdown?.toggleAttribute('hidden');
-  });
-
-  // Handle language selection
-  links?.forEach((link) => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const lang = link.getAttribute('data-lang');
-      if (lang) {
-        localStorage.setItem('preferredLanguage', lang);
-        window.location.href = `/${lang}`;
-      }
-    });
   });
 
   // Close dropdown when clicking outside
@@ -83,13 +77,4 @@ const lang = LANGUAGES[currentLang ?? 'en'];
       dropdown?.setAttribute('hidden', '');
     }
   });
-
-  // Check for preferred language on load
-  const preferredLang = localStorage.getItem('preferredLanguage');
-  const currentPath = window.location.pathname;
-  const currentLang = currentPath.split('/')[1];
-
-  if (preferredLang && preferredLang !== currentLang) {
-    window.location.href = `/${preferredLang}${currentPath.slice(3)}`;
-  }
 </script> 

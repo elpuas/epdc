@@ -7,11 +7,12 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  height: 32px;
-  width: 32px;
+  height: 44px;
+  width: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
+  touch-action: manipulation;
 }
 
 .toggle img {
@@ -32,20 +33,25 @@
   flex-direction: column;
   gap: var(--space-xs);
   z-index: 999;
+  pointer-events: auto;
 }
 
 .menu[hidden] {
   display: none;
+  pointer-events: none;
 }
 
-.menu img {
-  width: 28px;
-  height: auto;
-  cursor: pointer;
+.menuItem {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 4px;
   transition: transform 0.2s ease;
+  touch-action: manipulation;
 }
 
-.menu img:hover {
+.menuItem:hover {
   transform: scale(1.1);
-} 
+}
