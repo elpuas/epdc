@@ -6,9 +6,10 @@ import { Icon } from 'astro-icon/components';
 interface Props {
   currentLang: Language;
   currentPath: string;
+  languagePaths?: Partial<Record<Language, string>>;
 }
 
-const { currentLang = 'en' as Language, currentPath = '/en/' } = Astro.props;
+const { currentLang = 'en' as Language, currentPath = '/en/', languagePaths = {} } = Astro.props;
 
 const LANGUAGES = {
   en: { code: 'en', icon: 'circle-flags:us', name: 'English' },
@@ -21,6 +22,11 @@ const lang = LANGUAGES[currentLang ?? 'en'];
 const normalizedPath = currentPath.endsWith('/') ? currentPath : `${currentPath}/`;
 
 const buildLanguagePath = (targetLang: Language) => {
+  const resolvedPath = languagePaths[targetLang];
+  if (resolvedPath) {
+    return resolvedPath;
+  }
+
   const pathWithoutLang = normalizedPath.replace(/^\/(en|es|it)(?=\/)/, '') || '/';
   return `/${targetLang}${pathWithoutLang}`.replace(/\/{2,}/g, '/');
 };

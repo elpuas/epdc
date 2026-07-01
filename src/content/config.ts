@@ -13,6 +13,8 @@ const blogCollection = defineCollection({
     lang: z.enum(['en', 'es', 'it']).optional().default('en'),
     // Add optional author field
     author: z.string().optional(),
+    // Optional key used to connect translated variants of the same post
+    translationKey: z.string().optional(),
   }),
 });
 
