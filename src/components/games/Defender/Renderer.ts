@@ -95,7 +95,7 @@ export class DefenderRenderer {
     ctx.restore();
 
     if (state.flash > 0) {
-      ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(state.flash * 0.3, 0.22)})`;
+      ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(state.flash * 0.2, 0.14)})`;
       ctx.fillRect(0, 0, this.width, this.height);
     }
 
@@ -160,11 +160,11 @@ export class DefenderRenderer {
 
   private drawTerrain(elapsed: number): void {
     const ctx = this.context;
-    this.drawTerrainLayer(elapsed * 28, this.height * 0.68, 26, this.farTerrainGradient, 'rgba(35, 135, 255, 0.42)', 0.58);
-    this.drawTerrainLayer(elapsed * 88, this.height * 0.82, 78, this.nearTerrainGradient, 'rgba(216, 255, 0, 0.78)', 1);
+    this.drawTerrainLayer(elapsed * 24, this.height * 0.7, 20, this.farTerrainGradient, 'rgba(35, 135, 255, 0.32)', 0.45);
+    this.drawTerrainLayer(elapsed * 74, this.height * 0.84, 48, this.nearTerrainGradient, 'rgba(216, 255, 0, 0.68)', 1);
 
     ctx.save();
-    ctx.globalAlpha = 0.34;
+    ctx.globalAlpha = 0.22;
     ctx.strokeStyle = 'rgba(0, 255, 243, 0.34)';
     ctx.lineWidth = 1;
     ctx.beginPath();
@@ -204,8 +204,8 @@ export class DefenderRenderer {
     ctx.fillStyle = fill ?? 'rgba(0, 255, 243, 0.16)';
     ctx.fill();
     ctx.strokeStyle = stroke;
-    ctx.lineWidth = alpha > 0.9 ? 2.4 : 1.4;
-    ctx.shadowBlur = alpha > 0.9 ? 8 : 3;
+    ctx.lineWidth = alpha > 0.9 ? 1.7 : 1;
+    ctx.shadowBlur = alpha > 0.9 ? 4 : 1;
     ctx.shadowColor = stroke;
     ctx.stroke();
     ctx.restore();
@@ -225,11 +225,11 @@ export class DefenderRenderer {
     ctx.strokeStyle = COLORS.green;
     ctx.fillStyle = COLORS.green;
     ctx.lineWidth = 2;
-    ctx.shadowBlur = 7;
+    ctx.shadowBlur = 3;
     ctx.shadowColor = COLORS.green;
 
-    for (let index = 0; index < 10; index += 1) {
-      const x = (index * 97 - (elapsed * 88) % 97 + this.width) % this.width;
+    for (let index = 0; index < 7; index += 1) {
+      const x = (index * 133 - (elapsed * 74) % 133 + this.width) % this.width;
       const y = ground - this.terrainSample(index * 9 + Math.floor(elapsed * 4)) * 42;
       ctx.beginPath();
       ctx.arc(x, y - 8, 2.6, 0, Math.PI * 2);
@@ -255,11 +255,11 @@ export class DefenderRenderer {
     ctx.strokeStyle = 'rgba(0, 255, 243, 0.58)';
     ctx.fillStyle = 'rgba(0, 255, 243, 0.08)';
     ctx.lineWidth = 1.3;
-    ctx.shadowBlur = 5;
+    ctx.shadowBlur = 2;
     ctx.shadowColor = COLORS.cyan;
 
-    for (let index = 0; index < 8; index += 1) {
-      const x = (index * 123 - (elapsed * 88) % 123 + this.width) % this.width;
+    for (let index = 0; index < 5; index += 1) {
+      const x = (index * 181 - (elapsed * 74) % 181 + this.width) % this.width;
       const y = ground - this.terrainSample(index * 13 + Math.floor(elapsed * 4)) * 46;
       const height = 8 + (index % 4) * 4;
       ctx.beginPath();
@@ -284,12 +284,12 @@ export class DefenderRenderer {
       if (!bullet.active) continue;
 
       const direction = Math.sign(bullet.vx || 1);
-      ctx.shadowBlur = bullet.owner === 'player' ? 12 : 7;
+      ctx.shadowBlur = bullet.owner === 'player' ? 5 : 2;
       ctx.shadowColor = bullet.owner === 'player' ? COLORS.green : COLORS.blue;
       ctx.strokeStyle = bullet.owner === 'player' ? COLORS.green : COLORS.blue;
-      ctx.lineWidth = bullet.owner === 'player' ? 1.7 : 1.2;
+      ctx.lineWidth = bullet.owner === 'player' ? 1.4 : 1;
       ctx.beginPath();
-      ctx.moveTo(bullet.x - direction * (bullet.owner === 'player' ? 46 : 12), bullet.y - Math.sign(bullet.vy) * 3);
+      ctx.moveTo(bullet.x - direction * (bullet.owner === 'player' ? 30 : 8), bullet.y - Math.sign(bullet.vy) * 2);
       ctx.lineTo(bullet.x + direction * (bullet.owner === 'player' ? 8 : 6), bullet.y);
       ctx.stroke();
       if (bullet.owner === 'player') {
@@ -303,14 +303,14 @@ export class DefenderRenderer {
   private drawEnemies(enemies: Enemy[], elapsed: number): void {
     const ctx = this.context;
     ctx.save();
-    ctx.shadowBlur = 16;
+    ctx.shadowBlur = 5;
     ctx.shadowColor = COLORS.cyan;
 
     for (let index = 0; index < enemies.length; index += 1) {
       const enemy = enemies[index];
       if (!enemy.active) continue;
 
-      const pulse = 1 + Math.sin(elapsed * 6 + enemy.phase) * 0.05;
+      const pulse = 1 + Math.sin(elapsed * 6 + enemy.phase) * 0.025;
       ctx.save();
       ctx.translate(enemy.x, enemy.y);
       ctx.scale(enemy.direction * pulse, pulse);
@@ -454,14 +454,14 @@ export class DefenderRenderer {
     const ctx = this.context;
     const list = particles.particles;
     ctx.save();
-    ctx.globalCompositeOperation = 'lighter';
+    ctx.globalCompositeOperation = 'source-over';
 
     for (let index = 0; index < list.length; index += 1) {
       const particle = list[index];
       if (!particle.active) continue;
 
       const alpha = Math.max(0, particle.life / particle.maxLife);
-      ctx.globalAlpha = alpha;
+      ctx.globalAlpha = alpha * 0.82;
       ctx.fillStyle = particle.hue === 72 ? COLORS.green : COLORS.cyan;
       ctx.beginPath();
       ctx.arc(particle.x, particle.y, particle.radius * alpha, 0, Math.PI * 2);
@@ -476,19 +476,19 @@ export class DefenderRenderer {
 
     ctx.save();
     ctx.translate(player.x, player.y);
-    ctx.scale(player.direction * 0.46, 0.46);
+    ctx.scale(player.direction * 0.4, 0.4);
     ctx.rotate(player.bank);
 
     const engine = 1 + Math.sin(player.enginePulse) * 0.18;
     ctx.save();
     ctx.globalCompositeOperation = 'lighter';
-    ctx.shadowBlur = 18;
+    ctx.shadowBlur = 8;
     ctx.shadowColor = COLORS.cyan;
-    ctx.fillStyle = 'rgba(0, 255, 243, 0.35)';
+    ctx.fillStyle = 'rgba(0, 255, 243, 0.22)';
     ctx.beginPath();
     ctx.ellipse(-45, 0, 24 * engine, 5.5, 0, 0, Math.PI * 2);
     ctx.fill();
-    ctx.fillStyle = 'rgba(216, 255, 0, 0.26)';
+    ctx.fillStyle = 'rgba(216, 255, 0, 0.16)';
     ctx.beginPath();
     ctx.ellipse(-56, 0, 14 * engine, 3.2, 0, 0, Math.PI * 2);
     ctx.fill();
@@ -497,7 +497,7 @@ export class DefenderRenderer {
     ctx.fillStyle = this.playerGradient ?? COLORS.cyan;
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.92)';
     ctx.lineWidth = 1.6;
-    ctx.shadowBlur = 10;
+    ctx.shadowBlur = 4;
     ctx.shadowColor = COLORS.cyan;
 
     ctx.beginPath();

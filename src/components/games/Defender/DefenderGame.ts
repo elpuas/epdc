@@ -152,21 +152,21 @@ export class DefenderGame {
     this.gameOver = false;
     this.bulletCooldown = 0;
     this.enemySpawnTimer = ENEMY_SPAWN_SECONDS * 0.35;
-    this.enemyFireTimer = 0.12;
+    this.enemyFireTimer = 0.5;
     this.flash = 0;
     this.shake = 0;
 
     for (let index = 0; index < this.bullets.length; index += 1) this.bullets[index].active = false;
     for (let index = 0; index < this.enemies.length; index += 1) this.enemies[index].active = false;
 
-    for (let cluster = 0; cluster < 5; cluster += 1) {
-      const clusterX = 82 + cluster * 184 + (cluster % 2) * 42;
-      for (let member = 0; member < 5; member += 1) {
+    for (let cluster = 0; cluster < 4; cluster += 1) {
+      const clusterX = 120 + cluster * 210 + (cluster % 2) * 34;
+      for (let member = 0; member < 3; member += 1) {
         this.spawnEnemy(cluster * 0.36 + member * 0.08, cluster * 13 + member, clusterX);
       }
     }
 
-    for (let walker = 0; walker < 10; walker += 1) {
+    for (let walker = 0; walker < 6; walker += 1) {
       this.spawnGroundEnemy(walker);
     }
   }
@@ -274,11 +274,11 @@ export class DefenderGame {
     this.enemySpawnTimer -= deltaSeconds;
     if (this.enemySpawnTimer <= 0) {
       const clusterX = (elapsedSeconds * 137) % this.options.width;
-      const members = elapsedSeconds % 2 > 1 ? 4 : 3;
+      const members = elapsedSeconds % 2 > 1 ? 3 : 2;
       for (let index = 0; index < members; index += 1) {
         this.spawnEnemy(elapsedSeconds + index * 0.06, Math.floor(elapsedSeconds * 10) + index, clusterX);
       }
-      this.enemySpawnTimer = Math.max(0.14, ENEMY_SPAWN_SECONDS - this.score * 0.0009);
+      this.enemySpawnTimer = Math.max(0.46, ENEMY_SPAWN_SECONDS - this.score * 0.0006);
     }
 
     for (let index = 0; index < this.enemies.length; index += 1) {
@@ -318,15 +318,15 @@ export class DefenderGame {
     if (this.enemyFireTimer > 0) return;
 
     let fired = 0;
-    for (let index = 0; index < this.enemies.length && fired < 5; index += 1) {
+    for (let index = 0; index < this.enemies.length && fired < 2; index += 1) {
       const enemy = this.enemies[(index + Math.floor(elapsedSeconds * 17)) % this.enemies.length];
       if (!enemy.active || enemy.kind === 'walker') continue;
-      if ((index + Math.floor(enemy.age * 10)) % 3 !== 0) continue;
+      if ((index + Math.floor(enemy.age * 10)) % 5 !== 0) continue;
       this.fireEnemyShot(enemy);
       fired += 1;
     }
 
-    this.enemyFireTimer = 0.16 + (elapsedSeconds % 0.09);
+    this.enemyFireTimer = 0.42 + (elapsedSeconds % 0.16);
   }
 
   private updateStars(deltaSeconds: number): void {
@@ -355,9 +355,9 @@ export class DefenderGame {
           enemy.active = false;
           bullet.active = false;
           this.score += this.enemyScore(enemy.kind);
-          this.flash = 0.48;
-          this.shake = 4.5;
-          this.particles.burst(enemy.x, enemy.y, enemy.kind === 'pod' ? 18 : 12, 110, enemy.kind === 'walker' ? 72 : 184);
+          this.flash = 0.32;
+          this.shake = 2.8;
+          this.particles.burst(enemy.x, enemy.y, enemy.kind === 'pod' ? 12 : 8, 82, enemy.kind === 'walker' ? 72 : 184);
           this.audio.explosion();
           break;
         }
@@ -367,9 +367,9 @@ export class DefenderGame {
         enemy.active = false;
         this.lives -= 1;
         this.player.invulnerable = PLAYER_INVULNERABLE_SECONDS;
-        this.flash = 0.66;
-        this.shake = 7;
-        this.particles.burst(this.player.x, this.player.y, 20, 140, 72);
+        this.flash = 0.48;
+        this.shake = 4.5;
+        this.particles.burst(this.player.x, this.player.y, 14, 100, 72);
         this.audio.hit();
 
         if (this.lives <= 0) {
@@ -387,9 +387,9 @@ export class DefenderGame {
       bullet.active = false;
       this.lives -= 1;
       this.player.invulnerable = PLAYER_INVULNERABLE_SECONDS;
-      this.flash = 0.58;
-      this.shake = 6;
-      this.particles.burst(this.player.x, this.player.y, 16, 125, 72);
+      this.flash = 0.42;
+      this.shake = 4;
+      this.particles.burst(this.player.x, this.player.y, 10, 92, 72);
       this.audio.hit();
       if (this.lives <= 0) {
         this.gameOver = true;
