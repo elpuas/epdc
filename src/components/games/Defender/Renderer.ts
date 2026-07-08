@@ -86,6 +86,7 @@ export class DefenderRenderer {
     this.drawStars(stars);
     this.drawDebris(stars, state.elapsed);
     this.drawTerrain(state.elapsed);
+    this.drawGroundStructures(state.elapsed);
     this.drawHumanoids(state.elapsed);
     this.drawBullets(bullets);
     this.drawEnemies(enemies, state.elapsed);
@@ -227,8 +228,8 @@ export class DefenderRenderer {
     ctx.shadowBlur = 7;
     ctx.shadowColor = COLORS.green;
 
-    for (let index = 0; index < 7; index += 1) {
-      const x = (index * 151 - (elapsed * 88) % 151 + this.width) % this.width;
+    for (let index = 0; index < 10; index += 1) {
+      const x = (index * 97 - (elapsed * 88) % 97 + this.width) % this.width;
       const y = ground - this.terrainSample(index * 9 + Math.floor(elapsed * 4)) * 42;
       ctx.beginPath();
       ctx.arc(x, y - 8, 2.6, 0, Math.PI * 2);
@@ -247,25 +248,54 @@ export class DefenderRenderer {
     ctx.restore();
   }
 
+  private drawGroundStructures(elapsed: number): void {
+    const ctx = this.context;
+    const ground = this.height - 38;
+    ctx.save();
+    ctx.strokeStyle = 'rgba(0, 255, 243, 0.58)';
+    ctx.fillStyle = 'rgba(0, 255, 243, 0.08)';
+    ctx.lineWidth = 1.3;
+    ctx.shadowBlur = 5;
+    ctx.shadowColor = COLORS.cyan;
+
+    for (let index = 0; index < 8; index += 1) {
+      const x = (index * 123 - (elapsed * 88) % 123 + this.width) % this.width;
+      const y = ground - this.terrainSample(index * 13 + Math.floor(elapsed * 4)) * 46;
+      const height = 8 + (index % 4) * 4;
+      ctx.beginPath();
+      ctx.rect(x - 6, y - height, 12, height);
+      ctx.fill();
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x - 10, y - height);
+      ctx.lineTo(x, y - height - 7);
+      ctx.lineTo(x + 10, y - height);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
   private drawBullets(bullets: Bullet[]): void {
     const ctx = this.context;
     ctx.save();
-    ctx.shadowBlur = 18;
-    ctx.shadowColor = COLORS.green;
-    ctx.strokeStyle = COLORS.green;
-    ctx.lineWidth = 2.4;
 
     for (let index = 0; index < bullets.length; index += 1) {
       const bullet = bullets[index];
       if (!bullet.active) continue;
 
-      const direction = Math.sign(bullet.vx);
+      const direction = Math.sign(bullet.vx || 1);
+      ctx.shadowBlur = bullet.owner === 'player' ? 12 : 7;
+      ctx.shadowColor = bullet.owner === 'player' ? COLORS.green : COLORS.blue;
+      ctx.strokeStyle = bullet.owner === 'player' ? COLORS.green : COLORS.blue;
+      ctx.lineWidth = bullet.owner === 'player' ? 1.7 : 1.2;
       ctx.beginPath();
-      ctx.moveTo(bullet.x - direction * 54, bullet.y);
-      ctx.lineTo(bullet.x + direction * 10, bullet.y);
+      ctx.moveTo(bullet.x - direction * (bullet.owner === 'player' ? 46 : 12), bullet.y - Math.sign(bullet.vy) * 3);
+      ctx.lineTo(bullet.x + direction * (bullet.owner === 'player' ? 8 : 6), bullet.y);
       ctx.stroke();
-      ctx.fillStyle = COLORS.white;
-      ctx.fillRect(bullet.x + direction * 9 - 1, bullet.y - 2, 3, 4);
+      if (bullet.owner === 'player') {
+        ctx.fillStyle = COLORS.white;
+        ctx.fillRect(bullet.x + direction * 7 - 1, bullet.y - 1.5, 2, 3);
+      }
     }
     ctx.restore();
   }
@@ -289,14 +319,15 @@ export class DefenderRenderer {
       else if (enemy.kind === 'hunter') this.drawHunter(enemy.radius);
       else if (enemy.kind === 'walker') this.drawWalker(enemy.radius, elapsed + enemy.phase);
       else if (enemy.kind === 'pod') this.drawPod(enemy.radius, elapsed + enemy.phase);
-      else this.drawDrone(enemy.radius, elapsed + enemy.phase);
+      else if (enemy.kind === 'bomber') this.drawBomber(enemy.radius, elapsed + enemy.phase);
+      else this.drawLander(enemy.radius, elapsed + enemy.phase);
 
       ctx.restore();
     }
     ctx.restore();
   }
 
-  private drawDrone(radius: number, elapsed: number): void {
+  private drawLander(radius: number, elapsed: number): void {
     const ctx = this.context;
     ctx.strokeStyle = COLORS.green;
     ctx.fillStyle = 'rgba(216, 255, 0, 0.12)';
@@ -313,6 +344,27 @@ export class DefenderRenderer {
     ctx.stroke();
     ctx.fillStyle = COLORS.white;
     ctx.fillRect(-2, -radius * 0.08 + Math.sin(elapsed * 5), 4, 4);
+  }
+
+  private drawBomber(radius: number, elapsed: number): void {
+    const ctx = this.context;
+    ctx.strokeStyle = COLORS.blue;
+    ctx.fillStyle = 'rgba(35, 135, 255, 0.12)';
+    ctx.lineWidth = 1.7;
+    ctx.beginPath();
+    ctx.moveTo(-radius * 1.25, -radius * 0.22);
+    ctx.lineTo(-radius * 0.28, -radius * 0.7);
+    ctx.lineTo(radius * 1.2, -radius * 0.32);
+    ctx.lineTo(radius * 0.88, radius * 0.3);
+    ctx.lineTo(-radius * 0.18, radius * 0.68);
+    ctx.lineTo(-radius * 1.25, radius * 0.22);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = COLORS.green;
+    for (let dot = 0; dot < 3; dot += 1) {
+      ctx.fillRect(-radius * 0.46 + dot * radius * 0.42, Math.sin(elapsed * 4 + dot) * 1.2 - 1, 2.3, 2.3);
+    }
   }
 
   private drawSaucer(radius: number): void {
@@ -424,28 +476,28 @@ export class DefenderRenderer {
 
     ctx.save();
     ctx.translate(player.x, player.y);
-    ctx.scale(player.direction, 1);
+    ctx.scale(player.direction * 0.46, 0.46);
     ctx.rotate(player.bank);
 
     const engine = 1 + Math.sin(player.enginePulse) * 0.18;
     ctx.save();
     ctx.globalCompositeOperation = 'lighter';
-    ctx.shadowBlur = 24;
+    ctx.shadowBlur = 18;
     ctx.shadowColor = COLORS.cyan;
     ctx.fillStyle = 'rgba(0, 255, 243, 0.35)';
     ctx.beginPath();
-    ctx.ellipse(-45, 0, 29 * engine, 6, 0, 0, Math.PI * 2);
+    ctx.ellipse(-45, 0, 24 * engine, 5.5, 0, 0, Math.PI * 2);
     ctx.fill();
     ctx.fillStyle = 'rgba(216, 255, 0, 0.26)';
     ctx.beginPath();
-    ctx.ellipse(-57, 0, 17 * engine, 3.4, 0, 0, Math.PI * 2);
+    ctx.ellipse(-56, 0, 14 * engine, 3.2, 0, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
 
     ctx.fillStyle = this.playerGradient ?? COLORS.cyan;
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.92)';
     ctx.lineWidth = 1.6;
-    ctx.shadowBlur = 16;
+    ctx.shadowBlur = 10;
     ctx.shadowColor = COLORS.cyan;
 
     ctx.beginPath();
@@ -555,7 +607,7 @@ export class DefenderRenderer {
     const ctx = this.context;
     ctx.save();
     ctx.translate(x, y);
-    ctx.scale(0.42, 0.42);
+    ctx.scale(0.3, 0.3);
     ctx.fillStyle = COLORS.cyan;
     ctx.strokeStyle = COLORS.white;
     ctx.lineWidth = 2;

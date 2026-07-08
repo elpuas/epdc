@@ -69,6 +69,7 @@ export class DefenderGame {
   private paused = false;
   private bulletCooldown = 0;
   private enemySpawnTimer = 0;
+  private enemyFireTimer = 0;
   private flash = 0;
   private shake = 0;
   private spawnSide = 1;
@@ -78,15 +79,23 @@ export class DefenderGame {
     private readonly options: DefenderOptions = DEFAULT_OPTIONS,
   ) {
     this.options = { ...DEFAULT_OPTIONS, ...options };
-    this.bullets = Array.from({ length: BULLET_POOL_SIZE }, () => ({ active: false, x: 0, y: 0, vx: 0, radius: 4 }));
-    this.enemies = Array.from({ length: ENEMY_POOL_SIZE }, () => ({
+    this.bullets = Array.from({ length: BULLET_POOL_SIZE }, () => ({
       active: false,
-      kind: 'drone',
+      owner: 'player',
       x: 0,
       y: 0,
       vx: 0,
       vy: 0,
-      radius: 17,
+      radius: 3,
+    }));
+    this.enemies = Array.from({ length: ENEMY_POOL_SIZE }, () => ({
+      active: false,
+      kind: 'lander',
+      x: 0,
+      y: 0,
+      vx: 0,
+      vy: 0,
+      radius: 8,
       wobble: 0,
       phase: 0,
       age: 0,
@@ -142,13 +151,24 @@ export class DefenderGame {
     this.lives = MAX_LIVES;
     this.gameOver = false;
     this.bulletCooldown = 0;
-    this.enemySpawnTimer = ENEMY_SPAWN_SECONDS * 0.45;
+    this.enemySpawnTimer = ENEMY_SPAWN_SECONDS * 0.35;
+    this.enemyFireTimer = 0.12;
     this.flash = 0;
     this.shake = 0;
 
     for (let index = 0; index < this.bullets.length; index += 1) this.bullets[index].active = false;
     for (let index = 0; index < this.enemies.length; index += 1) this.enemies[index].active = false;
-    for (let index = 0; index < 8; index += 1) this.spawnEnemy(index * 0.48, index);
+
+    for (let cluster = 0; cluster < 5; cluster += 1) {
+      const clusterX = 82 + cluster * 184 + (cluster % 2) * 42;
+      for (let member = 0; member < 5; member += 1) {
+        this.spawnEnemy(cluster * 0.36 + member * 0.08, cluster * 13 + member, clusterX);
+      }
+    }
+
+    for (let walker = 0; walker < 10; walker += 1) {
+      this.spawnGroundEnemy(walker);
+    }
   }
 
   private readonly update = (deltaSeconds: number, elapsedSeconds: number): void => {
@@ -174,13 +194,15 @@ export class DefenderGame {
     this.updatePlayer(deltaSeconds);
     this.updateBullets(deltaSeconds);
     this.updateEnemies(deltaSeconds, elapsedSeconds);
+    this.updateEnemyFire(deltaSeconds, elapsedSeconds);
     this.updateStars(deltaSeconds);
     this.particles.update(deltaSeconds);
     this.resolveCollisions();
 
     this.bulletCooldown = Math.max(0, this.bulletCooldown - deltaSeconds);
-    this.flash = Math.max(0, this.flash - deltaSeconds * 4.8);
-    this.shake = Math.max(0, this.shake - deltaSeconds * 26);
+    this.enemyFireTimer = Math.max(0, this.enemyFireTimer - deltaSeconds);
+    this.flash = Math.max(0, this.flash - deltaSeconds * 5.2);
+    this.shake = Math.max(0, this.shake - deltaSeconds * 28);
     this.player.invulnerable = Math.max(0, this.player.invulnerable - deltaSeconds);
     this.highScore = Math.max(this.highScore, this.score);
 
@@ -191,13 +213,13 @@ export class DefenderGame {
     const vector = this.input.getVector(this.inputVector);
     this.player.x += vector.x * PLAYER_SPEED * deltaSeconds;
     this.player.y += vector.y * PLAYER_SPEED * deltaSeconds;
-    this.player.bank += (vector.y * 0.34 - this.player.bank) * Math.min(1, deltaSeconds * 9);
-    this.player.enginePulse += deltaSeconds * 16;
+    this.player.bank += (vector.y * 0.28 - this.player.bank) * Math.min(1, deltaSeconds * 10);
+    this.player.enginePulse += deltaSeconds * 18;
 
     if (vector.x !== 0) this.player.direction = vector.x > 0 ? 1 : -1;
 
     this.player.x = Math.min(this.options.width - PLAYER_RADIUS, Math.max(PLAYER_RADIUS, this.player.x));
-    this.player.y = Math.min(this.options.height - PLAYER_RADIUS, Math.max(PLAYER_RADIUS, this.player.y));
+    this.player.y = Math.min(this.options.height - PLAYER_RADIUS, Math.max(HUD_SAFE_TOP + PLAYER_RADIUS, this.player.y));
 
     if (this.input.consumeShoot() && this.bulletCooldown <= 0) {
       this.fireBullet();
@@ -206,12 +228,12 @@ export class DefenderGame {
     if (!this.reducedMotion) {
       const pulse = 0.55 + Math.sin(this.player.enginePulse) * 0.18;
       this.particles.emit(
-        this.player.x - this.player.direction * 25,
-        this.player.y + Math.sin(this.player.enginePulse * 0.7) * 2,
-        -this.player.direction * (90 + pulse * 80),
-        (Math.sin(this.player.enginePulse * 1.9) * 18),
-        2.4,
-        0.28,
+        this.player.x - this.player.direction * 13,
+        this.player.y + Math.sin(this.player.enginePulse * 0.7) * 1.4,
+        -this.player.direction * (92 + pulse * 80),
+        Math.sin(this.player.enginePulse * 1.9) * 12,
+        1.7,
+        0.22,
         184,
       );
     }
@@ -222,10 +244,12 @@ export class DefenderGame {
     if (!bullet) return;
 
     bullet.active = true;
-    bullet.x = this.player.x + this.player.direction * 22;
+    bullet.owner = 'player';
+    bullet.x = this.player.x + this.player.direction * 15;
     bullet.y = this.player.y;
     bullet.vx = this.player.direction * BULLET_SPEED;
-    bullet.radius = 4;
+    bullet.vy = 0;
+    bullet.radius = 2.5;
     this.bulletCooldown = BULLET_COOLDOWN_SECONDS;
     this.audio.laser();
   }
@@ -235,16 +259,26 @@ export class DefenderGame {
       const bullet = this.bullets[index];
       if (!bullet.active) continue;
       bullet.x += bullet.vx * deltaSeconds;
-      if (bullet.x < -24 || bullet.x > this.options.width + 24) bullet.active = false;
+      bullet.y += bullet.vy * deltaSeconds;
+
+      if (bullet.x < -64 || bullet.x > this.options.width + 64 || bullet.y < HUD_SAFE_TOP || bullet.y > this.options.height + 18) {
+        if (bullet.owner === 'enemy' && bullet.y > this.options.height - 18) {
+          this.particles.burst(bullet.x, this.options.height - 30, 6, 62, 72);
+        }
+        bullet.active = false;
+      }
     }
   }
 
   private updateEnemies(deltaSeconds: number, elapsedSeconds: number): void {
     this.enemySpawnTimer -= deltaSeconds;
     if (this.enemySpawnTimer <= 0) {
-      this.spawnEnemy(elapsedSeconds);
-      if (this.score > 400 || elapsedSeconds % 2 > 1.2) this.spawnEnemy(elapsedSeconds + 0.23);
-      this.enemySpawnTimer = Math.max(0.26, ENEMY_SPAWN_SECONDS - this.score * 0.0016);
+      const clusterX = (elapsedSeconds * 137) % this.options.width;
+      const members = elapsedSeconds % 2 > 1 ? 4 : 3;
+      for (let index = 0; index < members; index += 1) {
+        this.spawnEnemy(elapsedSeconds + index * 0.06, Math.floor(elapsedSeconds * 10) + index, clusterX);
+      }
+      this.enemySpawnTimer = Math.max(0.14, ENEMY_SPAWN_SECONDS - this.score * 0.0009);
     }
 
     for (let index = 0; index < this.enemies.length; index += 1) {
@@ -255,13 +289,16 @@ export class DefenderGame {
       enemy.x += enemy.vx * deltaSeconds;
 
       if (enemy.kind === 'hunter') {
-        enemy.vy += Math.sign(this.player.y - enemy.y) * 42 * deltaSeconds;
-        enemy.vy = Math.max(-72, Math.min(72, enemy.vy));
+        enemy.vy += Math.sign(this.player.y - enemy.y) * 72 * deltaSeconds;
+        enemy.vy = Math.max(-92, Math.min(92, enemy.vy));
         enemy.y += enemy.vy * deltaSeconds;
       } else if (enemy.kind === 'saucer') {
         enemy.y = enemy.baseY + Math.sin(elapsedSeconds * 3.2 + enemy.phase) * enemy.wobble;
       } else if (enemy.kind === 'walker') {
-        enemy.y = this.options.height - 82 + Math.sin(elapsedSeconds * 5 + enemy.phase) * 8;
+        enemy.y = this.options.height - 58 + Math.sin(elapsedSeconds * 5 + enemy.phase) * 5;
+        enemy.x += Math.sin(enemy.age * 1.7 + enemy.phase) * 16 * deltaSeconds;
+      } else if (enemy.kind === 'bomber') {
+        enemy.y = enemy.baseY + Math.sin(elapsedSeconds * 2.1 + enemy.phase) * enemy.wobble * 0.45;
       } else if (enemy.kind === 'pod') {
         enemy.y += Math.sin(enemy.age * 2.8 + enemy.phase) * enemy.wobble * deltaSeconds;
         if (enemy.age > 1.8 && Math.abs(this.player.x - enemy.x) < 180) {
@@ -271,10 +308,25 @@ export class DefenderGame {
         enemy.y += Math.sin(elapsedSeconds * 5.8 + enemy.phase) * enemy.wobble * deltaSeconds;
       }
 
-      enemy.y = Math.min(this.options.height - 48, Math.max(46, enemy.y));
+      enemy.y = Math.min(this.options.height - 42, Math.max(HUD_SAFE_TOP + 8, enemy.y));
 
-      if (enemy.x < -48 || enemy.x > this.options.width + 48) enemy.active = false;
+      if (enemy.x < -52 || enemy.x > this.options.width + 52) enemy.active = false;
     }
+  }
+
+  private updateEnemyFire(deltaSeconds: number, elapsedSeconds: number): void {
+    if (this.enemyFireTimer > 0) return;
+
+    let fired = 0;
+    for (let index = 0; index < this.enemies.length && fired < 5; index += 1) {
+      const enemy = this.enemies[(index + Math.floor(elapsedSeconds * 17)) % this.enemies.length];
+      if (!enemy.active || enemy.kind === 'walker') continue;
+      if ((index + Math.floor(enemy.age * 10)) % 3 !== 0) continue;
+      this.fireEnemyShot(enemy);
+      fired += 1;
+    }
+
+    this.enemyFireTimer = 0.16 + (elapsedSeconds % 0.09);
   }
 
   private updateStars(deltaSeconds: number): void {
@@ -297,15 +349,15 @@ export class DefenderGame {
 
       for (let bulletIndex = 0; bulletIndex < this.bullets.length; bulletIndex += 1) {
         const bullet = this.bullets[bulletIndex];
-        if (!bullet.active) continue;
+        if (!bullet.active || bullet.owner !== 'player') continue;
 
         if (CollisionSystem.circlesOverlap(enemy, bullet)) {
           enemy.active = false;
           bullet.active = false;
           this.score += this.enemyScore(enemy.kind);
-          this.flash = 0.72;
-          this.shake = 7;
-          this.particles.burst(enemy.x, enemy.y, enemy.kind === 'pod' ? 32 : 24, 170, enemy.kind === 'walker' ? 72 : 184);
+          this.flash = 0.48;
+          this.shake = 4.5;
+          this.particles.burst(enemy.x, enemy.y, enemy.kind === 'pod' ? 18 : 12, 110, enemy.kind === 'walker' ? 72 : 184);
           this.audio.explosion();
           break;
         }
@@ -315,9 +367,9 @@ export class DefenderGame {
         enemy.active = false;
         this.lives -= 1;
         this.player.invulnerable = PLAYER_INVULNERABLE_SECONDS;
-        this.flash = 0.9;
-        this.shake = 10;
-        this.particles.burst(this.player.x, this.player.y, 34, 190, 72);
+        this.flash = 0.66;
+        this.shake = 7;
+        this.particles.burst(this.player.x, this.player.y, 20, 140, 72);
         this.audio.hit();
 
         if (this.lives <= 0) {
@@ -326,9 +378,27 @@ export class DefenderGame {
         }
       }
     }
+
+    for (let bulletIndex = 0; bulletIndex < this.bullets.length; bulletIndex += 1) {
+      const bullet = this.bullets[bulletIndex];
+      if (!bullet.active || bullet.owner !== 'enemy' || this.player.invulnerable > 0) continue;
+      if (!CollisionSystem.circlesOverlap(bullet, this.player)) continue;
+
+      bullet.active = false;
+      this.lives -= 1;
+      this.player.invulnerable = PLAYER_INVULNERABLE_SECONDS;
+      this.flash = 0.58;
+      this.shake = 6;
+      this.particles.burst(this.player.x, this.player.y, 16, 125, 72);
+      this.audio.hit();
+      if (this.lives <= 0) {
+        this.gameOver = true;
+        this.audio.gameOver();
+      }
+    }
   }
 
-  private spawnEnemy(elapsedSeconds: number, seedOffset = 0): void {
+  private spawnEnemy(elapsedSeconds: number, seedOffset = 0, clusterX?: number): void {
     const enemy = this.nextEnemy();
     if (!enemy) return;
 
@@ -340,31 +410,68 @@ export class DefenderGame {
     const direction = fromLeft ? 1 : -1;
     enemy.active = true;
     enemy.kind = kind;
-    enemy.radius = kind === 'pod' ? 21 : kind === 'walker' ? 18 : kind === 'hunter' ? 16 : kind === 'saucer' ? 19 : 14;
-    enemy.x = seedOffset > 0
-      ? ((seedOffset * 119) % this.options.width)
+    enemy.radius = kind === 'pod' ? 11 : kind === 'walker' ? 9 : kind === 'hunter' ? 8 : kind === 'saucer' ? 10 : kind === 'bomber' ? 12 : 8;
+    enemy.x = clusterX !== undefined
+      ? clusterX + ((seedOffset % 5) - 2) * 22
       : fromLeft ? -enemy.radius : this.options.width + enemy.radius;
-    enemy.baseY = kind === 'walker' ? this.options.height - 82 : 58 + lane * 38;
+    enemy.baseY = kind === 'walker' ? this.options.height - 58 : 52 + lane * 30;
     enemy.y = enemy.baseY;
     enemy.direction = direction;
-    enemy.vx = direction * (ENEMY_BASE_SPEED + Math.min(120, this.score * 0.02) + lane * 4 + (kind === 'hunter' ? 42 : 0));
+    enemy.vx = direction * (ENEMY_BASE_SPEED + Math.min(110, this.score * 0.016) + lane * 3 + (kind === 'hunter' ? 54 : kind === 'bomber' ? 18 : 0));
     enemy.vy = 0;
-    enemy.wobble = 18 + (lane % 5) * 5;
+    enemy.wobble = 12 + (lane % 5) * 4;
     enemy.phase = elapsedSeconds + lane;
     enemy.age = 0;
   }
 
+  private spawnGroundEnemy(seedOffset: number): void {
+    const enemy = this.nextEnemy();
+    if (!enemy) return;
+
+    enemy.active = true;
+    enemy.kind = 'walker';
+    enemy.radius = 8;
+    enemy.x = (seedOffset * 91 + 34) % this.options.width;
+    enemy.baseY = this.options.height - 58;
+    enemy.y = enemy.baseY;
+    enemy.direction = seedOffset % 2 === 0 ? 1 : -1;
+    enemy.vx = enemy.direction * (18 + (seedOffset % 5) * 4);
+    enemy.vy = 0;
+    enemy.wobble = 5;
+    enemy.phase = seedOffset;
+    enemy.age = 0;
+  }
+
+  private fireEnemyShot(enemy: Enemy): void {
+    const bullet = this.nextBullet();
+    if (!bullet) return;
+
+    const dx = this.player.x - enemy.x;
+    const dy = this.player.y - enemy.y;
+    const length = Math.max(1, Math.hypot(dx, dy));
+    const speed = enemy.kind === 'bomber' ? 210 : 260;
+    bullet.active = true;
+    bullet.owner = 'enemy';
+    bullet.x = enemy.x;
+    bullet.y = enemy.y;
+    bullet.vx = (dx / length) * speed;
+    bullet.vy = (dy / length) * speed;
+    bullet.radius = 3;
+  }
+
   private enemyKind(lane: number, elapsedSeconds: number): EnemyKind {
-    const selector = (lane + Math.floor(elapsedSeconds * 1.7) + Math.floor(this.score / 300)) % 5;
+    const selector = (lane + Math.floor(elapsedSeconds * 1.7) + Math.floor(this.score / 300)) % 6;
     if (selector === 0) return 'saucer';
     if (selector === 1) return 'hunter';
     if (selector === 2) return 'walker';
     if (selector === 3) return 'pod';
-    return 'drone';
+    if (selector === 4) return 'bomber';
+    return 'lander';
   }
 
   private enemyScore(kind: EnemyKind): number {
     if (kind === 'pod') return 250;
+    if (kind === 'bomber') return 220;
     if (kind === 'hunter') return 180;
     if (kind === 'walker') return 140;
     if (kind === 'saucer') return 120;

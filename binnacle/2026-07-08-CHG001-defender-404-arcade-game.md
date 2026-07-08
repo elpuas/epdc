@@ -8,6 +8,7 @@
 - Added component-scoped styling for the dark neon arcade surface.
 - Refined the art direction toward a modern Defender-inspired presentation with denser starfields, scrolling vector terrain, multiple enemy silhouettes, arcade HUD labels, stronger engine trails, and larger impact feedback.
 - Continued the arcade visual refinement after studying reference screenshots for composition: added a scanner strip, sharper jagged terrain rhythm, horizontal ship proportions, seeded enemy density, ground scale markers, and less abstract enemy silhouettes.
+- Rebalanced the scene toward classic arcade chaos: reduced ship/enemy/projectile scale, seeded clustered waves, added hostile fire, increased ground walkers/civilians/structures, and expanded original vector enemy classes while avoiding copied Defender sprites.
 
 ## Why
 

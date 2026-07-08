@@ -1,8 +1,10 @@
 export interface Bullet {
   active: boolean;
+  owner: BulletOwner;
   x: number;
   y: number;
   vx: number;
+  vy: number;
   radius: number;
 }
 
@@ -42,4 +44,5 @@ export interface Star {
   streak: boolean;
 }
 
-export type EnemyKind = 'drone' | 'saucer' | 'hunter' | 'walker' | 'pod';
+export type BulletOwner = 'player' | 'enemy';
+export type EnemyKind = 'lander' | 'saucer' | 'hunter' | 'walker' | 'pod' | 'bomber';
