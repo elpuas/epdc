@@ -2,6 +2,28 @@ import type { Enemy, Bullet, Player, Star } from './types';
 import type { ParticlePool } from '../shared/Particles';
 import { COLORS, GAME_HEIGHT, GAME_WIDTH } from './constants';
 
+const ASSET_URLS = {
+  player: new URL('./assets/player-ship.svg', import.meta.url).href,
+  engineFlame: new URL('./assets/engine-flame.svg', import.meta.url).href,
+  lander: new URL('./assets/lander.svg', import.meta.url).href,
+  bomber: new URL('./assets/bomber.svg', import.meta.url).href,
+  pod: new URL('./assets/pod.svg', import.meta.url).href,
+  swarmer: new URL('./assets/swarmer.svg', import.meta.url).href,
+  baiter: new URL('./assets/baiter.svg', import.meta.url).href,
+  mutant: new URL('./assets/mutant.svg', import.meta.url).href,
+  groundTurret: new URL('./assets/ground-turret.svg', import.meta.url).href,
+  humanoid: new URL('./assets/humanoid.svg', import.meta.url).href,
+  building: new URL('./assets/building.svg', import.meta.url).href,
+  terrainModule: new URL('./assets/terrain-module.svg', import.meta.url).href,
+  explosion1: new URL('./assets/explosion-1.svg', import.meta.url).href,
+  explosion2: new URL('./assets/explosion-2.svg', import.meta.url).href,
+  explosion3: new URL('./assets/explosion-3.svg', import.meta.url).href,
+  hudLife: new URL('./assets/hud-life.svg', import.meta.url).href,
+  radarBlip: new URL('./assets/hud-radar-blip.svg', import.meta.url).href,
+} as const;
+
+type AssetName = keyof typeof ASSET_URLS;
+
 export interface RenderState {
   score: number;
   highScore: number;
@@ -17,14 +39,11 @@ export interface RenderState {
 
 const HUD_HEIGHT = 42;
 const RADAR_WIDTH = 306;
-const TERRAIN_STEPS = 74;
 
 export class DefenderRenderer {
   private readonly context: CanvasRenderingContext2D;
   private backgroundGradient?: CanvasGradient;
-  private farTerrainGradient?: CanvasGradient;
-  private nearTerrainGradient?: CanvasGradient;
-  private playerGradient?: CanvasGradient;
+  private readonly assets: Record<AssetName, HTMLImageElement>;
   private dpr = 1;
   private width = GAME_WIDTH;
   private height = GAME_HEIGHT;
@@ -35,7 +54,18 @@ export class DefenderRenderer {
       throw new Error('CanvasRenderingContext2D is unavailable.');
     }
     this.context = context;
+    this.assets = this.createAssets();
     this.resize(GAME_WIDTH, GAME_HEIGHT);
+  }
+
+  private createAssets(): Record<AssetName, HTMLImageElement> {
+    const entries = Object.entries(ASSET_URLS).map(([name, url]) => {
+      const image = new Image();
+      image.decoding = 'async';
+      image.src = url;
+      return [name, image];
+    });
+    return Object.fromEntries(entries) as Record<AssetName, HTMLImageElement>;
   }
 
   resize(width: number, height: number): void {
@@ -52,20 +82,6 @@ export class DefenderRenderer {
     this.backgroundGradient.addColorStop(0.44, '#05070d');
     this.backgroundGradient.addColorStop(1, COLORS.backgroundStart);
 
-    this.farTerrainGradient = this.context.createLinearGradient(0, height * 0.58, 0, height);
-    this.farTerrainGradient.addColorStop(0, 'rgba(35, 135, 255, 0.14)');
-    this.farTerrainGradient.addColorStop(1, 'rgba(0, 255, 243, 0.02)');
-
-    this.nearTerrainGradient = this.context.createLinearGradient(0, height * 0.68, 0, height);
-    this.nearTerrainGradient.addColorStop(0, 'rgba(216, 255, 0, 0.08)');
-    this.nearTerrainGradient.addColorStop(0.32, 'rgba(0, 255, 243, 0.08)');
-    this.nearTerrainGradient.addColorStop(1, 'rgba(5, 5, 5, 0.72)');
-
-    this.playerGradient = this.context.createLinearGradient(-38, -12, 42, 12);
-    this.playerGradient.addColorStop(0, '#ffffff');
-    this.playerGradient.addColorStop(0.35, '#bffcff');
-    this.playerGradient.addColorStop(0.72, COLORS.cyan);
-    this.playerGradient.addColorStop(1, COLORS.blue);
   }
 
   render(
@@ -160,55 +176,19 @@ export class DefenderRenderer {
 
   private drawTerrain(elapsed: number): void {
     const ctx = this.context;
-    this.drawTerrainLayer(elapsed * 24, this.height * 0.7, 20, this.farTerrainGradient, 'rgba(35, 135, 255, 0.32)', 0.45);
-    this.drawTerrainLayer(elapsed * 74, this.height * 0.84, 48, this.nearTerrainGradient, 'rgba(216, 255, 0, 0.68)', 1);
-
     ctx.save();
-    ctx.globalAlpha = 0.22;
-    ctx.strokeStyle = 'rgba(0, 255, 243, 0.34)';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(0, this.height - 18);
-    ctx.lineTo(this.width, this.height - 18);
-    ctx.stroke();
+    ctx.globalAlpha = 0.36;
+    this.drawTerrainModules(elapsed * 26, this.height - 92, 126, 51);
+    ctx.globalAlpha = 1;
+    this.drawTerrainModules(elapsed * 74, this.height - 74, 180, 72);
     ctx.restore();
   }
 
-  private drawTerrainLayer(
-    scroll: number,
-    baseY: number,
-    amplitude: number,
-    fill: CanvasGradient | undefined,
-    stroke: string,
-    alpha: number,
-  ): void {
-    const ctx = this.context;
-    const step = this.width / TERRAIN_STEPS;
-    const offset = scroll % step;
-
-    ctx.save();
-    ctx.globalAlpha = alpha;
-    ctx.beginPath();
-    ctx.moveTo(-step, this.height + 24);
-
-    for (let index = -1; index <= TERRAIN_STEPS + 1; index += 1) {
-      const x = index * step - offset;
-      const sample = index + Math.floor(scroll / step);
-      const jag = this.terrainSample(sample);
-      const y = baseY - jag * amplitude;
-      ctx.lineTo(x, y);
+  private drawTerrainModules(scroll: number, y: number, tileWidth: number, tileHeight: number): void {
+    const offset = scroll % tileWidth;
+    for (let x = -tileWidth - offset; x < this.width + tileWidth; x += tileWidth) {
+      this.drawAsset('terrainModule', x, y, tileWidth, tileHeight);
     }
-
-    ctx.lineTo(this.width + step, this.height + 24);
-    ctx.closePath();
-    ctx.fillStyle = fill ?? 'rgba(0, 255, 243, 0.16)';
-    ctx.fill();
-    ctx.strokeStyle = stroke;
-    ctx.lineWidth = alpha > 0.9 ? 1.7 : 1;
-    ctx.shadowBlur = alpha > 0.9 ? 4 : 1;
-    ctx.shadowColor = stroke;
-    ctx.stroke();
-    ctx.restore();
   }
 
   private terrainSample(index: number): number {
@@ -222,28 +202,11 @@ export class DefenderRenderer {
     const ctx = this.context;
     const ground = this.height - 44;
     ctx.save();
-    ctx.strokeStyle = COLORS.green;
-    ctx.fillStyle = COLORS.green;
-    ctx.lineWidth = 2;
-    ctx.shadowBlur = 3;
-    ctx.shadowColor = COLORS.green;
 
     for (let index = 0; index < 7; index += 1) {
       const x = (index * 133 - (elapsed * 74) % 133 + this.width) % this.width;
       const y = ground - this.terrainSample(index * 9 + Math.floor(elapsed * 4)) * 42;
-      ctx.beginPath();
-      ctx.arc(x, y - 8, 2.6, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.moveTo(x, y - 5);
-      ctx.lineTo(x, y + 7);
-      ctx.moveTo(x - 5, y);
-      ctx.lineTo(x + 5, y);
-      ctx.moveTo(x, y + 7);
-      ctx.lineTo(x - 4, y + 14);
-      ctx.moveTo(x, y + 7);
-      ctx.lineTo(x + 4, y + 14);
-      ctx.stroke();
+      this.drawAsset('humanoid', x - 4, y - 14, 8, 15);
     }
     ctx.restore();
   }
@@ -252,25 +215,10 @@ export class DefenderRenderer {
     const ctx = this.context;
     const ground = this.height - 38;
     ctx.save();
-    ctx.strokeStyle = 'rgba(0, 255, 243, 0.58)';
-    ctx.fillStyle = 'rgba(0, 255, 243, 0.08)';
-    ctx.lineWidth = 1.3;
-    ctx.shadowBlur = 2;
-    ctx.shadowColor = COLORS.cyan;
-
     for (let index = 0; index < 5; index += 1) {
       const x = (index * 181 - (elapsed * 74) % 181 + this.width) % this.width;
       const y = ground - this.terrainSample(index * 13 + Math.floor(elapsed * 4)) * 46;
-      const height = 8 + (index % 4) * 4;
-      ctx.beginPath();
-      ctx.rect(x - 6, y - height, 12, height);
-      ctx.fill();
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(x - 10, y - height);
-      ctx.lineTo(x, y - height - 7);
-      ctx.lineTo(x + 10, y - height);
-      ctx.stroke();
+      this.drawAsset(index % 3 === 0 ? 'groundTurret' : 'building', x - 9, y - 17, 18, 18);
     }
     ctx.restore();
   }
@@ -303,8 +251,6 @@ export class DefenderRenderer {
   private drawEnemies(enemies: Enemy[], elapsed: number): void {
     const ctx = this.context;
     ctx.save();
-    ctx.shadowBlur = 5;
-    ctx.shadowColor = COLORS.cyan;
 
     for (let index = 0; index < enemies.length; index += 1) {
       const enemy = enemies[index];
@@ -314,140 +260,17 @@ export class DefenderRenderer {
       ctx.save();
       ctx.translate(enemy.x, enemy.y);
       ctx.scale(enemy.direction * pulse, pulse);
-
-      if (enemy.kind === 'saucer') this.drawSaucer(enemy.radius);
-      else if (enemy.kind === 'hunter') this.drawHunter(enemy.radius);
-      else if (enemy.kind === 'walker') this.drawWalker(enemy.radius, elapsed + enemy.phase);
-      else if (enemy.kind === 'pod') this.drawPod(enemy.radius, elapsed + enemy.phase);
-      else if (enemy.kind === 'bomber') this.drawBomber(enemy.radius, elapsed + enemy.phase);
-      else this.drawLander(enemy.radius, elapsed + enemy.phase);
-
+      this.drawEnemyAsset(enemy);
       ctx.restore();
     }
     ctx.restore();
   }
 
-  private drawLander(radius: number, elapsed: number): void {
-    const ctx = this.context;
-    ctx.strokeStyle = COLORS.green;
-    ctx.fillStyle = 'rgba(216, 255, 0, 0.12)';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(0, -radius * 0.8);
-    ctx.lineTo(radius * 0.74, -radius * 0.18);
-    ctx.lineTo(radius * 0.4, radius * 0.72);
-    ctx.lineTo(0, radius * 0.36);
-    ctx.lineTo(-radius * 0.4, radius * 0.72);
-    ctx.lineTo(-radius * 0.74, -radius * 0.18);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
-    ctx.fillStyle = COLORS.white;
-    ctx.fillRect(-2, -radius * 0.08 + Math.sin(elapsed * 5), 4, 4);
-  }
-
-  private drawBomber(radius: number, elapsed: number): void {
-    const ctx = this.context;
-    ctx.strokeStyle = COLORS.blue;
-    ctx.fillStyle = 'rgba(35, 135, 255, 0.12)';
-    ctx.lineWidth = 1.7;
-    ctx.beginPath();
-    ctx.moveTo(-radius * 1.25, -radius * 0.22);
-    ctx.lineTo(-radius * 0.28, -radius * 0.7);
-    ctx.lineTo(radius * 1.2, -radius * 0.32);
-    ctx.lineTo(radius * 0.88, radius * 0.3);
-    ctx.lineTo(-radius * 0.18, radius * 0.68);
-    ctx.lineTo(-radius * 1.25, radius * 0.22);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
-    ctx.fillStyle = COLORS.green;
-    for (let dot = 0; dot < 3; dot += 1) {
-      ctx.fillRect(-radius * 0.46 + dot * radius * 0.42, Math.sin(elapsed * 4 + dot) * 1.2 - 1, 2.3, 2.3);
-    }
-  }
-
-  private drawSaucer(radius: number): void {
-    const ctx = this.context;
-    ctx.fillStyle = 'rgba(0, 255, 243, 0.14)';
-    ctx.strokeStyle = COLORS.cyan;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.ellipse(0, 2, radius, radius * 0.38, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(0, -3, radius * 0.44, Math.PI, Math.PI * 2);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(-radius * 0.82, 4);
-    ctx.lineTo(-radius * 1.18, 9);
-    ctx.moveTo(radius * 0.82, 4);
-    ctx.lineTo(radius * 1.18, 9);
-    ctx.stroke();
-    ctx.fillStyle = COLORS.white;
-    ctx.fillRect(-radius * 0.52, 0, radius * 0.24, 2);
-    ctx.fillRect(radius * 0.24, 0, radius * 0.24, 2);
-  }
-
-  private drawHunter(radius: number): void {
-    const ctx = this.context;
-    ctx.fillStyle = 'rgba(35, 135, 255, 0.2)';
-    ctx.strokeStyle = COLORS.blue;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(radius * 1.12, 0);
-    ctx.lineTo(radius * 0.16, -radius * 0.4);
-    ctx.lineTo(-radius * 0.92, -radius * 0.76);
-    ctx.lineTo(-radius * 0.46, 0);
-    ctx.lineTo(-radius * 0.92, radius * 0.76);
-    ctx.lineTo(radius * 0.16, radius * 0.4);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
-    ctx.fillStyle = COLORS.green;
-    ctx.fillRect(-radius * 0.24, -2, radius * 0.44, 4);
-  }
-
-  private drawWalker(radius: number, elapsed: number): void {
-    const ctx = this.context;
-    ctx.strokeStyle = COLORS.green;
-    ctx.fillStyle = 'rgba(216, 255, 0, 0.16)';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(-radius * 0.72, radius * 0.08);
-    ctx.lineTo(-radius * 0.4, -radius * 0.5);
-    ctx.lineTo(radius * 0.4, -radius * 0.5);
-    ctx.lineTo(radius * 0.72, radius * 0.08);
-    ctx.lineTo(radius * 0.36, radius * 0.38);
-    ctx.lineTo(-radius * 0.36, radius * 0.38);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
-    for (let leg = -1; leg <= 1; leg += 2) {
-      const swing = Math.sin(elapsed * 7 + leg) * 4;
-      ctx.beginPath();
-      ctx.moveTo(leg * radius * 0.26, radius * 0.32);
-      ctx.lineTo(leg * radius * 0.56, radius * 0.86 + swing);
-      ctx.stroke();
-    }
-  }
-
-  private drawPod(radius: number, elapsed: number): void {
-    const ctx = this.context;
-    ctx.strokeStyle = COLORS.cyan;
-    ctx.fillStyle = 'rgba(0, 255, 243, 0.1)';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(-radius * 0.95, 0);
-    ctx.bezierCurveTo(-radius * 0.6, -radius * 0.82, radius * 0.58, -radius * 0.82, radius * 0.95, 0);
-    ctx.bezierCurveTo(radius * 0.58, radius * 0.82, -radius * 0.6, radius * 0.82, -radius * 0.95, 0);
-    ctx.fill();
-    ctx.stroke();
-    ctx.fillStyle = COLORS.green;
-    ctx.beginPath();
-    ctx.rect(-radius * 0.42, -3 + Math.sin(elapsed * 3) * 1.5, radius * 0.84, 6);
-    ctx.fill();
+  private drawEnemyAsset(enemy: Enemy): void {
+    const size = enemy.radius * 2.35;
+    const wide = enemy.kind === 'bomber' || enemy.kind === 'baiter' ? size * 1.45 : size;
+    const tall = enemy.kind === 'lander' || enemy.kind === 'mutant' ? size * 1.2 : size;
+    this.drawAsset(enemy.kind, -wide / 2, -tall / 2, wide, tall);
   }
 
   private drawParticles(particles: ParticlePool): void {
@@ -461,11 +284,10 @@ export class DefenderRenderer {
       if (!particle.active) continue;
 
       const alpha = Math.max(0, particle.life / particle.maxLife);
-      ctx.globalAlpha = alpha * 0.82;
-      ctx.fillStyle = particle.hue === 72 ? COLORS.green : COLORS.cyan;
-      ctx.beginPath();
-      ctx.arc(particle.x, particle.y, particle.radius * alpha, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.globalAlpha = alpha * 0.75;
+      const frame = alpha > 0.66 ? 'explosion1' : alpha > 0.33 ? 'explosion2' : 'explosion3';
+      const size = particle.radius * 5 * alpha;
+      this.drawAsset(frame, particle.x - size / 2, particle.y - size / 2, size, size);
     }
     ctx.restore();
   }
@@ -480,49 +302,8 @@ export class DefenderRenderer {
     ctx.rotate(player.bank);
 
     const engine = 1 + Math.sin(player.enginePulse) * 0.18;
-    ctx.save();
-    ctx.globalCompositeOperation = 'lighter';
-    ctx.shadowBlur = 8;
-    ctx.shadowColor = COLORS.cyan;
-    ctx.fillStyle = 'rgba(0, 255, 243, 0.22)';
-    ctx.beginPath();
-    ctx.ellipse(-45, 0, 24 * engine, 5.5, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = 'rgba(216, 255, 0, 0.16)';
-    ctx.beginPath();
-    ctx.ellipse(-56, 0, 14 * engine, 3.2, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-
-    ctx.fillStyle = this.playerGradient ?? COLORS.cyan;
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.92)';
-    ctx.lineWidth = 1.6;
-    ctx.shadowBlur = 4;
-    ctx.shadowColor = COLORS.cyan;
-
-    ctx.beginPath();
-    ctx.moveTo(46, 0);
-    ctx.lineTo(22, -6);
-    ctx.lineTo(2, -8);
-    ctx.lineTo(-14, -18);
-    ctx.lineTo(-17, -8);
-    ctx.lineTo(-43, -6);
-    ctx.lineTo(-33, 0);
-    ctx.lineTo(-43, 6);
-    ctx.lineTo(-17, 8);
-    ctx.lineTo(-14, 18);
-    ctx.lineTo(2, 8);
-    ctx.lineTo(22, 6);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
-
-    ctx.fillStyle = '#07162f';
-    ctx.beginPath();
-    ctx.ellipse(17, -2, 8, 3.5, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = COLORS.white;
-    ctx.fillRect(-24, -2, 26, 4);
+    this.drawAsset('engineFlame', -62 * engine, -6, 26 * engine, 12);
+    this.drawAsset('player', -32, -10, 64, 20);
     ctx.restore();
   }
 
@@ -593,12 +374,12 @@ export class DefenderRenderer {
     ctx.stroke();
 
     ctx.fillStyle = COLORS.white;
-    ctx.fillRect(x + (player.x / this.width) * RADAR_WIDTH - 2, y + height * 0.42, 4, 4);
+    this.drawAsset('radarBlip', x + (player.x / this.width) * RADAR_WIDTH - 2, y + height * 0.42, 4, 4);
     for (let index = 0; index < enemies.length; index += 1) {
       const enemy = enemies[index];
       if (!enemy.active) continue;
-      ctx.fillStyle = enemy.kind === 'walker' ? COLORS.green : COLORS.cyan;
-      ctx.fillRect(x + (enemy.x / this.width) * RADAR_WIDTH - 1.5, y + 4 + (enemy.y / this.height) * 16, 3, 3);
+      ctx.fillStyle = enemy.kind === 'groundTurret' ? COLORS.green : COLORS.cyan;
+      this.drawAsset('radarBlip', x + (enemy.x / this.width) * RADAR_WIDTH - 1.5, y + 4 + (enemy.y / this.height) * 16, 3, 3);
     }
     ctx.restore();
   }
@@ -607,18 +388,13 @@ export class DefenderRenderer {
     const ctx = this.context;
     ctx.save();
     ctx.translate(x, y);
-    ctx.scale(0.3, 0.3);
-    ctx.fillStyle = COLORS.cyan;
-    ctx.strokeStyle = COLORS.white;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(30, 0);
-    ctx.lineTo(-8, -12);
-    ctx.lineTo(-22, 0);
-    ctx.lineTo(-8, 12);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
+    this.drawAsset('hudLife', -8, -4, 18, 8);
     ctx.restore();
+  }
+
+  private drawAsset(name: AssetName, x: number, y: number, width: number, height: number): void {
+    const image = this.assets[name];
+    if (!image.complete || image.naturalWidth === 0) return;
+    this.context.drawImage(image, x, y, width, height);
   }
 }

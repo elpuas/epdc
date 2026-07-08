@@ -166,8 +166,8 @@ export class DefenderGame {
       }
     }
 
-    for (let walker = 0; walker < 6; walker += 1) {
-      this.spawnGroundEnemy(walker);
+    for (let turret = 0; turret < 6; turret += 1) {
+      this.spawnGroundEnemy(turret);
     }
   }
 
@@ -288,13 +288,13 @@ export class DefenderGame {
       enemy.age += deltaSeconds;
       enemy.x += enemy.vx * deltaSeconds;
 
-      if (enemy.kind === 'hunter') {
+      if (enemy.kind === 'baiter' || enemy.kind === 'mutant') {
         enemy.vy += Math.sign(this.player.y - enemy.y) * 72 * deltaSeconds;
         enemy.vy = Math.max(-92, Math.min(92, enemy.vy));
         enemy.y += enemy.vy * deltaSeconds;
-      } else if (enemy.kind === 'saucer') {
+      } else if (enemy.kind === 'swarmer') {
         enemy.y = enemy.baseY + Math.sin(elapsedSeconds * 3.2 + enemy.phase) * enemy.wobble;
-      } else if (enemy.kind === 'walker') {
+      } else if (enemy.kind === 'groundTurret') {
         enemy.y = this.options.height - 58 + Math.sin(elapsedSeconds * 5 + enemy.phase) * 5;
         enemy.x += Math.sin(enemy.age * 1.7 + enemy.phase) * 16 * deltaSeconds;
       } else if (enemy.kind === 'bomber') {
@@ -320,7 +320,7 @@ export class DefenderGame {
     let fired = 0;
     for (let index = 0; index < this.enemies.length && fired < 2; index += 1) {
       const enemy = this.enemies[(index + Math.floor(elapsedSeconds * 17)) % this.enemies.length];
-      if (!enemy.active || enemy.kind === 'walker') continue;
+      if (!enemy.active || enemy.kind === 'groundTurret') continue;
       if ((index + Math.floor(enemy.age * 10)) % 5 !== 0) continue;
       this.fireEnemyShot(enemy);
       fired += 1;
@@ -357,7 +357,7 @@ export class DefenderGame {
           this.score += this.enemyScore(enemy.kind);
           this.flash = 0.32;
           this.shake = 2.8;
-          this.particles.burst(enemy.x, enemy.y, enemy.kind === 'pod' ? 12 : 8, 82, enemy.kind === 'walker' ? 72 : 184);
+          this.particles.burst(enemy.x, enemy.y, enemy.kind === 'pod' ? 12 : 8, 82, enemy.kind === 'groundTurret' ? 72 : 184);
           this.audio.explosion();
           break;
         }
@@ -410,14 +410,14 @@ export class DefenderGame {
     const direction = fromLeft ? 1 : -1;
     enemy.active = true;
     enemy.kind = kind;
-    enemy.radius = kind === 'pod' ? 11 : kind === 'walker' ? 9 : kind === 'hunter' ? 8 : kind === 'saucer' ? 10 : kind === 'bomber' ? 12 : 8;
+    enemy.radius = kind === 'pod' ? 11 : kind === 'groundTurret' ? 9 : kind === 'baiter' ? 8 : kind === 'swarmer' ? 9 : kind === 'bomber' ? 12 : kind === 'mutant' ? 10 : 8;
     enemy.x = clusterX !== undefined
       ? clusterX + ((seedOffset % 5) - 2) * 22
       : fromLeft ? -enemy.radius : this.options.width + enemy.radius;
-    enemy.baseY = kind === 'walker' ? this.options.height - 58 : 52 + lane * 30;
+    enemy.baseY = kind === 'groundTurret' ? this.options.height - 58 : 52 + lane * 30;
     enemy.y = enemy.baseY;
     enemy.direction = direction;
-    enemy.vx = direction * (ENEMY_BASE_SPEED + Math.min(110, this.score * 0.016) + lane * 3 + (kind === 'hunter' ? 54 : kind === 'bomber' ? 18 : 0));
+    enemy.vx = direction * (ENEMY_BASE_SPEED + Math.min(110, this.score * 0.016) + lane * 3 + (kind === 'baiter' ? 54 : kind === 'bomber' ? 18 : kind === 'mutant' ? 36 : 0));
     enemy.vy = 0;
     enemy.wobble = 12 + (lane % 5) * 4;
     enemy.phase = elapsedSeconds + lane;
@@ -429,7 +429,7 @@ export class DefenderGame {
     if (!enemy) return;
 
     enemy.active = true;
-    enemy.kind = 'walker';
+    enemy.kind = 'groundTurret';
     enemy.radius = 8;
     enemy.x = (seedOffset * 91 + 34) % this.options.width;
     enemy.baseY = this.options.height - 58;
@@ -461,20 +461,22 @@ export class DefenderGame {
 
   private enemyKind(lane: number, elapsedSeconds: number): EnemyKind {
     const selector = (lane + Math.floor(elapsedSeconds * 1.7) + Math.floor(this.score / 300)) % 6;
-    if (selector === 0) return 'saucer';
-    if (selector === 1) return 'hunter';
-    if (selector === 2) return 'walker';
+    if (selector === 0) return 'swarmer';
+    if (selector === 1) return 'baiter';
+    if (selector === 2) return 'groundTurret';
     if (selector === 3) return 'pod';
     if (selector === 4) return 'bomber';
+    if (selector === 5 && this.score > 500) return 'mutant';
     return 'lander';
   }
 
   private enemyScore(kind: EnemyKind): number {
     if (kind === 'pod') return 250;
     if (kind === 'bomber') return 220;
-    if (kind === 'hunter') return 180;
-    if (kind === 'walker') return 140;
-    if (kind === 'saucer') return 120;
+    if (kind === 'baiter') return 180;
+    if (kind === 'mutant') return 160;
+    if (kind === 'groundTurret') return 140;
+    if (kind === 'swarmer') return 120;
     return 100;
   }
 

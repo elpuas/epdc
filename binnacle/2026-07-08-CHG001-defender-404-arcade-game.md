@@ -10,6 +10,7 @@
 - Continued the arcade visual refinement after studying reference screenshots for composition: added a scanner strip, sharper jagged terrain rhythm, horizontal ship proportions, seeded enemy density, ground scale markers, and less abstract enemy silhouettes.
 - Rebalanced the scene toward classic arcade chaos: reduced ship/enemy/projectile scale, seeded clustered waves, added hostile fire, increased ground walkers/civilians/structures, and expanded original vector enemy classes while avoiding copied Defender sprites.
 - Corrected the composition toward Defender's readable rhythm: reduced enemy flood, shortened laser trails, lowered terrain profile, cut excess glow/particles/ground props, and shifted spawning from clutter to wave formations.
+- Replaced procedural object artwork with a dedicated SVG asset pack for the player ship, enemies, humanoids, structures, terrain modules, explosion frames, engine flame, and HUD icons; updated the renderer to cache and draw those assets while preserving the existing gameplay loop.
 
 ## Why
 

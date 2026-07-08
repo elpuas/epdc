@@ -45,4 +45,4 @@ export interface Star {
 }
 
 export type BulletOwner = 'player' | 'enemy';
-export type EnemyKind = 'lander' | 'saucer' | 'hunter' | 'walker' | 'pod' | 'bomber';
+export type EnemyKind = 'lander' | 'bomber' | 'pod' | 'swarmer' | 'baiter' | 'mutant' | 'groundTurret';
