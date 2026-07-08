@@ -1,0 +1,52 @@
+---
+import styles from './Defender.module.css';
+
+interface Props {
+  width?: number;
+  height?: number;
+  autoplay?: boolean;
+  showHUD?: boolean;
+  showControls?: boolean;
+}
+
+const {
+  width = 960,
+  height = 420,
+  autoplay = true,
+  showHUD = true,
+  showControls = true,
+} = Astro.props;
+---
+
+<figure
+  class={styles.defender}
+  data-defender-game
+  data-width={width}
+  data-height={height}
+  data-autoplay={String(autoplay)}
+  data-show-hud={String(showHUD)}
+  data-show-controls={String(showControls)}
+>
+  <canvas
+    class={styles.canvas}
+    width={width}
+    height={height}
+    tabindex="0"
+    role="application"
+    aria-label="Interactive 404 arcade game. Move with arrow keys or W A S D, shoot with Space, pause with Escape."
+  >
+    404 arcade game. Use a browser with canvas support to play.
+  </canvas>
+  <figcaption class={styles.caption} aria-hidden="true">
+    <span>Move: WASD / arrows</span>
+    <span>Shoot: Space</span>
+  </figcaption>
+</figure>
+
+<script>
+  import { mountDefenderGame } from './DefenderGame';
+
+  document.querySelectorAll<HTMLElement>('[data-defender-game]').forEach((element) => {
+    mountDefenderGame(element);
+  });
+</script>
