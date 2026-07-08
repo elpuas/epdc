@@ -44,5 +44,13 @@ export interface Star {
   streak: boolean;
 }
 
+export interface Civilian {
+  active: boolean;
+  x: number;
+  y: number;
+  baseX: number;
+  phase: number;
+}
+
 export type BulletOwner = 'player' | 'enemy';
 export type EnemyKind = 'lander' | 'bomber' | 'pod' | 'swarmer' | 'baiter' | 'mutant' | 'groundTurret';

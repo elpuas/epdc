@@ -1,4 +1,4 @@
-import type { Enemy, Bullet, Player, Star } from './types';
+import type { Enemy, Bullet, Civilian, Player, Star } from './types';
 import type { ParticlePool } from '../shared/Particles';
 import { COLORS, GAME_HEIGHT, GAME_WIDTH } from './constants';
 
@@ -88,6 +88,7 @@ export class DefenderRenderer {
     player: Player,
     bullets: Bullet[],
     enemies: Enemy[],
+    civilians: Civilian[],
     stars: Star[],
     particles: ParticlePool,
     state: RenderState,
@@ -103,7 +104,7 @@ export class DefenderRenderer {
     this.drawDebris(stars, state.elapsed);
     this.drawTerrain(state.elapsed);
     this.drawGroundStructures(state.elapsed);
-    this.drawHumanoids(state.elapsed);
+    this.drawHumanoids(civilians);
     this.drawBullets(bullets);
     this.drawEnemies(enemies, state.elapsed);
     this.drawParticles(particles);
@@ -198,15 +199,14 @@ export class DefenderRenderer {
     return Math.max(0.05, Math.min(1, saw * 0.35 + ridge * 0.48 + peak));
   }
 
-  private drawHumanoids(elapsed: number): void {
+  private drawHumanoids(civilians: Civilian[]): void {
     const ctx = this.context;
-    const ground = this.height - 44;
     ctx.save();
 
-    for (let index = 0; index < 7; index += 1) {
-      const x = (index * 133 - (elapsed * 74) % 133 + this.width) % this.width;
-      const y = ground - this.terrainSample(index * 9 + Math.floor(elapsed * 4)) * 42;
-      this.drawAsset('humanoid', x - 4, y - 14, 8, 15);
+    for (let index = 0; index < civilians.length; index += 1) {
+      const civilian = civilians[index];
+      if (!civilian.active) continue;
+      this.drawAsset('humanoid', civilian.x - 4, civilian.y - 14, 8, 15);
     }
     ctx.restore();
   }
@@ -215,8 +215,8 @@ export class DefenderRenderer {
     const ctx = this.context;
     const ground = this.height - 38;
     ctx.save();
-    for (let index = 0; index < 5; index += 1) {
-      const x = (index * 181 - (elapsed * 74) % 181 + this.width) % this.width;
+    for (let index = 0; index < 3; index += 1) {
+      const x = (index * 280 - (elapsed * 74) % 280 + this.width) % this.width;
       const y = ground - this.terrainSample(index * 13 + Math.floor(elapsed * 4)) * 46;
       this.drawAsset(index % 3 === 0 ? 'groundTurret' : 'building', x - 9, y - 17, 18, 18);
     }

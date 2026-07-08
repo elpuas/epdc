@@ -20,7 +20,7 @@ import {
   STAR_COUNT,
 } from './constants';
 import { DefenderRenderer } from './Renderer';
-import type { Bullet, Enemy, EnemyKind, Player, Star } from './types';
+import type { Bullet, Civilian, Enemy, EnemyKind, Player, Star } from './types';
 
 export interface DefenderOptions {
   autoplay: boolean;
@@ -39,6 +39,9 @@ const DEFAULT_OPTIONS: DefenderOptions = {
 };
 
 const HUD_SAFE_TOP = 42;
+const CIVILIAN_COUNT = 4;
+
+type WavePhase = 'calm' | 'attack' | 'recover';
 
 export class DefenderGame {
   private readonly inputVector: InputVector = { x: 0, y: 0 };
@@ -49,6 +52,7 @@ export class DefenderGame {
   private readonly particles = new ParticlePool(PARTICLE_POOL_SIZE);
   private readonly bullets: Bullet[];
   private readonly enemies: Enemy[];
+  private readonly civilians: Civilian[];
   private readonly stars: Star[];
   private readonly reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -70,6 +74,10 @@ export class DefenderGame {
   private bulletCooldown = 0;
   private enemySpawnTimer = 0;
   private enemyFireTimer = 0;
+  private wavePhase: WavePhase = 'calm';
+  private waveTimer = 0;
+  private waveIndex = 0;
+  private enemiesQueued = 0;
   private flash = 0;
   private shake = 0;
   private spawnSide = 1;
@@ -101,6 +109,13 @@ export class DefenderGame {
       age: 0,
       baseY: 0,
       direction: 1,
+    }));
+    this.civilians = Array.from({ length: CIVILIAN_COUNT }, (_, index) => ({
+      active: true,
+      x: 0,
+      y: 0,
+      baseX: 150 + index * 210,
+      phase: index * 1.7,
     }));
     this.stars = Array.from({ length: STAR_COUNT }, (_, index) => ({
       x: ((index * 173) % this.options.width),
@@ -152,23 +167,30 @@ export class DefenderGame {
     this.gameOver = false;
     this.bulletCooldown = 0;
     this.enemySpawnTimer = ENEMY_SPAWN_SECONDS * 0.35;
-    this.enemyFireTimer = 0.5;
+    this.enemyFireTimer = 1.1;
+    this.wavePhase = 'calm';
+    this.waveTimer = 1.8;
+    this.waveIndex = 0;
+    this.enemiesQueued = 0;
     this.flash = 0;
     this.shake = 0;
 
     for (let index = 0; index < this.bullets.length; index += 1) this.bullets[index].active = false;
     for (let index = 0; index < this.enemies.length; index += 1) this.enemies[index].active = false;
-
-    for (let cluster = 0; cluster < 4; cluster += 1) {
-      const clusterX = 120 + cluster * 210 + (cluster % 2) * 34;
-      for (let member = 0; member < 3; member += 1) {
-        this.spawnEnemy(cluster * 0.36 + member * 0.08, cluster * 13 + member, clusterX);
-      }
+    for (let index = 0; index < this.civilians.length; index += 1) {
+      const civilian = this.civilians[index];
+      civilian.active = true;
+      civilian.baseX = 150 + index * 210;
+      civilian.x = civilian.baseX;
+      civilian.y = this.groundY(civilian.x);
     }
 
-    for (let turret = 0; turret < 6; turret += 1) {
+    for (let turret = 0; turret < 2; turret += 1) {
       this.spawnGroundEnemy(turret);
     }
+
+    this.spawnEnemy(0.25, 0, 160);
+    this.spawnEnemy(0.52, 1, 690);
   }
 
   private readonly update = (deltaSeconds: number, elapsedSeconds: number): void => {
@@ -193,8 +215,10 @@ export class DefenderGame {
 
     this.updatePlayer(deltaSeconds);
     this.updateBullets(deltaSeconds);
+    this.updateWave(deltaSeconds, elapsedSeconds);
     this.updateEnemies(deltaSeconds, elapsedSeconds);
     this.updateEnemyFire(deltaSeconds, elapsedSeconds);
+    this.updateCivilians(deltaSeconds, elapsedSeconds);
     this.updateStars(deltaSeconds);
     this.particles.update(deltaSeconds);
     this.resolveCollisions();
@@ -271,16 +295,6 @@ export class DefenderGame {
   }
 
   private updateEnemies(deltaSeconds: number, elapsedSeconds: number): void {
-    this.enemySpawnTimer -= deltaSeconds;
-    if (this.enemySpawnTimer <= 0) {
-      const clusterX = (elapsedSeconds * 137) % this.options.width;
-      const members = elapsedSeconds % 2 > 1 ? 3 : 2;
-      for (let index = 0; index < members; index += 1) {
-        this.spawnEnemy(elapsedSeconds + index * 0.06, Math.floor(elapsedSeconds * 10) + index, clusterX);
-      }
-      this.enemySpawnTimer = Math.max(0.46, ENEMY_SPAWN_SECONDS - this.score * 0.0006);
-    }
-
     for (let index = 0; index < this.enemies.length; index += 1) {
       const enemy = this.enemies[index];
       if (!enemy.active) continue;
@@ -289,8 +303,8 @@ export class DefenderGame {
       enemy.x += enemy.vx * deltaSeconds;
 
       if (enemy.kind === 'baiter' || enemy.kind === 'mutant') {
-        enemy.vy += Math.sign(this.player.y - enemy.y) * 72 * deltaSeconds;
-        enemy.vy = Math.max(-92, Math.min(92, enemy.vy));
+        enemy.vy += Math.sign(this.player.y - enemy.y) * 44 * deltaSeconds;
+        enemy.vy = Math.max(-72, Math.min(72, enemy.vy));
         enemy.y += enemy.vy * deltaSeconds;
       } else if (enemy.kind === 'swarmer') {
         enemy.y = enemy.baseY + Math.sin(elapsedSeconds * 3.2 + enemy.phase) * enemy.wobble;
@@ -314,11 +328,60 @@ export class DefenderGame {
     }
   }
 
+  private updateWave(deltaSeconds: number, elapsedSeconds: number): void {
+    this.waveTimer -= deltaSeconds;
+
+    if (this.wavePhase === 'calm') {
+      if (this.waveTimer <= 0) this.startAttackWave(elapsedSeconds);
+      return;
+    }
+
+    if (this.wavePhase === 'attack') {
+      if (this.enemySpawnTimer <= 0 && this.enemiesQueued > 0 && this.activeFlyingEnemies() < 7) {
+        const entryX = this.waveIndex % 2 === 0 ? this.options.width + 28 : -28;
+        this.spawnEnemy(elapsedSeconds, this.waveIndex * 7 + this.enemiesQueued, entryX);
+        this.enemiesQueued -= 1;
+        this.enemySpawnTimer = 0.55 + (this.enemiesQueued % 2) * 0.18;
+      }
+
+      if (this.enemiesQueued <= 0) {
+        this.wavePhase = 'recover';
+        this.waveTimer = 4.2;
+      }
+      return;
+    }
+
+    if (this.waveTimer <= 0 || this.activeFlyingEnemies() <= 1) {
+      this.wavePhase = 'calm';
+      this.waveTimer = 2.1 + (this.waveIndex % 3) * 0.45;
+      this.waveIndex += 1;
+    }
+  }
+
+  private startAttackWave(elapsedSeconds: number): void {
+    this.wavePhase = 'attack';
+    this.enemiesQueued = 4 + (this.waveIndex % 3);
+    this.enemySpawnTimer = 0;
+    if (this.activeFlyingEnemies() === 0) {
+      this.spawnEnemy(elapsedSeconds, this.waveIndex * 11, this.waveIndex % 2 === 0 ? this.options.width + 24 : -24);
+      this.enemiesQueued -= 1;
+    }
+  }
+
+  private activeFlyingEnemies(): number {
+    let count = 0;
+    for (let index = 0; index < this.enemies.length; index += 1) {
+      const enemy = this.enemies[index];
+      if (enemy.active && enemy.kind !== 'groundTurret') count += 1;
+    }
+    return count;
+  }
+
   private updateEnemyFire(deltaSeconds: number, elapsedSeconds: number): void {
     if (this.enemyFireTimer > 0) return;
 
     let fired = 0;
-    for (let index = 0; index < this.enemies.length && fired < 2; index += 1) {
+    for (let index = 0; index < this.enemies.length && fired < 1; index += 1) {
       const enemy = this.enemies[(index + Math.floor(elapsedSeconds * 17)) % this.enemies.length];
       if (!enemy.active || enemy.kind === 'groundTurret') continue;
       if ((index + Math.floor(enemy.age * 10)) % 5 !== 0) continue;
@@ -326,7 +389,16 @@ export class DefenderGame {
       fired += 1;
     }
 
-    this.enemyFireTimer = 0.42 + (elapsedSeconds % 0.16);
+    this.enemyFireTimer = 1.05 + (elapsedSeconds % 0.24);
+  }
+
+  private updateCivilians(deltaSeconds: number, elapsedSeconds: number): void {
+    for (let index = 0; index < this.civilians.length; index += 1) {
+      const civilian = this.civilians[index];
+      if (!civilian.active) continue;
+      civilian.x = (civilian.x - 18 * deltaSeconds + this.options.width) % this.options.width;
+      civilian.y = this.groundY(civilian.x) + Math.sin(elapsedSeconds * 2 + civilian.phase) * 1.5;
+    }
   }
 
   private updateStars(deltaSeconds: number): void {
@@ -460,7 +532,7 @@ export class DefenderGame {
   }
 
   private enemyKind(lane: number, elapsedSeconds: number): EnemyKind {
-    const selector = (lane + Math.floor(elapsedSeconds * 1.7) + Math.floor(this.score / 300)) % 6;
+    const selector = (lane + this.waveIndex + Math.floor(this.score / 500)) % 6;
     if (selector === 0) return 'swarmer';
     if (selector === 1) return 'baiter';
     if (selector === 2) return 'groundTurret';
@@ -478,6 +550,10 @@ export class DefenderGame {
     if (kind === 'groundTurret') return 140;
     if (kind === 'swarmer') return 120;
     return 100;
+  }
+
+  private groundY(x: number): number {
+    return this.options.height - 55 - Math.sin(x * 0.019) * 13 - Math.sin(x * 0.043) * 7;
   }
 
   private nextBullet(): Bullet | undefined {
@@ -501,7 +577,7 @@ export class DefenderGame {
   }
 
   private render(elapsedSeconds: number): void {
-    this.renderer.render(this.player, this.bullets, this.enemies, this.stars, this.particles, {
+    this.renderer.render(this.player, this.bullets, this.enemies, this.civilians, this.stars, this.particles, {
       score: this.score,
       highScore: this.highScore,
       lives: this.lives,

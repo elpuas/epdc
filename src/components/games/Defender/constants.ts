@@ -5,16 +5,16 @@ export const PLAYER_RADIUS = 8;
 export const PLAYER_SPEED = 330;
 export const PLAYER_INVULNERABLE_SECONDS = 1.15;
 
-export const BULLET_POOL_SIZE = 72;
+export const BULLET_POOL_SIZE = 42;
 export const BULLET_SPEED = 680;
 export const BULLET_COOLDOWN_SECONDS = 0.09;
 
-export const ENEMY_POOL_SIZE = 48;
+export const ENEMY_POOL_SIZE = 24;
 export const ENEMY_BASE_SPEED = 82;
-export const ENEMY_SPAWN_SECONDS = 0.72;
+export const ENEMY_SPAWN_SECONDS = 1.4;
 
-export const STAR_COUNT = 190;
-export const PARTICLE_POOL_SIZE = 240;
+export const STAR_COUNT = 120;
+export const PARTICLE_POOL_SIZE = 160;
 export const MAX_LIVES = 3;
 
 export const COLORS = {

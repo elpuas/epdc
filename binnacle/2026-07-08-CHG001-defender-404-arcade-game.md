@@ -11,6 +11,7 @@
 - Rebalanced the scene toward classic arcade chaos: reduced ship/enemy/projectile scale, seeded clustered waves, added hostile fire, increased ground walkers/civilians/structures, and expanded original vector enemy classes while avoiding copied Defender sprites.
 - Corrected the composition toward Defender's readable rhythm: reduced enemy flood, shortened laser trails, lowered terrain profile, cut excess glow/particles/ground props, and shifted spawning from clutter to wave formations.
 - Replaced procedural object artwork with a dedicated SVG asset pack for the player ship, enemies, humanoids, structures, terrain modules, explosion frames, engine flame, and HUD icons; updated the renderer to cache and draw those assets while preserving the existing gameplay loop.
+- Reworked the gameplay pacing around explicit calm, attack, and recover wave phases; reduced simultaneous enemies, enemy fire, civilians, structures, and effects so the game reads closer to Defender's balanced arcade rhythm.
 
 ## Why
 
