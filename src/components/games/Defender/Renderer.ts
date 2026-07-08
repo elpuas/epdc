@@ -62,6 +62,7 @@ export interface RenderState {
   lives: number;
   gameOver: boolean;
   paused: boolean;
+  started: boolean;
   flash: number;
   shake: number;
   elapsed: number;
@@ -123,6 +124,11 @@ export class DefenderRenderer {
     const shakeX = state.shake > 0 ? Math.sin(state.elapsed * 90) * state.shake : 0;
     const shakeY = state.shake > 0 ? Math.cos(state.elapsed * 74) * state.shake * 0.45 : 0;
 
+    if (!state.started) {
+      this.drawIntroOverlay();
+      return;
+    }
+
     ctx.save();
     ctx.translate(shakeX, shakeY);
     this.drawBackground();
@@ -159,6 +165,45 @@ export class DefenderRenderer {
     ctx.globalAlpha = 0.2;
     ctx.fillStyle = COLORS.green;
     ctx.fillRect(0, this.height - 83, this.width, 1);
+    ctx.restore();
+  }
+
+  private drawIntroOverlay(): void {
+    const ctx = this.context;
+    this.drawBackground();
+
+    ctx.save();
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    const centerX = this.width / 2;
+    const centerY = this.height / 2;
+    const panelWidth = Math.min(560, this.width - 64);
+    const panelHeight = 172;
+    const panelX = centerX - panelWidth / 2;
+    const panelY = centerY - panelHeight / 2;
+
+    ctx.fillStyle = 'rgba(5, 5, 5, 0.76)';
+    ctx.fillRect(panelX, panelY, panelWidth, panelHeight);
+    ctx.strokeStyle = 'rgba(35, 135, 255, 0.9)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(panelX + 0.5, panelY + 0.5, panelWidth - 1, panelHeight - 1);
+
+    ctx.fillStyle = 'rgba(216, 255, 0, 0.9)';
+    ctx.fillRect(panelX + 18, panelY + 18, 46, 2);
+    ctx.fillRect(panelX + panelWidth - 64, panelY + panelHeight - 20, 46, 2);
+
+    ctx.fillStyle = COLORS.green;
+    ctx.font = '800 26px Inter, system-ui, sans-serif';
+    ctx.fillText('▶ START MISSION', centerX, centerY - 42);
+
+    ctx.fillStyle = COLORS.white;
+    ctx.font = '700 15px Inter, system-ui, sans-serif';
+    ctx.fillText('Pilot, click inside the screen to enter the sector.', centerX, centerY + 8);
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.68)';
+    ctx.font = '600 13px Inter, system-ui, sans-serif';
+    ctx.fillText('Your controls will become active once the mission begins.', centerX, centerY + 38);
     ctx.restore();
   }
 

@@ -13,6 +13,7 @@
 - Replaced procedural object artwork with a dedicated SVG asset pack for the player ship, enemies, humanoids, structures, terrain modules, explosion frames, engine flame, and HUD icons; updated the renderer to cache and draw those assets while preserving the existing gameplay loop.
 - Reworked the gameplay pacing around explicit calm, attack, and recover wave phases; reduced simultaneous enemies, enemy fire, civilians, structures, and effects so the game reads closer to Defender's balanced arcade rhythm.
 - Switched the visual entity renderer to the canonical `public/defender.png` sprite sheet and reworked gameplay toward Defender-style movement: inertial ship control, continuous world scroll, lander abductions, pod-swarmer splits, proximity turret fire, sparse collectible civilians, and controlled waves.
+- Separated the 404 page mission copy from the canvas UI and added a first-click arcade briefing flow that focuses the canvas, unlocks WebAudio, and starts gameplay without requiring a second interaction.
 
 ## Why
 

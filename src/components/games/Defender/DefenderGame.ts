@@ -31,7 +31,7 @@ export interface DefenderOptions {
 }
 
 const DEFAULT_OPTIONS: DefenderOptions = {
-  autoplay: true,
+  autoplay: false,
   showHUD: true,
   showControls: true,
   width: GAME_WIDTH,
@@ -76,6 +76,7 @@ export class DefenderGame {
   private highScore = 150150;
   private lives = MAX_LIVES;
   private gameOver = false;
+  private started = false;
   private paused = false;
   private bulletCooldown = 0;
   private enemySpawnTimer = 0;
@@ -147,15 +148,10 @@ export class DefenderGame {
 
     this.audio.setMuted(this.reducedMotion);
     this.reset();
+    this.paused = true;
     this.render(0);
 
-    if (this.options.autoplay && !this.reducedMotion) {
-      this.loop.start();
-    } else {
-      this.paused = true;
-      this.render(0);
-    }
-
+    this.canvas.addEventListener('pointerdown', this.handleCanvasPointerDown);
     document.addEventListener('visibilitychange', this.handleVisibilityChange);
     window.addEventListener('blur', this.handleBlur);
   }
@@ -163,6 +159,7 @@ export class DefenderGame {
   destroy(): void {
     this.loop.stop();
     this.input.destroy();
+    this.canvas.removeEventListener('pointerdown', this.handleCanvasPointerDown);
     document.removeEventListener('visibilitychange', this.handleVisibilityChange);
     window.removeEventListener('blur', this.handleBlur);
   }
@@ -211,6 +208,11 @@ export class DefenderGame {
   }
 
   private readonly update = (deltaSeconds: number, elapsedSeconds: number): void => {
+    if (!this.started) {
+      this.render(elapsedSeconds);
+      return;
+    }
+
     if (this.paused) {
       this.render(elapsedSeconds);
       return;
@@ -780,6 +782,7 @@ export class DefenderGame {
       lives: this.lives,
       gameOver: this.gameOver,
       paused: this.paused,
+      started: this.started,
       flash: this.reducedMotion ? 0 : this.flash,
       shake: this.reducedMotion ? 0 : this.shake,
       elapsed: elapsedSeconds,
@@ -795,6 +798,16 @@ export class DefenderGame {
 
   private readonly handleBlur = (): void => {
     this.paused = true;
+  };
+
+  private readonly handleCanvasPointerDown = (): void => {
+    this.canvas.focus();
+    if (this.started) return;
+
+    this.started = true;
+    this.paused = false;
+    this.audio.unlock();
+    if (!this.loop.isRunning()) this.loop.start();
   };
 }
 

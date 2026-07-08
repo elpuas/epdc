@@ -12,6 +12,13 @@ export class ArcadeAudio {
     }
   }
 
+  unlock(): void {
+    const context = this.ensureContext();
+    if (context?.state === 'suspended') {
+      void context.resume();
+    }
+  }
+
   laser(): void {
     this.tone(520, 940, 0.055, 'sawtooth');
   }
