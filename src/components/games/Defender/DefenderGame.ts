@@ -148,6 +148,7 @@ export class DefenderGame {
 
     for (let index = 0; index < this.bullets.length; index += 1) this.bullets[index].active = false;
     for (let index = 0; index < this.enemies.length; index += 1) this.enemies[index].active = false;
+    for (let index = 0; index < 8; index += 1) this.spawnEnemy(index * 0.48, index);
   }
 
   private readonly update = (deltaSeconds: number, elapsedSeconds: number): void => {
@@ -242,7 +243,8 @@ export class DefenderGame {
     this.enemySpawnTimer -= deltaSeconds;
     if (this.enemySpawnTimer <= 0) {
       this.spawnEnemy(elapsedSeconds);
-      this.enemySpawnTimer = Math.max(0.44, ENEMY_SPAWN_SECONDS - this.score * 0.0025);
+      if (this.score > 400 || elapsedSeconds % 2 > 1.2) this.spawnEnemy(elapsedSeconds + 0.23);
+      this.enemySpawnTimer = Math.max(0.26, ENEMY_SPAWN_SECONDS - this.score * 0.0016);
     }
 
     for (let index = 0; index < this.enemies.length; index += 1) {
@@ -326,20 +328,22 @@ export class DefenderGame {
     }
   }
 
-  private spawnEnemy(elapsedSeconds: number): void {
+  private spawnEnemy(elapsedSeconds: number, seedOffset = 0): void {
     const enemy = this.nextEnemy();
     if (!enemy) return;
 
     this.spawnSide *= -1;
     const fromLeft = this.spawnSide < 0;
     const laneCount = 8;
-    const lane = Math.floor((elapsedSeconds * 11 + this.score * 0.03) % laneCount);
-    const kind = this.enemyKind(lane, elapsedSeconds);
+    const lane = Math.floor((elapsedSeconds * 11 + this.score * 0.03 + seedOffset * 3) % laneCount);
+    const kind = this.enemyKind(lane + seedOffset, elapsedSeconds);
     const direction = fromLeft ? 1 : -1;
     enemy.active = true;
     enemy.kind = kind;
     enemy.radius = kind === 'pod' ? 21 : kind === 'walker' ? 18 : kind === 'hunter' ? 16 : kind === 'saucer' ? 19 : 14;
-    enemy.x = fromLeft ? -enemy.radius : this.options.width + enemy.radius;
+    enemy.x = seedOffset > 0
+      ? ((seedOffset * 119) % this.options.width)
+      : fromLeft ? -enemy.radius : this.options.width + enemy.radius;
     enemy.baseY = kind === 'walker' ? this.options.height - 82 : 58 + lane * 38;
     enemy.y = enemy.baseY;
     enemy.direction = direction;

@@ -7,6 +7,7 @@
 - Updated the 404 page to feature the arcade experience with recovery links below the game.
 - Added component-scoped styling for the dark neon arcade surface.
 - Refined the art direction toward a modern Defender-inspired presentation with denser starfields, scrolling vector terrain, multiple enemy silhouettes, arcade HUD labels, stronger engine trails, and larger impact feedback.
+- Continued the arcade visual refinement after studying reference screenshots for composition: added a scanner strip, sharper jagged terrain rhythm, horizontal ship proportions, seeded enemy density, ground scale markers, and less abstract enemy silhouettes.
 
 ## Why
 

@@ -10,8 +10,8 @@ export const BULLET_SPEED = 680;
 export const BULLET_COOLDOWN_SECONDS = 0.085;
 
 export const ENEMY_POOL_SIZE = 42;
-export const ENEMY_BASE_SPEED = 92;
-export const ENEMY_SPAWN_SECONDS = 0.68;
+export const ENEMY_BASE_SPEED = 104;
+export const ENEMY_SPAWN_SECONDS = 0.46;
 
 export const STAR_COUNT = 190;
 export const PARTICLE_POOL_SIZE = 340;

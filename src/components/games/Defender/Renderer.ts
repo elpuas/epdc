@@ -15,8 +15,9 @@ export interface RenderState {
   showControls: boolean;
 }
 
-const HUD_HEIGHT = 38;
-const TERRAIN_STEPS = 44;
+const HUD_HEIGHT = 42;
+const RADAR_WIDTH = 306;
+const TERRAIN_STEPS = 74;
 
 export class DefenderRenderer {
   private readonly context: CanvasRenderingContext2D;
@@ -47,20 +48,20 @@ export class DefenderRenderer {
     this.context.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
 
     this.backgroundGradient = this.context.createLinearGradient(0, HUD_HEIGHT, 0, height);
-    this.backgroundGradient.addColorStop(0, '#07162f');
-    this.backgroundGradient.addColorStop(0.44, '#10112a');
+    this.backgroundGradient.addColorStop(0, '#020407');
+    this.backgroundGradient.addColorStop(0.44, '#05070d');
     this.backgroundGradient.addColorStop(1, COLORS.backgroundStart);
 
     this.farTerrainGradient = this.context.createLinearGradient(0, height * 0.58, 0, height);
-    this.farTerrainGradient.addColorStop(0, 'rgba(35, 135, 255, 0.26)');
-    this.farTerrainGradient.addColorStop(1, 'rgba(0, 255, 243, 0.04)');
+    this.farTerrainGradient.addColorStop(0, 'rgba(35, 135, 255, 0.14)');
+    this.farTerrainGradient.addColorStop(1, 'rgba(0, 255, 243, 0.02)');
 
     this.nearTerrainGradient = this.context.createLinearGradient(0, height * 0.68, 0, height);
-    this.nearTerrainGradient.addColorStop(0, 'rgba(216, 255, 0, 0.22)');
-    this.nearTerrainGradient.addColorStop(0.32, 'rgba(0, 255, 243, 0.17)');
-    this.nearTerrainGradient.addColorStop(1, 'rgba(5, 5, 5, 0.86)');
+    this.nearTerrainGradient.addColorStop(0, 'rgba(216, 255, 0, 0.08)');
+    this.nearTerrainGradient.addColorStop(0.32, 'rgba(0, 255, 243, 0.08)');
+    this.nearTerrainGradient.addColorStop(1, 'rgba(5, 5, 5, 0.72)');
 
-    this.playerGradient = this.context.createLinearGradient(-26, -14, 30, 16);
+    this.playerGradient = this.context.createLinearGradient(-38, -12, 42, 12);
     this.playerGradient.addColorStop(0, '#ffffff');
     this.playerGradient.addColorStop(0.35, '#bffcff');
     this.playerGradient.addColorStop(0.72, COLORS.cyan);
@@ -85,6 +86,7 @@ export class DefenderRenderer {
     this.drawStars(stars);
     this.drawDebris(stars, state.elapsed);
     this.drawTerrain(state.elapsed);
+    this.drawHumanoids(state.elapsed);
     this.drawBullets(bullets);
     this.drawEnemies(enemies, state.elapsed);
     this.drawParticles(particles);
@@ -97,7 +99,7 @@ export class DefenderRenderer {
     }
 
     if (state.showHUD) {
-      this.drawHud(state);
+      this.drawHud(state, player, enemies);
     }
   }
 
@@ -109,12 +111,12 @@ export class DefenderRenderer {
     ctx.fillRect(0, HUD_HEIGHT, this.width, this.height - HUD_HEIGHT);
 
     ctx.save();
-    ctx.globalAlpha = 0.32;
+    ctx.globalAlpha = 0.5;
     ctx.fillStyle = COLORS.cyan;
-    ctx.fillRect(0, HUD_HEIGHT + 47, this.width, 2);
+    ctx.fillRect(0, HUD_HEIGHT, this.width, 2);
     ctx.globalAlpha = 0.16;
-    ctx.fillStyle = COLORS.blue;
-    ctx.fillRect(0, this.height * 0.56, this.width, 1);
+    ctx.fillStyle = COLORS.green;
+    ctx.fillRect(0, this.height * 0.66, this.width, 1);
     ctx.restore();
   }
 
@@ -157,12 +159,12 @@ export class DefenderRenderer {
 
   private drawTerrain(elapsed: number): void {
     const ctx = this.context;
-    this.drawTerrainLayer(elapsed * 44, this.height * 0.62, 34, this.farTerrainGradient, 'rgba(35, 135, 255, 0.48)', 0.62);
-    this.drawTerrainLayer(elapsed * 92, this.height * 0.77, 64, this.nearTerrainGradient, 'rgba(216, 255, 0, 0.62)', 1);
+    this.drawTerrainLayer(elapsed * 28, this.height * 0.68, 26, this.farTerrainGradient, 'rgba(35, 135, 255, 0.42)', 0.58);
+    this.drawTerrainLayer(elapsed * 88, this.height * 0.82, 78, this.nearTerrainGradient, 'rgba(216, 255, 0, 0.78)', 1);
 
     ctx.save();
     ctx.globalAlpha = 0.34;
-    ctx.strokeStyle = '#b000ff';
+    ctx.strokeStyle = 'rgba(0, 255, 243, 0.34)';
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(0, this.height - 18);
@@ -201,18 +203,48 @@ export class DefenderRenderer {
     ctx.fillStyle = fill ?? 'rgba(0, 255, 243, 0.16)';
     ctx.fill();
     ctx.strokeStyle = stroke;
-    ctx.lineWidth = 2;
-    ctx.shadowBlur = 10;
+    ctx.lineWidth = alpha > 0.9 ? 2.4 : 1.4;
+    ctx.shadowBlur = alpha > 0.9 ? 8 : 3;
     ctx.shadowColor = stroke;
     ctx.stroke();
     ctx.restore();
   }
 
   private terrainSample(index: number): number {
-    const a = Math.sin(index * 1.37) * 0.5 + 0.5;
-    const b = Math.sin(index * 2.71 + 1.8) * 0.5 + 0.5;
-    const spike = ((index * 17) % 9) / 9;
-    return Math.max(0.06, Math.min(1, a * 0.6 + b * 0.28 + spike * 0.36));
+    const saw = ((index * 13) % 17) / 17;
+    const ridge = Math.abs((((index * 7) % 23) / 11.5) - 1);
+    const peak = index % 11 === 0 ? 0.96 : index % 7 === 0 ? 0.72 : 0;
+    return Math.max(0.05, Math.min(1, saw * 0.35 + ridge * 0.48 + peak));
+  }
+
+  private drawHumanoids(elapsed: number): void {
+    const ctx = this.context;
+    const ground = this.height - 44;
+    ctx.save();
+    ctx.strokeStyle = COLORS.green;
+    ctx.fillStyle = COLORS.green;
+    ctx.lineWidth = 2;
+    ctx.shadowBlur = 7;
+    ctx.shadowColor = COLORS.green;
+
+    for (let index = 0; index < 7; index += 1) {
+      const x = (index * 151 - (elapsed * 88) % 151 + this.width) % this.width;
+      const y = ground - this.terrainSample(index * 9 + Math.floor(elapsed * 4)) * 42;
+      ctx.beginPath();
+      ctx.arc(x, y - 8, 2.6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(x, y - 5);
+      ctx.lineTo(x, y + 7);
+      ctx.moveTo(x - 5, y);
+      ctx.lineTo(x + 5, y);
+      ctx.moveTo(x, y + 7);
+      ctx.lineTo(x - 4, y + 14);
+      ctx.moveTo(x, y + 7);
+      ctx.lineTo(x + 4, y + 14);
+      ctx.stroke();
+    }
+    ctx.restore();
   }
 
   private drawBullets(bullets: Bullet[]): void {
@@ -221,7 +253,7 @@ export class DefenderRenderer {
     ctx.shadowBlur = 18;
     ctx.shadowColor = COLORS.green;
     ctx.strokeStyle = COLORS.green;
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 2.4;
 
     for (let index = 0; index < bullets.length; index += 1) {
       const bullet = bullets[index];
@@ -229,8 +261,8 @@ export class DefenderRenderer {
 
       const direction = Math.sign(bullet.vx);
       ctx.beginPath();
-      ctx.moveTo(bullet.x - direction * 34, bullet.y);
-      ctx.lineTo(bullet.x + direction * 9, bullet.y);
+      ctx.moveTo(bullet.x - direction * 54, bullet.y);
+      ctx.lineTo(bullet.x + direction * 10, bullet.y);
       ctx.stroke();
       ctx.fillStyle = COLORS.white;
       ctx.fillRect(bullet.x + direction * 9 - 1, bullet.y - 2, 3, 4);
@@ -267,24 +299,25 @@ export class DefenderRenderer {
   private drawDrone(radius: number, elapsed: number): void {
     const ctx = this.context;
     ctx.strokeStyle = COLORS.green;
-    ctx.fillStyle = 'rgba(216, 255, 0, 0.18)';
+    ctx.fillStyle = 'rgba(216, 255, 0, 0.12)';
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.arc(0, 0, radius * 0.58, 0, Math.PI * 2);
+    ctx.moveTo(0, -radius * 0.8);
+    ctx.lineTo(radius * 0.74, -radius * 0.18);
+    ctx.lineTo(radius * 0.4, radius * 0.72);
+    ctx.lineTo(0, radius * 0.36);
+    ctx.lineTo(-radius * 0.4, radius * 0.72);
+    ctx.lineTo(-radius * 0.74, -radius * 0.18);
+    ctx.closePath();
     ctx.fill();
     ctx.stroke();
-    for (let arm = 0; arm < 4; arm += 1) {
-      const angle = arm * Math.PI * 0.5 + Math.sin(elapsed * 3) * 0.14;
-      ctx.beginPath();
-      ctx.moveTo(Math.cos(angle) * radius * 0.4, Math.sin(angle) * radius * 0.4);
-      ctx.lineTo(Math.cos(angle) * radius, Math.sin(angle) * radius);
-      ctx.stroke();
-    }
+    ctx.fillStyle = COLORS.white;
+    ctx.fillRect(-2, -radius * 0.08 + Math.sin(elapsed * 5), 4, 4);
   }
 
   private drawSaucer(radius: number): void {
     const ctx = this.context;
-    ctx.fillStyle = 'rgba(0, 255, 243, 0.24)';
+    ctx.fillStyle = 'rgba(0, 255, 243, 0.14)';
     ctx.strokeStyle = COLORS.cyan;
     ctx.lineWidth = 2;
     ctx.beginPath();
@@ -294,6 +327,12 @@ export class DefenderRenderer {
     ctx.beginPath();
     ctx.arc(0, -3, radius * 0.44, Math.PI, Math.PI * 2);
     ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(-radius * 0.82, 4);
+    ctx.lineTo(-radius * 1.18, 9);
+    ctx.moveTo(radius * 0.82, 4);
+    ctx.lineTo(radius * 1.18, 9);
+    ctx.stroke();
     ctx.fillStyle = COLORS.white;
     ctx.fillRect(-radius * 0.52, 0, radius * 0.24, 2);
     ctx.fillRect(radius * 0.24, 0, radius * 0.24, 2);
@@ -301,14 +340,16 @@ export class DefenderRenderer {
 
   private drawHunter(radius: number): void {
     const ctx = this.context;
-    ctx.fillStyle = 'rgba(35, 135, 255, 0.42)';
+    ctx.fillStyle = 'rgba(35, 135, 255, 0.2)';
     ctx.strokeStyle = COLORS.blue;
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(radius, 0);
-    ctx.lineTo(-radius * 0.62, -radius * 0.72);
-    ctx.lineTo(-radius * 0.24, 0);
-    ctx.lineTo(-radius * 0.62, radius * 0.72);
+    ctx.moveTo(radius * 1.12, 0);
+    ctx.lineTo(radius * 0.16, -radius * 0.4);
+    ctx.lineTo(-radius * 0.92, -radius * 0.76);
+    ctx.lineTo(-radius * 0.46, 0);
+    ctx.lineTo(-radius * 0.92, radius * 0.76);
+    ctx.lineTo(radius * 0.16, radius * 0.4);
     ctx.closePath();
     ctx.fill();
     ctx.stroke();
@@ -319,38 +360,41 @@ export class DefenderRenderer {
   private drawWalker(radius: number, elapsed: number): void {
     const ctx = this.context;
     ctx.strokeStyle = COLORS.green;
-    ctx.fillStyle = 'rgba(216, 255, 0, 0.28)';
+    ctx.fillStyle = 'rgba(216, 255, 0, 0.16)';
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.arc(0, -radius * 0.28, radius * 0.46, Math.PI, Math.PI * 2);
-    ctx.lineTo(radius * 0.46, radius * 0.15);
-    ctx.lineTo(-radius * 0.46, radius * 0.15);
+    ctx.moveTo(-radius * 0.72, radius * 0.08);
+    ctx.lineTo(-radius * 0.4, -radius * 0.5);
+    ctx.lineTo(radius * 0.4, -radius * 0.5);
+    ctx.lineTo(radius * 0.72, radius * 0.08);
+    ctx.lineTo(radius * 0.36, radius * 0.38);
+    ctx.lineTo(-radius * 0.36, radius * 0.38);
     ctx.closePath();
     ctx.fill();
     ctx.stroke();
     for (let leg = -1; leg <= 1; leg += 2) {
       const swing = Math.sin(elapsed * 7 + leg) * 4;
       ctx.beginPath();
-      ctx.moveTo(leg * radius * 0.24, radius * 0.1);
-      ctx.lineTo(leg * radius * 0.46, radius * 0.72 + swing);
+      ctx.moveTo(leg * radius * 0.26, radius * 0.32);
+      ctx.lineTo(leg * radius * 0.56, radius * 0.86 + swing);
       ctx.stroke();
     }
   }
 
   private drawPod(radius: number, elapsed: number): void {
     const ctx = this.context;
-    ctx.strokeStyle = COLORS.white;
-    ctx.fillStyle = 'rgba(0, 255, 243, 0.2)';
+    ctx.strokeStyle = COLORS.cyan;
+    ctx.fillStyle = 'rgba(0, 255, 243, 0.1)';
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(0, -radius);
-    ctx.bezierCurveTo(radius * 0.8, -radius * 0.35, radius * 0.72, radius * 0.64, 0, radius);
-    ctx.bezierCurveTo(-radius * 0.72, radius * 0.64, -radius * 0.8, -radius * 0.35, 0, -radius);
+    ctx.moveTo(-radius * 0.95, 0);
+    ctx.bezierCurveTo(-radius * 0.6, -radius * 0.82, radius * 0.58, -radius * 0.82, radius * 0.95, 0);
+    ctx.bezierCurveTo(radius * 0.58, radius * 0.82, -radius * 0.6, radius * 0.82, -radius * 0.95, 0);
     ctx.fill();
     ctx.stroke();
     ctx.fillStyle = COLORS.green;
     ctx.beginPath();
-    ctx.arc(0, Math.sin(elapsed * 3) * 2, radius * 0.3, 0, Math.PI * 2);
+    ctx.rect(-radius * 0.42, -3 + Math.sin(elapsed * 3) * 1.5, radius * 0.84, 6);
     ctx.fill();
   }
 
@@ -390,11 +434,11 @@ export class DefenderRenderer {
     ctx.shadowColor = COLORS.cyan;
     ctx.fillStyle = 'rgba(0, 255, 243, 0.35)';
     ctx.beginPath();
-    ctx.ellipse(-31, 0, 25 * engine, 8, 0, 0, Math.PI * 2);
+    ctx.ellipse(-45, 0, 29 * engine, 6, 0, 0, Math.PI * 2);
     ctx.fill();
     ctx.fillStyle = 'rgba(216, 255, 0, 0.26)';
     ctx.beginPath();
-    ctx.ellipse(-38, 0, 14 * engine, 4, 0, 0, Math.PI * 2);
+    ctx.ellipse(-57, 0, 17 * engine, 3.4, 0, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
 
@@ -405,30 +449,32 @@ export class DefenderRenderer {
     ctx.shadowColor = COLORS.cyan;
 
     ctx.beginPath();
-    ctx.moveTo(30, 0);
-    ctx.lineTo(9, -6);
-    ctx.lineTo(-6, -18);
-    ctx.lineTo(-13, -7);
-    ctx.lineTo(-30, -5);
-    ctx.lineTo(-21, 0);
-    ctx.lineTo(-30, 5);
-    ctx.lineTo(-13, 7);
-    ctx.lineTo(-6, 18);
-    ctx.lineTo(9, 6);
+    ctx.moveTo(46, 0);
+    ctx.lineTo(22, -6);
+    ctx.lineTo(2, -8);
+    ctx.lineTo(-14, -18);
+    ctx.lineTo(-17, -8);
+    ctx.lineTo(-43, -6);
+    ctx.lineTo(-33, 0);
+    ctx.lineTo(-43, 6);
+    ctx.lineTo(-17, 8);
+    ctx.lineTo(-14, 18);
+    ctx.lineTo(2, 8);
+    ctx.lineTo(22, 6);
     ctx.closePath();
     ctx.fill();
     ctx.stroke();
 
     ctx.fillStyle = '#07162f';
     ctx.beginPath();
-    ctx.ellipse(8, -2, 7, 4, 0, 0, Math.PI * 2);
+    ctx.ellipse(17, -2, 8, 3.5, 0, 0, Math.PI * 2);
     ctx.fill();
     ctx.fillStyle = COLORS.white;
-    ctx.fillRect(-17, -2, 16, 4);
+    ctx.fillRect(-24, -2, 26, 4);
     ctx.restore();
   }
 
-  private drawHud(state: RenderState): void {
+  private drawHud(state: RenderState, player: Player, enemies: Enemy[]): void {
     const ctx = this.context;
     ctx.save();
     ctx.fillStyle = '#050505';
@@ -439,14 +485,16 @@ export class DefenderRenderer {
     ctx.font = '800 15px Inter, system-ui, sans-serif';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = COLORS.green;
-    ctx.fillText(`SCORE ${state.score.toString().padStart(6, '0')}`, 22, HUD_HEIGHT / 2);
+    ctx.fillText(`SCORE ${state.score.toString().padStart(6, '0')}`, 18, HUD_HEIGHT / 2);
     ctx.fillStyle = COLORS.cyan;
-    ctx.fillText(`HIGH SCORE ${state.highScore.toString().padStart(6, '0')}`, this.width * 0.36, HUD_HEIGHT / 2);
+    ctx.fillText(`HIGH SCORE ${state.highScore.toString().padStart(6, '0')}`, this.width - 318, HUD_HEIGHT / 2);
+
+    this.drawRadar(player, enemies);
 
     ctx.fillStyle = COLORS.white;
-    ctx.fillText('LIVES', this.width - 160, HUD_HEIGHT / 2);
+    ctx.fillText('LIVES', this.width - 126, HUD_HEIGHT / 2);
     for (let index = 0; index < state.lives; index += 1) {
-      this.drawLifeIcon(this.width - 104 + index * 24, HUD_HEIGHT / 2);
+      this.drawLifeIcon(this.width - 70 + index * 22, HUD_HEIGHT / 2);
     }
 
     if (state.showControls) {
@@ -469,6 +517,37 @@ export class DefenderRenderer {
       ctx.fillText(state.gameOver ? 'PRESS SPACE TO PLAY AGAIN' : 'PRESS ESC TO RESUME', this.width / 2, this.height / 2 + 24);
     }
 
+    ctx.restore();
+  }
+
+  private drawRadar(player: Player, enemies: Enemy[]): void {
+    const ctx = this.context;
+    const x = Math.max(214, this.width / 2 - RADAR_WIDTH / 2);
+    const y = 6;
+    const height = 28;
+
+    ctx.save();
+    ctx.strokeStyle = 'rgba(35, 135, 255, 0.72)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(x, y, RADAR_WIDTH, height);
+    ctx.beginPath();
+    for (let index = 0; index <= 34; index += 1) {
+      const sampleX = x + (index / 34) * RADAR_WIDTH;
+      const ridge = y + height - 4 - this.terrainSample(index) * 11;
+      if (index === 0) ctx.moveTo(sampleX, ridge);
+      else ctx.lineTo(sampleX, ridge);
+    }
+    ctx.strokeStyle = 'rgba(216, 255, 0, 0.72)';
+    ctx.stroke();
+
+    ctx.fillStyle = COLORS.white;
+    ctx.fillRect(x + (player.x / this.width) * RADAR_WIDTH - 2, y + height * 0.42, 4, 4);
+    for (let index = 0; index < enemies.length; index += 1) {
+      const enemy = enemies[index];
+      if (!enemy.active) continue;
+      ctx.fillStyle = enemy.kind === 'walker' ? COLORS.green : COLORS.cyan;
+      ctx.fillRect(x + (enemy.x / this.width) * RADAR_WIDTH - 1.5, y + 4 + (enemy.y / this.height) * 16, 3, 3);
+    }
     ctx.restore();
   }
 
