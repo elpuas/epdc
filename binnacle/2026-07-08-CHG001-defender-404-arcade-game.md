@@ -12,6 +12,7 @@
 - Corrected the composition toward Defender's readable rhythm: reduced enemy flood, shortened laser trails, lowered terrain profile, cut excess glow/particles/ground props, and shifted spawning from clutter to wave formations.
 - Replaced procedural object artwork with a dedicated SVG asset pack for the player ship, enemies, humanoids, structures, terrain modules, explosion frames, engine flame, and HUD icons; updated the renderer to cache and draw those assets while preserving the existing gameplay loop.
 - Reworked the gameplay pacing around explicit calm, attack, and recover wave phases; reduced simultaneous enemies, enemy fire, civilians, structures, and effects so the game reads closer to Defender's balanced arcade rhythm.
+- Switched the visual entity renderer to the canonical `public/defender.png` sprite sheet and reworked gameplay toward Defender-style movement: inertial ship control, continuous world scroll, lander abductions, pod-swarmer splits, proximity turret fire, sparse collectible civilians, and controlled waves.
 
 ## Why
 

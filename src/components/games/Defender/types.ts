@@ -21,11 +21,16 @@ export interface Enemy {
   age: number;
   baseY: number;
   direction: number;
+  health: number;
+  targetCivilian: number;
+  carryingCivilian: boolean;
 }
 
 export interface Player {
   x: number;
   y: number;
+  vx: number;
+  vy: number;
   direction: number;
   radius: number;
   invulnerable: number;
@@ -50,6 +55,7 @@ export interface Civilian {
   y: number;
   baseX: number;
   phase: number;
+  carriedBy: number;
 }
 
 export type BulletOwner = 'player' | 'enemy';
