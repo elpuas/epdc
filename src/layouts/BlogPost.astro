@@ -26,6 +26,7 @@ interface Props {
 	github?: string;
 	demoUrl?: string;
 	showHeroImage?: boolean;
+	languagePaths?: Partial<Record<Language, string>>;
 }
 
 const {
@@ -42,6 +43,7 @@ const {
 	entryPath,
 	tags = [],
 	showHeroImage = false,
+	languagePaths,
 } = Astro.props as Props;
 
 const pubDate = publishedAt ?? date;
@@ -96,7 +98,7 @@ const data = {
 	<body>
 		<header>
 			<div class:list={styles.wrapper}>
-				<Header lang={lang} />
+				<Header lang={lang} {languagePaths} />
 			</div>
 		</header>
 		<main>

@@ -9,9 +9,10 @@ import { Icon } from 'astro-icon/components';
 
 interface Props {
 	lang: Language;
+	languagePaths?: Partial<Record<Language, string>>;
 }
 
-const { lang } = Astro.props;
+const { lang, languagePaths } = Astro.props;
 const currentPath = Astro.url.pathname;
 const craftedMenuId = `crafted-menu-${lang}`;
 ---
@@ -57,7 +58,7 @@ const craftedMenuId = `crafted-menu-${lang}`;
 			</ul>
 		</nav>
 		<div class={styles.headerControls}>
-			<LanguageSwitcher currentLang={lang} currentPath={currentPath} />
+			<LanguageSwitcher currentLang={lang} currentPath={currentPath} {languagePaths} />
 			<button 
 				id="bw-toggle" 
 				class={styles.bwToggle}

@@ -2,6 +2,8 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPost from '../../../layouts/BlogPost.astro';
 import { render } from 'astro:content';
+import { SUPPORTED_LANGUAGES, type Language } from '../../../i18n/utils';
+import { getBlogEntrySlug } from '../../../utils/blogSlug';
 
 export async function getStaticPaths() {
 	// Filter posts for English language
@@ -10,7 +12,7 @@ export async function getStaticPaths() {
 	});
 	// Map posts to paths using post.slug
 	return posts.map((post) => ({
-		params: { slug: post.slug }, // Use post.slug
+		params: { slug: getBlogEntrySlug(post) },
 		props: post,
 	}));
 }
@@ -18,8 +20,20 @@ type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
 const { Content } = await render(post);
+const allPosts = await getCollection('blog');
+const languagePaths = Object.fromEntries(
+	SUPPORTED_LANGUAGES.map((lang) => [lang, `/${lang}/blog/`]),
+) as Partial<Record<Language, string>>;
+
+if (post.data.translationKey) {
+	for (const translatedPost of allPosts) {
+		if (translatedPost.data.translationKey === post.data.translationKey) {
+			languagePaths[translatedPost.data.lang] = `/${translatedPost.data.lang}/blog/${getBlogEntrySlug(translatedPost)}/`;
+		}
+	}
+}
 ---
 
-<BlogPost {...post.data}>
+<BlogPost {...post.data} {languagePaths}>
 	<Content />
 </BlogPost>
