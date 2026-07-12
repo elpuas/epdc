@@ -1,0 +1,81 @@
+.defender {
+  --defender-border: rgba(255, 255, 255, 0.14);
+  --defender-cyan: #00fff3;
+  --defender-blue: #2387ff;
+  --defender-green: #d8ff00;
+  position: relative;
+  width: min(100%, 960px);
+  margin-inline: auto;
+  overflow: hidden;
+  border: 1px solid var(--defender-border);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 28% 18%, rgba(0, 255, 243, 0.18), transparent 28%),
+    radial-gradient(circle at 80% 72%, rgba(35, 135, 255, 0.16), transparent 32%),
+    linear-gradient(180deg, #050505 0%, #0d1117 100%);
+  box-shadow:
+    0 0 0 1px rgba(0, 255, 243, 0.08),
+    0 28px 80px rgba(0, 0, 0, 0.44),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.defender::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 50%, transparent 50%),
+    radial-gradient(circle at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.38) 100%);
+  background-size: 100% 4px, 100% 100%;
+  mix-blend-mode: screen;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  min-height: 260px;
+  outline: none;
+  cursor: crosshair;
+}
+
+.canvas:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--defender-green);
+}
+
+.caption {
+  position: absolute;
+  inset-inline: 18px;
+  inset-block-end: 14px;
+  display: none;
+  justify-content: space-between;
+  gap: var(--space-md);
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+.caption span {
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+@media (max-width: 720px) {
+  .canvas {
+    min-height: 220px;
+  }
+
+  .caption {
+    display: flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .defender::after {
+    background:
+      radial-gradient(circle at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.38) 100%);
+  }
+}

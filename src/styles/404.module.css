@@ -2,32 +2,40 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 60vh;
+  min-height: 72vh;
   padding: var(--space-2xl) var(--space-lg);
   text-align: center;
 }
 
 .errorContent {
-  max-width: 600px;
+  width: min(100%, 1040px);
   margin: 0 auto;
 }
 
+.kicker {
+  margin: 0 0 var(--space-sm);
+  color: var(--color-tertiary);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
 .errorContent h1 {
-  font-size: var(--fontsize-h1);
-  color: var(--color-accent);
-  margin-bottom: var(--space-lg);
+  max-width: 920px;
+  margin: 0 auto var(--space-md);
+  color: var(--color-tertiary);
+  font-size: clamp(3rem, 8vw, 6rem);
+  letter-spacing: 0;
 }
 
 .errorMessage {
-  font-size: var(--fontsize-lg);
+  max-width: 720px;
+  margin: 0 auto var(--space-xl);
+  font-size: var(--fontsize-editorial);
   color: var(--color-secondary);
-  margin-bottom: var(--space-md);
-}
-
-.helpText {
-  font-size: var(--fontsize-base);
-  color: var(--color-muted);
-  margin-bottom: var(--space-xl);
 }
 
 .actions {
@@ -35,9 +43,14 @@
   gap: var(--space-md);
   justify-content: center;
   flex-wrap: wrap;
+  margin-block-start: var(--space-xl);
 }
 
 @media (max-width: 768px) {
+  .errorPage {
+    padding-inline: var(--space-md);
+  }
+
   .actions {
     flex-direction: column;
     align-items: center;
