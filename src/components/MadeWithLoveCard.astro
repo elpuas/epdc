@@ -1,204 +1,321 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import { Icon } from 'astro-icon/components';
-import type { Language } from '../i18n/utils';
+import { getImage, type ImageMetadata } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+import { Icon } from 'astro-icon/components'
+import type { Language } from '../i18n/utils'
 
 interface Props {
-  project: CollectionEntry<'portfolio'>;
-  lang: Language;
-  index?: number;
-  animateOnView?: boolean;
+	project: CollectionEntry<'portfolio'>
+	lang: Language
+	index?: number
+	animateOnView?: boolean
 }
 
-const { project, lang, index = 0, animateOnView = false } = Astro.props;
-const { title, description } = project.data;
-const projectUrl = `/${lang}/crafted-with-love/${project.slug}`;
-const animationDelay = `${Math.min(index * 70, 560)}ms`;
+const { project, lang, index = 0, animateOnView = false } = Astro.props
+const { title, description, image } = project.data
+const projectUrl = `/${lang}/crafted-with-love/${project.slug}`
+const animationDelay = `${Math.min(index * 70, 560)}ms`
+
+const portfolioImages = import.meta.glob<ImageMetadata>(
+	'../../public/portfolio/*.{jpeg,jpg,png,webp}',
+	{
+		eager: true,
+		import: 'default',
+	},
+)
+
+const featuredImage = image
+	? portfolioImages[`../../public${image}`]
+	: undefined
+
+const preview = featuredImage
+	? await getImage({
+			src: featuredImage,
+			widths: [360, 520, 680],
+			sizes: '(min-width: 1100px) 40vw, (min-width: 768px) 54vw, 0px',
+			format: 'webp',
+			quality: 82,
+		})
+	: undefined
 
 function getProjectIcon(entry: CollectionEntry<'portfolio'>) {
-  const haystack = `${entry.slug} ${entry.data.title} ${(entry.data.tags ?? []).join(' ')}`.toLowerCase();
+	const haystack =
+		`${entry.slug} ${entry.data.title} ${(entry.data.tags ?? []).join(' ')}`.toLowerCase()
 
-  if (haystack.includes('ecommerce') || haystack.includes('woocommerce')) {
-    return 'ph:shopping-bag-open';
-  }
+	if (haystack.includes('ecommerce') || haystack.includes('woocommerce')) {
+		return 'ph:shopping-bag-open'
+	}
 
-  if (haystack.includes('real estate') || haystack.includes('brokers') || haystack.includes('property')) {
-    return 'ph:buildings';
-  }
+	if (
+		haystack.includes('real estate') ||
+		haystack.includes('brokers') ||
+		haystack.includes('property')
+	) {
+		return 'ph:buildings'
+	}
 
-  if (haystack.includes('auto') || haystack.includes('car')) {
-    return 'ph:car-profile';
-  }
+	if (haystack.includes('auto') || haystack.includes('car')) {
+		return 'ph:car-profile'
+	}
 
-  if (haystack.includes('medical') || haystack.includes('fisio') || haystack.includes('health')) {
-    return 'ph:first-aid-kit';
-  }
+	if (
+		haystack.includes('medical') ||
+		haystack.includes('fisio') ||
+		haystack.includes('health')
+	) {
+		return 'ph:first-aid-kit'
+	}
 
-  if (haystack.includes('travel') || haystack.includes('adventurers') || haystack.includes('tour')) {
-    return 'ph:airplane-tilt';
-  }
+	if (
+		haystack.includes('travel') ||
+		haystack.includes('adventurers') ||
+		haystack.includes('tour')
+	) {
+		return 'ph:airplane-tilt'
+	}
 
-  if (haystack.includes('music') || haystack.includes('phonogram') || haystack.includes('fonogram')) {
-    return 'ph:waveform';
-  }
+	if (
+		haystack.includes('music') ||
+		haystack.includes('phonogram') ||
+		haystack.includes('fonogram')
+	) {
+		return 'ph:waveform'
+	}
 
-  if (haystack.includes('law') || haystack.includes('studio') || haystack.includes('ambrosio')) {
-    return 'ph:scales';
-  }
+	if (
+		haystack.includes('law') ||
+		haystack.includes('studio') ||
+		haystack.includes('ambrosio')
+	) {
+		return 'ph:scales'
+	}
 
-  return 'ph:globe-hemisphere-west';
+	return 'ph:globe-hemisphere-west'
 }
 
-const iconName = getProjectIcon(project);
+const iconName = getProjectIcon(project)
 ---
 
 <article
-  class:list={[
-    'made-with-love-card',
-    animateOnView && 'made-with-love-card--animated',
-  ]}
-  style={`--entry-delay: ${animationDelay};`}
-  data-crafted-enter={animateOnView ? 'true' : undefined}
+	class:list={[
+		'made-with-love-card',
+		animateOnView && 'made-with-love-card--animated',
+	]}
+	style={`--entry-delay: ${animationDelay};`}
+	data-crafted-card
+	data-crafted-enter={animateOnView ? 'true' : undefined}
+	data-preview-src={preview?.src}
+	data-preview-srcset={preview?.srcSet.attribute}
 >
-  <a href={projectUrl} class="card-shell" aria-label={title}>
-    <span class="media" aria-hidden="true">
-      <Icon name={iconName} width="20" height="20" />
-    </span>
+	<a href={projectUrl} class="card-shell" aria-label={title}>
+		<span class="media" aria-hidden="true">
+			<Icon name={iconName} width="20" height="20" />
+		</span>
 
-    <div class="copy">
-      <h2 class="card-title">{title}</h2>
-      <p class="card-excerpt">{description}</p>
-    </div>
-  </a>
+		<div class="copy">
+			<h2 class="card-title">{title}</h2>
+			<p class="card-excerpt">{description}</p>
+		</div>
+	</a>
 </article>
 
 <style>
-  .made-with-love-card {
-    display: flex;
-    min-width: 0;
-    box-sizing: border-box;
-  }
+	.made-with-love-card {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		min-width: 0;
+		box-sizing: border-box;
+		transition:
+			opacity 240ms ease,
+			filter 240ms ease;
+	}
 
-  .card-shell {
-    flex: 1 1 auto;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: var(--space-md);
-    align-items: start;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    padding: var(--space-md);
-    border: 1px solid var(--color-quaternary);
-    border-radius: 10px;
-    background: color-mix(in srgb, var(--color-primary) 94%, var(--color-secondary) 6%);
-    color: inherit;
-    text-decoration: none;
-    transition:
-      transform 180ms ease,
-      border-color 180ms ease,
-      background 180ms ease,
-      box-shadow 180ms ease;
-  }
+	.made-with-love-card[data-active='true'] {
+		z-index: 3;
+	}
 
-  .card-shell:hover,
-  .card-shell:focus-within,
-  .card-shell:focus-visible {
-    transform: translateY(-1px);
-    border-color: color-mix(in srgb, var(--color-secondary) 40%, var(--color-quaternary) 60%);
-    background: color-mix(in srgb, var(--color-primary) 92%, var(--color-secondary) 8%);
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-tertiary) 15%, transparent);
-  }
+	.card-shell {
+		position: relative;
+		z-index: 1;
+		flex: 1 1 auto;
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
+		gap: var(--space-md);
+		align-items: start;
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
+		padding: var(--space-md);
+		border: 1px solid var(--color-quaternary);
+		border-radius: 10px;
+		background: color-mix(
+			in srgb,
+			var(--color-primary) 94%,
+			var(--color-secondary) 6%
+		);
+		color: inherit;
+		text-decoration: none;
+		transform: translateZ(0);
+		transition:
+			transform 240ms ease,
+			border-color 240ms ease,
+			background 240ms ease,
+			box-shadow 240ms ease;
+	}
 
-  .copy {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-  }
+	.card-shell:hover,
+	.card-shell:focus-visible,
+	.made-with-love-card[data-active='true'] .card-shell {
+		z-index: 3;
+		transform: translateY(-2px) scale(1.012);
+		border-color: color-mix(
+			in srgb,
+			var(--color-secondary) 72%,
+			var(--color-tertiary) 28%
+		);
+		background: color-mix(
+			in srgb,
+			var(--color-primary) 88%,
+			var(--color-secondary) 12%
+		);
+		box-shadow:
+			0 0 0 1px color-mix(in srgb, var(--color-tertiary) 24%, transparent),
+			0 14px 32px color-mix(in srgb, var(--color-primary) 62%, transparent);
+	}
 
-  .card-shell .card-title {
-    margin: 0 0 0.35rem;
-    font-size: clamp(1.1rem, 1rem + 0.3vw, 1.25rem);
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.03em;
-    background: linear-gradient(
-      90deg,
-      var(--color-secondary) 0%,
-      var(--color-tertiary) 100%
-    );
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-  }
+	.copy {
+		display: flex;
+		flex-direction: column;
+		min-width: 0;
+	}
 
-  .card-shell .card-excerpt {
-    margin: 0;
-    font-size: 0.98rem;
-    font-family: 'Montserrat VF', sans-serif;
-    font-weight: 300;
-    line-height: 1.55;
-    color: var(--color-secondary);
-  }
+	.card-shell .card-title {
+		margin: 0 0 0.35rem;
+		font-size: clamp(1.1rem, 1rem + 0.3vw, 1.25rem);
+		font-family: 'Inter', sans-serif;
+		font-weight: 700;
+		line-height: 1.15;
+		letter-spacing: -0.03em;
+		background: linear-gradient(
+			90deg,
+			var(--color-secondary) 0%,
+			var(--color-tertiary) 100%
+		);
+		color: transparent;
+		-webkit-background-clip: text;
+		background-clip: text;
+		transition:
+			filter 240ms ease,
+			text-shadow 240ms ease;
+	}
 
-  .media {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 2.25rem;
-    height: 2.25rem;
-    border: 1px solid var(--color-quaternary);
-    border-radius: 8px;
-    color: var(--color-tertiary);
-    transition:
-      transform 180ms ease,
-      border-color 180ms ease;
-  }
+	.card-shell:hover .card-title,
+	.card-shell:focus-visible .card-title,
+	.made-with-love-card[data-active='true'] .card-title {
+		filter: saturate(1.2) brightness(1.12);
+		text-shadow: 0 0 18px
+			color-mix(in srgb, var(--color-tertiary) 18%, transparent);
+	}
 
-  .media :global(svg) {
-    display: block;
-  }
+	.card-shell .card-excerpt {
+		margin: 0;
+		font-size: 0.98rem;
+		font-family: 'Montserrat VF', sans-serif;
+		font-weight: 300;
+		line-height: 1.55;
+		color: var(--color-secondary);
+	}
 
-  .card-shell:hover .media,
-  .card-shell:focus-visible .media {
-    transform: translateY(-1px);
-    border-color: color-mix(in srgb, var(--color-secondary) 40%, var(--color-tertiary) 60%);
-  }
+	.media {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		width: 2.25rem;
+		height: 2.25rem;
+		border: 1px solid var(--color-quaternary);
+		border-radius: 8px;
+		color: var(--color-tertiary);
+		transition:
+			transform 240ms ease,
+			border-color 240ms ease,
+			box-shadow 240ms ease;
+	}
 
-  .card-shell:focus-visible {
-    outline: 2px solid color-mix(in srgb, var(--color-secondary) 65%, white 35%);
-    outline-offset: 3px;
-  }
+	.media :global(svg) {
+		display: block;
+	}
 
-  .made-with-love-card--animated[data-enter-ready='true'] .card-shell {
-    opacity: 0;
-    transform: translateY(12px);
-  }
+	.card-shell:hover .media,
+	.card-shell:focus-visible .media,
+	.made-with-love-card[data-active='true'] .media {
+		transform: translateY(-1px) scale(1.04);
+		border-color: color-mix(
+			in srgb,
+			var(--color-secondary) 45%,
+			var(--color-tertiary) 55%
+		);
+		box-shadow: 0 0 16px
+			color-mix(in srgb, var(--color-tertiary) 16%, transparent);
+	}
 
-  .made-with-love-card--animated[data-enter-ready='true'].is-visible .card-shell {
-    opacity: 1;
-    transform: translateY(0);
-    transition:
-      opacity 560ms ease,
-      transform 560ms ease,
-      border-color 180ms ease,
-      background 180ms ease,
-      box-shadow 180ms ease;
-    transition-delay: var(--entry-delay, 0ms);
-  }
+	.card-shell:focus-visible {
+		outline: 3px solid
+			color-mix(in srgb, var(--color-secondary) 72%, white 28%);
+		outline-offset: 4px;
+	}
 
-  @media (prefers-reduced-motion: reduce) {
-    .card-shell,
-    .media {
-      transition: none;
-    }
+	:global(.projects-grid.is-interacting)
+		.made-with-love-card:not([data-active='true']) {
+		opacity: 0.58;
+		filter: saturate(0.72) contrast(0.9);
+	}
 
-    .made-with-love-card--animated[data-enter-ready='true'] .card-shell,
-    .made-with-love-card--animated[data-enter-ready='true'].is-visible .card-shell {
-      opacity: 1;
-      transform: none;
-    }
-  }
+	.made-with-love-card--animated[data-enter-ready='true'] .card-shell {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+
+	.made-with-love-card--animated[data-enter-ready='true'].is-visible
+		.card-shell {
+		opacity: 1;
+		transform: translateY(0);
+		transition:
+			opacity 560ms ease,
+			transform 560ms ease,
+			border-color 240ms ease,
+			background 240ms ease,
+			box-shadow 240ms ease;
+		transition-delay: var(--entry-delay, 0ms);
+	}
+
+	.made-with-love-card--animated[data-enter-ready='true'].is-visible[data-active='true']
+		.card-shell {
+		transform: translateY(-2px) scale(1.012);
+		transition-delay: 0ms;
+	}
+
+	@media (hover: none) {
+		.card-shell:active {
+			transform: scale(0.992);
+			border-color: var(--color-secondary);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.made-with-love-card,
+		.card-shell,
+		.card-title,
+		.media {
+			transition: none;
+		}
+
+		.made-with-love-card--animated[data-enter-ready='true'] .card-shell,
+		.made-with-love-card--animated[data-enter-ready='true'].is-visible
+			.card-shell {
+			opacity: 1;
+			transform: none;
+		}
+	}
 </style>

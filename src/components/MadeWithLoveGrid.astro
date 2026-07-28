@@ -1,61 +1,285 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import type { Language } from '../i18n/utils';
-import MadeWithLoveCard from './MadeWithLoveCard.astro';
+import type { CollectionEntry } from 'astro:content'
+import type { Language } from '../i18n/utils'
+import MadeWithLoveCard from './MadeWithLoveCard.astro'
 
 interface Props {
-  projects: CollectionEntry<'portfolio'>[];
-  lang: Language;
-  animateOnView?: boolean;
+	projects: CollectionEntry<'portfolio'>[]
+	lang: Language
+	animateOnView?: boolean
 }
 
-const { projects, lang, animateOnView = false } = Astro.props;
+const { projects, lang, animateOnView = false } = Astro.props
 
 const emptyMessages = {
-  en: 'No projects available yet. Check back soon!',
-  es: 'No hay proyectos disponibles aún. ¡Vuelve pronto!',
-  it: 'Nessun progetto disponibile ancora. Torna presto!',
-} satisfies Record<Language, string>;
+	en: 'No projects available yet. Check back soon!',
+	es: 'No hay proyectos disponibles aún. ¡Vuelve pronto!',
+	it: 'Nessun progetto disponibile ancora. Torna presto!',
+} satisfies Record<Language, string>
 ---
 
 {
-  projects.length === 0 ? (
-    <div class="no-projects">
-      <p>{emptyMessages[lang]}</p>
-    </div>
-  ) : (
-    <div class="projects-grid">
-      {projects.map((project, index) => (
-        <MadeWithLoveCard project={project} lang={lang} index={index} animateOnView={animateOnView} />
-      ))}
-    </div>
-  )
+	projects.length === 0 ? (
+		<div class="no-projects">
+			<p>{emptyMessages[lang]}</p>
+		</div>
+	) : (
+		<div class="projects-grid" data-crafted-grid>
+			{projects.map((project, index) => (
+				<MadeWithLoveCard
+					project={project}
+					lang={lang}
+					index={index}
+					animateOnView={animateOnView}
+				/>
+			))}
+
+			<div class="project-preview" data-project-preview aria-hidden="true">
+				<img
+					data-project-preview-image
+					alt=""
+					width="680"
+					height="425"
+					loading="lazy"
+					decoding="async"
+				/>
+			</div>
+		</div>
+	)
 }
 
+<script>
+	const initializeCraftedGrids = () => {
+		const grids = document.querySelectorAll<HTMLElement>(
+			'[data-crafted-grid]:not([data-crafted-grid-bound])',
+		)
+
+		grids.forEach((grid) => {
+			const preview = grid.querySelector<HTMLElement>('[data-project-preview]')
+			const image = grid.querySelector<HTMLImageElement>(
+				'[data-project-preview-image]',
+			)
+			const cards = Array.from(
+				grid.querySelectorAll<HTMLElement>('[data-crafted-card]'),
+			)
+			const hoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)')
+			let activeCard: HTMLElement | null = null
+			let loadToken = 0
+
+			if (!preview || !image) {
+				return
+			}
+
+			const positionPreview = (card: HTMLElement) => {
+				const cardRect = card.getBoundingClientRect()
+				const previewRect = preview.getBoundingClientRect()
+				const viewportMargin = 12
+				const overlap = Math.min(72, cardRect.height * 0.32)
+				const maxLeft = window.innerWidth - previewRect.width - viewportMargin
+				const maxTop = window.innerHeight - previewRect.height - viewportMargin
+				const preferredLeft =
+					cardRect.left + (cardRect.width - previewRect.width) / 2
+				let preferredTop = cardRect.bottom - overlap
+
+				if (preferredTop > maxTop && cardRect.top - previewRect.height + overlap > 0) {
+					preferredTop = cardRect.top - previewRect.height + overlap
+				}
+
+				const left = Math.max(
+					viewportMargin,
+					Math.min(preferredLeft, Math.max(viewportMargin, maxLeft)),
+				)
+				const top = Math.max(
+					viewportMargin,
+					Math.min(preferredTop, Math.max(viewportMargin, maxTop)),
+				)
+
+				preview.style.setProperty('--preview-left', `${Math.round(left)}px`)
+				preview.style.setProperty('--preview-top', `${Math.round(top)}px`)
+			}
+
+			const revealCard = (card: HTMLElement) => {
+				const src = card.dataset.previewSrc
+
+				if (!src) {
+					return
+				}
+
+				activeCard?.removeAttribute('data-active')
+				activeCard = card
+				activeCard.dataset.active = 'true'
+				grid.classList.add('is-interacting')
+				positionPreview(card)
+
+				if (image.dataset.projectSrc === src) {
+					preview.classList.add('is-visible')
+					return
+				}
+
+				const currentToken = ++loadToken
+				preview.classList.add('is-loading', 'is-visible')
+				image.dataset.projectSrc = src
+				image.sizes =
+					'(min-width: 1100px) 40vw, (min-width: 768px) 54vw, 0px'
+				image.srcset = card.dataset.previewSrcset ?? ''
+				image.src = src
+
+				const revealLoadedImage = () => {
+					if (currentToken !== loadToken) {
+						return
+					}
+
+					preview.classList.remove('is-loading')
+				}
+
+				if (image.complete) {
+					revealLoadedImage()
+				} else {
+					image.addEventListener('load', revealLoadedImage, { once: true })
+				}
+			}
+
+			const concealPreview = () => {
+				loadToken += 1
+				activeCard?.removeAttribute('data-active')
+				activeCard = null
+				grid.classList.remove('is-interacting')
+				preview.classList.remove('is-visible', 'is-loading')
+			}
+
+			cards.forEach((card) => {
+				const link = card.querySelector<HTMLAnchorElement>('.card-shell')
+
+				if (!link) {
+					return
+				}
+
+				link.addEventListener('pointerenter', () => {
+					if (hoverCapable.matches) {
+						revealCard(card)
+					}
+				})
+
+				link.addEventListener('pointerleave', () => {
+					if (document.activeElement !== link) {
+						concealPreview()
+					}
+				})
+
+				link.addEventListener('focus', () => revealCard(card))
+				link.addEventListener('blur', concealPreview)
+			})
+
+			window.addEventListener(
+				'resize',
+				() => {
+					if (activeCard) {
+						positionPreview(activeCard)
+					}
+				},
+				{ passive: true },
+			)
+
+			window.addEventListener(
+				'scroll',
+				() => {
+					if (activeCard) {
+						positionPreview(activeCard)
+					}
+				},
+				{ passive: true },
+			)
+
+			grid.dataset.craftedGridBound = 'true'
+		})
+	}
+
+	initializeCraftedGrids()
+	document.addEventListener('astro:page-load', initializeCraftedGrids)
+</script>
+
 <style>
-  .projects-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    align-items: stretch;
-    gap: var(--space-lg);
-  }
+	.projects-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		align-items: stretch;
+		gap: var(--space-lg);
+		isolation: isolate;
+	}
 
-  .no-projects {
-    padding: 3rem 0;
-    text-align: center;
-    font-size: 1.1rem;
-    color: var(--color-white);
-  }
+	.project-preview {
+		position: fixed;
+		top: var(--preview-top, 0);
+		left: var(--preview-left, 0);
+		z-index: 2;
+		display: grid;
+		place-items: center;
+		width: min(40rem, calc(100vw - 1.5rem));
+		aspect-ratio: 16 / 10;
+		pointer-events: none;
+		opacity: 0;
+		transform: translateY(10px) scale(0.97);
+		filter: drop-shadow(0 22px 28px rgb(0 0 0 / 0.62));
+		transition:
+			top 240ms ease,
+			left 240ms ease,
+			opacity 240ms ease,
+			transform 240ms ease;
+	}
 
-  @media (min-width: 768px) {
-    .projects-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
+	.project-preview.is-visible:not(.is-loading) {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
 
-  @media (min-width: 1100px) {
-    .projects-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
+	.project-preview img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+
+	.no-projects {
+		padding: 3rem 0;
+		text-align: center;
+		font-size: 1.1rem;
+		color: var(--color-white);
+	}
+
+	@media (min-width: 768px) {
+		.projects-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.project-preview {
+			width: min(54vw, 36rem);
+		}
+	}
+
+	@media (min-width: 1100px) {
+		.projects-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.project-preview {
+			width: min(40vw, 40rem);
+		}
+	}
+
+	@media (hover: none), (pointer: coarse), (max-width: 767px) {
+		.project-preview {
+			display: none;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.project-preview {
+			transform: none;
+			transition: opacity 1ms linear;
+		}
+
+		.project-preview.is-visible:not(.is-loading) {
+			transform: none;
+		}
+	}
 </style>
