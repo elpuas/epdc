@@ -1,0 +1,121 @@
+---
+title: "WordPress 7.1: qué cambia y por qué importa para tu negocio"
+lang: "es"
+description: "Descubre qué cambia con WordPress 7.1: diseño responsive, colaboración, imágenes e infraestructura que prepara tu sitio para IA y automatización."
+image: "/posts/wordpress-7-1-que-cambia-y-por-que-importa-para-tu-negocio/hero.webp"
+date: "2026-09-25"
+author: Alfredo Navas
+translationKey: "wordpress-7-1-business-impact"
+---
+
+import HeroImage from '../../../public/posts/wordpress-7-1-que-cambia-y-por-que-importa-para-tu-negocio/hero.webp';
+import NotesImage from '../../../public/posts/wordpress-7-1-que-cambia-y-por-que-importa-para-tu-negocio/add-notes-to-post.webp';
+import ResponsiveControls from '../../../public/posts/wordpress-7-1-que-cambia-y-por-que-importa-para-tu-negocio/epdc-responsive-controls.webp';
+import NewBlocks from '../../../public/posts/wordpress-7-1-que-cambia-y-por-que-importa-para-tu-negocio/new-nblocks-tabs.webp';
+import {Image} from 'astro:assets';
+
+<div class="blog-hero-image">
+    {HeroImage && <Image width={1020} height={510} src={HeroImage} alt="WordPress 7.1 y la evolución de WordPress como plataforma para empresas" />}
+</div>
+
+Cuando una nueva versión de WordPress aparece, es fácil perderse entre nombres de bloques, APIs y cambios de interfaz. Pero la pregunta útil para una empresa no es solamente “¿qué cambió?”, sino “¿qué trabajo será más claro, más rápido o más sostenible gracias a este cambio?”.
+
+[WordPress 7.1](https://wordpress.org/download/releases/7-1/) responde a esa pregunta en dos niveles. Por un lado, incorpora mejoras ya disponibles para diseñar, revisar contenido y gestionar imágenes. Por otro, continúa reforzando una base técnica que permite integrar automatizaciones e inteligencia artificial de forma más ordenada.
+
+No es una versión que convierta automáticamente un sitio en un asistente de IA. Tampoco elimina la necesidad de definir procesos, permisos y objetivos de negocio. Su importancia está en que hace a WordPress más capaz hoy y mejor preparado para evolucionar mañana.
+
+## Lo que ya está disponible en WordPress 7.1
+
+### Más control responsive, directamente desde el editor
+
+Un mismo contenido se consulta desde teléfonos, tabletas y computadoras. Hasta ahora, muchos ajustes para cada pantalla dependían del tema, de CSS personalizado o de pedir ayuda al equipo de desarrollo.
+
+<div class="blog-image" style="text-align: center;">
+    {ResponsiveControls && <Image width={1020} height={510} src={ResponsiveControls} alt="Controles responsive en WordPress 7.1" />}
+</div>
+
+WordPress 7.1 permite definir estilos responsive de los bloques desde el editor, tanto en los estilos globales como en bloques individuales. También incorpora controles para estados de interacción, como *hover*, *focus* y *active*. Los temas pueden configurar los puntos de corte de móvil y tableta mediante `theme.json`. Todo esto forma parte de las capacidades estables de la versión. [La documentación oficial de la versión](https://wordpress.org/download/releases/7-1/) explica el alcance de estos controles.
+
+Para marketing y contenido, el beneficio es autonomía con límites claros: ajustar la presentación de una campaña o una landing page sin convertir cada cambio visual en un ticket de desarrollo. Para producto y tecnología, el beneficio es consistencia: las reglas aprobadas en el diseño pueden vivir en la plataforma, en lugar de repetirse en soluciones puntuales.
+
+Eso no significa que cualquier persona deba rediseñar una página crítica sin revisión. Significa que un sitio bien configurado puede dar a cada equipo los controles que realmente necesita.
+
+### Notes: una conversación donde está el contenido
+
+Las aprobaciones editoriales suelen dispersarse entre correos, chats, documentos y capturas de pantalla. El resultado es conocido: alguien pide “cambiar el segundo párrafo”, pero nadie está completamente seguro de qué versión está viendo.
+
+<div class="blog-image" style="text-align: center;">
+    {NotesImage && <Image width={1020} height={510} src={NotesImage} alt="Notas en WordPress 7.1" />}
+</div>
+
+En WordPress 7.1, **Notes** permite dejar comentarios en una selección de texto, crear más de una conversación por bloque y usar texto enriquecido y menciones con notificaciones por correo. Son funciones incluidas en la versión estable, no una promesa futura. [El anuncio oficial detalla estas mejoras](https://wordpress.org/news/2026/08/mary-lou/).
+
+Para un equipo editorial, esto puede reducir pérdida de contexto y hacer más visible quién debe responder, revisar o aprobar. No reemplaza un flujo editorial ni una persona responsable de la publicación; sí acerca la conversación al activo que se está revisando.
+
+### Imágenes: menos fricción al publicar, menos carga al servidor
+
+Las imágenes grandes son una causa frecuente de publicaciones lentas, errores de carga y consumo innecesario de recursos del servidor. WordPress 7.1 rediseña el flujo de edición de medios y traslada la compresión, el redimensionamiento y la generación de miniaturas al navegador mediante una versión WebAssembly de libvips. También añade soporte integrado para AVIF, HEIC y HDR gain maps. [WordPress documenta estos cambios de media y rendimiento](https://wordpress.org/news/2026/08/mary-lou/).
+
+En términos de negocio, esto puede hacer más resiliente el trabajo de un equipo que publica fotos de productos, propiedades, eventos o campañas con frecuencia, especialmente ante archivos grandes y hosting compartido. No sustituye una estrategia de imágenes: todavía conviene definir tamaños, peso objetivo, derechos de uso y revisión visual antes de publicar.
+
+## Más capacidades nativas no significa “cero plugins”
+
+WordPress 7.1 suma bloques como Tabs y Playlist, además de otros controles que antes podían requerir una extensión o código personalizado. La tendencia es relevante: cuando una capacidad del núcleo cubre un caso real, el proyecto puede reducir dependencias externas y el mantenimiento asociado.
+
+<div class="blog-image" style="text-align: center;">
+    {NewBlocks && <Image width={1020} height={510} src={NewBlocks} alt="Nuevos bloques en WordPress 7.1" />}
+</div>
+
+La decisión correcta no es eliminar plugins por principio. Un plugin bien mantenido sigue siendo la mejor opción cuando aporta una función específica que WordPress no resuelve. La pregunta es más práctica: **¿esta dependencia agrega valor propio o solo replica una capacidad que ya ofrece la plataforma?**
+
+En EPDC preferimos partir de las capacidades nativas, configurar bien el tema y añadir extensiones únicamente cuando la necesidad del negocio lo justifica. Es una forma de mantener el sitio más fácil de actualizar, auditar y evolucionar.
+
+## La Abilities API: WordPress empieza a describir lo que puede hacer
+
+La parte menos visible de WordPress 7.1 también es una de las más interesantes para responsables técnicos y de producto. La **Abilities API**, disponible desde WordPress 6.9 y ampliada en 7.1, ofrece una forma estandarizada de registrar, descubrir y ejecutar capacidades de un sitio o de sus extensiones.
+
+Una capacidad puede tener una descripción, entradas y salidas definidas, validación y permisos. En vez de obligar a cada integración a entender internamente cada plugin, WordPress puede exponer funciones concretas de manera estructurada. [La guía oficial de la Abilities API](https://developer.wordpress.org/apis/abilities-api/) señala precisamente la descubribilidad, la validación y el control de permisos como sus beneficios; [el anuncio de 7.1](https://wordpress.org/news/2026/08/mary-lou/) confirma sus mejoras para automatización e integraciones asistidas por IA.
+
+Para una empresa, la traducción es sencilla: si mañana se quiere conectar el sitio con un CRM, una herramienta interna o una automatización, conviene que las acciones importantes estén bien definidas y protegidas. Por ejemplo: consultar disponibilidad, crear un borrador, actualizar un producto o preparar un reporte. La API no hace esas integraciones por sí sola; ofrece una infraestructura más clara para construirlas de forma responsable.
+
+## WordPress AI Client: una capa común, no un “bot” listo para activar
+
+El **WordPress AI Client** ya está integrado como una capa común para que los desarrolladores conecten funcionalidades de IA sin escribir una integración distinta para cada proveedor. El propietario del sitio elige y configura el proveedor; el plugin describe la capacidad que necesita y WordPress busca un modelo compatible. [La documentación oficial explica este enfoque independiente del proveedor](https://developer.wordpress.org/news/2026/05/how-to-build-an-image-generation-plugin-with-the-wordpress-ai-client/).
+
+Esto importa porque evita que cada función quede atada a un único modelo o a una página de credenciales separada. También ayuda a evaluar una funcionalidad de IA como parte de la arquitectura del sitio, no como un complemento aislado que se instala por tendencia.
+
+Hay una distinción importante: WordPress 7.1 no incluye un asistente visible y genérico en el panel para todos los sitios. La prioridad declarada ha sido dar una base a autores de plugins e integraciones. Cada caso de uso debe comprobar que existe un proveedor configurado, que el modelo puede realizar la tarea y que sus costes, permisos y datos son adecuados. [El equipo de IA de WordPress lo aclara en su actualización de 7.1](https://make.wordpress.org/ai/2026/06/19/whats-coming-to-the-ai-client-in-wp-7-1/).
+
+## Lo que sigue en desarrollo: streaming, embeddings y agentes
+
+Conviene separar con honestidad la plataforma disponible de la dirección que todavía se está construyendo.
+
+El trabajo de *streaming* en 7.1 se introdujo primero en el PHP AI Client, no como una capacidad naturalmente soportada por WordPress. Los servidores y alojamientos aún deben resolver solicitudes largas para que una respuesta pueda mostrarse progresivamente. Por su parte, los *embeddings* representan el significado de un contenido y pueden servir de base para búsquedas semánticas, pero la búsqueda vectorial se describe oficialmente como un experimento en el plugin de IA. [La actualización técnica de WordPress sobre AI Client](https://make.wordpress.org/ai/2026/06/19/whats-coming-to-the-ai-client-in-wp-7-1/) diferencia ambos estados.
+
+Tampoco existe un “agente de negocio” universal que pueda gestionar un sitio sin configuración. La dirección futura es más interesante y más exigente: combinar capacidades estructuradas, permisos explícitos, datos de calidad y una interfaz común para que automatizaciones o agentes puedan ayudar con tareas concretas.
+
+Ahí es donde la IA puede ir más allá de escribir otro artículo. Con un caso de uso bien delimitado, podría ayudar a encontrar contenido relacionado, preparar un borrador a partir de información aprobada, clasificar una solicitud entrante o reunir datos para una revisión humana. Para ejecutar acciones en sistemas de negocio, seguirá siendo esencial definir qué puede hacer, con qué datos, quién autoriza y cómo se revisa el resultado.
+
+## Qué debería hacer una empresa ahora
+
+No hace falta adoptar cada novedad ni transformar un sitio estable de un día para otro. Sí es un buen momento para hacer preguntas más útiles:
+
+- ¿El tema y los bloques permiten que el equipo de contenido haga ajustes responsive seguros?
+- ¿El proceso editorial tiene responsables, aprobaciones y un lugar único para el feedback?
+- ¿Las imágenes se publican con una guía de formatos, peso y derechos de uso?
+- ¿Qué plugins son realmente necesarios y cuáles duplican capacidades de WordPress?
+- ¿Qué datos y acciones del sitio deberían estar definidos antes de automatizarlos?
+
+La respuesta a estas preguntas prepara una mejor operación hoy, incluso si la empresa decide no implementar IA todavía.
+
+## WordPress 7.1 es una mejora operativa y una decisión de arquitectura
+
+Para EPDC, el valor de WordPress 7.1 no está en perseguir una etiqueta de IA. Está en construir sitios que permitan publicar mejor, colaborar con menos fricción, depender de menos piezas innecesarias y exponer capacidades de negocio de manera segura cuando haga sentido.
+
+Un WordPress moderno no es solamente un conjunto de páginas: puede reunir contenido, productos, formularios, integraciones y procesos. Si esa base está bien diseñada, será mucho más sencillo evaluar automatizaciones y herramientas de IA sin sacrificar control, seguridad ni mantenibilidad.
+
+<div class="notification">
+<p><strong>¿Quieres evaluar qué partes de tu WordPress pueden mejorar?</strong></p>
+<p>En ElPuas Digital Crafts revisamos la arquitectura, el flujo editorial y las dependencias de tu sitio para priorizar mejoras que aporten valor real hoy y lo preparen para evolucionar mañana.</p>
+<p><a href="https://elpuasdigitalcrafts.com/contact">Conversemos sobre tu proyecto →</a></p>
+</div>
