@@ -19,6 +19,7 @@
     "three": "^0.186.1"
   },
   "devDependencies": {
-    "@iconify-json/circle-flags": "^1.2.6"
+    "@iconify-json/circle-flags": "^1.2.6",
+    "@types/three": "^0.186.0"
   }
 }

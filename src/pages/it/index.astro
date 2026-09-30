@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Hero from '../../components/Hero.astro';
-import ServiceCard from '../../components/ServiceCard.astro';
+import HeroServicesJourney from '../../components/HeroServicesJourney.astro';
 import SupportTeaser from '../../components/SupportTeaser.astro';
 import HomeProjectShowcase from '../../components/HomeProjectShowcase.astro';
 import HomeProjectShowcaseVisual from '../../components/HomeProjectShowcaseVisual.astro';
@@ -14,49 +13,7 @@ const lang = 'it';
 ---
 
 <Layout {title} {description} {lang}>
-  <section class={styles.intro}>
-    <Hero {lang} />
-  </section> 
-  <section class={styles.services}>
-    <div class={`${styles.withPattern} ${styles.dotsPattern}`}>
-      <h2>A <span class={`${styles.brand} ${styles.accent}`}>ElPuas Digital Crafts</span>, non ci limitiamo a costruire siti web — creiamo piattaforme digitali ad alte prestazioni, potenziate dall'IA e supportate da manutenzione esperta per crescere con la tua attività.</h2>
-    </div>
-  </section>
-  <section class={styles.expertiseSection}>
-    <h2 class="text-gradient-brand">La Nostra Competenza</h2>
-    <p class="subtitle">Offriamo più che codice — portiamo artigianato digitale intelligente e affidabile.</p>
-  
-    <ul class={styles.servicesGrid}>
-      <li>
-        <ServiceCard 
-        icon="ph:flask" 
-        title="Sviluppo Web Personalizzato" 
-        description="Siti web su misura costruiti per velocità, prestazioni e scalabilità." 
-        href="/it/services/" />
-      </li>
-      <li>
-        <ServiceCard 
-        icon="ph:shopping-cart" 
-        title="Soluzioni E-Commerce" 
-        description="WooCommerce o headless — rendiamo la vendita senza problemi." 
-        href="/it/services/" />
-      </li>
-      <li>
-        <ServiceCard 
-        icon="ph:lifebuoy" 
-        title="Manutenzione e Supporto" 
-        description="Aggiornamenti, ottimizzazioni e tranquillità — gestiti per te." 
-        href="/it/services/#pricing-title" />
-      </li>
-      <li>
-        <ServiceCard 
-        icon="ph:mask-happy" 
-        title="Servizi White-Label" 
-        description="Costruiamo silenziosamente dietro le quinte così che la tua agenzia possa brillare." 
-        href="/it/services/" />
-      </li>
-    </ul>
-  </section>
+  <HeroServicesJourney {lang} />
   <HomeProjectShowcase
     title="Nuara Pelletterie"
     description="Ecommerce premium sviluppato per un marchio italiano di articoli artigianali in pelle."

@@ -1,0 +1,52 @@
+---
+import { formationProfiles, getFormationDepthShape } from '../data/neuralJourneyFormations';
+
+interface Props {
+  system: string;
+}
+
+const { system } = Astro.props;
+const formation = formationProfiles[system];
+const midground = formation && getFormationDepthShape(formation, 'midground');
+const background = formation && getFormationDepthShape(formation, 'background');
+---
+
+{formation && (
+  <svg class="formation-fallback" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <g class="formation-fallback__far">
+      {background!.edges.map(([from, to]) => (
+        <line x1={background!.nodes[from][0] * 100} y1={background!.nodes[from][1] * 100} x2={background!.nodes[to][0] * 100} y2={background!.nodes[to][1] * 100} />
+      ))}
+      {background!.nodes.map(([x, y]) => <circle cx={x * 100} cy={y * 100} r=".38" />)}
+    </g>
+    <g class="formation-fallback__middle">
+      {midground!.edges.map(([from, to]) => (
+        <line x1={midground!.nodes[from][0] * 100} y1={midground!.nodes[from][1] * 100} x2={midground!.nodes[to][0] * 100} y2={midground!.nodes[to][1] * 100} />
+      ))}
+      {midground!.nodes.map(([x, y]) => <circle cx={x * 100} cy={y * 100} r=".48" />)}
+    </g>
+    <g class="formation-fallback__near">
+      {formation.edges.map(([from, to, accent]) => (
+        <line class={accent === 'lime' ? 'is-accent' : undefined} x1={formation.nodes[from][0] * 100} y1={formation.nodes[from][1] * 100} x2={formation.nodes[to][0] * 100} y2={formation.nodes[to][1] * 100} />
+      ))}
+      {formation.nodes.map(([x, y], index) => (
+        <circle class={formation.anchors.includes(index) ? 'is-anchor' : undefined} cx={x * 100} cy={y * 100} r={formation.anchors.includes(index) ? 1.2 : .6} />
+      ))}
+    </g>
+  </svg>
+)}
+
+<style>
+  .formation-fallback { display: block; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+  .formation-fallback__far { opacity: .18; }
+  .formation-fallback__far line { stroke: #00fff3; stroke-width: .25; }
+  .formation-fallback__far circle { fill: #00fff3; }
+  .formation-fallback__middle { opacity: .36; }
+  .formation-fallback__middle line { stroke: #00fff3; stroke-width: .32; }
+  .formation-fallback__middle circle { fill: #00fff3; }
+  .formation-fallback__near line { stroke: #00fff3; stroke-width: .42; opacity: .64; }
+  .formation-fallback__near line.is-accent { stroke: #d8ff00; opacity: .72; }
+  .formation-fallback__near circle { fill: #00fff3; opacity: .86; }
+  .formation-fallback__near circle.is-anchor { fill: #d8ff00; filter: drop-shadow(0 0 2px #d8ff00); }
+  :global([data-neural-enhanced='true']) .formation-fallback { opacity: 0; }
+</style>

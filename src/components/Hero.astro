@@ -1,6 +1,5 @@
 ---
 import Button from './Button.astro';
-import NeuralNetworkBackground from './NeuralNetworkBackground.astro';
 
 interface Props {
   lang: string;
@@ -36,7 +35,6 @@ const content = heroContent[lang as keyof typeof heroContent] || heroContent.en;
 ---
 
 <section class="hero" aria-labelledby="hero-heading">
-  <NeuralNetworkBackground />
   <div class="hero-content">
     <p class="hero-eyebrow">{content.eyebrow}</p>
     <h1 id="hero-heading" class="text-gradient-brand">{content.headline}</h1>

@@ -1,0 +1,49 @@
+---
+import { heroBackground, heroForeground, heroMidground } from '../data/neuralHeroGraph';
+
+const x = (value: number) => (value + 5) * 100;
+const y = (value: number) => (3 - value) * 100;
+---
+
+<div class="neural-journey-background" aria-hidden="true" data-neural-background>
+  <canvas class="neural-journey-background__canvas" data-neural-canvas></canvas>
+  <svg class="neural-journey-background__fallback" viewBox="0 0 1000 600" preserveAspectRatio="xMaxYMid slice" focusable="false">
+    <g class="neural-journey-background__distant">
+      {heroBackground.edges.map(([from, to]) => <line x1={x(heroBackground.nodes[from][0])} y1={y(heroBackground.nodes[from][1])} x2={x(heroBackground.nodes[to][0])} y2={y(heroBackground.nodes[to][1])} />)}
+      {heroBackground.nodes.map(([px, py]) => <circle cx={x(px)} cy={y(py)} r="2" />)}
+    </g>
+    <g class="neural-journey-background__middle">
+      {heroMidground.edges.map(([from, to]) => <line x1={x(heroMidground.nodes[from][0])} y1={y(heroMidground.nodes[from][1])} x2={x(heroMidground.nodes[to][0])} y2={y(heroMidground.nodes[to][1])} />)}
+      {heroMidground.nodes.map(([px, py]) => <circle cx={x(px)} cy={y(py)} r="2.8" />)}
+    </g>
+    <g class="neural-journey-background__near">
+      {heroForeground.edges.map(([from, to, accent]) => <line class={accent === 'lime' ? 'is-accent' : undefined} x1={x(heroForeground.nodes[from][0])} y1={y(heroForeground.nodes[from][1])} x2={x(heroForeground.nodes[to][0])} y2={y(heroForeground.nodes[to][1])} />)}
+      {heroForeground.nodes.map(([px, py], index) => <circle class={heroForeground.anchors.some((anchor) => anchor === index) ? 'is-anchor' : undefined} cx={x(px)} cy={y(py)} r={heroForeground.anchors.some((anchor) => anchor === index) ? 5 : 3} />)}
+    </g>
+  </svg>
+</div>
+
+<script>
+  import { mountNeuralJourney } from '../scripts/neuralJourney';
+
+  document.querySelectorAll<HTMLElement>('[data-neural-journey]:not([data-neural-initialized])').forEach((root) => {
+    root.dataset.neuralInitialized = 'true';
+    void mountNeuralJourney(root);
+  });
+</script>
+
+<style>
+  .neural-journey-background { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .neural-journey-background__canvas { position: fixed; top: 0; left: 0; display: block; width: 100%; height: 100svh; opacity: 0; pointer-events: none; }
+  :global([data-neural-enhanced='true'][data-neural-active='true']) .neural-journey-background__canvas { opacity: 1; }
+  .neural-journey-background__fallback { position: absolute; top: 0; left: 0; display: block; width: 100%; height: clamp(30rem, 58vh, 40rem); overflow: hidden; pointer-events: none; }
+  .neural-journey-background__distant { opacity: .18; }
+  .neural-journey-background__middle { opacity: .34; }
+  .neural-journey-background__near { opacity: .65; }
+  .neural-journey-background__fallback line { stroke: #00fff3; stroke-width: .55; }
+  .neural-journey-background__fallback line.is-accent { stroke: #d8ff00; }
+  .neural-journey-background__fallback circle { fill: #00fff3; }
+  .neural-journey-background__fallback circle.is-anchor { fill: #d8ff00; filter: drop-shadow(0 0 4px #d8ff00); }
+  :global([data-neural-enhanced='true']) .neural-journey-background__fallback { opacity: 0; }
+  @media (max-width: 767px) { .neural-journey-background__fallback { opacity: .44; } }
+</style>

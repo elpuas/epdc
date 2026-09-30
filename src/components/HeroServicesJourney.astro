@@ -1,0 +1,39 @@
+---
+import Hero from './Hero.astro';
+import ServicesEcosystem from './ServicesEcosystem.astro';
+import NeuralJourneyBackground from './NeuralJourneyBackground.astro';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+---
+
+<div class="hero-services-journey" data-neural-journey>
+  <NeuralJourneyBackground />
+  <div class="hero-services-journey__content">
+    <div class="hero-services-journey__hero" data-journey-hero>
+      <Hero {lang} />
+    </div>
+    <ServicesEcosystem {lang} />
+    <slot />
+  </div>
+</div>
+
+<style>
+  .hero-services-journey {
+    position: relative;
+    isolation: isolate;
+    margin-top: var(--space-lg) !important;
+  }
+
+  .hero-services-journey__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-services-journey__hero {
+    margin-bottom: clamp(3rem, 6vw, 6rem);
+  }
+</style>
