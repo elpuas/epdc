@@ -1,14 +1,8 @@
 /* Intro */
 .intro {
-  max-width: 1024px;
+  max-width: none;
   width: 100%;
-
-  p {
-    font-size: var(--fontsize-h4);
-    margin-bottom: 0;
-    letter-spacing: 0.05em;
-    text-transform: capitalize;
-  }
+  margin-top: var(--space-lg) !important;
 }
 
 .withPattern {

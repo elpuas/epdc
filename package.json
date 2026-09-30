@@ -15,7 +15,8 @@
     "@astrojs/sitemap": "^3.4.1",
     "@iconify-json/ph": "^1.2.2",
     "astro": "^5.9.1",
-    "astro-icon": "^1.1.5"
+    "astro-icon": "^1.1.5",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "@iconify-json/circle-flags": "^1.2.6"

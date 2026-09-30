@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
-import Button from '../../components/Button.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import SupportTeaser from '../../components/SupportTeaser.astro';
 import HomeProjectShowcase from '../../components/HomeProjectShowcase.astro';
@@ -16,9 +15,7 @@ const lang = 'it';
 
 <Layout {title} {description} {lang}>
   <section class={styles.intro}>
-    <p>Studio piccolo, grandi risultati.</p>
     <Hero {lang} />
-    <Button href="/it/services" label="Scopri I Nostri Servizi" />
   </section> 
   <section class={styles.services}>
     <div class={`${styles.withPattern} ${styles.dotsPattern}`}>

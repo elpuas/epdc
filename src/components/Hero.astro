@@ -1,117 +1,120 @@
 ---
+import Button from './Button.astro';
+import NeuralNetworkBackground from './NeuralNetworkBackground.astro';
+
 interface Props {
   lang: string;
 }
 
 const { lang } = Astro.props;
 
-// Define the rotating verbs for each language
-const verbs = {
-    en: ['code', 'build', 'design', 'optimize'],
-    es: ['codeamos', 'creamos', 'ideamos', 'afinamos'],
-    it: ['scriviamo', 'creiamo', 'curiamo', 'ottimizziamo']
+const heroContent = {
+  en: {
+    eyebrow: 'Applied AI. Development with judgment.',
+    headline: 'Do more with less, without losing control.',
+    body: 'We combine AI, automation, and custom digital development to turn repetitive work into meaningful progress, with strategic judgment and technical quality.',
+    cta: 'Let’s talk about what we can improve',
+    href: '/en/services/',
+  },
+  es: {
+    eyebrow: 'IA aplicada. Desarrollo con criterio.',
+    headline: 'Haz más con menos, sin perder el control.',
+    body: 'Combinamos IA, automatización y desarrollo digital a medida para transformar trabajo repetitivo en avances reales, con criterio estratégico y calidad técnica.',
+    cta: 'Conversemos sobre lo que podemos mejorar',
+    href: '/es/services/',
+  },
+  it: {
+    eyebrow: 'IA applicata. Sviluppo con criterio.',
+    headline: 'Fai di più con meno, senza perdere il controllo.',
+    body: 'Combiniamo IA, automazione e sviluppo digitale su misura per trasformare il lavoro ripetitivo in progressi concreti, con visione strategica e qualità tecnica.',
+    cta: 'Parliamo di ciò che possiamo migliorare',
+    href: '/it/services/',
+  },
 };
 
-// Get the appropriate verbs for the current language
-const currentVerbs = verbs[lang as keyof typeof verbs] || verbs.en;
+const content = heroContent[lang as keyof typeof heroContent] || heroContent.en;
 ---
 
 <section class="hero" aria-labelledby="hero-heading">
-    <div class="hero-content">
-        {lang === 'en' && (
-            <h1 id="hero-heading" class="text-gradient-brand">We <span id="verb-rotator" aria-live="polite" aria-label={`Current action: ${currentVerbs[0]}`}>{currentVerbs[0]}</span> digital crafts <strong>for</strong> humans.</h1>
-        )}
-        {lang === 'es' && (
-            <h1 id="hero-heading" class="text-gradient-brand">Nosotros <span id="verb-rotator" aria-live="polite" aria-label={`Acción actual: ${currentVerbs[0]}`}>{currentVerbs[0]}</span> artes digitales <strong>para</strong> humanos.</h1>
-        )}
-        {lang === 'it' && (
-            <h1 id="hero-heading" class="text-gradient-brand">Noi <span id="verb-rotator" aria-live="polite" aria-label={`Azione attuale: ${currentVerbs[0]}`}>{currentVerbs[0]}</span> artigianato digitale <strong>per</strong> umani.</h1>
-        )}
+  <NeuralNetworkBackground />
+  <div class="hero-content">
+    <p class="hero-eyebrow">{content.eyebrow}</p>
+    <h1 id="hero-heading" class="text-gradient-brand">{content.headline}</h1>
+    <p class="hero-body">{content.body}</p>
+    <div class="hero-cta">
+      <Button href={content.href} label={content.cta} />
     </div>
+  </div>
 </section>
 
 <style>
+  .hero {
+    position: relative;
+    isolation: isolate;
+    box-sizing: border-box;
+    min-height: clamp(30rem, 58vh, 40rem);
+    overflow: hidden;
+    padding: clamp(var(--space-2xl), 5vw, 5rem);
+    display: grid;
+    align-items: center;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(90deg, rgb(0 0 0 / 76%) 0%, rgb(0 0 0 / 58%) 45%, rgb(0 0 0 / 22%) 67%, rgb(0 0 0 / 2%) 100%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 56rem;
+  }
+
+  .hero-eyebrow {
+    margin: 0 0 var(--space-lg);
+    color: var(--color-tertiary);
+    font-family: var(--font-family-heading);
+    font-size: clamp(0.875rem, 0.78rem + 0.5vw, 1.125rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    max-width: 22ch;
+    margin-bottom: var(--space-lg);
+    letter-spacing: -0.05em;
+  }
+
+  .hero-body {
+    max-width: 47ch;
+    margin: 0;
+    color: var(--color-white);
+    font-size: clamp(1.125rem, 1rem + 0.55vw, 1.45rem);
+    font-weight: 400;
+  }
+
+  .hero-cta {
+    margin-top: var(--space-xl);
+  }
+
+  @media (max-width: 767px) {
     .hero {
-        text-align: left;
+      min-height: 0;
+      padding: var(--space-2xl) var(--space-md);
     }
 
-    
+    .hero::after {
+      background: linear-gradient(90deg, rgb(0 0 0 / 94%), rgb(0 0 0 / 82%));
+    }
+
     h1 {
-        margin-bottom: 1rem;
-        letter-spacing: -0.05em;
+      font-size: clamp(3rem, 12vw, 4rem);
     }
-    
-    #verb-rotator {
-        display: inline-block;
-        min-width: 80px;
-        font-weight: inherit;
-        font-size: var(--fontsize-h1);
-        position: relative;
-        transition: opacity 0.3s ease-in-out;
-    }
+  }
 </style>
-
-<script>
-  // Wait for DOM to be fully loaded
-  document.addEventListener('DOMContentLoaded', () => {
-    // Get references to DOM elements
-    const verbRotator = document.getElementById('verb-rotator');
-    if (!verbRotator) return;
-    
-    // Get the language from the URL pathname
-    const pathLang = window.location.pathname.split('/')[1] || 'en';
-    
-    // Define the verbs for each language
-    const verbs = {
-      en: ['code', 'craft', 'build', 'design', 'optimize'],
-      es: ['codeamos', 'creamos', 'ideamos', 'afinamos'],
-      it: ['scriviamo', 'creiamo', 'curiamo', 'ottimizziamo']
-    };
-    
-    // Define labels for each language
-    const ariaLabels = {
-      en: 'Current action:',
-      es: 'Acción actual:',
-      it: 'Azione attuale:'
-    };
-    
-    // Type assertion for language key
-    type LanguageKey = keyof typeof verbs;
-    
-    // Get the appropriate verbs for the current language
-    const langKey = (pathLang in verbs) ? pathLang as LanguageKey : 'en';
-    const currentVerbs = verbs[langKey];
-    const labelPrefix = ariaLabels[langKey] || ariaLabels.en;
-    
-    let currentIndex = 0;
-    
-    // Function to update the rotating verb with null checks
-    function updateVerb() {
-      if (!verbRotator) return;
-      
-      // Fade out
-      verbRotator.style.opacity = '0';
-      
-      setTimeout(() => {
-        if (!verbRotator) return;
-        
-        // Update text and aria-label
-        currentIndex = (currentIndex + 1) % currentVerbs.length;
-        const currentVerb = currentVerbs[currentIndex];
-        verbRotator.textContent = currentVerb;
-        verbRotator.setAttribute('aria-label', `${labelPrefix} ${currentVerb}`);
-        
-        // Fade in
-        verbRotator.style.opacity = '1';
-      }, 500); // Half of the total transition time
-    }
-    
-    // Set initial opacity (with null check)
-    if (verbRotator) {
-      verbRotator.style.opacity = '1';
-    }
-    
-    // Start rotation timer (3 seconds per word)
-    setInterval(updateVerb, 3000);
-  });
-</script> 
