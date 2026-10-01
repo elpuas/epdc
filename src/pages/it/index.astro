@@ -2,7 +2,6 @@
 import Layout from '../../layouts/Layout.astro';
 import HeroServicesJourney from '../../components/HeroServicesJourney.astro';
 import SupportTeaser from '../../components/SupportTeaser.astro';
-import styles from '../../styles/Index.module.css';
 import TrustedBy from '../../components/TrustedBy.astro';
 
 const title = 'ElPuas Digital Crafts | Sviluppo Web con Amore e Precisione';
@@ -11,38 +10,15 @@ const lang = 'it';
 ---
 
 <Layout {title} {description} {lang}>
-  <HeroServicesJourney {lang} />
-  <SupportTeaser
-    title="Supporto Continuo Che Cresce Con Te"
-    description="Piani mensili per mantenere il tuo sito aggiornato, sicuro e in costante miglioramento."
-    cards={[
-      {
-        icon: 'ph:shield-check',
-        title: 'Aggiornamenti e sicurezza',
-        description: 'Mantieni WordPress, plugin e temi aggiornati con backup gestiti.',
-      },
-      {
-        icon: 'ph:code',
-        title: 'Sviluppo continuo',
-        description: 'Ore incluse per miglioramenti, modifiche e nuove funzionalità.',
-      },
-      {
-        icon: 'ph:gauge',
-        title: 'Prestazioni stabili',
-        description: 'Controlli proattivi per mantenere il sito veloce e affidabile.',
-      },
-      {
-        icon: 'ph:lightning',
-        title: 'Supporto prioritario',
-        description: 'Risposta più rapida per problemi e richieste importanti.',
-      },
-    ]}
-    ctaLabel="Esplora I Nostri Piani"
-    ctaHref="/it/services/#pricing-title"
-  />
-  <section class={styles.trustedBy}>
-    <TrustedBy title="Scelti da brand innovativi" />
-  </section>
+  <HeroServicesJourney {lang}>
+    <SupportTeaser
+      title="Il lancio è solo l’inizio."
+      description="Il tuo sito ha bisogno di cura e spazio per evolversi. Ti affianchiamo con manutenzione, supporto e miglioramenti, perché continui a rispondere alle esigenze della tua attività."
+      ctaLabel="Scopri i nostri servizi di supporto"
+      ctaHref="/it/services/#pricing-title"
+    />
+    <TrustedBy title="Brand con cui abbiamo collaborato." />
+  </HeroServicesJourney>
 </Layout>
 
 <style>

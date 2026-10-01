@@ -3,6 +3,7 @@ export type NeuralEdge = readonly [number, number, 'cyan' | 'lime'];
 
 export type FormationProfile = {
   parent: 'hero' | string;
+  parentAnchor?: number;
   branchBend: number;
   seed: number;
   phase: number;
@@ -78,9 +79,21 @@ export const formationProfiles: Record<string, FormationProfile> = {
     anchors: [0, 6], signals: [0, 6, 10],
   },
   nuara: {
-    parent: 'partner', branchBend: 150, seed: 83, phase: 5.72, drift: 0.025, signalDirection: 1, pulse: 0.44, thresholdOffset: -.015,
-    nodes: [[.48,.17],[.39,.25],[.27,.32],[.14,.28],[.07,.41],[.38,.43],[.48,.55],[.38,.72],[.23,.79],[.1,.91],[.61,.32],[.74,.24],[.87,.32],[.92,.48],[.72,.52],[.62,.66],[.77,.78],[.91,.86]],
+    parent: 'partner', branchBend: 115, seed: 83, phase: 5.72, drift: 0.025, signalDirection: 1, pulse: 0.44, thresholdOffset: .025,
+    nodes: [[.48,.1],[.39,.2],[.27,.29],[.14,.25],[.07,.38],[.38,.41],[.48,.54],[.38,.72],[.23,.79],[.1,.91],[.61,.29],[.74,.23],[.87,.31],[.92,.48],[.72,.52],[.62,.66],[.77,.78],[.91,.86]],
     edges: [[0,1,'cyan'],[1,2,'cyan'],[2,3,'cyan'],[3,4,'lime'],[1,5,'cyan'],[5,6,'cyan'],[6,7,'lime'],[7,8,'cyan'],[8,9,'cyan'],[0,10,'cyan'],[10,11,'cyan'],[11,12,'lime'],[12,13,'cyan'],[10,14,'cyan'],[14,15,'cyan'],[15,16,'lime'],[16,17,'cyan']],
     anchors: [0, 6, 14], signals: [0, 6, 10, 15],
+  },
+  support: {
+    parent: 'nuara', parentAnchor: 17, branchBend: -82, seed: 97, phase: 6.84, drift: 0.018, signalDirection: 1, pulse: 0.28, thresholdOffset: .035,
+    nodes: [[.53,.1],[.4,.14],[.28,.08],[.15,.16],[.05,.29],[.25,.32],[.09,.48],[.03,.72],[.72,.12],[.88,.04],[1.03,.15],[1.04,.35],[1.08,.56],[.98,.77],[.79,.93],[.6,.97]],
+    edges: [[0,1,'cyan'],[1,2,'cyan'],[2,3,'cyan'],[3,4,'lime'],[1,5,'cyan'],[5,6,'cyan'],[6,7,'cyan'],[0,8,'cyan'],[8,9,'lime'],[9,10,'cyan'],[8,11,'cyan'],[11,12,'cyan'],[11,13,'cyan'],[13,14,'lime'],[14,15,'cyan']],
+    anchors: [0], signals: [0, 10],
+  },
+  clients: {
+    parent: 'support', parentAnchor: 14, branchBend: -95, seed: 113, phase: 7.66, drift: 0.01, signalDirection: 1, pulse: 0.1, thresholdOffset: .02,
+    nodes: [[.54,.08],[.42,.17],[.27,.22],[.13,.34],[.03,.47],[.66,.2],[.78,.3],[.89,.4],[.98,.55],[.58,.45],[.47,.62]],
+    edges: [[0,1,'cyan'],[1,2,'cyan'],[2,3,'cyan'],[3,4,'cyan'],[0,5,'cyan'],[5,6,'cyan'],[6,7,'cyan'],[7,8,'cyan'],[1,9,'cyan'],[9,10,'cyan']],
+    anchors: [0], signals: [],
   },
 };

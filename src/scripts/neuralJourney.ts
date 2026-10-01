@@ -35,6 +35,7 @@ export async function mountNeuralJourney(root: HTMLElement) {
   const canvas = root.querySelector<HTMLCanvasElement>('[data-neural-canvas]');
   const hero = root.querySelector<HTMLElement>('[data-journey-hero]');
   const cards = [...root.querySelectorAll<HTMLElement>('[data-neural-formation]')];
+  const closing = root.querySelector<HTMLElement>('[data-neural-clients]');
   if (!canvas || !hero || !cards.length) return;
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -171,7 +172,7 @@ export async function mountNeuralJourney(root: HTMLElement) {
           anchorColors.set(color.map((channel) => channel * birth * options.intensity), index * 3);
           if (glows[index]) {
             glows[index].position.set(...position);
-            glows[index].material.opacity = birth * (.13 + (Math.sin(time * pulse + index * 1.35) + 1) * .06);
+            glows[index].material.opacity = birth * (.13 + (Math.sin(time * pulse + index * 1.35) + 1) * .06) * (options.intensity < .2 ? options.intensity : 1);
           }
         });
 
@@ -211,14 +212,16 @@ export async function mountNeuralJourney(root: HTMLElement) {
     const formations = cards.map((card) => {
       const profile = formationProfiles[card.dataset.neuralFormation || 'build'];
       const isProject = card.hasAttribute('data-neural-project');
+      const isSupport = card.hasAttribute('data-neural-support');
+      const isClients = card.hasAttribute('data-neural-clients');
       const visual = card.querySelector<HTMLElement>('[data-neural-visual]')!;
       const title = card.querySelector<HTMLElement>('[data-neural-title]')!;
       const copy = card.querySelector<HTMLElement>('[data-neural-copy]')!;
       const midShape = getFormationDepthShape(profile, 'midground');
       const backgroundShape = getFormationDepthShape(profile, 'background');
-      const foreground = createGraph(profile, { plane: 'foreground', pointSize: 4.1, anchorSize: 7.5, signalSize: 5.5, pointOpacity: .86, lineOpacity: isProject ? .4 : .57, intensity: isProject ? .72 : 1, signalSpeed: .12 + profile.phase * .012, signalDirection: profile.signalDirection, driftPx: profile.drift * 100, seed: profile.seed, mobileLimit: isProject ? 12 : 9 });
-      const midground = createGraph(midShape, { plane: 'midground', pointSize: 3.1, anchorSize: 4.5, signalSize: 3.6, pointOpacity: .52, lineOpacity: .29, intensity: isProject ? .38 : .5, signalSpeed: .07 + profile.phase * .006, signalDirection: profile.signalDirection, driftPx: profile.drift * 55, seed: profile.seed + 107, mobileLimit: 6 });
-      const background = createGraph(backgroundShape, { plane: 'background', pointSize: 2.5, anchorSize: 0, signalSize: 0, pointOpacity: .3, lineOpacity: .19, intensity: isProject ? .25 : .34, signalSpeed: 0, driftPx: profile.drift * 25, seed: profile.seed + 211, mobileLimit: 5 });
+      const foreground = createGraph(profile, { plane: 'foreground', pointSize: isClients ? 2.4 : isSupport ? 3.2 : 4.1, anchorSize: isClients ? 3.5 : isSupport ? 5.5 : 7.5, signalSize: isClients ? 0 : isSupport ? 4 : 5.5, pointOpacity: isClients ? .45 : isSupport ? .65 : .86, lineOpacity: isClients ? .16 : isSupport ? .24 : isProject ? .4 : .57, intensity: isClients ? .18 : isSupport ? .32 : isProject ? .72 : 1, signalSpeed: isClients ? 0 : isSupport ? .095 : .12 + profile.phase * .012, signalDirection: profile.signalDirection, driftPx: profile.drift * 100, seed: profile.seed, mobileLimit: isClients ? 6 : isSupport ? 8 : isProject ? 12 : 9 });
+      const midground = createGraph(isClients ? { ...midShape, signals: [] } : midShape, { plane: 'midground', pointSize: isClients ? 2 : isSupport ? 2.5 : 3.1, anchorSize: isClients ? 0 : 4.5, signalSize: isClients ? 0 : isSupport ? 2.8 : 3.6, pointOpacity: isClients ? .35 : .52, lineOpacity: isClients ? .12 : isSupport ? .17 : .29, intensity: isClients ? .09 : isSupport ? .17 : isProject ? .38 : .5, signalSpeed: isClients ? 0 : .07 + profile.phase * .006, signalDirection: profile.signalDirection, driftPx: profile.drift * 55, seed: profile.seed + 107, mobileLimit: isClients ? 4 : 6 });
+      const background = createGraph(backgroundShape, { plane: 'background', pointSize: isClients ? 1.7 : 2.5, anchorSize: 0, signalSize: 0, pointOpacity: isClients ? .2 : .3, lineOpacity: isClients ? .08 : isSupport ? .1 : .19, intensity: isClients ? .05 : isSupport ? .1 : isProject ? .25 : .34, signalSpeed: 0, driftPx: profile.drift * 25, seed: profile.seed + 211, mobileLimit: isClients ? 3 : 5 });
       return { card, visual, title, copy, profile, foreground, midground, background, midShape, backgroundShape, bounds: visual.getBoundingClientRect(), progress: 0 };
     });
 
@@ -256,14 +259,14 @@ export async function mountNeuralJourney(root: HTMLElement) {
         lineMaterial.opacity = lineOpacity * (mobile.matches ? .68 : 1);
         bridges.forEach(({ from, to, bend }, index) => {
           const destination = formations[to].foreground.positions[0];
-          const origin = from < 0 ? heroSource : formations[from].foreground.positions[0];
+          const origin = from < 0 ? heroSource : formations[from].foreground.positions[formations[to].profile.parentAnchor ?? 0];
           const depth = planeZ[plane];
           const offsetX = plane === 'foreground' ? 0 : plane === 'midground' ? 38 : -52;
           const offsetY = plane === 'foreground' ? 0 : plane === 'midground' ? -28 : 42;
           const source: Position = [origin[0] + offsetX, origin[1] + offsetY, depth];
           const target: Position = [destination[0] + offsetX, destination[1] + offsetY, depth];
           const progress = clamp((formations[to].progress + (plane === 'background' ? .2 : .13)) / (plane === 'foreground' ? .65 : .85));
-          const intensity = plane === 'foreground' ? .72 : plane === 'midground' ? .47 : .28;
+          const intensity = (plane === 'foreground' ? .72 : plane === 'midground' ? .47 : .28) * (formations[to].card.hasAttribute('data-neural-clients') ? .22 : formations[to].card.hasAttribute('data-neural-support') ? .48 : 1);
           for (let segment = 0; segment < segments; segment++) {
             const a = curvePoint(source, target, bend * (plane === 'foreground' ? 1 : plane === 'midground' ? .6 : 1.28), segment / segments * progress);
             const b = curvePoint(source, target, bend * (plane === 'foreground' ? 1 : plane === 'midground' ? .6 : 1.28), (segment + 1) / segments * progress);
@@ -313,8 +316,10 @@ export async function mountNeuralJourney(root: HTMLElement) {
       formations.forEach((formation) => {
         formation.bounds = formation.visual.getBoundingClientRect();
         formation.progress = clamp((viewportHeight * .95 - formation.bounds.top) / (viewportHeight * .7) + formation.profile.thresholdOffset);
-        const title = smooth(.58, .77, formation.progress);
-        const copy = smooth(.75, .95, formation.progress);
+        const isSupport = formation.card.hasAttribute('data-neural-support');
+        const isClients = formation.card.hasAttribute('data-neural-clients');
+        const title = isClients ? smooth(.25, .5, formation.progress) : isSupport ? smooth(.32, .6, formation.progress) : smooth(.58, .77, formation.progress);
+        const copy = isClients ? smooth(.42, .68, formation.progress) : isSupport ? smooth(.55, .82, formation.progress) : smooth(.75, .95, formation.progress);
         formation.title.style.setProperty('--reveal-opacity', String(title));
         formation.title.style.setProperty('--reveal-rise', `${(1 - title) * 18}px`);
         formation.copy.style.setProperty('--reveal-opacity', String(copy));
@@ -322,7 +327,7 @@ export async function mountNeuralJourney(root: HTMLElement) {
         if (formation.card.hasAttribute('data-neural-project')) {
           const image = formation.card.querySelector<HTMLElement>('[data-neural-project-image]');
           const details = formation.card.querySelector<HTMLElement>('[data-neural-project-details]');
-          const imageReveal = smooth(.48, .76, formation.progress);
+          const imageReveal = smooth(.57, .81, formation.progress);
           const detailsReveal = smooth(.8, .98, formation.progress);
           image?.style.setProperty('--project-reveal-opacity', String(imageReveal));
           image?.style.setProperty('--project-reveal-rise', `${(1 - imageReveal) * 24}px`);
@@ -330,6 +335,10 @@ export async function mountNeuralJourney(root: HTMLElement) {
           details?.style.setProperty('--project-reveal-rise', `${(1 - detailsReveal) * 12}px`);
         }
       });
+      if (closing) {
+        const top = closing.getBoundingClientRect().top;
+        root.style.setProperty('--neural-journey-opacity', String(smooth(-viewportHeight * .1, viewportHeight * .9, top)));
+      }
       const width = Math.max(1, Math.round(wrapperBounds.width));
       const height = Math.max(1, Math.round(viewportHeight));
       if (canvas.width !== Math.round(width * renderer.getPixelRatio()) || canvas.height !== Math.round(height * renderer.getPixelRatio())) {

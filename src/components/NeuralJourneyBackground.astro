@@ -35,7 +35,7 @@ const y = (value: number) => (3 - value) * 100;
 <style>
   .neural-journey-background { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
   .neural-journey-background__canvas { position: fixed; top: 0; left: 0; display: block; width: 100%; height: 100svh; opacity: 0; pointer-events: none; }
-  :global([data-neural-enhanced='true'][data-neural-active='true']) .neural-journey-background__canvas { opacity: 1; }
+  :global([data-neural-enhanced='true'][data-neural-active='true']) .neural-journey-background__canvas { opacity: var(--neural-journey-opacity, 1); }
   .neural-journey-background__fallback { position: absolute; top: 0; left: 0; display: block; width: 100%; height: clamp(30rem, 58vh, 40rem); overflow: hidden; pointer-events: none; }
   .neural-journey-background__distant { opacity: .18; }
   .neural-journey-background__middle { opacity: .34; }

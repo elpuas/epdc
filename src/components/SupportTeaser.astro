@@ -1,94 +1,100 @@
 ---
-import Button from './Button.astro';
-import ServiceCard from './ServiceCard.astro';
-import styles from '../styles/Index.module.css';
-
-interface SupportCard {
-  icon: string;
-  title: string;
-  description: string;
-}
+import ServiceFormationFallback from './ServiceFormationFallback.astro';
 
 interface Props {
   title: string;
   description: string;
-  cards: SupportCard[];
   ctaLabel: string;
   ctaHref: string;
 }
 
-const { title, description, cards, ctaLabel, ctaHref } = Astro.props as Props;
+const { title, description, ctaLabel, ctaHref } = Astro.props as Props;
 ---
 
-<section class="support-teaser" aria-labelledby="support-teaser-title">
-  <div class="support-copy">
-    <h3 id="support-teaser-title" class="text-gradient-brand">{title}</h3>
-    <p>{description}</p>
+<section class="support-teaser" aria-labelledby="support-teaser-title" data-neural-formation="support" data-neural-support>
+  <div class="support-teaser__network" data-neural-visual aria-hidden="true">
+    <ServiceFormationFallback system="support" />
   </div>
 
-  <ul class={`${styles.servicesGrid} support-grid`}>
-    {
-      cards.map((card, index) => (
-        <li style={`--service-enter-delay: ${0.08 + index * 0.1}s;`}>
-          <ServiceCard
-            icon={card.icon}
-            title={card.title}
-            description={card.description}
-            href={ctaHref}
-          />
-        </li>
-      ))
-    }
-  </ul>
+  <h2 id="support-teaser-title" class="text-gradient-brand" data-neural-title>{title}</h2>
 
-  <div class="support-cta">
-    <Button href={ctaHref} label={ctaLabel} />
+  <div class="support-teaser__content" data-neural-copy>
+    <p>{description}</p>
+    <a class="support-teaser__link" href={ctaHref}>{ctaLabel} <span aria-hidden="true">→</span></a>
   </div>
 </section>
 
 <style>
   .support-teaser {
+    position: relative;
     display: grid;
-    gap: clamp(var(--space-xl), 4vw, var(--space-3xl));
-    padding-block: var(--space-2xl);
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+    gap: clamp(2rem, 7vw, 7rem);
+    align-items: start;
+    padding: clamp(2.5rem, 5vw, 4.5rem) clamp(.5rem, 2vw, 2rem) clamp(3.5rem, 6vw, 5rem);
+    isolation: isolate;
   }
 
-  .support-copy {
-    text-align: center;
+  .support-teaser__network {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: .22;
+    mask-image: linear-gradient(90deg, #000 0%, transparent 42%, transparent 64%, #000 100%);
   }
 
-  .support-copy h3 {
-    margin: 0 0 var(--space-md);
-    font-size: var(--fontsize-h2);
-    text-align: center;
+  .support-teaser h2 {
+    position: relative;
+    z-index: 1;
+    max-width: 15ch;
+    margin: 0;
+    font-size: clamp(2.35rem, 4.2vw, 4.3rem);
+    line-height: 1.05;
+    letter-spacing: -.055em;
   }
 
-  .support-copy p {
-    margin: 0 auto;
-    color: var(--color-tertiary);
-    font-size: var(--fontsize-editorial);
-    line-height: var(--lineheight-editorial);
+  .support-teaser__content { position: relative; z-index: 1; max-width: 31rem; }
+  .support-teaser__content p {
+    margin: 0;
+    color: color-mix(in srgb, var(--color-white) 84%, var(--color-primary));
+    font-size: clamp(1.1rem, 1rem + .45vw, 1.4rem);
+    line-height: 1.55;
   }
 
-  .support-grid {
-    row-gap: clamp(var(--space-lg), 3vw, var(--space-2xl));
-    margin-top: 0;
-
-    li {
-      min-height: 136px;
-    }
+  .support-teaser__link {
+    display: inline-block;
+    max-width: 100%;
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
+    padding-bottom: .35rem;
+    border-bottom: 1px solid var(--color-secondary);
+    color: var(--color-secondary);
+    font-size: clamp(1.05rem, 1rem + .3vw, 1.3rem);
+    font-weight: 600;
+    text-decoration: none;
   }
 
-  .support-cta {
-    display: flex;
-    justify-content: center;
+  .support-teaser__link span { display: inline-block; margin-left: .4rem; transition: transform .25s ease; }
+  .support-teaser__link:hover, .support-teaser__link:focus-visible { color: var(--color-tertiary); border-color: var(--color-tertiary); }
+  .support-teaser__link:hover span, .support-teaser__link:focus-visible span { transform: translateX(.25rem); }
+  .support-teaser__link:focus-visible { outline: 2px solid var(--color-tertiary); outline-offset: 5px; }
+
+  :global([data-neural-enhanced='true']) [data-neural-title],
+  :global([data-neural-enhanced='true']) [data-neural-copy] {
+    opacity: var(--reveal-opacity, 1);
+    transform: translateY(var(--reveal-rise, 0px));
+  }
+
+  .support-teaser:focus-within [data-neural-title],
+  .support-teaser:focus-within [data-neural-copy] { opacity: 1 !important; transform: none !important; }
+
+  @media (max-width: 767px) {
+    .support-teaser { grid-template-columns: 1fr; gap: 1.7rem; padding-block: 3rem 4.5rem; }
+    .support-teaser h2 { max-width: 18ch; font-size: clamp(2.25rem, 8vw, 3.2rem); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .support-grid :global(.service-card) {
-      opacity: 1;
-      transform: none;
-      animation: none;
-    }
+    [data-neural-title], [data-neural-copy] { opacity: 1 !important; transform: none !important; }
+    .support-teaser__link span { transition: none; }
   }
 </style>

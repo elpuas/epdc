@@ -12,8 +12,6 @@ const copy = {
     eyebrow: 'CAPACIDADES DIGITALES',
     heading: 'Qué hacemos',
     intro: 'Entregamos más que código. Construimos sistemas digitales que ayudan a tu negocio a avanzar.',
-    valueHeading: 'No construimos solo sitios web. Creamos capacidad para crecer.',
-    valueCopy: 'Unimos desarrollo a medida, automatización e IA aplicada para convertir lo complejo en sistemas más claros y útiles.',
     services: [
       { title: 'Desarrollo web personalizado', description: 'Sitios web a medida, diseñados para rendir, evolucionar y apoyar objetivos reales de negocio.', href: '/es/services/', system: 'build' },
       { title: 'Soluciones de comercio electrónico', description: 'Experiencias de comercio digital claras, integradas y preparadas para que vender sea más simple.', href: '/es/services/', system: 'sell' },
@@ -25,8 +23,6 @@ const copy = {
     eyebrow: 'DIGITAL CAPABILITIES',
     heading: 'What we do',
     intro: 'We deliver more than code. We build digital systems that help your business move forward.',
-    valueHeading: 'We don’t just build websites. We create capacity to grow.',
-    valueCopy: 'We bring together custom development, automation and applied AI to turn complexity into clearer, more useful systems.',
     services: [
       { title: 'Custom web development', description: 'Tailored websites designed to perform, evolve and support meaningful business goals.', href: '/en/services/', system: 'build' },
       { title: 'E-commerce solutions', description: 'Clear, integrated digital commerce experiences that make selling simpler.', href: '/en/services/', system: 'sell' },
@@ -38,8 +34,6 @@ const copy = {
     eyebrow: 'CAPACITÀ DIGITALI',
     heading: 'Cosa facciamo',
     intro: 'Offriamo più del codice. Costruiamo sistemi digitali che aiutano la tua attività ad andare avanti.',
-    valueHeading: 'Non costruiamo solo siti web. Creiamo la capacità di crescere.',
-    valueCopy: 'Uniamo sviluppo su misura, automazione e IA applicata per trasformare la complessità in sistemi più chiari e utili.',
     services: [
       { title: 'Sviluppo web personalizzato', description: 'Siti su misura, progettati per funzionare, evolvere e sostenere obiettivi di business concreti.', href: '/it/services/', system: 'build' },
       { title: 'Soluzioni e-commerce', description: 'Esperienze di commercio digitale chiare e integrate, pensate per rendere la vendita più semplice.', href: '/it/services/', system: 'sell' },
@@ -75,14 +69,10 @@ const content = copy[lang as keyof typeof copy] || copy.en;
     ))}
   </ul>
 
-  <section class="services-value" aria-labelledby="services-value-heading">
-    <div><h2 id="services-value-heading">{content.valueHeading}</h2></div>
-    <p>{content.valueCopy}</p>
-  </section>
 </section>
 
 <style>
-  .services-ecosystem { position: relative; display: grid; gap: clamp(4rem, 8vw, 7rem); padding-block: clamp(2rem, 5vw, 4rem) clamp(5rem, 9vw, 8rem); }
+  .services-ecosystem { position: relative; display: grid; gap: clamp(4rem, 8vw, 7rem); padding-block: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 3vw, 3rem); }
   .services-heading { position: relative; max-width: 50rem; }
   .services-eyebrow { margin: 0 0 var(--space-md); color: var(--color-tertiary); font-family: var(--font-family-heading); font-size: clamp(.75rem, .7rem + .35vw, 1rem); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
   .services-heading h2 { margin-bottom: var(--space-md); font-size: clamp(3rem, 6vw, 5.5rem); }
@@ -105,17 +95,13 @@ const content = copy[lang as keyof typeof copy] || copy.en;
   .molecular-service__content p { max-width: 48ch; margin: 0; color: color-mix(in srgb, var(--color-secondary) 82%, var(--color-tertiary)); font-size: clamp(1rem, .95rem + .16vw, 1.12rem); line-height: 1.55; }
   :global([data-neural-enhanced='true']) [data-neural-title], :global([data-neural-enhanced='true']) [data-neural-copy] { opacity: var(--reveal-opacity, 1); transform: translateY(var(--reveal-rise, 0px)); }
   .molecular-service:focus-visible [data-neural-title], .molecular-service:focus-visible [data-neural-copy] { opacity: 1 !important; transform: none !important; }
-  .services-value { position: relative; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(16rem, .7fr); gap: clamp(var(--space-xl), 6vw, var(--space-4xl)); align-items: end; padding: clamp(2rem, 5vw, 4rem); background: radial-gradient(circle at 86% 12%, rgb(0 255 243 / 9%), transparent 20rem); }
-  .services-value h2 { max-width: 15ch; margin: 0; color: var(--color-secondary); font-size: clamp(2.2rem, 4vw, 4.5rem); line-height: 1.03; }
-  .services-value > p { max-width: 34ch; margin: 0; color: var(--color-tertiary); font-size: clamp(1.05rem, 1rem + .22vw, 1.25rem); line-height: 1.55; }
   @media (max-width: 767px) {
     .services-ecosystem { gap: 3.5rem; }
-    .services-grid, .services-value { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
     .services-grid { row-gap: 3.5rem; }
     .services-grid li:nth-child(n) { grid-column: 1; margin-top: 0; }
     .services-grid li:nth-child(even) { margin-left: 1rem; }
     .molecular-service__visual, .molecular-service--sell .molecular-service__visual, .molecular-service--care .molecular-service__visual, .molecular-service--partner .molecular-service__visual { height: 11rem; }
-    .services-value { gap: var(--space-lg); padding-inline: .5rem; }
   }
   @media (prefers-reduced-motion: reduce) {
     [data-neural-title], [data-neural-copy] { opacity: 1 !important; transform: none !important; }

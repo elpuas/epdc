@@ -2,7 +2,6 @@
 import Layout from '../../layouts/Layout.astro';
 import HeroServicesJourney from '../../components/HeroServicesJourney.astro';
 import SupportTeaser from '../../components/SupportTeaser.astro';
-import styles from '../../styles/Index.module.css';
 import TrustedBy from '../../components/TrustedBy.astro';
 
 const title = 'ElPuas Digital Crafts | Desarrollo Web con Amor y Precisión';
@@ -11,38 +10,15 @@ const lang = 'es';
 ---
 
 <Layout {title} {description} {lang}>
-  <HeroServicesJourney {lang} />
-  <SupportTeaser
-    title="Planes por Suscripción"
-    description="Planes mensuales para mantener tu sitio actualizado, seguro y en constante mejora."
-    cards={[
-      {
-        icon: 'ph:shield-check',
-        title: 'Actualizaciones y seguridad',
-        description: 'Mantén WordPress, plugins y temas al día con copias de seguridad gestionadas.',
-      },
-      {
-        icon: 'ph:code',
-        title: 'Desarrollo continuo',
-        description: 'Horas incluidas para mejoras, ajustes y nuevas funcionalidades.',
-      },
-      {
-        icon: 'ph:gauge',
-        title: 'Rendimiento estable',
-        description: 'Revisiones proactivas para mantener el sitio rápido y confiable.',
-      },
-      {
-        icon: 'ph:lightning',
-        title: 'Soporte prioritario',
-        description: 'Atención rápida para incidencias y solicitudes importantes.',
-      },
-    ]}
-    ctaLabel="Explora Nuestros Planes"
-    ctaHref="/es/services/#pricing-title"
-  />
-  <section class={styles.trustedBy}>
-    <TrustedBy title="Con la confianza de marcas visionarias" />
-  </section>
+  <HeroServicesJourney {lang}>
+    <SupportTeaser
+      title="El lanzamiento es solo el comienzo."
+      description="Tu sitio necesita cuidado y espacio para evolucionar. Te acompañamos con mantenimiento, soporte y mejoras para que siga respondiendo a las necesidades de tu negocio."
+      ctaLabel="Conoce nuestros servicios de soporte"
+      ctaHref="/es/services/#pricing-title"
+    />
+    <TrustedBy title="Marcas con las que hemos trabajado." />
+  </HeroServicesJourney>
 </Layout>
 
 <style>
