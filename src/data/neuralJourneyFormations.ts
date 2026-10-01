@@ -77,4 +77,10 @@ export const formationProfiles: Record<string, FormationProfile> = {
     edges: [[0,1,'lime'],[1,2,'cyan'],[2,3,'cyan'],[1,4,'cyan'],[4,5,'lime'],[0,6,'cyan'],[6,7,'cyan'],[7,8,'lime'],[6,9,'cyan'],[9,10,'cyan'],[10,11,'lime'],[10,12,'cyan'],[6,13,'cyan']],
     anchors: [0, 6], signals: [0, 6, 10],
   },
+  nuara: {
+    parent: 'partner', branchBend: 150, seed: 83, phase: 5.72, drift: 0.025, signalDirection: 1, pulse: 0.44, thresholdOffset: -.015,
+    nodes: [[.48,.17],[.39,.25],[.27,.32],[.14,.28],[.07,.41],[.38,.43],[.48,.55],[.38,.72],[.23,.79],[.1,.91],[.61,.32],[.74,.24],[.87,.32],[.92,.48],[.72,.52],[.62,.66],[.77,.78],[.91,.86]],
+    edges: [[0,1,'cyan'],[1,2,'cyan'],[2,3,'cyan'],[3,4,'lime'],[1,5,'cyan'],[5,6,'cyan'],[6,7,'lime'],[7,8,'cyan'],[8,9,'cyan'],[0,10,'cyan'],[10,11,'cyan'],[11,12,'lime'],[12,13,'cyan'],[10,14,'cyan'],[14,15,'cyan'],[15,16,'lime'],[16,17,'cyan']],
+    anchors: [0, 6, 14], signals: [0, 6, 10, 15],
+  },
 };

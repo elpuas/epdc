@@ -67,7 +67,7 @@ const content = copy[lang as keyof typeof copy] || copy.en;
             <ServiceFormationFallback system={service.system} />
           </div>
           <div class="molecular-service__content">
-            <h3 data-neural-title>{service.title}</h3>
+            <h3 class="text-gradient-brand" data-neural-title>{service.title}</h3>
             <p data-neural-copy>{service.description}</p>
           </div>
         </a>
@@ -101,6 +101,7 @@ const content = copy[lang as keyof typeof copy] || copy.en;
   .molecular-service--partner .molecular-service__visual { height: clamp(13rem, 22vw, 18rem); }
   .molecular-service__content { max-width: 38rem; padding-top: clamp(1.5rem, 2vw, 2rem); }
   .molecular-service__content h3 { max-width: 18ch; margin: 0 0 var(--space-sm); color: var(--color-secondary); font-size: clamp(1.8rem, 2.6vw, 2.7rem); line-height: 1.04; letter-spacing: -.05em; }
+  .molecular-service__content h3.text-gradient-brand { color: transparent; }
   .molecular-service__content p { max-width: 48ch; margin: 0; color: color-mix(in srgb, var(--color-secondary) 82%, var(--color-tertiary)); font-size: clamp(1rem, .95rem + .16vw, 1.12rem); line-height: 1.55; }
   :global([data-neural-enhanced='true']) [data-neural-title], :global([data-neural-enhanced='true']) [data-neural-copy] { opacity: var(--reveal-opacity, 1); transform: translateY(var(--reveal-rise, 0px)); }
   .molecular-service:focus-visible [data-neural-title], .molecular-service:focus-visible [data-neural-copy] { opacity: 1 !important; transform: none !important; }

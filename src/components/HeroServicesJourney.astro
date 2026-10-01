@@ -1,6 +1,7 @@
 ---
 import Hero from './Hero.astro';
 import ServicesEcosystem from './ServicesEcosystem.astro';
+import FeaturedProjectJourney from './FeaturedProjectJourney.astro';
 import NeuralJourneyBackground from './NeuralJourneyBackground.astro';
 
 interface Props {
@@ -17,6 +18,7 @@ const { lang } = Astro.props;
       <Hero {lang} />
     </div>
     <ServicesEcosystem {lang} />
+    <FeaturedProjectJourney {lang} />
     <slot />
   </div>
 </div>

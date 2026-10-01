@@ -2,8 +2,6 @@
 import Layout from '../../layouts/Layout.astro';
 import HeroServicesJourney from '../../components/HeroServicesJourney.astro';
 import SupportTeaser from '../../components/SupportTeaser.astro';
-import HomeProjectShowcase from '../../components/HomeProjectShowcase.astro';
-import HomeProjectShowcaseVisual from '../../components/HomeProjectShowcaseVisual.astro';
 import styles from '../../styles/Index.module.css';
 import TrustedBy from '../../components/TrustedBy.astro';
 
@@ -14,25 +12,6 @@ const lang = 'es';
 
 <Layout {title} {description} {lang}>
   <HeroServicesJourney {lang} />
-  <HomeProjectShowcase
-    title="Nuara Pelletterie"
-    description="Ecommerce premium desarrollado para una marca italiana de artículos artesanales en cuero."
-    linkLabel="Ver Proyecto"
-    tags={[
-      { icon: 'ph:shopping-cart', label: 'WooCommerce' },
-      { icon: 'ph:pencil-line', label: 'Diseño Personalizado' },
-      { icon: 'ph:globe-hemisphere-west', label: 'Multilenguaje' },
-      { icon: 'ph:headset', label: 'Soporte Continuo' },
-    ]}
-    tagsLabel="Características del proyecto"
-    href="/es/crafted-with-love/nuara-pelletterie-ecommerce-es/"
-  >
-    <HomeProjectShowcaseVisual
-      slot="visual"
-      src="/portfolio/nuara-mobile.webp"
-      alt="Vista del proyecto Nuara Pelletterie en la homepage"
-    />
-  </HomeProjectShowcase>
   <SupportTeaser
     title="Planes por Suscripción"
     description="Planes mensuales para mantener tu sitio actualizado, seguro y en constante mejora."

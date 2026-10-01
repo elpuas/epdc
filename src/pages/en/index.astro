@@ -2,8 +2,6 @@
 import Layout from '../../layouts/Layout.astro';
 import HeroServicesJourney from '../../components/HeroServicesJourney.astro';
 import SupportTeaser from '../../components/SupportTeaser.astro';
-import HomeProjectShowcase from '../../components/HomeProjectShowcase.astro';
-import HomeProjectShowcaseVisual from '../../components/HomeProjectShowcaseVisual.astro';
 import styles from '../../styles/Index.module.css';
 import TrustedBy from '../../components/TrustedBy.astro';
 
@@ -14,25 +12,6 @@ const lang = 'en';
 
 <Layout {title} {description} {lang}>
   <HeroServicesJourney {lang} />
-    <HomeProjectShowcase
-      title="Nuara Pelletterie"
-      description="Premium ecommerce experience developed for an Italian handcrafted leather goods brand."
-      linkLabel="View Project"
-      tags={[
-        { icon: 'ph:shopping-cart', label: 'WooCommerce' },
-        { icon: 'ph:pencil-line', label: 'Custom Design' },
-        { icon: 'ph:globe-hemisphere-west', label: 'Multilingual' },
-        { icon: 'ph:headset', label: 'Ongoing Support' },
-      ]}
-      tagsLabel="Project features"
-      href="/en/crafted-with-love/nuara-pelletterie-ecommerce-en/"
-    >
-      <HomeProjectShowcaseVisual
-        slot="visual"
-        src="/portfolio/epdc-nuara-card.webp"
-        alt="Nuara Pelletterie project showcase image"
-      />
-    </HomeProjectShowcase>
     <SupportTeaser
       title="Ongoing Support That Grows With You"
       description="Monthly plans to keep your website updated, secure, and continuously improving."

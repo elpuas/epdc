@@ -1,0 +1,112 @@
+---
+import ServiceFormationFallback from './ServiceFormationFallback.astro';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+
+const copy = {
+  es: {
+    eyebrow: 'DE LAS IDEAS A LO REAL',
+    description: 'Ecommerce premium desarrollado para una marca italiana de artículos artesanales en cuero.',
+    link: 'Explorar el proyecto',
+    capabilities: ['WooCommerce', 'Diseño personalizado', 'Multilenguaje', 'Soporte continuo'],
+    href: '/es/crafted-with-love/nuara-pelletterie-ecommerce-es/',
+    imageAlt: 'Vista de la tienda Nuara Pelletterie en una pantalla de escritorio',
+  },
+  en: {
+    eyebrow: 'FROM IDEAS TO REALITY',
+    description: 'Premium ecommerce experience developed for an Italian handcrafted leather goods brand.',
+    link: 'Explore the project',
+    capabilities: ['WooCommerce', 'Custom design', 'Multilingual', 'Ongoing support'],
+    href: '/en/crafted-with-love/nuara-pelletterie-ecommerce-en/',
+    imageAlt: 'Nuara Pelletterie online store displayed on a desktop screen',
+  },
+  it: {
+    eyebrow: 'DALLE IDEE ALLA REALTÀ',
+    description: 'Ecommerce premium sviluppato per un marchio italiano di articoli artigianali in pelle.',
+    link: 'Esplora il progetto',
+    capabilities: ['WooCommerce', 'Design personalizzato', 'Multilingua', 'Supporto continuo'],
+    href: '/it/crafted-with-love/nuara-pelletterie-ecommerce-it/',
+    imageAlt: 'Il negozio online Nuara Pelletterie su uno schermo desktop',
+  },
+} as const;
+
+const content = copy[lang as keyof typeof copy] || copy.en;
+---
+
+<section class="featured-project" aria-labelledby="featured-project-title" data-neural-formation="nuara" data-neural-project>
+  <div class="featured-project__network" data-neural-visual aria-hidden="true">
+    <ServiceFormationFallback system="nuara" />
+  </div>
+
+  <div class="featured-project__copy">
+    <p class="featured-project__eyebrow">{content.eyebrow}</p>
+    <h2 id="featured-project-title" class="text-gradient-brand" data-neural-title>Nuara Pelletterie</h2>
+    <p class="featured-project__description" data-neural-copy>{content.description}</p>
+    <div class="featured-project__details" data-neural-project-details>
+      <a class="featured-project__link" href={content.href}>{content.link} <span aria-hidden="true">→</span></a>
+      <ul class="featured-project__capabilities" aria-label={lang === 'es' ? 'Capacidades del proyecto' : lang === 'it' ? 'Competenze del progetto' : 'Project capabilities'}>
+        {content.capabilities.map((capability) => <li>{capability}</li>)}
+      </ul>
+    </div>
+  </div>
+
+  <figure class="featured-project__image" data-neural-project-image>
+    <img src="/portfolio/hero-nuara.webp" alt={content.imageAlt} width="1240" height="760" loading="lazy" decoding="async" />
+  </figure>
+</section>
+
+<style>
+  .featured-project {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.14fr) minmax(0, .86fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: center;
+    min-height: clamp(36rem, 56vw, 48rem);
+    padding: clamp(5rem, 10vw, 9rem) clamp(.5rem, 2vw, 2rem) clamp(6rem, 11vw, 10rem);
+    isolation: isolate;
+  }
+
+  .featured-project::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, var(--color-primary) 0%, color-mix(in srgb, var(--color-primary) 90%, transparent) 39%, transparent 75%);
+    pointer-events: none;
+  }
+
+  .featured-project__network { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .22; mask-image: linear-gradient(90deg, transparent, rgb(0 0 0 / .4) 42%, #000 78%); }
+  .featured-project__copy { position: relative; z-index: 1; min-width: 0; max-width: 43rem; }
+  .featured-project__eyebrow { margin: 0 0 clamp(1.1rem, 2vw, 2rem); color: var(--color-tertiary); font-family: var(--font-family-heading); font-size: clamp(.75rem, .7rem + .28vw, .95rem); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .featured-project h2 { max-width: 12ch; margin: 0 0 clamp(1.5rem, 3vw, 2.5rem); font-size: clamp(3.3rem, 7vw, 7rem); line-height: .96; letter-spacing: -.065em; }
+  .featured-project__description { max-width: 33ch; margin: 0; color: color-mix(in srgb, var(--color-white) 82%, var(--color-primary)); font-size: clamp(1.15rem, 1rem + .7vw, 1.7rem); line-height: 1.46; }
+  .featured-project__details { margin-top: clamp(2rem, 4vw, 3.5rem); }
+  .featured-project__link { display: inline-flex; gap: .9rem; align-items: center; padding-bottom: .35rem; border-bottom: 1px solid var(--color-secondary); color: var(--color-secondary); font-size: clamp(1.15rem, 1rem + .5vw, 1.5rem); font-weight: 600; text-decoration: none; }
+  .featured-project__link span { color: inherit; transition: transform .25s ease; }
+  .featured-project__link:hover, .featured-project__link:focus-visible { color: var(--color-tertiary); border-color: var(--color-tertiary); }
+  .featured-project__link:hover span, .featured-project__link:focus-visible span { transform: translateX(.25rem); }
+  .featured-project__link:focus-visible { outline: 2px solid var(--color-tertiary); outline-offset: 5px; }
+  .featured-project__capabilities { display: flex; flex-wrap: wrap; column-gap: .8rem; row-gap: .25rem; max-width: 40rem; margin: clamp(1.7rem, 3vw, 2.7rem) 0 0; padding: 0; list-style: none; }
+  .featured-project__capabilities li { color: color-mix(in srgb, var(--color-white) 68%, var(--color-primary)); font-size: clamp(.88rem, .84rem + .18vw, 1rem); }
+  .featured-project__capabilities li:not(:last-child)::after { content: '·'; margin-left: .8rem; color: var(--color-tertiary); }
+  .featured-project__image { position: relative; z-index: 1; width: 100%; max-width: 29rem; aspect-ratio: 1.63; margin: 0 0 0 auto; overflow: hidden; opacity: 1; }
+  .featured-project__image img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  :global([data-neural-enhanced='true']) [data-neural-project-image], :global([data-neural-enhanced='true']) [data-neural-project-details] { opacity: var(--project-reveal-opacity, 1); transform: translateY(var(--project-reveal-rise, 0px)); }
+  :global([data-neural-enhanced='true']) [data-neural-title], :global([data-neural-enhanced='true']) [data-neural-copy] { opacity: var(--reveal-opacity, 1); transform: translateY(var(--reveal-rise, 0px)); }
+  .featured-project:focus-within [data-neural-title], .featured-project:focus-within [data-neural-copy], .featured-project:focus-within [data-neural-project-details], .featured-project:focus-within [data-neural-project-image] { opacity: 1 !important; transform: none !important; }
+  @media (max-width: 767px) {
+    .featured-project { grid-template-columns: 1fr; gap: 2.5rem; min-height: 0; padding-block: 5rem 6rem; }
+    .featured-project::before { background: linear-gradient(180deg, var(--color-primary), color-mix(in srgb, var(--color-primary) 84%, transparent) 55%, transparent); }
+    .featured-project h2 { max-width: none; font-size: clamp(3.1rem, 12vw, 5rem); }
+    .featured-project__image { max-width: 30rem; margin-inline: auto; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-neural-title], [data-neural-copy], [data-neural-project-image], [data-neural-project-details] { opacity: 1 !important; transform: none !important; }
+    .featured-project__link span { transition: none; }
+  }
+</style>
