@@ -1,0 +1,103 @@
+---
+title: "Vulnerabilità in PHP e WordPress: perché la manutenzione del tuo sito è importante"
+lang: "it"
+description: "Gli aggiornamenti di sicurezza di PHP e WordPress mostrano perché la manutenzione continua è importante per proteggere il tuo sito web."
+image: "/posts/vulnerabilidades-php-wordpress-mantenimiento/hero.webp"
+date: "2026-10-29"
+author: Alfredo Navas
+translationKey: "php-wordpress-security-maintenance-october-2026"
+---
+
+import HeroImage from '../../../public/posts/vulnerabilidades-php-wordpress-mantenimiento/hero.webp';
+import SecurityImage from '../../../public/posts/vulnerabilidades-php-wordpress-mantenimiento/capas-seguridad.webp';
+import MaintenanceImage from '../../../public/posts/vulnerabilidades-php-wordpress-mantenimiento/mantenimiento-continuo.webp';
+import { Image } from 'astro:assets';
+import Button from '../../components/Button.astro';
+
+<div class="blog-hero-image">
+  <Image width={1020} height={680} src={HeroImage} alt="Illustrazione della manutenzione e della sicurezza di WordPress e PHP" />
+</div>
+
+Un sito web può caricarsi velocemente, mostrare i prodotti e ricevere richieste mentre, dietro le quinte, ha bisogno di un aggiornamento di sicurezza. *Le vulnerabilità non producono sempre segnali visibili.*
+
+Questo ottobre abbiamo avuto diversi esempi: PHP ha pubblicato correzioni per *due vulnerabilità critiche* e WordPress ha rilasciato le versioni 7.1.3 e 7.1.4 con aggiornamenti di sicurezza.
+
+Per chi gestisce un’attività, queste notizie possono sollevare alcune domande: il mio sito è interessato? Quanto è urgente aggiornarlo? Chi si occupa di verificarlo?
+
+In ElPuas Digital Crafts, ***tutti i siti dei nostri clienti sono già aggiornati***. Approfittiamo di questi eventi per spiegare cosa è successo e perché la manutenzione continua fa parte della cura di un sito web.
+
+## Cosa è successo con PHP?
+
+<div class="blog-internal-image">
+  <Image width={1020} height={680} src={SecurityImage} alt="Illustrazione dei livelli WordPress, PHP e server di un sito web" loading="lazy" />
+</div>
+
+PHP è una delle tecnologie che permettono a WordPress di funzionare. Viene eseguito sul server e partecipa ad attività come l’elaborazione delle richieste, la consultazione delle informazioni e la generazione delle pagine visitate dai tuoi clienti.
+
+Il 21 ottobre, il team PHP ha pubblicato aggiornamenti per correggere due vulnerabilità critiche: CVE-2026-109618 e CVE-2026-109619. Secondo l’avviso ufficiale, potevano consentire l’esecuzione remota di codice senza autenticazione.
+
+In parole semplici, un attaccante poteva sfruttare queste falle per tentare di eseguire istruzioni sul server senza avere un account o effettuare l’accesso. Il rischio dipendeva dall’ambiente, ma il team PHP ha raccomandato di aggiornare immediatamente.
+
+Le correzioni sono state pubblicate in PHP 8.2.35, 8.3.36, 8.4.27 e 8.5.12. Anche i fornitori di hosting possono distribuire le patch tramite i propri pacchetti, quindi controllare lo stato del server è una parte importante della risposta.
+
+Questo caso ricorda un aspetto spesso trascurato: ***la sicurezza di WordPress dipende anche dall’ambiente in cui è ospitato***. Gli aggiornamenti dal pannello di amministrazione riguardano una parte del sito; PHP richiede attenzione a livello di hosting.
+
+Fonte: [avviso ufficiale di sicurezza PHP](https://www.php.net/archive/2026.php#2026-10-21-5).
+
+## Cosa ha corretto WordPress 7.1.3?
+
+WordPress 7.1.3 è stato pubblicato il 6 ottobre e ha incluso *sette correzioni di sicurezza*.
+
+Tra i problemi affrontati c’erano falle che potevano consentire l’inserimento di codice malevolo, compromettere la disponibilità del sito o esporre commenti di articoli privati e non pubblicati.
+
+Ogni vulnerabilità aveva condizioni specifiche. Alcune richiedevano determinati permessi o azioni per essere sfruttate. La loro pubblicazione non significa che tutti i siti fossero stati attaccati, ma rendeva necessaria l’applicazione delle correzioni.
+
+Per un’attività, è importante capire che un aggiornamento dal numero di versione apparentemente piccolo può contenere modifiche importanti per proteggere le informazioni e mantenere disponibile il servizio.
+
+Fonte: [documentazione ufficiale di WordPress 7.1.3](https://wordpress.org/documentation/wordpress-version/version-7.1.3/).
+
+## Cosa è cambiato con WordPress 7.1.4?
+
+Il 28 ottobre WordPress ha pubblicato la versione 7.1.4 con ulteriori correzioni di sicurezza, raccomandando di aggiornare immediatamente.
+
+Tra gli altri problemi, questa versione ha affrontato una debolezza nel processo di aggiornamento che poteva consentire l’esecuzione di codice durante l’operazione. Ha anche corretto diverse falle che permettevano l’inserimento di codice malevolo, problemi nei componenti dell’editor e restrizioni di accesso a determinate informazioni.
+
+Due versioni di sicurezza nello stesso mese dimostrano perché *la manutenzione richiede continuità*. Un sito aggiornato all’inizio del mese potrebbe avere bisogno di attenzione di nuovo prima della sua fine.
+
+Queste correzioni riflettono anche il lavoro dei ricercatori e del team di sicurezza WordPress per individuare e risolvere i problemi. Per i proprietari dei siti, il passo necessario è applicare queste soluzioni.
+
+Fonte: [annuncio ufficiale di WordPress 7.1.4](https://wordpress.org/news/2026/10/wordpress-7-1-4/).
+
+## Perché è importante anche se il tuo sito è piccolo?
+
+È comune pensare che il sito di una piccola attività non interessi a un attaccante. Tuttavia, *molti tentativi di attacco sono automatizzati*: cercano installazioni vulnerabili indipendentemente dalle dimensioni dell’attività.
+
+Un sito può essere utilizzato per distribuire contenuti malevoli, inviare spam o sfruttare le risorse del server. Per il proprietario, un incidente può tradursi in interruzioni, richieste non ricevute o tempo dedicato al ripristino del servizio.
+
+La manutenzione aiuta a ridurre l’esposizione alle falle note. Permette anche di seguire i cambiamenti di cui il sito ha bisogno man mano che i suoi strumenti evolvono.
+
+## I siti dei nostri clienti sono già aggiornati
+
+Se hai un piano di manutenzione con ElPuas Digital Crafts, i tuoi siti sono già aggiornati.
+
+Lo diciamo chiaramente perché questo è parte del valore di un supporto continuativo: avere un team che conosce il tuo sito e si occupa delle sue esigenze tecniche mentre tu ti concentri sulla tua attività.
+
+*Nessun servizio può garantire che non emergerà mai una vulnerabilità.* Il software cambia, vengono scoperti nuovi problemi e le misure di sicurezza devono stare al passo.
+
+La tranquillità sta nel sapere che il tuo sito riceve attenzione e che hai un team a cui rivolgerti quando serve.
+
+## La manutenzione fa parte della vita di un sito
+
+<div class="blog-internal-image">
+  <Image width={1020} height={680} src={MaintenanceImage} alt="Illustrazione di un calendario per la manutenzione continua di un sito web" loading="lazy" />
+</div>
+
+Pubblicare un sito è l’inizio della sua vita. In seguito ha bisogno di cura per continuare a funzionare e adattarsi ai cambiamenti di WordPress, dei suoi strumenti e del server.
+
+Gli aggiornamenti di questo mese sono un esempio concreto di questo lavoro, che spesso avviene senza modificare ciò che vedono i visitatori.
+
+Se il tuo sito non ha ancora un piano di manutenzione, possiamo aiutarti a valutarne lo stato e definire l’assistenza necessaria.
+
+<Button href="/it/contact" label="Parliamo di come prenderci cura del sito della tua attività" />
+
+<div class="spacer" style="height: 100px;"></div>
