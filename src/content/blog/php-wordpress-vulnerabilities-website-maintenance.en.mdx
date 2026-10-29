@@ -1,0 +1,103 @@
+---
+title: "PHP and WordPress vulnerabilities: why website maintenance matters"
+lang: "en"
+description: "Recent PHP and WordPress security updates show why ongoing maintenance matters for protecting your website."
+image: "/posts/vulnerabilidades-php-wordpress-mantenimiento/hero.webp"
+date: "2026-10-29"
+author: Alfredo Navas
+translationKey: "php-wordpress-security-maintenance-october-2026"
+---
+
+import HeroImage from '../../../public/posts/vulnerabilidades-php-wordpress-mantenimiento/hero.webp';
+import SecurityImage from '../../../public/posts/vulnerabilidades-php-wordpress-mantenimiento/capas-seguridad.webp';
+import MaintenanceImage from '../../../public/posts/vulnerabilidades-php-wordpress-mantenimiento/mantenimiento-continuo.webp';
+import { Image } from 'astro:assets';
+import Button from '../../components/Button.astro';
+
+<div class="blog-hero-image">
+  <Image width={1020} height={680} src={HeroImage} alt="Illustration of WordPress and PHP maintenance and security" />
+</div>
+
+A website can load quickly, display products, and receive inquiries while, behind the scenes, it needs a security update. *Vulnerabilities do not always have visible signs.*
+
+This October brought several examples: PHP published fixes for *two critical vulnerabilities*, and WordPress released versions 7.1.3 and 7.1.4 with security updates.
+
+For business owners, this news can raise questions: Is my site affected? How urgent is the update? Who is responsible for checking it?
+
+At ElPuas Digital Crafts, ***all of our clients’ websites have already been updated***. We are using these events to explain what happened and why ongoing maintenance is part of caring for a website.
+
+## What happened with PHP?
+
+<div class="blog-internal-image">
+  <Image width={1020} height={680} src={SecurityImage} alt="Illustration of the WordPress, PHP, and server layers of a website" loading="lazy" />
+</div>
+
+PHP is one of the technologies that makes WordPress work. It runs on the server and takes part in tasks such as processing requests, retrieving information, and generating the pages your customers visit.
+
+On October 21, the PHP team released updates to fix two critical vulnerabilities: CVE-2026-109618 and CVE-2026-109619. According to the official advisory, they could allow unauthenticated remote code execution.
+
+Simply put, an attacker could exploit these flaws to try to run instructions on the server without an account or logging in. The risk depended on the environment, but the PHP team recommended updating immediately.
+
+Fixes were released in PHP 8.2.35, 8.3.36, 8.4.27, and 8.5.12. Hosting providers can also distribute patches through their own packages, so checking the server’s status is an important part of the response.
+
+This is a reminder of something that is easy to overlook: ***WordPress security also depends on the environment where it is hosted***. Updating from the dashboard addresses part of the site; PHP needs attention at the hosting level.
+
+Source: [official PHP security advisory](https://www.php.net/archive/2026.php#2026-10-21-5).
+
+## What did WordPress 7.1.3 fix?
+
+WordPress 7.1.3 was released on October 6 and included *seven security fixes*.
+
+The issues addressed included flaws that could allow malicious code to be inserted, affect website availability, or expose comments on private and unpublished posts.
+
+Each vulnerability had specific conditions. Some required particular permissions or actions to be exploited. Their disclosure does not mean every website had been attacked, but applying the fixes was necessary.
+
+For a business, the important point is that a small version-number update can contain significant changes to protect information and keep the service available.
+
+Source: [official WordPress 7.1.3 documentation](https://wordpress.org/documentation/wordpress-version/version-7.1.3/).
+
+## What changed in WordPress 7.1.4?
+
+On October 28, WordPress released version 7.1.4 with further security fixes and recommended updating immediately.
+
+Among other issues, the release addressed a weakness in the update process that could allow code execution during that operation. It also fixed several malicious-code injection flaws, issues in editor components, and access restrictions involving certain information.
+
+Two security releases in the same month show why *maintenance needs to be continuous*. A website updated at the beginning of the month may need attention again before it ends.
+
+These fixes also reflect the work of researchers and the WordPress security team to identify and resolve issues. For website owners, the necessary step is to apply those solutions.
+
+Source: [official WordPress 7.1.4 announcement](https://wordpress.org/news/2026/10/wordpress-7-1-4/).
+
+## Why does this matter even if your site is small?
+
+It is common to think a small business website is not attractive to an attacker. Yet *many attacks are automated*: they search for vulnerable installations regardless of the business’s size.
+
+A website can be used to distribute malicious content, send spam, or exploit server resources. For its owner, an incident can mean interruptions, missed inquiries, or time spent restoring service.
+
+Maintenance helps reduce exposure to known vulnerabilities. It also makes it possible to follow the changes a site needs as its tools evolve.
+
+## Our clients’ websites are already updated
+
+If you have a maintenance plan with ElPuas Digital Crafts, your websites have already been updated.
+
+We say this clearly because it is part of the value of ongoing support: having a team that knows your website and handles its technical needs while you focus on your business.
+
+*No service can guarantee that a vulnerability will never appear.* Software changes, new issues are discovered, and security measures need to keep up.
+
+Peace of mind comes from knowing your website receives attention and that you have a team to turn to when needed.
+
+## Maintenance is part of owning a website
+
+<div class="blog-internal-image">
+  <Image width={1020} height={680} src={MaintenanceImage} alt="Illustration of a calendar for ongoing website maintenance" loading="lazy" />
+</div>
+
+Publishing a website is the beginning of its life. Afterward, it needs care to keep working and adapt to changes in WordPress, its tools, and the server.
+
+This month’s updates are a concrete example of that work, which often happens without changing what visitors see.
+
+If your site does not yet have a maintenance plan, we can help review its status and determine the care it needs.
+
+<Button href="/en/contact" label="Let’s talk about how to care for your business website" />
+
+<div class="spacer" style="height: 100px;"></div>

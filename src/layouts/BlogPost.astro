@@ -55,6 +55,7 @@ const absoluteHeroImage = heroImage
 const schemaType = contentType === 'labs' ? 'TechArticle' : 'Article';
 const resolvedEntryPath = entryPath ?? Astro.url.pathname;
 const isLabsEntry = contentType === 'labs';
+const authorLabel = { es: 'Por', en: 'By', it: 'Di' }[lang];
 
 const data = {
 	'@context': 'https://schema.org',
@@ -102,7 +103,7 @@ const data = {
 			</div>
 		</header>
 		<main>
-			<article class:list={stylesBlog.article}>
+			<article class:list={[stylesBlog.article, !isLabsEntry && 'blog-post-content']}>
 				<div class="prose" class:list={stylesBlog.prose}>
 					<div class="title">
 						<h1>{title}</h1>
@@ -110,7 +111,7 @@ const data = {
 							!isLabsEntry && (pubDate || author) && (
 								<div class="blog-date">
 									{pubDate && <FormattedDate date={pubDate} />}
-									{author && <p>By <span class="accent">{author}</span></p>}
+									{author && <p>{authorLabel} <span class="accent">{author}</span></p>}
 								</div>
 							)
 						}

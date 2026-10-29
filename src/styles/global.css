@@ -120,6 +120,14 @@ a {
 	background-clip: text;
 }
 
+.blog-post-content :is(h1, h2, h3, h4, h5, h6) {
+	background: linear-gradient(90deg, var(--color-secondary) 0%, var(--color-tertiary) 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+}
+
 a:hover {
 	color: var(--color-tertiary);
 }
@@ -249,6 +257,10 @@ pre {
 		text-decoration: underline;
 		text-underline-offset: 3px;
 		text-decoration-color: var(--color-tertiary);
+	}
+
+	a.button {
+		text-decoration: none;
 	}
 
 	h3 {
