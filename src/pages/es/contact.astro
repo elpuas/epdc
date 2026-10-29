@@ -34,6 +34,9 @@ const lang = 'es';
       <label for="service-es">¿Qué necesitas? *</label>
       <select id="service-es" name="service" required>
         <option value="">Elige un servicio...</option>
+        <option value="Essential">Plan Essential — $150/mes</option>
+        <option value="Growth">Plan Growth — $180/mes</option>
+        <option value="AI Commerce">Plan AI Commerce — $250/mes</option>
         <option value="Full Website">Necesito el paquete completo (Diseño + Desarrollo + Hosting)</option>
         <option value="E-Commerce">Una tienda online que realmente venda</option>
         <option value="Maintenance">Mantener mi sitio rápido y seguro</option>
@@ -56,4 +59,17 @@ const lang = 'es';
       <button type="submit">Hablemos</button>
     </p>
   </form>
+
+  <script>
+    const selectedService = new URLSearchParams(window.location.search).get('service');
+    const serviceSelect = document.querySelector<HTMLSelectElement>('#service-es');
+
+    if (serviceSelect && selectedService) {
+      const availableValues = Array.from(serviceSelect.options, (option) => option.value);
+
+      if (availableValues.includes(selectedService)) {
+        serviceSelect.value = selectedService;
+      }
+    }
+  </script>
 </Layout> 

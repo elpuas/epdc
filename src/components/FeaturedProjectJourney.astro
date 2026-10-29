@@ -71,7 +71,7 @@ const content = copy[lang as keyof typeof copy] || copy.en;
 <style>
   .featured-project {
     position: relative;
-    padding: clamp(1.5rem, 3vw, 3rem) clamp(.5rem, 2vw, 2rem) clamp(5rem, 8vw, 7rem);
+    padding: clamp(6.5rem, 13vw, 11rem) clamp(.5rem, 2vw, 2rem) clamp(5rem, 8vw, 7rem);
     isolation: isolate;
   }
 
@@ -107,7 +107,7 @@ const content = copy[lang as keyof typeof copy] || copy.en;
   :global([data-neural-enhanced='true']) [data-neural-title], :global([data-neural-enhanced='true']) [data-neural-copy] { opacity: var(--reveal-opacity, 1); transform: translateY(var(--reveal-rise, 0px)); }
   .featured-project:focus-within [data-neural-title], .featured-project:focus-within [data-neural-copy], .featured-project:focus-within [data-neural-project-details], .featured-project:focus-within [data-neural-project-image] { opacity: 1 !important; transform: none !important; }
   @media (max-width: 767px) {
-    .featured-project { padding-block: 1.5rem 5rem; }
+    .featured-project { padding-bottom: 5rem; }
     .featured-project::before { background: radial-gradient(ellipse 28rem 30rem at 15% 55%, var(--color-primary), transparent); }
     .featured-project__intro { margin-bottom: 3rem; }
     .featured-project__intro h2 { max-width: 18ch; font-size: clamp(2.1rem, 8vw, 3rem); }

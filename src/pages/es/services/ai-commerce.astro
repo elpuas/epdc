@@ -1,0 +1,132 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import PlanDetail from '../../../components/PlanDetail.astro';
+
+const title = 'Plan AI Commerce para WordPress con IA | ElPuas Digital Crafts';
+const description = 'Plan WordPress por $250 USD al mes con todo Growth y funciones de IA para contenido, traducción, SEO, imágenes y automatizaciones.';
+const lang = 'es';
+---
+
+<Layout {title} {description} {lang}>
+  <PlanDetail
+    name="AI Commerce"
+    price="$250"
+    summary="Todo lo de Growth, con 8 horas mensuales de desarrollo y funciones de inteligencia artificial integradas en WordPress para contenido, traducción, SEO, imágenes de marketing y automatizaciones definidas."
+    audienceIntro="AI Commerce es para equipos que quieren un sitio WordPress y funciones de IA dentro de flujos concretos, con límites claros y revisión humana."
+    audience={[
+      'Negocios que publican o actualizan contenido con frecuencia desde WordPress.',
+      'Tiendas que necesitan apoyo para preparar descripciones, traducciones o metadatos de productos existentes.',
+      'Equipos que quieren reducir tareas editoriales repetitivas sin entregar el control a un sistema autónomo.',
+      'Clientes que también necesitan hosting, mantenimiento y 8 horas mensuales de desarrollo.'
+    ]}
+    included={[
+      {
+        title: 'Todo lo de Growth',
+        description: 'Sitio WordPress con tema premium adaptado a tu marca y licencias, hosting, mantenimiento, respaldos, seguridad, monitoreo, soporte por correo, optimización y reportes. AI Commerce amplía la asignación a 8 horas mensuales de desarrollo.',
+        icon: 'ph:trend-up'
+      },
+      {
+        title: 'IA integrada en WordPress',
+        description: 'Funciones habilitadas dentro del sitio para asistir tareas acordadas, sin presentar chatbots públicos ni agentes personalizados como parte del plan.',
+        icon: 'ph:sparkle'
+      },
+      {
+        title: 'Contenido y traducción asistidos',
+        description: 'Generación, reescritura, resumen y traducción de texto a partir de instrucciones e información proporcionadas por el cliente.',
+        icon: 'ph:translate'
+      },
+      {
+        title: 'Apoyo para SEO',
+        description: 'Generación asistida de títulos SEO, metadescripciones y mejoras de texto. No sustituye una auditoría ni una estrategia SEO completa.',
+        icon: 'ph:magnifying-glass'
+      },
+      {
+        title: 'Imágenes de marketing con IA',
+        description: 'Acceso a la función de generación de imágenes que se configure para el sitio. La asignación de texto no equivale a una cantidad de imágenes.',
+        icon: 'ph:image'
+      },
+      {
+        title: 'Automatizaciones definidas',
+        description: 'Flujos editoriales o administrativos dentro de WordPress que se acuerden durante la incorporación. Las integraciones externas se evalúan aparte.',
+        icon: 'ph:gear-six'
+      },
+      {
+        title: 'Hasta 3 millones de tokens de texto',
+        description: 'Asignación mensual exclusiva para las funciones de texto habilitadas en el sitio. El consumo depende del tamaño y la complejidad de cada solicitud.',
+        icon: 'ph:text-aa'
+      }
+    ]}
+    limits={[
+      'No incluye chatbots públicos, asistentes de atención al cliente ni agentes de IA personalizados.',
+      'Los 3 millones de tokens aplican únicamente a texto; no se convierten en una cuota de imágenes.',
+      'La cantidad incluida de imágenes y su política de uso deben confirmarse por escrito según el proveedor y la configuración elegidos antes de activar esa función.',
+      'Las automatizaciones incluidas se limitan a los flujos definidos durante la incorporación; integraciones con servicios externos, APIs o sistemas del cliente se cotizan aparte.',
+      'No incluye generación de video o audio, voz a texto, texto a voz ni uso general de IA fuera del sitio cubierto.',
+      'La IA asiste la creación de borradores, pero no incluye un servicio humano ilimitado de redacción, traducción, diseño o estrategia editorial.',
+      'El consumo adicional y cualquier trabajo que exceda las 8 horas mensuales de desarrollo requieren aprobación y cotización antes de ejecutarse.'
+    ]}
+    steps={[
+      {
+        title: 'Revisión del sitio y del caso de uso',
+        description: 'Revisamos el sitio que necesitas, el hosting, los datos disponibles y las tareas que el equipo quiere mejorar con IA.'
+      },
+      {
+        title: 'Definición de funciones y límites',
+        description: 'Acordamos qué funciones de texto, imagen y automatización se habilitan, quién las usa y qué revisión humana requiere cada flujo.'
+      },
+      {
+        title: 'Configuración e incorporación',
+        description: 'Preparamos el hosting y mantenimiento de Growth, configuramos las funciones acordadas y explicamos al equipo cómo utilizarlas de forma responsable.'
+      },
+      {
+        title: 'Operación mensual',
+        description: 'Damos mantenimiento al sitio, atendemos solicitudes, revisamos el consumo de texto y reportamos el trabajo. Los cambios de alcance se cotizan antes de ejecutarse.'
+      }
+    ]}
+    faqs={[
+      {
+        question: '¿Para qué puedo usar las funciones de IA?',
+        answer: 'Puedes preparar y traducir borradores de descripciones de productos, proponer títulos SEO y metadescripciones, o generar imágenes de apoyo para marketing. Tu equipo puede revisar los resultados antes de utilizarlos.'
+      },
+      {
+        question: '¿AI Commerce incluye un chatbot para mis clientes?',
+        answer: 'No. Los chatbots públicos, asistentes de atención al cliente y agentes personalizados están excluidos y requieren un alcance independiente.'
+      },
+      {
+        question: '¿Los 3 millones de tokens también cubren imágenes?',
+        answer: 'No. Esa asignación corresponde exclusivamente al procesamiento de texto. No se convierte en créditos ni en una cantidad de imágenes.'
+      },
+      {
+        question: '¿Cuántas imágenes puedo generar?',
+        answer: 'La oferta todavía no define una cuota universal. Antes de activar la función se debe confirmar por escrito el proveedor, el límite aplicable y cualquier costo de uso. Esta es una decisión comercial pendiente para la versión final.'
+      },
+      {
+        question: '¿Qué automatizaciones están incluidas?',
+        answer: 'Las que se definan expresamente durante la incorporación y funcionen dentro del alcance acordado para WordPress. Por ejemplo, se puede preparar un borrador de metadatos al crear un producto. Las conexiones con CRM, ERP, plataformas externas, APIs o flujos a medida se estiman por separado.'
+      },
+      {
+        question: '¿La IA publica contenido automáticamente?',
+        answer: 'No se asume publicación automática. Los borradores pueden revisarse antes de publicarse; cualquier automatización con capacidad de publicar o actuar requiere definición y aprobación específica.'
+      },
+      {
+        question: '¿AI Commerce sirve para construir una tienda nueva?',
+        answer: 'El plan incluye un sitio WordPress con un tema premium adaptado a tu marca y las licencias necesarias. El alcance de la tienda, el catálogo y las integraciones debe confirmarse antes de contratar; el trabajo adicional se cotiza por separado.'
+      }
+    ]}
+    relatedPlans={[
+      {
+        name: 'Essential',
+        price: '$150',
+        description: 'Sitio con tema premium, licencias y mantenimiento, sin hosting ni horas mensuales de desarrollo.',
+        href: '/es/services/essential'
+      },
+      {
+        name: 'Growth',
+        price: '$180',
+        description: 'Hosting, 4 horas de desarrollo, optimización y reportes sin funciones de IA incluidas.',
+        href: '/es/services/growth'
+      }
+    ]}
+    contactValue="AI Commerce"
+  />
+</Layout>

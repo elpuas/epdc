@@ -1,0 +1,116 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import PlanDetail from '../../../components/PlanDetail.astro';
+
+const title = 'Plan Essential para mantenimiento WordPress | ElPuas Digital Crafts';
+const description = 'Mantenimiento WordPress por $150 USD al mes con actualizaciones, copias de seguridad, monitoreo de seguridad y soporte por correo.';
+const lang = 'es';
+---
+
+<Layout {title} {description} {lang}>
+  <PlanDetail
+    name="Essential"
+    price="$150"
+    summary="Un sitio WordPress con un tema premium adaptado a tu marca, licencias y mantenimiento continuo, sin hosting ni horas mensuales de desarrollo incluidas."
+    audienceIntro="Essential es para negocios que necesitan un sitio WordPress y atención técnica continua, y cuentan con su propio hosting."
+    audience={[
+      'Negocios que necesitan un sitio WordPress basado en un tema premium adaptado a su marca.',
+      'Equipos que ya cuentan con hosting y no necesitan trasladarlo a ElPuas Digital Crafts.',
+      'Sitios estables que no requieren cambios o desarrollo todos los meses.',
+      'Clientes que prefieren solicitar soporte y dar seguimiento por correo electrónico.'
+    ]}
+    included={[
+      {
+        title: 'Sitio WordPress y licencias',
+        description: 'Creación de un sitio con un tema premium adaptado a tu marca y las licencias necesarias para su funcionamiento.',
+        icon: 'ph:layout'
+      },
+      {
+        title: 'Actualizaciones y mantenimiento',
+        description: 'Revisión y aplicación de actualizaciones disponibles del núcleo de WordPress, temas y plugins, con criterio técnico para cuidar la estabilidad del sitio.',
+        icon: 'ph:arrows-clockwise'
+      },
+      {
+        title: 'Copias de seguridad regulares',
+        description: 'Seguimiento de copias de seguridad del sitio para contar con un punto de recuperación ante un problema técnico.',
+        icon: 'ph:database'
+      },
+      {
+        title: 'Seguridad y monitoreo',
+        description: 'Supervisión del estado del sitio y revisión de señales que puedan indicar una interrupción o un riesgo de seguridad.',
+        icon: 'ph:shield-check'
+      },
+      {
+        title: 'Soporte por correo',
+        description: 'Un canal directo para reportar incidencias, hacer consultas sobre el mantenimiento y coordinar el trabajo cubierto por el plan.',
+        icon: 'ph:envelope-simple'
+      }
+    ]}
+    limits={[
+      'No incluye hosting ni la migración del sitio a un nuevo proveedor.',
+      'La creación inicial utiliza un tema premium adaptado; el desarrollo completamente personalizado y las funcionalidades adicionales se cotizan aparte.',
+      'No incluye horas mensuales de desarrollo para cambios posteriores a la entrega.',
+      'El alcance del sitio, las páginas, productos e integraciones se confirma antes de contratar; el trabajo adicional se cotiza por separado.',
+      'Recuperaciones complejas, limpieza posterior a un hackeo y trabajos fuera del mantenimiento habitual requieren diagnóstico y cotización adicional.'
+    ]}
+    steps={[
+      {
+        title: 'Revisión inicial',
+        description: 'Conversamos sobre tu negocio, el sitio que necesitas, tu hosting y los materiales de marca para definir el alcance.'
+      },
+      {
+        title: 'Preparación del sitio',
+        description: 'Acordamos el alcance, adaptamos un tema premium a tu marca y preparamos las licencias necesarias para el sitio.'
+      },
+      {
+        title: 'Rutina mensual',
+        description: 'Ejecutamos las tareas de mantenimiento, respaldos y monitoreo incluidas, priorizando la estabilidad del sitio.'
+      },
+      {
+        title: 'Atención por correo',
+        description: 'El cliente reporta incidencias o consultas por email. Si la solicitud está fuera del alcance, enviamos una cotización antes de trabajarla.'
+      }
+    ]}
+    faqs={[
+      {
+        question: '¿Essential incluye hosting?',
+        answer: 'No. El sitio continúa en el hosting del cliente. Si necesitas hosting administrado por ElPuas Digital Crafts, revisa Growth o AI Commerce.'
+      },
+      {
+        question: '¿Puedo pedir cambios en el sitio?',
+        answer: 'La adaptación inicial del sitio está incluida. Para cambios posteriores puedes solicitar una cotización, ya que Essential no incluye horas mensuales de desarrollo.'
+      },
+      {
+        question: '¿Este plan sirve para crear un sitio nuevo?',
+        answer: 'Sí. Essential incluye un sitio WordPress construido con un tema premium adaptado a tu marca y las licencias necesarias. Por ejemplo, se adaptan colores, imágenes y contenido a tu identidad. El alcance concreto se confirma antes de contratar.'
+      },
+      {
+        question: '¿El soporte se atiende por Slack?',
+        answer: 'Essential incluye soporte por correo. Slack solo está disponible cuando se confirma expresamente en el servicio o propuesta contratada.'
+      },
+      {
+        question: '¿Qué tipo de atención incluye el mantenimiento?',
+        answer: 'Incluye actualizaciones de WordPress y plugins, revisión de copias de seguridad y monitoreo. Por ejemplo, podemos revisar una alerta de disponibilidad o atender por correo una incidencia después de una actualización.'
+      },
+      {
+        question: '¿Qué ocurre si el sitio necesita trabajo antes de iniciar?',
+        answer: 'Si ya tienes un sitio, revisamos su estado y el trabajo necesario antes de confirmar el alcance. Cualquier trabajo adicional se presenta para tu aprobación.'
+      }
+    ]}
+    relatedPlans={[
+      {
+        name: 'Growth',
+        price: '$180',
+        description: 'Añade hosting, 4 horas mensuales de desarrollo, optimización y reportes.',
+        href: '/es/services/growth'
+      },
+      {
+        name: 'AI Commerce',
+        price: '$250',
+        description: 'Todo Growth con 8 horas mensuales de desarrollo y funciones de IA integradas en WordPress.',
+        href: '/es/services/ai-commerce'
+      }
+    ]}
+    contactValue="Essential"
+  />
+</Layout>

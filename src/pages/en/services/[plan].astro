@@ -1,0 +1,16 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import PlanDetail from '../../../components/PlanDetail.astro';
+import { getPlanDetails, slugs } from '../../../data/plan-details';
+
+export function getStaticPaths() {
+  return slugs.map((plan, index) => ({ params: { plan }, props: { index } }));
+}
+
+const details = getPlanDetails('en', Astro.props.index);
+const title = `${details.name} WordPress Plan | ElPuas Digital Crafts`;
+const description = details.summary;
+---
+<Layout {title} {description} lang="en">
+  <PlanDetail lang="en" {...details} />
+</Layout>

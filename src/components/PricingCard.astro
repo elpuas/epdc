@@ -12,6 +12,8 @@ interface Props {
     badge?: string;
     ctaLabel?: string;
     href?: string;
+    priceAriaLabel?: string;
+    featuresAriaLabel?: string;
     enterDelay?: string;
     enterFrom?: 'left' | 'bottom' | 'right';
 }
@@ -27,6 +29,8 @@ const {
     badge,
     ctaLabel = 'Comenzar',
     href = '/es/contact',
+    priceAriaLabel = `Price: ${price} ${period}`,
+    featuresAriaLabel = `${title} plan features`,
     enterDelay = '0s',
     enterFrom = 'bottom',
 } = Astro.props;
@@ -55,12 +59,12 @@ const titleId = `pricing-title-${title.toLowerCase().replace(/\s+/g, '-')}`;
 
     <div class="card-divider" aria-hidden="true"></div>
 
-    <p class="price" aria-label={`Price: ${price} ${period}`}>
+    <p class="price" aria-label={priceAriaLabel}>
         <span class="price-value">{price}</span>
         <span class="price-period">{period}</span>
     </p>
 
-    <ul class="feature-list" aria-label={`${title} plan features`}>
+    <ul class="feature-list" aria-label={featuresAriaLabel}>
         {features.map((feature) => (
             <li class="feature-item">
                 <span class="feature-icon-shell" aria-hidden="true">
@@ -103,6 +107,13 @@ const titleId = `pricing-title-${title.toLowerCase().replace(/\s+/g, '-')}`;
         box-shadow 0.25s ease,
         background-color 0.25s ease;
     transition-delay: var(--pricing-enter-delay, 0s);
+}
+
+@media (min-width: 40rem) {
+    .pricing-card {
+        grid-row: span 6;
+        grid-template-rows: subgrid;
+    }
 }
 
 .pricing-card[data-enter-state='pending'] {

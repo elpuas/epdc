@@ -1,0 +1,116 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import PlanDetail from '../../../components/PlanDetail.astro';
+
+const title = 'Plan Growth con hosting y soporte WordPress | ElPuas Digital Crafts';
+const description = 'Hosting, mantenimiento y 4 horas mensuales de desarrollo WordPress por $180 USD al mes, con optimización y reportes.';
+const lang = 'es';
+---
+
+<Layout {title} {description} {lang}>
+  <PlanDetail
+    name="Growth"
+    price="$180"
+    summary="Un sitio WordPress con tema premium adaptado a tu marca y licencias, más hosting, mantenimiento y 4 horas mensuales de desarrollo para pequeñas mejoras."
+    audienceIntro="Growth está pensado para negocios que quieren concentrar hosting, mantenimiento y ajustes recurrentes con el mismo equipo técnico."
+    audience={[
+      'Negocios que necesitan un sitio WordPress adaptado a su marca y mejoras pequeñas de forma recurrente.',
+      'Clientes que quieren alojar el sitio con ElPuas Digital Crafts y centralizar su atención técnica.',
+      'Equipos que necesitan una bolsa mensual limitada para ajustes de contenido, estilos o configuración.',
+      'Sitios que se benefician de seguimiento de rendimiento y un resumen mensual del trabajo realizado.'
+    ]}
+    included={[
+      {
+        title: 'Todo lo de Essential',
+        description: 'Sitio WordPress con tema premium adaptado a tu marca y licencias, más actualizaciones, copias de seguridad, seguridad, monitoreo y soporte por correo.',
+        icon: 'ph:shield-check'
+      },
+      {
+        title: 'Hosting incluido',
+        description: 'Alojamiento administrado por ElPuas Digital Crafts para el sitio cubierto por el plan, sujeto a la revisión técnica inicial y al alcance acordado.',
+        icon: 'ph:cloud'
+      },
+      {
+        title: '4 horas de desarrollo al mes',
+        description: 'Tiempo para tareas pequeñas y claramente delimitadas dentro del sitio existente. Las horas no utilizadas no se acumulan.',
+        icon: 'ph:code'
+      },
+      {
+        title: 'Optimización de rendimiento',
+        description: 'Revisión y ajustes razonables de rendimiento dentro de la arquitectura y las herramientas actuales del sitio.',
+        icon: 'ph:gauge'
+      },
+      {
+        title: 'Reporte mensual',
+        description: 'Un resumen del mantenimiento realizado, el estado general observado y el uso de las horas de desarrollo del periodo.',
+        icon: 'ph:chart-line-up'
+      }
+    ]}
+    limits={[
+      'Las 4 horas de desarrollo no se acumulan de un mes a otro y el trabajo que exceda esa asignación requiere aprobación y cotización adicional.',
+      'La creación inicial utiliza un tema premium adaptado; rediseños completos, funcionalidades complejas e integraciones a medida se cotizan aparte.',
+      'El hosting cubre el sitio acordado; necesidades especiales de infraestructura, tráfico, almacenamiento o servicios externos se evalúan por separado.',
+      'El alcance del sitio, las páginas, productos e integraciones se confirma antes de contratar; el trabajo adicional se cotiza por separado.',
+      'La creación editorial de textos, fotografías, traducciones o campañas no forma parte de Growth.'
+    ]}
+    steps={[
+      {
+        title: 'Auditoría y accesos',
+        description: 'Revisamos las necesidades de tu negocio, los materiales de marca y, si ya tienes un sitio, su estado y hosting actual.'
+      },
+      {
+        title: 'Incorporación y hosting',
+        description: 'Acordamos el alcance, adaptamos el tema premium a tu marca, preparamos las licencias y el hosting; si existe un sitio, revisamos la migración necesaria.'
+      },
+      {
+        title: 'Priorización mensual',
+        description: 'El cliente envía sus solicitudes y definimos qué tareas caben en las 4 horas disponibles. El trabajo adicional se estima antes de ejecutarlo.'
+      },
+      {
+        title: 'Mantenimiento y reporte',
+        description: 'Realizamos mantenimiento, monitoreo, optimización y tareas aprobadas; al cierre del periodo resumimos el trabajo y el uso de horas.'
+      }
+    ]}
+    faqs={[
+      {
+        question: '¿Qué tipo de trabajo cabe en las 4 horas mensuales?',
+        answer: 'Ajustes pequeños en el sitio, como corregir estilos, actualizar una sección o ajustar un formulario. Antes de iniciar confirmamos si la solicitud cabe en la asignación o requiere una cotización.'
+      },
+      {
+        question: '¿Las horas que no uso se acumulan?',
+        answer: 'No. La asignación corresponde al mes activo y no se transfiere al siguiente periodo.'
+      },
+      {
+        question: '¿Qué revisan en el rendimiento y el reporte?',
+        answer: 'Podemos revisar la caché, la carga de recursos o una regresión de velocidad. El reporte mensual resume las actualizaciones, respaldos, incidencias y tareas realizadas.'
+      },
+      {
+        question: '¿Growth incluye el desarrollo de un sitio nuevo?',
+        answer: 'Sí. Growth incluye un sitio WordPress con un tema premium adaptado a tu marca y las licencias necesarias. El alcance concreto se confirma antes de contratar.'
+      },
+      {
+        question: '¿El traslado al hosting está incluido automáticamente?',
+        answer: 'El hosting forma parte del plan, pero primero revisamos el sitio y su infraestructura. Si la migración requiere trabajo extraordinario, se presenta el alcance antes de realizarla.'
+      },
+      {
+        question: '¿Growth incluye Slack?',
+        answer: 'El soporte por correo está incluido. Slack se habilita únicamente cuando el servicio o la propuesta contratada lo indica expresamente.'
+      }
+    ]}
+    relatedPlans={[
+      {
+        name: 'Essential',
+        price: '$150',
+        description: 'Sitio con tema premium, licencias y mantenimiento, sin hosting ni horas mensuales de desarrollo.',
+        href: '/es/services/essential'
+      },
+      {
+        name: 'AI Commerce',
+        price: '$250',
+        description: 'Añade funciones de IA, automatizaciones y hasta 3 millones de tokens de texto, con 8 horas mensuales de desarrollo.',
+        href: '/es/services/ai-commerce'
+      }
+    ]}
+    contactValue="Growth"
+  />
+</Layout>

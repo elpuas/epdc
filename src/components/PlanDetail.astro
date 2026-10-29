@@ -1,0 +1,197 @@
+---
+import { Icon } from 'astro-icon/components';
+import Button from './Button.astro';
+import styles from '../styles/PlanDetail.module.css';
+
+interface IncludedItem {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface Step {
+  title: string;
+  description: string;
+}
+
+interface Faq {
+  question: string;
+  answer: string;
+}
+
+interface RelatedPlan {
+  name: string;
+  price: string;
+  description: string;
+  href: string;
+}
+
+interface Props {
+  lang?: 'es' | 'en' | 'it';
+  name: string;
+  price: string;
+  summary: string;
+  audienceIntro: string;
+  audience: string[];
+  included: IncludedItem[];
+  limits: string[];
+  steps: Step[];
+  faqs: Faq[];
+  relatedPlans: RelatedPlan[];
+  contactValue: string;
+}
+
+const {
+  lang = 'es',
+  name,
+  price,
+  summary,
+  audienceIntro,
+  audience,
+  included,
+  limits,
+  steps,
+  faqs,
+  relatedPlans,
+  contactValue,
+} = Astro.props;
+
+const slug = name.toLowerCase().replace(/\s+/g, '-');
+const contactHref = `/${lang}/contact?service=${encodeURIComponent(contactValue)}`;
+const labels = {
+  es: { back: 'Ver todos los planes', eyebrow: 'Plan mensual para WordPress', currency: 'USD / mes', price: 'dólares estadounidenses por mes', consult: 'Consultar por', terms: 'Revisar términos y condiciones', audience: '¿Para quién es?', included: 'Qué incluye', includedIntro: 'Servicios para crear, mantener y mejorar tu sitio WordPress.', limits: 'Límites y cotizaciones adicionales', limitsIntro: 'El plan cubre el alcance descrito arriba. Estos trabajos se revisan y cotizan por separado.', process: 'Cómo funciona', processIntro: 'Una incorporación clara y una rutina mensual predecible.', faq: 'Preguntas frecuentes', faqIntro: 'Lo esencial antes de contratar.', compare: 'Compara los otros planes', compareIntro: 'Elige el nivel de atención que corresponde a tu sitio hoy.', view: 'Ver plan', next: 'Siguiente paso', cta: `Conversemos sobre tu sitio y confirmemos si ${name} es el plan correcto.`, ctaIntro: 'Revisaremos el estado actual, el alcance y cualquier servicio adicional antes de activar el plan.' },
+  en: { back: 'View all plans', eyebrow: 'Monthly WordPress plan', currency: 'USD / month', price: 'US dollars per month', consult: 'Ask about', terms: 'Review terms and conditions', audience: 'Who is it for?', included: 'What is included', includedIntro: 'Services to build, maintain, and improve your WordPress website.', limits: 'Limits and additional quotes', limitsIntro: 'The plan covers the scope described above. Additional work is reviewed and quoted separately.', process: 'How it works', processIntro: 'A clear onboarding process and ongoing monthly care.', faq: 'Frequently asked questions', faqIntro: 'What to know before subscribing.', compare: 'Compare the other plans', compareIntro: 'Choose the level of care that fits your website.', view: 'View plan', next: 'Next step', cta: `Let’s discuss your website and find out whether ${name} is right for you.`, ctaIntro: 'We will review your needs, scope, and any additional services before activating the plan.' },
+  it: { back: 'Vedi tutti i piani', eyebrow: 'Piano mensile WordPress', currency: 'EUR / mese', price: 'euro al mese', consult: 'Richiedi informazioni su', terms: 'Leggi termini e condizioni', audience: 'A chi è rivolto?', included: 'Cosa comprende', includedIntro: 'Servizi per creare, mantenere e migliorare il tuo sito WordPress.', limits: 'Limiti e preventivi aggiuntivi', limitsIntro: 'Il piano copre i servizi descritti sopra. I lavori aggiuntivi vengono valutati e preventivati separatamente.', process: 'Come funziona', processIntro: 'Un avvio chiaro e un’assistenza mensile continuativa.', faq: 'Domande frequenti', faqIntro: 'Cosa sapere prima di sottoscrivere il piano.', compare: 'Confronta gli altri piani', compareIntro: 'Scegli il livello di assistenza adatto al tuo sito.', view: 'Vedi il piano', next: 'Il prossimo passo', cta: `Parliamo del tuo sito e scopriamo se ${name} è il piano giusto per te.`, ctaIntro: 'Prima di attivare il piano esamineremo le tue esigenze, l’ambito e gli eventuali servizi aggiuntivi.' },
+}[lang];
+---
+
+<article class={styles.plan}>
+  <header class={styles.hero} aria-labelledby={`${slug}-title`}>
+    <a class={styles.backLink} href={`/${lang}/services#pricing-title`}>
+      <span aria-hidden="true">&larr;</span> {labels.back}
+    </a>
+    <p class={styles.eyebrow}>{labels.eyebrow}</p>
+    <h1 id={`${slug}-title`} class="text-gradient-brand">{name}</h1>
+    <p class={styles.summary}>{summary}</p>
+    <p class={styles.price} aria-label={`${price} ${labels.price}`}>
+      <span>{price}</span>
+      <small>{labels.currency}</small>
+    </p>
+    <div class={styles.heroActions}>
+      <Button href={contactHref} label={`${labels.consult} ${name}`} />
+      <a class={styles.termsLink} href={`/${lang}/terms-and-conditions`}>{labels.terms}</a>
+    </div>
+  </header>
+
+  <section class={styles.section} aria-labelledby={`${slug}-audience`}>
+    <div class={styles.sectionHeading}>
+      <div>
+        <h2 id={`${slug}-audience`}>{labels.audience}</h2>
+        <p>{audienceIntro}</p>
+      </div>
+    </div>
+    <ul class={styles.audienceList}>
+      {audience.map((item) => (
+        <li>
+          <Icon name="ph:check-circle" width="22" height="22" aria-hidden="true" />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class={styles.section} aria-labelledby={`${slug}-included`}>
+    <div class={styles.sectionHeading}>
+      <div>
+        <h2 id={`${slug}-included`}>{labels.included}</h2>
+        <p>{labels.includedIntro}</p>
+      </div>
+    </div>
+    <div class={styles.includedGrid}>
+      {included.map((item) => (
+        <section class={styles.includedCard}>
+          <Icon name={item.icon} width="26" height="26" aria-hidden="true" />
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+        </section>
+      ))}
+    </div>
+  </section>
+
+  <section class={`${styles.section} ${styles.limitsSection}`} aria-labelledby={`${slug}-limits`}>
+    <div class={styles.sectionHeading}>
+      <div>
+        <h2 id={`${slug}-limits`}>{labels.limits}</h2>
+        <p>{labels.limitsIntro}</p>
+      </div>
+    </div>
+    <ul class={styles.limitList}>
+      {limits.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+
+  <section class={styles.section} aria-labelledby={`${slug}-process`}>
+    <div class={styles.sectionHeading}>
+      <div>
+        <h2 id={`${slug}-process`}>{labels.process}</h2>
+        <p>{labels.processIntro}</p>
+      </div>
+    </div>
+    <ol class={styles.steps}>
+      {steps.map((step, index) => (
+        <li>
+          <span class={styles.stepNumber} aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <div>
+            <h3>{step.title}</h3>
+            <p>{step.description}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class={styles.section} aria-labelledby={`${slug}-faq`}>
+    <div class={styles.sectionHeading}>
+      <div>
+        <h2 id={`${slug}-faq`}>{labels.faq}</h2>
+        <p>{labels.faqIntro}</p>
+      </div>
+    </div>
+    <div class={styles.faqList}>
+      {faqs.map((faq) => (
+        <details>
+          <summary>{faq.question}</summary>
+          <p>{faq.answer}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class={styles.section} aria-labelledby={`${slug}-compare`}>
+    <div class={styles.sectionHeading}>
+      <div>
+        <h2 id={`${slug}-compare`}>{labels.compare}</h2>
+        <p>{labels.compareIntro}</p>
+      </div>
+    </div>
+    <div class={styles.relatedGrid}>
+      {relatedPlans.map((plan) => (
+        <a class={styles.relatedCard} href={plan.href}>
+          <span>
+            <strong>{plan.name}</strong>
+            <small>{plan.price} {labels.currency}</small>
+          </span>
+          <p>{plan.description}</p>
+          <span class={styles.relatedLink}>{labels.view} <span aria-hidden="true">&rarr;</span></span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class={styles.finalCta} aria-labelledby={`${slug}-cta`}>
+    <p class={styles.eyebrow}>{labels.next}</p>
+    <h2 id={`${slug}-cta`}>{labels.cta}</h2>
+    <p>{labels.ctaIntro}</p>
+    <Button href={contactHref} label={`${labels.consult} ${name}`} />
+  </section>
+</article>

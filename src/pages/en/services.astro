@@ -116,7 +116,7 @@ const structuredData = {
           animateOnView={true}
         >
           <div slot="description">
-            We handle the <span class={styles.accent}>updates, security, and performance</span> so you don't have to. Our maintenance and support plans include WordPress core and plugin updates, uptime monitoring, <span class={styles.accent}>regular backups</span>, security checks, and <span class={styles.accent}>performance tuning</span>. Need help fast? Reach us directly via Slack. Perfect for businesses that want peace of mind and proactive support — without hiring an in-house dev team. 
+            All plans include a <span class={styles.accent}>WordPress website with a premium theme adapted to your brand</span> and the necessary licenses, plus updates, security, monitoring, regular backups, and email support. Growth and AI Commerce add hosting, performance optimization, and reports, with 4 and 8 monthly development hours respectively.
           </div>
         </ServiceDetails>
 
@@ -153,15 +153,16 @@ const structuredData = {
     <div class={styles.pricingGrid} role="list" aria-describedby="pricing-subtitle" data-pricing-reveal-group>
       <PricingCard
         title="Essential"
-        description="Everything you need to keep your site running smoothly."
+        description="Your WordPress website with a premium theme and ongoing maintenance."
         price="$150"
         period="/ month"
         icon="ph:rocket-launch"
-        href="/en/contact"
-        ctaLabel="Get Started"
+        href="/en/services/essential"
+        ctaLabel="View details"
         enterDelay="0s"
         enterFrom="left"
         features={[
+          'Website with premium theme and licenses',
           'Updates and maintenance',
           'Regular backups',
           'Security and monitoring',
@@ -171,20 +172,20 @@ const structuredData = {
 
       <PricingCard
         title="Growth"
-        description="For companies that want to keep evolving."
+        description="Your WordPress website with hosting and ongoing improvements."
         price="$180"
         period="/ month"
         icon="ph:trend-up"
         highlight
         badge="Most Popular"
-        href="/en/contact"
-        ctaLabel="Get Started"
+        href="/en/services/growth"
+        ctaLabel="View details"
         enterDelay="0.15s"
         enterFrom="bottom"
         features={[
           'Everything in Essential',
           'Hosting included',
-          'Development hours (2h/month)',
+          'Development hours (4h/month)',
           'Performance optimization',
           'Monthly reporting'
         ]}
@@ -192,20 +193,21 @@ const structuredData = {
 
       <PricingCard
         title="AI Commerce"
-        description="WordPress + AI to help your business grow. Everything in Growth, plus native AI for content, SEO, marketing images, and repetitive tasks."
+        description="Everything in Growth, plus integrated AI for content, translation, SEO, marketing images, and defined automations."
         price="$250"
         period="/ month"
         icon="ph:sparkle"
-        href="/en/contact"
-        ctaLabel="Get Started"
+        href="/en/services/ai-commerce"
+        ctaLabel="View details"
         enterDelay="0.3s"
         enterFrom="right"
         features={[
+          'Everything in Growth, with 8 development hours/month',
           'Native AI integrated into WordPress',
           'AI content generation and translation',
           'AI SEO and marketing image generation',
           'Workflow automation',
-          'Up to 3M text tokens/month; ready for future AI assistants and agents'
+          'Up to 3M text tokens/month'
         ]}
       />
     </div>

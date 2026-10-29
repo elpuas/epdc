@@ -35,7 +35,7 @@ const structuredData = {
     {
       '@type': 'Service',
       name: 'Mantenimiento y Soporte',
-      description: 'Planes que incluyen actualizaciones de seguridad, backups, monitoreo y horas de desarrollo.'
+      description: 'Planes con sitio WordPress basado en un tema premium adaptado a la marca, licencias y mantenimiento, con hosting y horas de desarrollo según el nivel contratado.'
     },
     {
       '@type': 'Service',
@@ -119,7 +119,7 @@ const structuredData = {
           animateOnView={true}
         >
           <div slot="description">
-            Nos encargamos de las <span class={styles.accent}>actualizaciones, seguridad y rendimiento</span> para que tú no tengas que hacerlo. Nuestros planes de mantenimiento y soporte incluyen actualizaciones del núcleo de WordPress y plugins, monitoreo de tiempo de actividad, <span class={styles.accent}>copias de seguridad regulares</span>, controles de seguridad y <span class={styles.accent}>ajuste de rendimiento</span>. ¿Necesitas ayuda rápida? Contáctanos directamente a través de Slack. Perfecto para negocios que desean tranquilidad y soporte proactivo — sin contratar un equipo interno de desarrollo.
+            Nuestros planes incluyen un <span class={styles.accent}>sitio WordPress con un tema premium adaptado a tu marca</span> y las licencias necesarias, además de actualizaciones, seguridad, monitoreo, copias de seguridad regulares y soporte por correo. Growth y AI Commerce añaden hosting, optimización de rendimiento y reportes, con 4 y 8 horas mensuales de desarrollo respectivamente.
           </div>
         </ServiceDetails>
 
@@ -155,15 +155,18 @@ const structuredData = {
     <div class={styles.pricingGrid} role="list" aria-describedby="pricing-subtitle" data-pricing-reveal-group>
       <PricingCard
         title="Essential"
-        description="Todo lo básico para mantener tu sitio funcionando correctamente."
+        description="Tu sitio WordPress con tema premium y mantenimiento continuo."
         price="$150"
         period="/ mes"
         icon="ph:rocket-launch"
-        href="/es/contact"
-        ctaLabel="Comenzar"
+        href="/es/services/essential"
+        ctaLabel="Ver detalles"
+        priceAriaLabel="150 dólares estadounidenses por mes"
+        featuresAriaLabel="Servicios incluidos en Essential"
         enterDelay="0s"
         enterFrom="left"
         features={[
+          'Sitio con tema premium y licencias',
           'Actualizaciones y mantenimiento',
           'Backups regulares',
           'Seguridad y monitoreo',
@@ -173,20 +176,22 @@ const structuredData = {
 
       <PricingCard
         title="Growth"
-        description="Para empresas que quieren evolucionar continuamente."
+        description="Tu sitio WordPress con hosting y mejoras continuas."
         price="$180"
         period="/ mes"
         icon="ph:trend-up"
         highlight
         badge="Más Popular"
-        href="/es/contact"
-        ctaLabel="Comenzar"
+        href="/es/services/growth"
+        ctaLabel="Ver detalles"
+        priceAriaLabel="180 dólares estadounidenses por mes"
+        featuresAriaLabel="Servicios incluidos en Growth"
         enterDelay="0.15s"
         enterFrom="bottom"
         features={[
           'Todo lo del plan Essential',
           'Hosting incluido',
-          'Horas de desarrollo (2h/mes)',
+          'Horas de desarrollo (4h/mes)',
           'Optimización de rendimiento',
           'Reportes mensuales'
         ]}
@@ -194,20 +199,23 @@ const structuredData = {
 
       <PricingCard
         title="AI Commerce"
-        description="WordPress + IA para impulsar tu negocio. Incluye todo lo de Growth, más IA nativa para contenidos, SEO, imágenes de marketing y tareas repetitivas."
+        description="WordPress + IA con límites claros. Incluye todo Growth, más funciones integradas para contenido, traducción, SEO, imágenes de marketing y automatizaciones definidas."
         price="$250"
         period="/ mes"
         icon="ph:sparkle"
-        href="/es/contact"
-        ctaLabel="Comenzar"
+        href="/es/services/ai-commerce"
+        ctaLabel="Ver detalles"
+        priceAriaLabel="250 dólares estadounidenses por mes"
+        featuresAriaLabel="Servicios incluidos en AI Commerce"
         enterDelay="0.3s"
         enterFrom="right"
         features={[
+          'Todo Growth, con 8 horas de desarrollo/mes',
           'IA nativa integrada en WordPress',
           'Generación y traducción de contenido con IA',
           'SEO e imágenes de marketing con IA',
           'Automatización de flujos de trabajo',
-          'Hasta 3 M de tokens de texto/mes; preparado para futuros asistentes y agentes de IA'
+          'Hasta 3 M de tokens de texto al mes'
         ]}
       />
     </div>

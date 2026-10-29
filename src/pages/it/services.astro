@@ -116,7 +116,7 @@ const structuredData = {
           animateOnView={true}
         >
           <div slot="description">
-            Ci occupiamo degli <span class={styles.accent}>aggiornamenti, della sicurezza e delle prestazioni</span> così che tu non debba farlo. I nostri piani di manutenzione e supporto includono aggiornamenti del core WordPress e dei plugin, monitoraggio dell'uptime, <span class={styles.accent}>backup regolari</span>, controlli di sicurezza e <span class={styles.accent}>ottimizzazione delle prestazioni</span>. Hai bisogno di aiuto veloce? Contattaci direttamente via Slack. Perfetto per le aziende che desiderano tranquillità e supporto proattivo — senza assumere un team di sviluppo interno.
+            Tutti i piani includono un <span class={styles.accent}>sito WordPress con tema premium adattato al tuo brand</span> e le licenze necessarie, oltre ad aggiornamenti, sicurezza, monitoraggio, backup regolari e supporto via email. Growth e AI Commerce aggiungono hosting, ottimizzazione e report, con rispettivamente 4 e 8 ore mensili di sviluppo.
           </div>
         </ServiceDetails>
 
@@ -153,15 +153,18 @@ const structuredData = {
     <div class={styles.pricingGrid} role="list" aria-describedby="pricing-subtitle" data-pricing-reveal-group>
       <PricingCard
         title="Essential"
-        description="Tutto il necessario per mantenere il tuo sito operativo senza intoppi."
-        price="$150"
+        description="Il tuo sito WordPress con tema premium e manutenzione continua."
+        price="€135"
         period="/ mese"
         icon="ph:rocket-launch"
-        href="/it/contact"
-        ctaLabel="Inizia"
+        href="/it/services/essential"
+        ctaLabel="Scopri il piano"
+        priceAriaLabel="135 euro al mese"
+        featuresAriaLabel="Servizi inclusi in Essential"
         enterDelay="0s"
         enterFrom="left"
         features={[
+          'Sito con tema premium e licenze',
           'Aggiornamenti e manutenzione',
           'Backup regolari',
           'Sicurezza e monitoraggio',
@@ -171,20 +174,22 @@ const structuredData = {
 
       <PricingCard
         title="Growth"
-        description="Per aziende che vogliono evolvere con continuità."
-        price="$180"
+        description="Il tuo sito WordPress con hosting e miglioramenti continui."
+        price="€162"
         period="/ mese"
         icon="ph:trend-up"
         highlight
         badge="Più Scelto"
-        href="/it/contact"
-        ctaLabel="Inizia"
+        href="/it/services/growth"
+        ctaLabel="Scopri il piano"
+        priceAriaLabel="162 euro al mese"
+        featuresAriaLabel="Servizi inclusi in Growth"
         enterDelay="0.15s"
         enterFrom="bottom"
         features={[
           'Tutto ciò che include Essential',
           'Hosting incluso',
-          'Ore di sviluppo (2h/mese)',
+          'Ore di sviluppo (4h/mese)',
           'Ottimizzazione delle performance',
           'Report mensili'
         ]}
@@ -192,20 +197,23 @@ const structuredData = {
 
       <PricingCard
         title="AI Commerce"
-        description="WordPress + IA per far crescere il tuo business. Include tutto il piano Growth, più IA nativa per contenuti, SEO, immagini marketing e attività ripetitive."
-        price="$250"
+        description="Tutto Growth, più IA integrata per contenuti, traduzioni, SEO, immagini marketing e automazioni definite."
+        price="€225"
         period="/ mese"
         icon="ph:sparkle"
-        href="/it/contact"
-        ctaLabel="Inizia"
+        href="/it/services/ai-commerce"
+        ctaLabel="Scopri il piano"
+        priceAriaLabel="225 euro al mese"
+        featuresAriaLabel="Servizi inclusi in AI Commerce"
         enterDelay="0.3s"
         enterFrom="right"
         features={[
+          'Tutto Growth, con 8 ore di sviluppo/mese',
           'IA nativa integrata in WordPress',
           'Generazione e traduzione di contenuti con IA',
           'SEO e immagini marketing con IA',
           'Automazione dei flussi di lavoro',
-          'Fino a 3 M di token di testo/mese; pronto per futuri assistenti e agenti IA'
+          'Fino a 3 M di token di testo/mese'
         ]}
       />
     </div>
