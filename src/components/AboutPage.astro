@@ -1,0 +1,140 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import HomeProjectShowcaseVisual from './HomeProjectShowcaseVisual.astro';
+import NeuralJourneyBackground from './NeuralJourneyBackground.astro';
+import AboutFormation from './AboutFormation.astro';
+import catalina from '../../public/team/catalina-valverde-dos.webp';
+import alfredo from '../../public/team/foto-uno.webp';
+import gianfranco from '../../public/team/gianfranco.webp';
+import styles from '../styles/AboutJourney.module.css';
+
+interface Props { lang: 'es' | 'en' | 'it' }
+const { lang } = Astro.props;
+const translations = {
+  es: {
+    title: 'Conocé ElPuas Digital Crafts | Un Estudio Web Familiar', description: 'Conocé al equipo de ElPuas Digital Crafts y nuestra forma de crear experiencias digitales.',
+    intro: 'Quiénes somos', headline: 'Desarrollo digital con criterio humano.', lead: 'Somos ElPuas Digital Crafts, un estudio familiar de Costa Rica. Creamos sitios y experiencias digitales combinando desarrollo, automatización e inteligencia artificial aplicada, con personas al mando.', introLink: 'Hablemos de lo que querés mejorar',
+    approach: 'Nuestra historia', approachTitle: 'Un estudio familiar, con el corazón en lo que hacemos.', approachText: [
+      'Somos ElPuas Digital Crafts, un estudio web familiar que construye sitios web de alto rendimiento con amor, código y café.',
+      'Creemos que los grandes sitios web van más allá del diseño. Deben ser ultrarrápidos, fáciles de gestionar y listos para crecer con tu negocio. Por eso utilizamos frameworks modernos como Astro, soluciones inteligentes de WordPress y flujos de trabajo asistidos por IA para entregar sitios web de alto rendimiento sin el alto costo de mantenimiento.',
+      'Desde desarrollos personalizados de WordPress hasta plataformas optimizadas de eCommerce, creamos experiencias digitales que ayudan a crecer a pequeñas empresas y a escalar agencias. Ya sea que estés lanzando tu primer sitio o necesites un socio confiable de marca blanca, te respaldamos con comunicación clara, ejecución cuidadosa y soporte a largo plazo que realmente está presente.',
+      'Ponemos la alianza primero y trabajamos orientados a resultados, sin perder el toque humano, la seguridad y la confianza.'
+    ], approachLink: 'Conocé nuestros trabajos',
+    people: 'Las personas', teamTitle: 'Un equipo cercano.', teamIntro: 'La estrategia, el desarrollo y la experiencia se conectan en personas reales.',
+    roles: ['CEO y Directora de Contenido', 'CTO', 'Lead Frontend Developer'], bios: ['Define la voz y la dirección editorial de los proyectos.', 'Lidera la estrategia técnica y el desarrollo.', 'Convierte las decisiones de diseño en interfaces responsivas y accesibles.'],
+    project: 'Trabajo real', projectText: 'Una plataforma inmobiliaria en WordPress con una plantilla premium adaptada a la marca, navegación optimizada para móviles y soporte continuo.', projectLink: 'Explorar el proyecto', projectAlt: 'Vista móvil del sitio web de Premium Brokers',
+    close: 'Construyamos algo que funcione para tu negocio.', closeText: 'Contanos qué necesitás mejorar y conversemos sobre el siguiente paso.', contact: 'Hablemos', profile: 'Perfil de', website: 'Sitio personal de',
+  },
+  en: {
+    title: 'Meet ElPuas Digital Crafts | A Family-Led Web Studio', description: 'Meet the ElPuas Digital Crafts team and discover how we create digital experiences.',
+    intro: 'About us', headline: 'Digital development with human judgment.', lead: 'We’re ElPuas Digital Crafts, a family-led studio from Costa Rica. We create websites and digital experiences that combine development, automation, and applied AI, with people in control.', introLink: 'Let’s talk about what you want to improve',
+    approach: 'Our story', approachTitle: 'A family studio with heart in everything we do.', approachText: [
+      'We’re ElPuas Digital Crafts, a family-led web studio building high-performance websites with love, code, and coffee.',
+      'We believe great websites go beyond design. They should be fast, easy to manage, and ready to grow with your business. That’s why we use modern frameworks like Astro, smart WordPress solutions, and AI-assisted workflows to deliver high-performance websites without the high maintenance costs.',
+      'From custom WordPress development to optimized eCommerce platforms, we create digital experiences that help small businesses grow and agencies scale. Whether you’re launching your first site or need a reliable white-label partner, we support you with clear communication, careful execution, and long-term support that’s really there.',
+      'We put partnership first and focus on results, while keeping the human touch, security, and trust at the heart of our work.'
+    ], approachLink: 'Explore our work',
+    people: 'The people', teamTitle: 'A team that stays close.', teamIntro: 'Strategy, development, and experience come together through real people.',
+    roles: ['CEO & Head of Content', 'CTO', 'Lead Frontend Developer'], bios: ['Shapes the voice and editorial direction of our projects.', 'Leads technical strategy and development.', 'Turns design decisions into responsive, accessible interfaces.'],
+    project: 'Real work', projectText: 'A WordPress real estate website built with a premium template adapted to the brand, mobile-friendly navigation, and ongoing support.', projectLink: 'Explore the project', projectAlt: 'Mobile view of the Premium Brokers website',
+    close: 'Let’s build something that works for your business.', closeText: 'Tell us what you want to improve and let’s discuss the next step.', contact: 'Let’s talk', profile: 'Profile of', website: 'Personal website of',
+  },
+  it: {
+    title: 'Scopri ElPuas Digital Crafts | Uno Studio Web a Conduzione Familiare', description: 'Conosci il team di ElPuas Digital Crafts e il nostro modo di creare esperienze digitali.',
+    intro: 'Chi siamo', headline: 'Sviluppo digitale con criterio umano.', lead: 'Siamo ElPuas Digital Crafts, uno studio a conduzione familiare della Costa Rica. Creiamo siti ed esperienze digitali combinando sviluppo, automazione e intelligenza artificiale applicata, con le persone al centro delle decisioni.', introLink: 'Parliamo di ciò che vuoi migliorare',
+    approach: 'La nostra storia', approachTitle: 'Uno studio di famiglia che mette il cuore in ciò che fa.', approachText: [
+      'Siamo ElPuas Digital Crafts, uno studio web a conduzione familiare che costruisce siti ad alte prestazioni con amore, codice e caffè.',
+      'Crediamo che i grandi siti web vadano oltre il design. Devono essere velocissimi, facili da gestire e pronti a crescere insieme alla tua attività. Per questo usiamo framework moderni come Astro, soluzioni WordPress intelligenti e flussi di lavoro assistiti dall’IA per realizzare siti ad alte prestazioni senza costi di manutenzione elevati.',
+      'Dallo sviluppo WordPress personalizzato alle piattaforme eCommerce ottimizzate, creiamo esperienze digitali che aiutano le piccole imprese a crescere e le agenzie a espandersi. Che tu stia lanciando il tuo primo sito o abbia bisogno di un partner white-label affidabile, ti affianchiamo con comunicazione chiara, lavoro attento e supporto a lungo termine davvero presente.',
+      'Mettiamo la collaborazione al primo posto e puntiamo ai risultati, senza perdere il tocco umano, la sicurezza e la fiducia.'
+    ], approachLink: 'Scopri i nostri lavori',
+    people: 'Le persone', teamTitle: 'Un team vicino a te.', teamIntro: 'Strategia, sviluppo ed esperienza si incontrano attraverso persone reali.',
+    roles: ['CEO e Direttrice dei Contenuti', 'CTO', 'Lead Frontend Developer'], bios: ['Definisce la voce e la direzione editoriale dei progetti.', 'Guida la strategia tecnica e lo sviluppo.', 'Trasforma le scelte di design in interfacce responsive e accessibili.'],
+    project: 'Lavori reali', projectText: 'Un sito immobiliare WordPress con un template premium adattato al brand, navigazione ottimizzata per dispositivi mobili e supporto continuo.', projectLink: 'Esplora il progetto', projectAlt: 'Vista mobile del sito web di Premium Brokers',
+    close: 'Costruiamo qualcosa che funzioni per la tua attività.', closeText: 'Raccontaci cosa vuoi migliorare e parliamo del prossimo passo.', contact: 'Parliamone', profile: 'Profilo di', website: 'Sito personale di',
+  },
+};
+const t = translations[lang];
+const team = [
+  { name: 'Catalina Valverde', image: catalina, links: [] },
+  { name: 'Alfredo Navas Fernandini', image: alfredo, links: [{label: 'LinkedIn', href: 'https://www.linkedin.com/in/elpuasdev/'}, {label: 'GitHub', href: 'https://github.com/elpuasdev'}, {label: 'Web', href: 'https://www.elpuas.com'}] },
+  { name: 'Gianfranco Navas', image: gianfranco, links: [{label: 'LinkedIn', href: 'https://www.linkedin.com/in/gianfranconavasfernandiniwebdeveloper/'}, {label: 'GitHub', href: 'https://github.com/gianfranco2605'}, {label: 'X', href: 'https://x.com/gianfranco2605'}] },
+];
+---
+<Layout title={t.title} description={t.description} {lang}>
+  <div class={styles.about} data-neural-journey>
+    <NeuralJourneyBackground />
+    <section class:list={[styles.section, styles.hero]} aria-labelledby="about-title">
+      <div class={styles.neuralHeroBounds} data-journey-hero aria-hidden="true"></div>
+      <div class={styles.copy} data-about-reveal data-viewport-entrance>
+        <p class={styles.eyebrow}>{t.intro}</p>
+        <h1 id="about-title" class="text-gradient-brand" aria-label={t.headline}><span aria-hidden="true">{Array.from(t.headline).map((character, characterIndex) => <span class={styles.titleCharacter} style={`--character-index: ${characterIndex}`}>{character}</span>)}</span></h1>
+        <p class={styles.lead}>{t.lead}</p>
+        <a class={styles.textLink} href={`/${lang}/contact`}>{t.introLink} <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+    <section class:list={[styles.section, styles.approach]} data-neural-formation="build" aria-labelledby="about-approach">
+      <AboutFormation system="build" compact />
+      <div class={styles.copy} data-about-reveal>
+        <p class={styles.eyebrow}>{t.approach}</p>
+        <h2 id="about-approach" data-neural-title data-viewport-entrance aria-label={t.approachTitle}><span aria-hidden="true">{Array.from(t.approachTitle).map((character, characterIndex) => <span class={styles.titleCharacter} style={`--character-index: ${characterIndex}`}>{character}</span>)}</span></h2>
+        <div data-neural-copy>{t.approachText.map(paragraph => <p>{paragraph}</p>)}<a class={styles.textLink} href={`/${lang}/crafted-with-love/`}>{t.approachLink} <span aria-hidden="true">→</span></a></div>
+      </div>
+    </section>
+    <section class:list={[styles.section, styles.team]} aria-labelledby="about-team">
+      <div class={styles.teamIntroFormation} data-neural-formation="sell">
+        <AboutFormation system="sell" compact />
+      <div class={styles.teamHeading} data-about-reveal>
+          <div><p class={styles.eyebrow}>{t.people}</p><h2 id="about-team" data-neural-title data-viewport-entrance aria-label={t.teamTitle}><span aria-hidden="true">{Array.from(t.teamTitle).map((character, characterIndex) => <span class={styles.titleCharacter} style={`--character-index: ${characterIndex}`}>{character}</span>)}</span></h2></div>
+          <p data-neural-copy>{t.teamIntro}</p>
+      </div>
+      </div>
+      <ul class={styles.people} role="list">
+          {team.map((person, index) => <li class={styles.person} data-team-scene data-neural-formation={["care", "partner", "nuara"][index]}>
+            <AboutFormation system={["care", "partner", "nuara"][index]} compact />
+            <div class={styles.portrait} data-neural-copy>
+            <Image src={person.image} alt={person.name} widths={[400, 600, 800]} sizes="(max-width: 700px) 90vw, 42vw" loading="lazy" />
+            <div class={styles.personCopy}>
+            <h3 data-neural-title aria-label={person.name}><span aria-hidden="true">{Array.from(person.name).map((character, characterIndex) => <span class={styles.nameCharacter} style={`--character-index: ${characterIndex}`}>{character}</span>)}</span></h3><div><p class={styles.role}>{t.roles[index]}</p><p>{t.bios[index]}</p>
+            {person.links.length > 0 && <ul class={styles.socials} role="list">{person.links.map(link => <li><a href={link.href} aria-label={`${link.label === 'Web' ? t.website : `${t.profile} ${link.label} —`} ${person.name}`}>{link.label}</a></li>)}</ul>}
+            </div></div></div>
+          </li>)}
+      </ul>
+    </section>
+    <section class:list={[styles.section, styles.project]} data-neural-formation="support" aria-labelledby="about-project">
+      <AboutFormation system="support" />
+      <div class={styles.projectLayout} data-about-reveal>
+        <div class={styles.copy}><p class={styles.eyebrow}>{t.project}</p><h2 id="about-project" data-neural-title data-viewport-entrance aria-label="Premium Brokers"><span aria-hidden="true">{Array.from('Premium Brokers').map((character, characterIndex) => <span class={styles.titleCharacter} style={`--character-index: ${characterIndex}`}>{character}</span>)}</span></h2><div data-neural-copy><p>{t.projectText}</p><a class={styles.textLink} href={`/${lang}/crafted-with-love/premium-brokers-${lang}/`}>{t.projectLink} <span aria-hidden="true">→</span></a></div></div>
+        <div data-viewport-entrance><HomeProjectShowcaseVisual src="/portfolio/pb-mobile.webp" alt={t.projectAlt} /></div>
+      </div>
+    </section>
+    <section class:list={[styles.section, styles.close]} data-neural-formation="clients" data-neural-clients aria-labelledby="about-contact">
+      <AboutFormation system="clients" compact />
+      <div class={styles.copy} data-about-reveal data-viewport-entrance><h2 id="about-contact" data-neural-title aria-label={t.close}><span aria-hidden="true">{Array.from(t.close).map((character, characterIndex) => <span class={styles.titleCharacter} style={`--character-index: ${characterIndex}`}>{character}</span>)}</span></h2><div data-neural-copy><p>{t.closeText}</p><a class={styles.button} href={`/${lang}/contact`}>{t.contact} <span aria-hidden="true">→</span></a></div></div>
+    </section>
+  </div>
+</Layout>
+<script>
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const scenes = document.querySelectorAll<HTMLElement>('[data-team-scene]');
+  const entrances = document.querySelectorAll<HTMLElement>('[data-viewport-entrance]');
+  if (!motion.matches && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        const scene = target as HTMLElement;
+        if (isIntersecting) { scene.dataset.sceneVisible = 'true'; observer.unobserve(scene); }
+      });
+    }, { threshold: .15 });
+    scenes.forEach((scene) => { scene.dataset.sceneVisible = 'false'; observer.observe(scene); });
+    const entranceObserver = new IntersectionObserver((entries) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (isIntersecting) { (target as HTMLElement).dataset.entranceVisible = 'true'; entranceObserver.unobserve(target); }
+      });
+    }, { threshold: .1 });
+    entrances.forEach((element) => { element.dataset.entranceVisible = 'false'; entranceObserver.observe(element); });
+    motion.addEventListener('change', () => {
+      if (motion.matches) { observer.disconnect(); entranceObserver.disconnect(); scenes.forEach(scene => delete scene.dataset.sceneVisible); entrances.forEach(element => delete element.dataset.entranceVisible); }
+    });
+  }
+</script>

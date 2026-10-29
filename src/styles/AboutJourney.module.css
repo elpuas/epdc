@@ -1,0 +1,103 @@
+.about { position: relative; isolation: isolate; overflow: clip; color: #f3f7f3; margin-top: var(--space-lg) !important; }
+.section { position: relative; z-index: 1; padding-inline: clamp(1.25rem, 5vw, 5rem); }
+.hero { padding-block: clamp(var(--space-2xl), 5vw, 5rem) clamp(5rem, 8vw, 8rem); }
+.neuralHeroBounds { position: absolute; inset: 0 0 auto; height: clamp(30rem, 58vh, 40rem); pointer-events: none; }
+.copy { max-width: 43rem; }
+.eyebrow { margin: 0 0 1.4rem; color: #57f9ed; font-size: .75rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.hero .eyebrow { margin-bottom: var(--space-lg); font-family: var(--font-family-heading); font-size: clamp(.875rem, .78rem + .5vw, 1.125rem); letter-spacing: .08em; line-height: 1.3; }
+.about h1, .about h2, .about h3 { margin: 0; line-height: 1.06; letter-spacing: -.045em; }
+.about :is(h1, h2, h3) span { font-size: inherit; line-height: inherit; font-weight: inherit; font-family: inherit; letter-spacing: inherit; color: inherit; }
+.about h1 { font-size: clamp(3rem, 6vw, 6.4rem); max-width: 12ch; }
+.about h2 { font-size: clamp(2rem, 3.8vw, 4rem); }
+.about p:not(.eyebrow) { color: #d4dfda; font-size: clamp(1rem, 1.15vw, 1.2rem); line-height: 1.65; }
+.lead { max-width: 40rem; margin-block: 2rem; }
+.textLink, .button { display: inline-block; color: #d8ff00; font-weight: 700; text-decoration: none; border-bottom: 1px solid currentColor; padding-block: .55rem; }
+.textLink:hover, .socials a:hover { color: #60fff0; }
+.about a:focus-visible { outline: 2px solid #65fff0; outline-offset: 5px; }
+.approach { padding-block: 3rem clamp(4rem, 7vw, 6rem); }
+.approach .copy { max-width: 36rem; }
+.approach h2 { font-size: clamp(2rem, 3.2vw, 3.3rem); }
+.team { padding-block: 2rem clamp(6rem, 10vw, 10rem); }
+.teamIntroFormation { position: relative; }
+.teamHeading { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: end; }
+.teamHeading > p { max-width: 24rem; margin: 0; }
+.people { list-style: none; display: grid; gap: var(--space-content-flow); margin: var(--space-content-flow) 0 0; padding: 0; }
+.person { position: relative; max-width: 59rem; }
+.portrait { display: grid; grid-template-columns: minmax(0, 18rem) minmax(14rem, .75fr); align-items: center; gap: 0; }
+.person:nth-child(2) { margin-left: auto; }
+.person:nth-child(2) .portrait { grid-template-columns: minmax(0, 1fr) minmax(0, 18rem); }
+.person:nth-child(2) img { order: 2; }
+.personCopy { position: relative; z-index: 1; max-width: 25rem; margin-left: -3.5rem; padding: 1.5rem 0 1.5rem 3.5rem; background: linear-gradient(90deg, transparent, #000 3.5rem); }
+.person:nth-child(2) .personCopy { max-width: none; margin-left: 0; margin-right: -3.5rem; padding: 1.5rem 3.5rem 1.5rem 0; background: linear-gradient(270deg, transparent, #000 3.5rem); }
+.person img { display: block; width: 100%; max-width: 18rem; height: auto; aspect-ratio: 1.05; object-fit: cover; object-position: center 25%; border-radius: 34% 12% 28% 10% / 28% 12% 24% 10%; background: #172e26; transform: skewY(-1.5deg); }
+.person:nth-child(2) img { border-radius: 12% 32% 12% 27% / 12% 27% 12% 26%; transform: skewY(1.5deg); }
+.person:nth-child(3) img { border-radius: 29% 12% 32% 12% / 24% 12% 29% 12%; }
+.person h3 { font-size: clamp(1.6rem, 2.3vw, 2.5rem); margin-top: 1.2rem; }
+@media (min-width: 1000px) {
+  .person:nth-child(2) .portrait { grid-template-columns: minmax(30rem, 1fr) minmax(0, 18rem); }
+  .person:nth-child(2) h3 { white-space: nowrap; }
+}
+.nameCharacter, .titleCharacter { white-space: inherit; }
+.person p { margin: .45rem 0; }
+.about .role { color: #6ff7e9 !important; font-size: .9rem !important; }
+.socials { display: flex; gap: 1rem; list-style: none; padding: 0; margin: 1rem 0 0; }
+.socials a { color: #d8ff00; font-size: .9rem; text-underline-offset: .2em; }
+.project { padding-block: 2rem 2.5rem; }
+.projectLayout { display: grid; grid-template-columns: 1fr minmax(15rem, .75fr); gap: clamp(3rem, 8vw, 8rem); align-items: center; }
+.projectLayout .copy { max-width: 34rem; }
+.close { padding-block: 2rem clamp(8rem, 12vw, 12rem); }
+.close .copy { max-width: 46rem; }
+.button { border: 1px solid #d8ff00; padding: .9rem 1.4rem; margin-top: 1.2rem; }
+.button:hover { background: #d8ff00; color: #000; }
+@media (max-width: 700px) {
+  .hero { padding-block: var(--space-2xl) 8rem; padding-inline: var(--space-md); }
+  .neuralHeroBounds { height: 100%; }
+  .about h1 { font-size: clamp(2.8rem, 12vw, 4.5rem); }
+  .approach .copy { margin-left: 0; }
+  .approach { padding-bottom: 4rem; }
+  .teamHeading, .projectLayout { grid-template-columns: 1fr; gap: 1.5rem; }
+  .people { max-width: 28rem; }
+  .portrait, .person:nth-child(2) .portrait { grid-template-columns: 1fr; gap: 0; }
+  .person:nth-child(2) { margin-left: 0; }
+  .person:nth-child(2) img { order: 0; }
+  .personCopy, .person:nth-child(2) .personCopy { margin: -2rem 0 0 1rem; padding: 2.5rem 0 0; background: linear-gradient(180deg, transparent, #000 2.5rem); }
+  .person img { width: min(100%, 16rem); aspect-ratio: 1.12; }
+  .projectLayout { gap: 3rem; }
+  .team { padding-bottom: 8rem; }
+  .project { padding-bottom: 2rem; }
+  .close { padding-top: 1.5rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .about[data-neural-enhanced='true'] [data-neural-title],
+  .about[data-neural-enhanced='true'] [data-neural-copy] { opacity: var(--reveal-opacity, 1); transform: translateY(var(--reveal-rise, 0px)); }
+  .about[data-neural-enhanced='true'] .close [data-neural-title],
+  .about[data-neural-enhanced='true'] .close [data-neural-copy] { opacity: 1; transform: none; }
+  .about [data-viewport-entrance][data-entrance-visible='false'] { opacity: 0; }
+  .about [data-viewport-entrance][data-entrance-visible='true'] { animation: scene-enter .75s cubic-bezier(.22, 1, .36, 1) backwards; }
+  .about[data-neural-enhanced='true'] [data-neural-title][data-viewport-entrance] { opacity: 1; transform: none; }
+  .about [data-entrance-visible='true'] .titleCharacter { animation: type-character .01s steps(1, end) calc(.12s + var(--character-index) * .025s) backwards; }
+  .about [data-viewport-entrance]:focus-within { opacity: 1 !important; animation: none !important; }
+  .about[data-neural-enhanced='true'] .person .portrait,
+  .about[data-neural-enhanced='true'] .person [data-neural-title] { opacity: 1; transform: none; }
+  .about [data-neural-formation]:focus-within [data-neural-title],
+  .about [data-neural-formation]:focus-within [data-neural-copy] { opacity: 1 !important; transform: none !important; }
+  .person img { transition: transform .65s cubic-bezier(.22, 1, .36, 1); }
+  .person[data-scene-visible='false'] img,
+  .person[data-scene-visible='false'] .personCopy { opacity: 0; }
+  .person[data-scene-visible='true'] img { animation: portrait-enter .9s cubic-bezier(.22, 1, .36, 1) backwards; }
+  .person[data-scene-visible='true']:nth-child(2) img { animation-name: portrait-enter-reverse; }
+  .person[data-scene-visible='true'] .personCopy { animation: copy-enter .8s cubic-bezier(.22, 1, .36, 1) .18s backwards; }
+  .person[data-scene-visible='true'] .nameCharacter { animation: type-character .01s steps(1, end) calc(.42s + var(--character-index) * .045s) backwards; }
+  .person[data-scene-visible='false']:focus-within img,
+  .person[data-scene-visible='false']:focus-within .personCopy { opacity: 1; transform: none; }
+  .person:hover img, .person:focus-within img { transform: skewY(-1.5deg) scale(1.025); }
+  .person:nth-child(2):hover img, .person:nth-child(2):focus-within img { transform: skewY(1.5deg) scale(1.025); }
+  .textLink, .button, .socials a { transition: color .25s ease, background-color .25s ease, border-color .25s ease; }
+  .textLink span, .button span { display: inline-block; transition: transform .25s ease; }
+  .textLink:hover span, .textLink:focus-visible span, .button:hover span, .button:focus-visible span { transform: translateX(.25rem); }
+}
+@keyframes portrait-enter { from { opacity: 0; transform: translateY(28px) skewY(-1.5deg) scale(.96); } to { opacity: 1; transform: skewY(-1.5deg) scale(1); } }
+@keyframes portrait-enter-reverse { from { opacity: 0; transform: translateY(28px) skewY(1.5deg) scale(.96); } to { opacity: 1; transform: skewY(1.5deg) scale(1); } }
+@keyframes copy-enter { from { opacity: 0; transform: translateY(16px); clip-path: inset(0 12% 0 0); } to { opacity: 1; transform: translateY(0); clip-path: inset(0); } }
+@keyframes type-character { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scene-enter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }

@@ -1,0 +1,14 @@
+---
+import ServiceFormationFallback from './ServiceFormationFallback.astro';
+interface Props { system: string; compact?: boolean }
+const { system, compact = false } = Astro.props;
+---
+<div class:list={['about-formation', compact && 'about-formation--compact']} data-neural-visual aria-hidden="true">
+  <ServiceFormationFallback {system} />
+</div>
+<style>
+  .about-formation { position: relative; width: min(72%, 38rem); height: clamp(11rem, 19vw, 17rem); margin: 0 0 clamp(2rem, 4vw, 4rem) auto; pointer-events: none; }
+  .about-formation--compact { position: absolute; top: -2rem; right: 0; width: min(50%, 28rem); height: clamp(10rem, 16vw, 15rem); margin: 0; }
+  @media (max-width: 700px) { .about-formation { width: 78%; height: 10rem; margin-bottom: 2.5rem; } }
+  @media (max-width: 700px) { .about-formation--compact { top: -1rem; right: 0; width: 40%; height: 7rem; margin: 0; } }
+</style>

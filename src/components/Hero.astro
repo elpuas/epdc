@@ -1,6 +1,4 @@
 ---
-import Button from './Button.astro';
-
 interface Props {
   lang: string;
 }
@@ -40,7 +38,7 @@ const content = heroContent[lang as keyof typeof heroContent] || heroContent.en;
     <h1 id="hero-heading" class="text-gradient-brand">{content.headline}</h1>
     <p class="hero-body">{content.body}</p>
     <div class="hero-cta">
-      <Button href={content.href} label={content.cta} />
+      <a class="hero-cta__link" href={content.href}>{content.cta} <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
@@ -99,6 +97,27 @@ const content = heroContent[lang as keyof typeof heroContent] || heroContent.en;
 
   .hero-cta {
     margin-top: var(--space-xl);
+  }
+
+  .hero-cta__link {
+    display: inline-block;
+    max-width: 100%;
+    padding-block: .55rem;
+    border-bottom: 1px solid currentColor;
+    color: var(--color-secondary);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color .25s ease;
+  }
+
+  .hero-cta__link span { display: inline-block; transition: transform .25s ease; }
+  .hero-cta__link:hover, .hero-cta__link:focus-visible { color: var(--color-tertiary); }
+  .hero-cta__link:hover span, .hero-cta__link:focus-visible span { transform: translateX(.25rem); }
+  .hero-cta__link:focus-visible { outline: 2px solid var(--color-tertiary); outline-offset: 5px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-cta__link, .hero-cta__link span { transition: none; }
+    .hero-cta__link:hover span, .hero-cta__link:focus-visible span { transform: none; }
   }
 
   @media (max-width: 767px) {

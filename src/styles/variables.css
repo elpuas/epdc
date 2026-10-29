@@ -33,6 +33,8 @@
   --space-2xl: 48px;
   --space-3xl: clamp(80px, 10vw, 100px);
   --space-4xl: clamp(100px, 12vw, 120px);
+  /* Vertical space between major content blocks. */
+  --space-content-flow: 50px;
 
   /* Margins */
   --margin-xs: var(--space-xs);
@@ -85,6 +87,10 @@
   /* Font Weights */
   --font-weight-regular: 400;
   --font-weight-bold: 700;
+}
+
+@media (min-width: 768px) {
+  :root { --space-content-flow: clamp(100px, 7vw, 192px); }
 }
 
 /* Black and White Theme */
